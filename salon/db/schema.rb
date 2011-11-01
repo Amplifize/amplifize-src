@@ -10,16 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101060957) do
+ActiveRecord::Schema.define(:version => 20111101064959) do
 
-  create_table "rss_feeds", :force => true do |t|
+  create_table "feeds", :force => true do |t|
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "rssfeeds_users", :id => false, :force => true do |t|
-    t.integer  "rss_feed_id"
+  add_index "feeds", ["url"], :name => "index_feeds_on_url", :unique => true
+
+  create_table "feeds_users", :id => false, :force => true do |t|
+    t.integer  "feed_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

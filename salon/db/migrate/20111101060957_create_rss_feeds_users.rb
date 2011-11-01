@@ -1,7 +1,7 @@
 class CreateRssFeedsUsers < ActiveRecord::Migration
   def self.up
-    create_table :rssfeeds_users, :id => false do |t|
-      t.references :rss_feed
+    create_table :feeds_users, :id => false do |t|
+      t.references :feed
       t.references :user
 
       t.timestamps
@@ -9,6 +9,6 @@ class CreateRssFeedsUsers < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :rssfeeds_users
+    drop_table :feeds_users
   end
 end

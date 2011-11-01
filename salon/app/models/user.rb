@@ -3,9 +3,5 @@ class User < ActiveRecord::Base
      c.login_field = :email 
   end
   
-  has_many :rssfeeds do
-    def find_or_create_by_url(url)
-      find_or_create_by_url(url)
-    end
-  end
+  has_and_belongs_to_many :feeds
 end
