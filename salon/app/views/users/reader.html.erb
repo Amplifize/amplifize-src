@@ -1,9 +1,33 @@
 <p id="notice"><%= notice %></p>
-<div id="userOptions">
+<div id="tabs">
 	<ul>
-		<li><%= link_to "New feed", :new_feed %></li>
+		<li><a href="#tabs-1">All</a></li>
+		<li><a href="#tabs-2">Shares</a></li>
+		<li><a href="#tabs-3">Feeds</a></li>
+		<li><a href="#tabs-4">Manage feeds</a></li>
+		<li><a href="#tabs-5">Manage profile</a></li>
 	</ul>
-</div>
-<div id="feeds">
-	
+	<div id="tabs-1">
+		
+	</div>
+	<div id="tabs-2">
+		
+	</div>
+	<div id="tabs-3">
+		
+	</div>
+	<div id="tabs-4">
+		<h3>Add feed</h3>
+		<%= render "feeds/form" %>
+		<hr/>
+		<h3>Manage feeds</h3>
+		<table>
+		<% @my_feeds.each do |feed|%>
+			<tr>
+				<td width="90%"><%= feed.url %></td>
+				<td>Delete</td>
+			</tr>
+		<%end%>
+		</table>
+	</div>
 </div>

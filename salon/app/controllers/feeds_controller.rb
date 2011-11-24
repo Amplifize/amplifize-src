@@ -1,13 +1,4 @@
 class FeedsController < ApplicationController
-  def show
-    @feed = Feed.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @feed }
-    end
-  end
-
   def new
     @feed = Feed.new
 

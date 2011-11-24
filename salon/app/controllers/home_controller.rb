@@ -1,5 +1,3 @@
 class HomeController < ApplicationController
-  def index
-    
-  end
+  before_filter :require_no_user, :only => :index
 end
