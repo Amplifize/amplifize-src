@@ -7,22 +7,30 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-    <div id="nav">
+    <header>
+    	<h1>rssSalon</h1>
+    	<h3>the water cooler in the cloud</h3>
+    	
+    	<div id="navigation">
         <% if current_user %>
         <%= link_to "Logout", :logout %>
         <% else %>
-        <%= link_to "Register", new_user_path%> | 
+        <%= link_to "Register", new_user_path%> 
         <%= link_to "Login", :login %>
         <% end %>
-    </div>
+        </div>
+        <div style="clear:both"></div>
+    </header>
     
     <div id="content">
     <%= yield %>
     </div>
 
 	<div id="footer">
-		
+		Built by Big Fish, Big Pond Inc. &copy; 2011
+		<%= link_to "About", :about %>
+		<%= link_to "Contact Us", :contact %>
+		<%= link_to "Terms", :terms %>
 	</div>
-
 </body>
 </html>

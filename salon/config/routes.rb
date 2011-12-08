@@ -6,6 +6,10 @@ Salon::Application.routes.draw do
 
   match 'reader' => 'users#reader', :as => :reader
 
+  match 'about' => 'home#about', :as => :about
+  match 'contact' => 'home#contact', :as => :contact
+  match 'terms' => 'home#terms', :as => :terms
+
   root :to => "home#index"
 
   # The priority is based upon order of creation:
