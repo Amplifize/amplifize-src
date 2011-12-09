@@ -1,27 +1,28 @@
 <p id="notice"><%= notice %></p>
-<div id="tabs">
+<div id="feeds">
 	<ul>
-		<li><a href="#tabs-1">All</a></li>
-		<li><a href="#tabs-2">Shares</a></li>
-		<li><a href="#tabs-3">Feeds</a></li>
-		<li><a href="#tabs-4">Manage feeds</a></li>
-		<li><a href="#tabs-5">Manage profile</a></li>
+		<li><a href="#feeds-shares">Shares</a></li>
+		<li><a href="#feeds-list">Feeds</a></li>
 	</ul>
-	<div id="tabs-1">
-		
+	<div id="feeds-shares">
+		<% @my_shares.each do |item|%>
+		<%end%>		
 	</div>
-	<div id="tabs-2">
-		
+	<div id="feeds-list">
+		<% @my_posts.each do |post|%>
+			<div class="post">
+				<p><a href="<%=post.url%>"><%=post.title%></a></p>
+				<p><%= post.written_dt %></p>
+				<p><%= post.content.nil? ? '' : post.content.html_safe %></p>
+			</div>
+		<%end%>
 	</div>
-	<div id="tabs-3">
-		
-	</div>
-	<div id="tabs-4">
+</div>
 		<h3>Add feed</h3>
 		<%= render "feeds/form" %>
 		<hr/>
 		<h3>Manage feeds</h3>
-		<table>
+		<table id="feedTable">
 		<% @my_feeds.each do |feed|%>
 			<tr>
 				<td width="90%"><%= feed.url %></td>
@@ -29,5 +30,3 @@
 			</tr>
 		<%end%>
 		</table>
-	</div>
-</div>

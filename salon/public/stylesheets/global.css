@@ -100,6 +100,10 @@ header > #navigation > a:hover {
 	margin-right: 50px;
 }
 
+#footer > a:hover {
+	color: #222222;
+}
+
 #mainRight,
 #mainLeft {
 	float: left;
@@ -127,6 +131,8 @@ span.mainNo {
 	
 	background-color: #424242;
 	color: #E9E9E9;
+	
+	line-height: 38px;
 }
 
 div.mainUpsell {
@@ -176,4 +182,8 @@ div.field, div.actions {
 
 #mainRight > h2 {
 	margin-top: 12px;
+}
+
+#tabs {
+	height: 90%;
 }

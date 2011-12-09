@@ -3,6 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.string :title
       t.string :url
+      t.datetime :written_dt
       t.text :content, :limit => 4294967295
 
       t.timestamps

@@ -46,9 +46,21 @@ ActiveRecord::Schema.define(:version => 20111118065508) do
   add_index "followers", ["follow_id"], :name => "followers_follow_id_fk"
   add_index "followers", ["user_id"], :name => "followers_user_id_fk"
 
+  create_table "post_users", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.integer  "read_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "post_users", ["post_id"], :name => "post_users_post_id_fk"
+  add_index "post_users", ["user_id"], :name => "post_users_user_id_fk"
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.string   "url"
+    t.datetime "written_dt"
     t.text     "content",    :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -57,26 +69,10 @@ ActiveRecord::Schema.define(:version => 20111118065508) do
 
   add_index "posts", ["feed_id"], :name => "posts_feed_id_fk"
 
-  create_table "posts_users", :force => true do |t|
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.integer  "read_state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "posts_users", ["post_id"], :name => "posts_users_post_id_fk"
-  add_index "posts_users", ["user_id"], :name => "posts_users_user_id_fk"
-
   create_table "shares", :force => true do |t|
     t.string   "uri"
     t.text     "comment"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,9 +89,9 @@ ActiveRecord::Schema.define(:version => 20111118065508) do
   add_foreign_key "followers", "users", :name => "followers_follow_id_fk", :column => "follow_id"
   add_foreign_key "followers", "users", :name => "followers_user_id_fk"
 
-  add_foreign_key "posts", "feeds", :name => "posts_feed_id_fk"
+  add_foreign_key "post_users", "posts", :name => "post_users_post_id_fk"
+  add_foreign_key "post_users", "users", :name => "post_users_user_id_fk"
 
-  add_foreign_key "posts_users", "posts", :name => "posts_users_post_id_fk"
-  add_foreign_key "posts_users", "users", :name => "posts_users_user_id_fk"
+  add_foreign_key "posts", "feeds", :name => "posts_feed_id_fk"
 
 end

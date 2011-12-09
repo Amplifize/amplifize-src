@@ -2,23 +2,22 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 $(function() {
-  $( "#tabs" ).tabs();
+  $( "#feeds" ).tabs();
 
   $(".alert").click(function() {
     alert(this.getAttribute("data-confirm"));
     return false;
   });
-});
 
-$('a[data-remote=true]').livequery('click', function() {
-    $.ajax({ 
-      url: this.href, 
-      dataType: "script"
-    }); 
-    return false; 
-});
- 
-
-$('form[data-remote=true]').livequery('submit', function() {
-  return request({ url : this.action, type : this.method, data : $(this).serialize() });
+  $('form#new_feed').live("ajax:success", function(data, status, xhr) {
+    $("#feed_url").val();
+    
+    $("#feedTable tr:last").after("<tr><td>"+ data.feed.url +"</td><td>Delete</td></tr>")  
+  });
+  
+  $('form#new_feed').live("ajax:failure", function(data, status, xhr) {
+  	alert(status);
+  });
+  
+  $("#notice").live("onload", function() { this.slideup(300).delay(5000) });
 });

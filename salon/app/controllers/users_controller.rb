@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(:users, :notice => 'Registration successfull.') }
+        format.html { redirect_to(:reader, :notice => 'Registration successfull.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
@@ -72,10 +72,11 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  
+
   def reader
     @feed = Feed.new
     @my_feeds = current_user.feeds
+    @my_posts = current_user.posts.sort_by {|post| post.written_dt}.reverse!
+    @my_shares = current_user.shares.sort_by { |share| share.created_at }.reverse!
   end
 end
