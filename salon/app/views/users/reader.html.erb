@@ -23,10 +23,14 @@
 		<hr/>
 		<h3>Manage feeds</h3>
 		<table id="feedTable">
-		<% @my_feeds.each do |feed|%>
 			<tr>
-				<td width="90%"><%= feed.url %></td>
-				<td>Delete</td>
+				<td width="90%">Feed</td>
+				<td>Options</td>
+			</tr>
+		<% @my_feeds.each do |feed|%>
+			<tr id="tr_<%= feed.id %>">
+				<td><%= feed.url %></td>
+				<td><%= link_to "Delete", unsubscribe_url(:feed_id => feed.id), :remote => true %></td>
 			</tr>
 		<%end%>
 		</table>

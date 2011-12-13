@@ -1,7 +1,7 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-$(function() {
+$(document).ready(function() {
   $( "#feeds" ).tabs();
 
   $(".alert").click(function() {
@@ -9,15 +9,13 @@ $(function() {
     return false;
   });
 
-  $('form#new_feed').live("ajax:success", function(data, status, xhr) {
-    $("#feed_url").val();
-    
-    $("#feedTable tr:last").after("<tr><td>"+ data.feed.url +"</td><td>Delete</td></tr>")  
-  });
+  // $('form#new_feed').bind("ajax:success", function(data, status, xhr) {
+    // alert("it worked");
+  // });
+//   
+  // $('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
+  	// alert(status);
+  // });
   
-  $('form#new_feed').live("ajax:failure", function(data, status, xhr) {
-  	alert(status);
-  });
-  
-  $("#notice").live("onload", function() { this.slideup(300).delay(5000) });
+  //$("#notice").slideUp(2500);
 });

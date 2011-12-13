@@ -2,17 +2,6 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :reader
 
-  # GET /users/1
-  # GET /users/1.xml
-  def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
-
   # GET /users/new
   # GET /users/new.xml
   def new
@@ -68,8 +57,23 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to(root_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def unsubscribe
+    @feed = Feed.find(params[:feed_id])
+    
+    @feed.posts.each do |post|
+      current_user.posts.delete(post)
+    end
+    
+    current_user.feeds.delete(@feed)
+    
+    respond_to do |format|
+      format.html { redirect_to(reader_url)}
+      format.js
     end
   end
 

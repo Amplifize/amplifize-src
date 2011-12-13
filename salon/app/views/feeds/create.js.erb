@@ -1,0 +1,3 @@
+$("#feed_url").val("");
+var link = '<%= link_to 'Delete', unsubscribe_url(:feed_id => @feed.id), :remote => true %>';
+$("#feedTable tr:last").after("<tr id=\"tr_<%= @feed.id %>\"><td> <%= @feed.url %> </td><td>"+link+"</td></tr>")  

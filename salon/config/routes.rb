@@ -5,6 +5,7 @@ Salon::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
   match 'reader' => 'users#reader', :as => :reader
+  match 'unsubscribe' => 'users#unsubscribe', :as => :unsubscribe
 
   match 'about' => 'home#about', :as => :about
   match 'contact' => 'home#contact', :as => :contact
