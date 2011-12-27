@@ -14,8 +14,7 @@ header {
 	display:block;
 	
 	height: 75px;
-	
-	padding: 10px;
+
 	margin: 0 auto;
 	
 	width: 940px;
@@ -24,6 +23,8 @@ header {
 header > h1 {
 	display: inline;
 	float: left;
+	
+	padding-left: 10px;
 }
 
 header > h3 {
@@ -69,8 +70,6 @@ header > #navigation > a:hover {
 
 #content {
 	width: 940px;
-	height: 550px;
-	
 	margin: 0 auto;
 }
 
@@ -81,6 +80,15 @@ header > #navigation > a:hover {
 	font-size: 12px;
 	
 	color: #999999;
+	
+	padding-top: 10px;
+	padding-bottom: 10px;
+	
+	border-top: 1px solid #000000;
+}
+
+#footer span.copyright {
+	padding-left: 10px;
 }
 
 #footer > a,
@@ -104,42 +112,6 @@ header > #navigation > a:hover {
 	color: #222222;
 }
 
-#mainRight,
-#mainLeft {
-	float: left;
-	width: 50%;
-	margin-top: 50px;
-}
-
-span.mainNo {
-	display:-moz-inline-stack;
-	display: inline-block;
-	zoom: 1;
-	*display: inline;
-	
-	float: left;
-	margin-right: 15px;
-	
-	text-align: center;
-	vertical-align: middle;
-	
-	width: 35px;
-	height: 35px;
-	-moz-border-radius: 35px;
-	-webkit-border-radius: 35px;
-	border-radius: 35px;
-	
-	background-color: #424242;
-	color: #E9E9E9;
-	
-	line-height: 38px;
-}
-
-div.mainUpsell {
-	padding: 10px;
-
-	font-size: 32px;
-}
 
 div.field, div.actions {
   margin-bottom: 10px;
@@ -178,12 +150,4 @@ div.field, div.actions {
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
-}
-
-#mainRight > h2 {
-	margin-top: 12px;
-}
-
-#tabs {
-	height: 90%;
 }

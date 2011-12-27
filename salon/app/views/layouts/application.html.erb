@@ -2,8 +2,10 @@
 <html>
 <head>
   <title>Salon</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "global.css" %>
+  <%= yield :stylesheets %>
   <%= javascript_include_tag :defaults %>
+  <%= yield :javascripts %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -12,9 +14,7 @@
     	<h3>Give good content a voice</h3>
     	
     	<div id="navigation">
-        <% if current_user %>
-        <%= link_to "Add Feed", :root %>
-        <%= link_to "Profile", :root %>
+        <% if current_user %> 
         <%= link_to "Logout", :logout %>
         <% else %>
         <%= link_to "Register", new_user_path%> 
@@ -23,16 +23,18 @@
         </div>
         <div style="clear:both"></div>
     </header>
-    
+
     <div id="content">
-    <%= yield %>
+	    <%= yield %>
+	    <div style="clear:both"></div>
     </div>
 
 	<div id="footer">
-		Built by Big Fish, Big Pond Inc. &copy; 2011
+		<span class="copyright">Built by Big Fish, Big Pond Inc. &copy; 2011</span>
 		<%= link_to "About", :about %>
 		<%= link_to "Contact Us", :contact %>
 		<%= link_to "Terms", :terms %>
+		<div style="clear:both"></div>
 	</div>
 </body>
 </html>

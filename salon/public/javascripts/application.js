@@ -2,20 +2,37 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 $(document).ready(function() {
-  $( "#feeds" ).tabs();
+	$(".alert").click(function() {
+		alert(this.getAttribute("data-confirm"));
+		return false;
+	});
 
-  $(".alert").click(function() {
-    alert(this.getAttribute("data-confirm"));
-    return false;
-  });
+	$("ul.subnav").parent().append("<span></span>");
+	//Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
 
-  // $('form#new_feed').bind("ajax:success", function(data, status, xhr) {
-    // alert("it worked");
-  // });
-//   
-  // $('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
-  	// alert(status);
-  // });
-  
-  //$("#notice").slideUp(2500);
+	$("ul.topnav li span").hover(function() {//When trigger is clicked...
+
+		//Following events are applied to the subnav itself (moving subnav up and down)
+		$(this).parent().find("ul.subnav").slideDown('fast').show();
+		//Drop down the subnav on click
+
+		$(this).parent().hover(function() {
+		}, function() {
+			$(this).parent().find("ul.subnav").slideUp('slow');
+			//When the mouse hovers out of the subnav, move it back up
+		});
+		//Following events are applied to the trigger (Hover events for the trigger)
+	});
+	
+	// $('form#new_feed').bind("ajax:success", function(data, status, xhr) {
+	// alert("it worked");
+	// });
+	//
+	// $('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
+	// alert(status);
+	// });
+
+	setTimeout(function() {
+		$("#notice").html("")
+	}, 5000);
 });
