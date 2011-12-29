@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   def reader
     @feed = Feed.new
     @my_feeds = current_user.feeds
-    @my_posts = current_user.posts.sort_by {|post| post.written_dt}.reverse!
+    @my_posts = current_user.posts.sort_by {|post| post.published_at}.reverse!
     @my_shares = current_user.shares.sort_by { |share| share.created_at }.reverse!
   end
 end

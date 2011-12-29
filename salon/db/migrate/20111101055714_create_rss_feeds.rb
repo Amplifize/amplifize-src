@@ -2,6 +2,7 @@ class CreateRssFeeds < ActiveRecord::Migration
   def self.up
     create_table :feeds do |t|
       t.string :url
+      t.string :title
 
       t.timestamps
     end

@@ -23,14 +23,6 @@ $(document).ready(function() {
 		});
 		//Following events are applied to the trigger (Hover events for the trigger)
 	});
-	
-	// $('form#new_feed').bind("ajax:success", function(data, status, xhr) {
-	// alert("it worked");
-	// });
-	//
-	// $('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
-	// alert(status);
-	// });
 
 	setTimeout(function() {
 		$("#notice").html("")

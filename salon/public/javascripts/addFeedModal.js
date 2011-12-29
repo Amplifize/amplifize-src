@@ -11,23 +11,23 @@
  * Revision: $Id: osx.js 238 2010-03-11 05:56:57Z emartin24 $
  */
 
-jQuery(function ($) {
-	var OSX = {
+$(document).ready(function() {
+	var AddFeedOverlay = {
 		container: null,
 		init: function () {
 			$("#addFeedNavItem").click(function (e) {
 				e.preventDefault();	
 
 				$("#addFeed-modal-content").modal({
-					overlayId: 'osx-overlay',
-					containerId: 'osx-container',
+					overlayId: 'reader-overlay',
+					containerId: 'reader-overlay-container',
 					closeHTML: null,
 					minHeight: 80,
 					opacity: 65, 
 					position: ['0',],
 					overlayClose: true,
-					onOpen: OSX.open,
-					onClose: OSX.close
+					onOpen: AddFeedOverlay.open,
+					onClose: AddFeedOverlay.close
 				});
 			});
 		},
@@ -67,6 +67,15 @@ jQuery(function ($) {
 		}
 	};
 
-	OSX.init();
+	AddFeedOverlay.init();
+
+	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
+		$("#feed_url").val("");
+		$.modal.close();
+	});
+
+	$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
+		alert(status);
+	});
 
 });

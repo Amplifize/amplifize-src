@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20111118065508) do
 
   create_table "feeds", :force => true do |t|
     t.string   "url"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_update_date"
@@ -58,10 +59,11 @@ ActiveRecord::Schema.define(:version => 20111118065508) do
   add_index "post_users", ["user_id"], :name => "post_users_user_id_fk"
 
   create_table "posts", :force => true do |t|
+    t.string   "uid"
     t.string   "title"
     t.string   "url"
-    t.datetime "written_dt"
-    t.text     "content",    :limit => 2147483647
+    t.datetime "published_at"
+    t.text     "content",      :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "feed_id"
