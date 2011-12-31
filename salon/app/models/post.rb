@@ -21,6 +21,8 @@ class Post < ActiveRecord::Base
         :read_state   => 1
       )
     end
+    
+    return posts
   end
 
   @private

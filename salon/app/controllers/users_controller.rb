@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => :reader
+  before_filter :require_user, :only => [:reader, :update]
 
   # GET /users/new
   # GET /users/new.xml
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(:reader, :notice => 'Registration successfull.') }
+        format.html { redirect_to(:reader, :notice => 'Welcome to amplifize') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.html { redirect_to(@user, :notice => 'Update was successful.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,15 +72,30 @@ class UsersController < ApplicationController
     current_user.feeds.delete(@feed)
     
     respond_to do |format|
-      format.html { redirect_to(reader_url)}
+      format.html {redirect_to(reader_url)}
       format.js
     end
   end
 
   def reader
     @feed = Feed.new
-    @my_feeds = current_user.feeds
-    @my_posts = current_user.posts.sort_by {|post| post.published_at}.reverse!
-    @my_shares = current_user.shares.sort_by { |share| share.created_at }.reverse!
+    @my_feeds = current_user.feeds;
+    @current_position = 0
+    @post = self.internal_get_post(0) 
+    @post_count = current_user.posts.count
+  end
+
+  def next_post()
+    index = params[:index].to_i
+    post = self.internal_get_post(index)
+    
+    respond_to do |format|
+      format.js {render :json => post }
+    end
+  end
+
+  @private
+  def internal_get_post(index)
+    current_user.posts.fetch(index)
   end
 end

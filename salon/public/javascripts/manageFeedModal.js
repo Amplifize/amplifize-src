@@ -12,13 +12,13 @@
  */
 
 $(document).ready(function() {
-	var AddFeedOverlay = {
+	var ManageFeedOverlay = {
 		container: null,
 		init: function () {
-			$("#addFeedNavItem").click(function (e) {
+			$("#manageFeedNavItem").click(function (e) {
 				e.preventDefault();	
 
-				$("#addFeed-modal-content").modal({
+				$("#manageFeed-modal-content").modal({
 					overlayId: 'reader-overlay',
 					containerId: 'reader-overlay-container',
 					closeHTML: null,
@@ -26,8 +26,8 @@ $(document).ready(function() {
 					opacity: 65, 
 					position: ['0',],
 					overlayClose: true,
-					onOpen: AddFeedOverlay.open,
-					onClose: AddFeedOverlay.close
+					onOpen: ManageFeedOverlay.open,
+					onClose: ManageFeedOverlay.close
 				});
 			});
 		},
@@ -35,12 +35,12 @@ $(document).ready(function() {
 			var self = this;
 			self.container = d.container[0];
 			d.overlay.fadeIn('slow', function () {
-				$("#addFeed-modal-content", self.container).show();
-				var title = $("#addFeed-modal-title", self.container);
+				$("#manageFeed-modal-content", self.container).show();
+				var title = $("#manageFeed-modal-title", self.container);
 				title.show();
 				d.container.slideDown('slow', function () {
 					setTimeout(function () {
-						var h = $("#addFeed-modal-data", self.container).height()
+						var h = $("#manageFeed-modal-data", self.container).height()
 							+ title.height()
 							+ 20; // padding
 						d.container.animate(
@@ -48,7 +48,7 @@ $(document).ready(function() {
 							200,
 							function () {
 								$("div.close", self.container).show();
-								$("#addFeed-modal-data", self.container).show();
+								$("#manageFeed-modal-data", self.container).show();
 							}
 						);
 					}, 300);
@@ -67,17 +67,6 @@ $(document).ready(function() {
 		}
 	};
 
-	AddFeedOverlay.init();
-
-	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
-		
-		
-		$("#feed_url").val("");
-		$.modal.close();
-	});
-
-	$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
-		alert(status);
-	});
+	ManageFeedOverlay.init();
 
 });

@@ -1,11 +1,15 @@
 Salon::Application.routes.draw do
   resources :users, :user_sessions, :feeds
-  
+
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
   match 'reader' => 'users#reader', :as => :reader
   match 'unsubscribe' => 'users#unsubscribe', :as => :unsubscribe
+  match '/users/next_post/:index', :controller => "users", :action => 'next_post', :as => :next_post
+  
+  match 'refresh' => 'feeds#refresh', :as => :refresh
+  match '/feed/import' => 'feeds#import', :as => :import
 
   match 'about' => 'home#about', :as => :about
   match 'contact' => 'home#contact', :as => :contact

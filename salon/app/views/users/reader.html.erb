@@ -3,19 +3,19 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "jquery.simplemodal.js", "addFeedModal.js" %>
+	<%= javascript_include_tag "reader.js", "jquery.simplemodal.js", "addFeedModal.js", "manageFeedModal.js" %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
-<ul class="topnav">  
-	<li><a href="#">Home</a></li>
+<ul class="topnav">
 	<li>
 		<a href="#">Feeds</a>
 		<ul class="subnav">
 			<li id="addFeedNavItem"><a href="#">Add feed</a></li>
-			<li id="manageFeedsLinkNavItem"><a href="#">Manage feeds</a></li>
-			<li id="importFeedsNavItem"><a href="#">Import feeds</a></li>
+			<li id="manageFeedNavItem"><a href="#">Manage feeds</a></li>
 		</ul>
+	</li>
+	<!--
 	<li>  
     	<a href="#">Amplified</a>  
     	<ul class="subnav">
@@ -23,35 +23,56 @@
         	<li><a href="#">Manage crowds</a></li>
     	</ul>
 	</li>
+	-->
 	<div style="clear: both;"></div>
 </ul>  
 
+<div id="amplifizeContent">
+	<!--
+	<div class="panel">
+		<h3>Sliding Panel</h3>
+		<p>Here's our sliding panel/drawer made using jQuery with the toggle function and some CSS3 for the rounded corners</p>
+	</div>
+	<div style="clear:both;"></div>
+
+	<a class="trigger" href="#">Feed actions</a>
+	-->
+	<%= link_to "previous", next_post_path(@current_position - 1), :remote => true, :id => "previous_button"  %>
+	<%= link_to "next", next_post_path(@current_position + 1), :remote => true, :id => "next_button" %>
+	
+	
+	<br/><br/>
+	<div id="contentTitle"><a href="<%= @post.url %>"><%= @post.title %></a></div>
+	<div id="contentPublishDate"><%= @post.published_at %></div>
+	<div id="contentSummary"><%= @post.content.html_safe %></div>
+</div>
 
 
 <div id="addFeed-modal-content">
 	<div id="addFeed-modal-title">Add feed</div>
 	<div id="addFeed-modal-data"><%= render "feeds/form" %></div>
 </div>
-<!--
-<div id="manageFeeds">
-	<h3>Manage feeds</h3>
-	<table id="feedTable">
-		<tr>
-			<td width="90%">Feed</td>
-			<td>Options</td>
-		</tr>
-	<% @my_feeds.each do |feed|%>
-		<tr id="tr_<%= feed.id %>">
-			<td><%= feed.url %></td>
-			<td>
-				<%= link_to "Delete", unsubscribe_url(:feed_id => feed.id), :remote => true %> | 
-				<%= link_to "Refresh", refresh_url(:feed_id => feed.id), :remote => true %>
-			</td>
-		</tr>
-	<%end%>
-	</table>
+<div id="manageFeed-modal-content">
+	<div id="manageFeed-modal-title">Manage feeds</div>
+	<div id="manageFeed-modal-data">
+		<h3>Import feeds</h3>
+		<%= render 'feeds/import' %>
+		<hr />
+	
+		<h3>Manage feeds</h3>
+		<table id="feedTable">
+			<tr>
+				<td width="75%">Feed</td>
+				<td>Options</td>
+			</tr>
+		<% @my_feeds.each do |feed|%>
+			<tr id="tr_<%= feed.id %>">
+				<td><%= feed.url %></td>
+				<td>
+					<%= link_to "Delete", unsubscribe_url(:feed_id => feed.id), :remote => true %>
+				</td>
+			</tr>
+		<%end%>
+		</table>
+	</div>
 </div>
-<div id="importFeeds">
-	<%= render 'feeds/import' %>
-</div>
--->
