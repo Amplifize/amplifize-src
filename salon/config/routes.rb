@@ -11,6 +11,8 @@ Salon::Application.routes.draw do
   match 'refresh' => 'feeds#refresh', :as => :refresh
   match '/feed/import' => 'feeds#import', :as => :import
 
+  match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state', :as => :set_read_state
+
   match 'about' => 'home#about', :as => :about
   match 'contact' => 'home#contact', :as => :contact
   match 'terms' => 'home#terms', :as => :terms

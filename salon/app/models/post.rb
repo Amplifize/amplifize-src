@@ -6,6 +6,14 @@ class Post < ActiveRecord::Base
 
   after_save :attach_to_users
 
+  scope :desc, order("posts.published_at DESC")
+  
+  scope :unread, lambda {
+    joins(:post_users).
+    where("post_users.read_state = 1")
+  }
+
+
   def self.get_new_posts(feed_url, feed_id)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
     add_entries(feed.entries, feed_id)

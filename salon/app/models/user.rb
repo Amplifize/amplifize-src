@@ -9,5 +9,4 @@ class User < ActiveRecord::Base
   has_many :posts, :through => :post_users
   
   has_many :shares
-
 end

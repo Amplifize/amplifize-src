@@ -81,8 +81,8 @@ class UsersController < ApplicationController
     @feed = Feed.new
     @my_feeds = current_user.feeds;
     @current_position = 0
-    @post = self.internal_get_post(0) 
-    @post_count = current_user.posts.count
+    @post = self.internal_get_post(0)
+    @post_count = current_user.posts.unread.count
   end
 
   def next_post()
@@ -96,6 +96,6 @@ class UsersController < ApplicationController
 
   @private
   def internal_get_post(index)
-    current_user.posts.fetch(index)
+    current_user.posts.unread.desc.fetch(index)
   end
 end
