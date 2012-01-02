@@ -2,9 +2,7 @@
 db/*.sqlite3
 log/*.log
 tmp/**/*
-Gemfile.lock
 vendor/cache/*
-../.metadata/
-../.project
+.metadata/
 .project
 lambda
