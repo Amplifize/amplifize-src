@@ -80,22 +80,6 @@ class UsersController < ApplicationController
   def reader
     @feed = Feed.new
     @my_feeds = current_user.feeds;
-    @current_position = 0
-    @post = self.internal_get_post(0)
-    @post_count = current_user.posts.unread.count
-  end
-
-  def next_post()
-    index = params[:index].to_i
-    post = self.internal_get_post(index)
-    
-    respond_to do |format|
-      format.js {render :json => post }
-    end
-  end
-
-  @private
-  def internal_get_post(index)
-    current_user.posts.unread.desc.fetch(index)
+    @posts = current_user.posts.unread.desc.map(&:id).to_json
   end
 end

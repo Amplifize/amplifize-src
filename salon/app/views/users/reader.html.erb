@@ -5,22 +5,7 @@
 <% content_for :javascripts do %>
 	<%= javascript_include_tag "reader.js", "jquery.simplemodal.js", "addFeedModal.js", "manageFeedModal.js" %>
 	<script type="text/javascript">
-		var currentPostId = <%= @post.id %>;
-		var currentPosition = <%= @current_position %>;
-		
-		var markRead = function() {
-			$.ajax({
-				url: "/post_users/"+currentPostId+"/read_state/0",
-				success: function() {
-					//log this
-				},
-				error: function(xhr, text, error) {
-					//log this
-				}
-			});
-		}
-
-		markRead();
+		var posts = <%= @posts %>;
 	</script>
 <% end %>
 
@@ -45,10 +30,10 @@
 	<div style="clear: both;"></div>
 </ul>  
 <div id="amplifizeContentNavigation">
-	<%= link_to "previous", next_post_path(@current_position - 1), :remote => true, :id => "previous_button"  %>
-	<%= link_to "next", next_post_path(@current_position + 1), :remote => true, :id => "next_button" %>
-	<%= link_to "keep unread", set_read_state_path(@post.id, 1), :remote => true, :id => "unread_button" %>
-	<%= link_to "flag", set_read_state_path(@post.id, 2), :remote => true, :id => "flag_button" %>
+	<a href="#" onclick="downPost();">previous</a>
+	<a href="#" onclick="upPost();">next</a>
+	<a href="#" onclick="setReadState(1);">keep unread</a>
+	<a href="#" onclick="setReadState(2);">flag</a>
 </div>
 
 <div id="amplifizeContent">
@@ -62,9 +47,9 @@
 	<a class="trigger" href="#">Feed actions</a>
 	-->	
 	<br/><br/>
-	<div id="contentTitle"><a href="<%= @post.url %>"><%= @post.title %></a></div>
-	<div id="contentPublishDate"><%= @post.published_at %></div>
-	<div id="contentSummary"><%= @post.content.html_safe %></div>
+	<div id="contentTitle"></div>
+	<div id="contentPublishDate"></div>
+	<div id="contentSummary"></div>
 </div>
 
 

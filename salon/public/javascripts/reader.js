@@ -1,65 +1,64 @@
 $(document).ready(function(){
-	$(".trigger").click(function(){
-		$(".panel").toggle("fast");
-		$(this).toggleClass("active");
+	// $(".trigger").click(function(){
+		// $(".panel").toggle("fast");
+		// $(this).toggleClass("active");
+		// return false;
+	// });
+
+	var current_post = undefined;
+	var position = 0;
+		
+	var setReadState = function(readState) {
+		$.ajax({
+			url: "/post_users/"+current_post.id+"/read_state/"+readState,
+			success: function() {
+				//log this
+			},
+			error: function(xhr, text, error) {
+				//log this
+			}
+		});
+		
 		return false;
-	});
-
-	$("#previous_button").bind("ajax:success", function(xhr, data, status) {
-		updatePostContent(data.post);
-		updatePostNavigation(data.post);
-		currentPosition--;
-		markRead();
-		
-		var nextButton = $("#next_button");
-		var previousButton = $("#previous_button");
-
-		//reduce the button values
-		//if(previousButton.attr("href")) {
-			var newPreviousString = "/users/next_post/" + (currentPosition - 1);
-			previousButton.attr("href", newPreviousString);
-		//} else {
-		//}
-
-		var newNextString = "/users/next_post/" + (currentPosition + 1);
-		nextButton.attr("href", newNextString);
-		
-	});
-	
-	$("#next_button").bind("ajax:success", function(xhr, data, status) {
-		updatePostContent(data.post);
-		updatePostNavigation(data.post);
-		currentPosition++;
-		markRead();
-		
-		var nextButton = $("#next_button");
-		var previousButton = $("#previous_button");
-
-		//increase the button values
-		//if(previousButton.attr("href")) {
-			var newPreviousString = "/users/next_post/" + (currentPosition - 1);
-			previousButton.attr("href", newPreviousString);
-		//} else {
-		//}
-
-		var newNextString = "/users/next_post/" + (currentPosition + 1);
-		nextButton.attr("href", newNextString);
-	});
-
-	$("#next_button").bind("ajax:error", function(xhr, data, status) {
-		//log an error
-	});
-
-	var updatePostContent = function(post) {		
-		$("#contentTitle").html('<a href="'+post.url+'">'+post.title+'</a></p>');
-		$("#contentPublishDate").html(post.published_at);
-		$("#contentSummary").html(post.content);
-		
-		currentPostId = post.id;
 	}
-	
-	var updatePostNavigation = function(post) {
-		$("#unread_button").attr("href", "post_users/"+post.id+"/read_state/1");
-		$("#flag_button").attr("href", "post_users/"+post.id+"/read_state/2");
-	}
+		
+	var downPost = function() {
+		if(position > 0) {
+			position--;
+			updatePostContent(posts[position]);
+		}
+		
+		return false;
+	};
+		
+	var upPost = function() {
+		if(position < posts.length) {
+			position++;
+			updatePostContent(posts[position]);
+		}
+		
+		return false;
+	};
+
+	var updatePostContent = function(postId) {		
+		$.ajax({
+			url: "/posts/"+postId,
+			success: function(data, textStatus, jqXHR) {
+				current_post = data.post;
+				
+				$("#contentTitle").html('<a href="'+current_post.url+'">'+current_post.title+'</a></p>');
+				$("#contentPublishDate").html(current_post.published_at);
+				$("#contentSummary").html(current_post.content);
+
+				setReadState(0);
+			},
+			error: function(xhr, text, error) {
+				alert(error);
+				alert(text);
+			}
+			
+		})
+	};
+
+	updatePostContent(posts[position]);
 });
