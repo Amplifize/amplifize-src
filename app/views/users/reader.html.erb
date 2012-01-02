@@ -1,0 +1,83 @@
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "reader.css", "reader-overlay.css" %>
+<% end %>
+
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "reader.js", "jquery.simplemodal.js", "addFeedModal.js", "manageFeedModal.js" %>
+	<script type="text/javascript">
+		var posts = <%= @posts %>;
+	</script>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+<ul class="topnav">
+	<li>
+		<a href="#">Feeds</a>
+		<ul class="subnav">
+			<li id="addFeedNavItem"><a href="#">Add feed</a></li>
+			<li id="manageFeedNavItem"><a href="#">Manage feeds</a></li>
+		</ul>
+	</li>
+	<!--
+	<li>  
+    	<a href="#">Amplified</a>  
+    	<ul class="subnav">
+        	<li><a href="#">Invite friends</a></li>
+        	<li><a href="#">Manage crowds</a></li>
+    	</ul>
+	</li>
+	-->
+	<div style="clear: both;"></div>
+</ul>  
+<div id="amplifizeContentNavigation">
+	<a href="#" onclick="downPost();">previous</a>
+	<a href="#" onclick="upPost();">next</a>
+	<a href="#" onclick="setReadState(1);">keep unread</a>
+	<a href="#" onclick="setReadState(2);">flag</a>
+</div>
+
+<div id="amplifizeContent">
+	<!--
+	<div class="panel">
+		<h3>Sliding Panel</h3>
+		<p>Here's our sliding panel/drawer made using jQuery with the toggle function and some CSS3 for the rounded corners</p>
+	</div>
+	<div style="clear:both;"></div>
+
+	<a class="trigger" href="#">Feed actions</a>
+	-->	
+	<br/><br/>
+	<div id="contentTitle"></div>
+	<div id="contentPublishDate"></div>
+	<div id="contentSummary"></div>
+</div>
+
+
+<div id="addFeed-modal-content">
+	<div id="addFeed-modal-title">Add feed</div>
+	<div id="addFeed-modal-data"><%= render "feeds/form" %></div>
+</div>
+<div id="manageFeed-modal-content">
+	<div id="manageFeed-modal-title">Manage feeds</div>
+	<div id="manageFeed-modal-data">
+		<h3>Import feeds</h3>
+		<%= render 'feeds/import' %>
+		<hr />
+	
+		<h3>Manage feeds</h3>
+		<table id="feedTable">
+			<tr>
+				<td width="75%">Feed</td>
+				<td>Options</td>
+			</tr>
+		<% @my_feeds.each do |feed|%>
+			<tr id="tr_<%= feed.id %>">
+				<td><%= feed.url %></td>
+				<td>
+					<%= link_to "Delete", unsubscribe_url(:feed_id => feed.id), :remote => true %>
+				</td>
+			</tr>
+		<%end%>
+		</table>
+	</div>
+</div>
