@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.string :url
       t.datetime :published_at
-      t.text :content, :limit => 4294967295
+      t.text :content #, :limit => 4294967295
 
       t.timestamps
     end
