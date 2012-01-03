@@ -26,7 +26,7 @@ class FeedsController < ApplicationController
       format.js { render :json => @posts.map(&:attributes) }
     end
   end
-  
+
   def import
     require 'opml'
 
@@ -50,6 +50,7 @@ class FeedsController < ApplicationController
 
         posts.insert(Post.synchronize_posts_with_users(current_user.id, @feed.id))
       end
+    end
 
     #TODO: Figure out how to return the posts here
     respond_to do |format|
@@ -67,3 +68,5 @@ class FeedsController < ApplicationController
       format.js { render :json => posts.map(&:attributes) }
     end
   end
+
+end
