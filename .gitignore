@@ -6,3 +6,5 @@ vendor/cache/*
 .metadata/
 .project
 lambda
+.DS_Store
+screen\ shots/*

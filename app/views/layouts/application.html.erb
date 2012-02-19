@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Salon</title>
+  <title>Amplifize | Give good content a voice</title>
   <%= stylesheet_link_tag "global.css" %>
   <%= yield :stylesheets %>
   <%= javascript_include_tag :defaults %>
@@ -11,7 +11,7 @@
 <body>
     <header>
     	<h1>amplifize</h1>
-    	<h3>Give good content a voice</h3>
+    	<h3>Subscribe, share, discuss</h3>
     	
     	<div id="navigation">
         <% if current_user %> 
@@ -36,5 +36,13 @@
 		<%= link_to "Terms", :terms %>
 		<div style="clear:both"></div>
 	</div>
+	<script type="text/javascript">
+  		var uvOptions = {};
+  		(function() {
+    		var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    		uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/F73fXEQJeNksQxotASDg.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  		})();
+	</script>
 </body>
 </html>
