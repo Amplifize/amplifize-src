@@ -33,9 +33,13 @@ GEM
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
     builder (2.1.2)
-    chronic (0.6.4)
     curb (0.7.15)
     daemons (1.1.5)
+    delayed_job (3.0.1)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.2)
+      activerecord (> 2.1.0)
+      delayed_job (~> 3.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
@@ -96,15 +100,13 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.30)
-    whenever (0.7.0)
-      activesupport (>= 2.3.4)
-      chronic (~> 0.6.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   authlogic
+  delayed_job_active_record
   feedzirra
   foreigner
   jquery-rails (>= 1.0.12)
@@ -113,4 +115,3 @@ DEPENDENCIES
   pg
   rails (= 3.0.8)
   thin
-  whenever

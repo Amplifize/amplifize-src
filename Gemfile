@@ -9,12 +9,12 @@ gem 'rails', '3.0.8'
 gem 'pg'
 gem 'thin'
 gem 'authlogic'
-gem 'whenever'
 gem 'loofah', '1.0.0.beta.1'
 gem 'feedzirra'
 gem 'foreigner'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'opml'
+gem 'delayed_job_active_record'
 
 # Use unicorn as the web server
 # gem 'unicorn'

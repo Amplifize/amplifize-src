@@ -8,12 +8,7 @@ class Feed < ActiveRecord::Base
   before_save :check_feed_url, :setup_feed_metadata
    
   def self.update_feeds
-    feeds = Feed.all
-    feeds.each { |feed|
-      Post.get_new_posts(feed.url, feed.id)
-    }
-    
-    puts "Finished updating feeds"
+    Delayed::Job.enqueue(FeedsJob.new)
   end
   
   @private
