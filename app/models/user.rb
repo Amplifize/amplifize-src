@@ -9,4 +9,7 @@ class User < ActiveRecord::Base
   has_many :posts, :through => :post_users
   
   has_many :shares
+  
+  has_many :followers, :foreign_key => :follower, :class_name => 'Follow'
+  has_many :followed, :foreign_key => :followed, :class_name => 'Follow'
 end

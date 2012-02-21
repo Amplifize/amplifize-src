@@ -1,5 +1,7 @@
 #addFeed-modal-content,
-#manageFeed-modal-content {
+#manageFeed-modal-content,
+#findPeople-modal-content,
+#manageFollows-modal-content {
 	display: none;
 }
 
@@ -75,59 +77,15 @@ html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
 	overflow-y: auto;
 }
 
-/*
-.panel {
-	display: none;
-	background: #000000;
-	border:1px solid #111111;
-	-moz-border-radius-topright: 20px;
-	-webkit-border-top-right-radius: 20px;
-	-moz-border-radius-bottomright: 20px;
-	-webkit-border-bottom-right-radius: 20px;
-	width: 330px;
-	height: auto;
-	padding: 30px 30px 30px 130px;
-	filter: alpha(opacity=85);
-	opacity: .85;
+#userSearchForm,
+#userSearchResults,
+#userSearchResultsTable
+{
+	margin-left: 25px;
+	padding: 5px;
 }
-	 
-a.trigger{
-	width: 200px;
-	text-decoration: none;
-	font-size: 16px;
-	letter-spacing:-1px;
-	font-family: verdana, helvetica, arial, sans-serif;
-	color:#fff;
-	padding: 20px 40px 20px 15px;
-	font-weight: 700;
-	background:#333333 url(images/plus.png) 85% 55% no-repeat;
-	border:1px solid #444444;
-	-moz-border-radius-topright: 20px;
-	-webkit-border-top-right-radius: 20px;
-	-moz-border-radius-bottomright: 20px;
-	-webkit-border-bottom-right-radius: 20px;
-	-moz-border-radius-bottomleft: 0px;
-	-webkit-border-bottom-left-radius: 0px;
-	display: block;
+
+#userSearch button {
+	margin-left: 10px;
+	padding: 10px;
 }
-	 
-a.trigger:hover{
-	width: 200px;
-	text-decoration: none;
-	font-size: 16px;
-	letter-spacing:-1px;
-	font-family: verdana, helvetica, arial, sans-serif;
-	color:#fff;
-	padding: 20px 40px 20px 20px;
-	font-weight: 700;
-	background:#222222 url(images/plus.png) 85% 55% no-repeat;
-	border:1px solid #444444;
-	-moz-border-radius-topright: 20px;
-	-webkit-border-top-right-radius: 20px;
-	-moz-border-radius-bottomright: 20px;
-	-webkit-border-bottom-right-radius: 20px;
-	-moz-border-radius-bottomleft: 0px;
-	-webkit-border-bottom-left-radius: 0px;
-	display: block;
-}
-*/

@@ -7,10 +7,15 @@ Salon::Application.routes.draw do
   match 'reader' => 'users#reader', :as => :reader
   match 'unsubscribe' => 'users#unsubscribe', :as => :unsubscribe
   
+  match '/users/search' => 'users#search', :as => :user_search
+  
   match 'refresh' => 'feeds#refresh', :as => :refresh
   match '/feed/import' => 'feeds#import', :as => :import
 
   match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state', :as => :set_read_state
+
+  #follows actions
+  match '/follows/add/:user_id' => 'follows#add', :as => :follows_add
 
   match 'about' => 'home#about', :as => :about
   match 'contact' => 'home#contact', :as => :contact

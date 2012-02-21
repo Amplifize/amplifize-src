@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:reader, :update]
+  before_filter :require_user, :only => [:reader, :update, :search]
 
   # GET /users/new
   # GET /users/new.xml
@@ -81,5 +81,14 @@ class UsersController < ApplicationController
     @feed = Feed.new
     @my_feeds = current_user.feeds;
     @posts = current_user.posts.unread.desc.map(&:id).to_json
+    @my_follows = current_user.followed
+  end
+  
+  def search
+    user = User.find_by_email(params[:email])
+    
+    respond_to do |format|
+      format.js { render :json => user }
+    end
   end
 end

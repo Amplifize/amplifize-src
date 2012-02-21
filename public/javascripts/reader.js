@@ -1,10 +1,4 @@
-$(document).ready(function(){
-	// $(".trigger").click(function(){
-		// $(".panel").toggle("fast");
-		// $(this).toggleClass("active");
-		// return false;
-	// });
-
+$(document).ready(function() {
 	updatePostContent(posts[position]);
 });
 
@@ -43,6 +37,10 @@ var upPost = function() {
 	return false;
 };
 
+var share = function() {
+	
+};
+
 var updatePostContent = function(postId) {		
 	$.ajax({
 		url: "/posts/"+postId,
@@ -50,7 +48,7 @@ var updatePostContent = function(postId) {
 			current_post = data.post;
 			
 			$("#contentTitle").html('<a href="'+current_post.url+'">'+current_post.title+'</a></p>');
-			$("#contentPublishDate").html(current_post.published_at);
+			$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 			$("#contentSummary").html(current_post.content);
 
 			setReadState(0);
@@ -59,6 +57,5 @@ var updatePostContent = function(postId) {
 			alert(error);
 			alert(text);
 		}
-		
 	})
 };

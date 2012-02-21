@@ -16,9 +16,11 @@
 
 /* Container */
 #reader-overlay-container {background-color:#eee; color:#000; font: 16px/24px "Lucida Grande",Arial,sans-serif; padding-bottom:4px; width:600px; -moz-border-radius-bottomleft:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomright:6px; -webkit-border-bottom-right-radius:6px; border-radius:0 0 6px 6px; -moz-box-shadow:0 0 64px #000; -webkit-box-shadow:0 0 64px #000; box-shadow:0 0 64px #000;}
-#reader-overlay-container a {color:#ddd;}
+#reader-overlay-container a {color:#000;}
 #reader-overlay-container #addFeed-modal-title,
-#reader-overlay-container #manageFeed-modal-title {
+#reader-overlay-container #manageFeed-modal-title,
+#reader-overlay-container #findPeople-modal-title,
+#reader-overlay-container #manageFollows-modal-title {
 	color:#000; background-color:#ddd; 
 	border-bottom:1px solid #ccc; 
 	font-weight:bold; 
@@ -27,7 +29,9 @@
 }
 
 #reader-overlay-container #addFeed-modal-data,
-#reader-overlay-container #manageFeed-modal-data {
+#reader-overlay-container #manageFeed-modal-data, 
+#reader-overlay-container #findPeopleFeed-modal-data
+#reader-overlay-container #manageFollows-modal-data {
 	font-size:12px; 
 	padding:6px 12px;
 }

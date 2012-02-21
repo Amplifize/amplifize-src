@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "reader.js", "jquery.simplemodal.js", "addFeedModal.js", "manageFeedModal.js" %>
+	<%= javascript_include_tag "reader.js", "jquery.simplemodal.js", "addFeedModal.js", "manageFeedModal.js", "dateFormat.js", "findPeopleModal.js", "manageFollowsModal.js" %>
 	<script type="text/javascript">
 		var posts = <%= @posts %>;
 	</script>
@@ -18,22 +18,21 @@
 			<li id="manageFeedNavItem"><a href="#">Manage feeds</a></li>
 		</ul>
 	</li>
-	<!--
-	<li>  
-    	<a href="#">Amplified</a>  
-    	<ul class="subnav">
-        	<li><a href="#">Invite friends</a></li>
-        	<li><a href="#">Manage crowds</a></li>
-    	</ul>
+	<li>
+		<a href="#">People</a>
+		<ul class="subnav">
+			<li id="findPeopleNavItem"><a href="#">Find someone to follow</a></li>
+			<li id="manageFollowsNavItem"><a href="#">Manage follows</a></li>
+		</ul>
 	</li>
-	-->
 	<div style="clear: both;"></div>
 </ul>  
 <div id="amplifizeContentNavigation">
 	<a href="#" onclick="downPost();">previous</a>
 	<a href="#" onclick="upPost();">next</a>
 	<a href="#" onclick="setReadState(1);">keep unread</a>
-	<a href="#" onclick="setReadState(2);">flag</a>
+	<a href="#" onclick="setReadState(2);">bookmark</a>
+	<a href="#" onclick="share();">share</a>
 </div>
 
 <div id="amplifizeContent">
@@ -75,6 +74,40 @@
 				<td><%= feed.url %></td>
 				<td>
 					<%= link_to "Delete", unsubscribe_url(:feed_id => feed.id), :remote => true %>
+				</td>
+			</tr>
+		<%end%>
+		</table>
+	</div>
+</div>
+<div id="findPeople-modal-content">
+	<div id="findPeople-modal-title">Find people to follow</div>
+	<div id="findPeople-modal-data">
+		<%= render "users/search_form" %>
+		
+		<div id="userSearchResultsDiv">
+			<p id="userSearchResults">Results<p>
+			<table id="userSearchResultsTable">
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="manageFollows-modal-content">
+	<div id="manageFollows-modal-title">Manage follows</div>
+	<div id="manageFollows-modal-data">
+		<table id="followTable">
+			<tr>
+				<td width="75%">Email</td>
+				<td>Options</td>
+			</tr>
+		<% @my_follows.each do |follow|%>
+			<tr id="tr_<%= follow.id %>">
+				<td>ABCDE</td>
+				<td>
+					<%= link_to "Delete", unfollow_url(:follow_id => follow.id), :remote => true %>
 				</td>
 			</tr>
 		<%end%>

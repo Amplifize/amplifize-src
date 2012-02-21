@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120220000115) do
+ActiveRecord::Schema.define(:version => 20120220045849) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -53,15 +53,12 @@ ActiveRecord::Schema.define(:version => 20120220000115) do
     t.datetime "updated_at"
   end
 
-  create_table "followers", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "follow_id"
+  create_table "follows", :force => true do |t|
+    t.integer  "follower"
+    t.integer  "followed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "followers", ["follow_id"], :name => "followers_follow_id_fk"
-  add_index "followers", ["user_id"], :name => "followers_user_id_fk"
 
   create_table "post_users", :force => true do |t|
     t.integer  "post_id"
@@ -71,26 +68,21 @@ ActiveRecord::Schema.define(:version => 20120220000115) do
     t.datetime "updated_at"
   end
 
-  add_index "post_users", ["post_id"], :name => "post_users_post_id_fk"
-  add_index "post_users", ["user_id"], :name => "post_users_user_id_fk"
-
   create_table "posts", :force => true do |t|
     t.string   "uid"
     t.string   "title"
     t.string   "url"
     t.datetime "published_at"
-    t.text     "content",      :limit => 2147483647
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "feed_id"
   end
 
-  add_index "posts", ["feed_id"], :name => "posts_feed_id_fk"
-
   create_table "shares", :force => true do |t|
-    t.string   "uri"
-    t.text     "comment"
+    t.text     "summary"
     t.integer  "user_id"
+    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -103,9 +95,6 @@ ActiveRecord::Schema.define(:version => 20120220000115) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_foreign_key "followers", "users", :name => "followers_follow_id_fk", :column => "follow_id"
-  add_foreign_key "followers", "users", :name => "followers_user_id_fk"
 
   add_foreign_key "post_users", "posts", :name => "post_users_post_id_fk"
   add_foreign_key "post_users", "users", :name => "post_users_user_id_fk"

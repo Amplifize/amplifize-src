@@ -4,7 +4,6 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @feed }
     end
   end
 

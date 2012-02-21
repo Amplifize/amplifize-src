@@ -1,9 +1,9 @@
 class CreateShares < ActiveRecord::Migration
   def self.up
     create_table :shares do |t|
-      t.string :uri
-      t.text :comment
+      t.text :summary
       t.references :user
+      t.references :post
 
       t.timestamps
     end
