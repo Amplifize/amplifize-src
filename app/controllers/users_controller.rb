@@ -81,7 +81,8 @@ class UsersController < ApplicationController
     @feed = Feed.new
     @my_feeds = current_user.feeds;
     @posts = current_user.posts.unread.desc.map(&:id).to_json
-    @my_follows = current_user.followed
+    @my_follows = Follow.find_all_by_follower(current_user.id)
+    @shares = current_user.share_users
   end
   
   def search

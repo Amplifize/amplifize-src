@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120220045849) do
+ActiveRecord::Schema.define(:version => 20120224061023) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -77,6 +77,14 @@ ActiveRecord::Schema.define(:version => 20120220045849) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "feed_id"
+  end
+
+  create_table "share_users", :force => true do |t|
+    t.integer  "share_id"
+    t.integer  "user_id"
+    t.integer  "read_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "shares", :force => true do |t|

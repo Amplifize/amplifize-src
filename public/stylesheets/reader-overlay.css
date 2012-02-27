@@ -20,7 +20,8 @@
 #reader-overlay-container #addFeed-modal-title,
 #reader-overlay-container #manageFeed-modal-title,
 #reader-overlay-container #findPeople-modal-title,
-#reader-overlay-container #manageFollows-modal-title {
+#reader-overlay-container #manageFollows-modal-title,
+#reader-overlay-container #addShares-modal-title {
 	color:#000; background-color:#ddd; 
 	border-bottom:1px solid #ccc; 
 	font-weight:bold; 
@@ -30,8 +31,9 @@
 
 #reader-overlay-container #addFeed-modal-data,
 #reader-overlay-container #manageFeed-modal-data, 
-#reader-overlay-container #findPeopleFeed-modal-data
-#reader-overlay-container #manageFollows-modal-data {
+#reader-overlay-container #findPeopleFeed-modal-data,
+#reader-overlay-container #manageFollows-modal-data,
+#reader-overlay-container #addShares-modal-data {
 	font-size:12px; 
 	padding:6px 12px;
 }

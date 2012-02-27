@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "reader.js", "jquery.simplemodal.js", "addFeedModal.js", "manageFeedModal.js", "dateFormat.js", "findPeopleModal.js", "manageFollowsModal.js" %>
+	<%= javascript_include_tag "reader.js", "jquery.simplemodal.js", "addFeedModal.js", "manageFeedModal.js", "dateFormat.js", "findPeopleModal.js", "manageFollowsModal.js", "addShare.js" %>
 	<script type="text/javascript">
 		var posts = <%= @posts %>;
 	</script>
@@ -32,19 +32,10 @@
 	<a href="#" onclick="upPost();">next</a>
 	<a href="#" onclick="setReadState(1);">keep unread</a>
 	<a href="#" onclick="setReadState(2);">bookmark</a>
-	<a href="#" onclick="share();">share</a>
+	<a href="#" id="shareNavItem">share</a>
 </div>
 
 <div id="amplifizeContent">
-	<!--
-	<div class="panel">
-		<h3>Sliding Panel</h3>
-		<p>Here's our sliding panel/drawer made using jQuery with the toggle function and some CSS3 for the rounded corners</p>
-	</div>
-	<div style="clear:both;"></div>
-
-	<a class="trigger" href="#">Feed actions</a>
-	-->	
 	<br/><br/>
 	<div id="contentTitle"></div>
 	<div id="contentPublishDate"></div>
@@ -103,14 +94,21 @@
 				<td width="75%">Email</td>
 				<td>Options</td>
 			</tr>
-		<% @my_follows.each do |follow|%>
-			<tr id="tr_<%= follow.id %>">
-				<td>ABCDE</td>
-				<td>
-					<%= link_to "Delete", unfollow_url(:follow_id => follow.id), :remote => true %>
-				</td>
-			</tr>
+		<% if not @my_follows.nil? then %>
+			<% @my_follows.each do |follow|%>
+			<%end%>
 		<%end%>
 		</table>
+	</div>
+</div>
+<div id="addShares-modal-content">
+	<div id="addShares-modal-title">Share post</div>
+	<div id="addShares-modal-data">
+		<form method="POST" action="/shares/add" data-remote="true" id="addShareForm">
+			<input type="hidden" value="" id="sharePostId" name="postId" />
+			<label for="summary">Summary</label>
+			<textarea name="summary" id="summary"></textarea>
+			<input type="submit" value="Share" />
+		</form>
 	</div>
 </div>

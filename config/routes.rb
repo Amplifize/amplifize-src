@@ -17,6 +17,9 @@ Salon::Application.routes.draw do
   #follows actions
   match '/follows/add/:user_id' => 'follows#add', :as => :follows_add
 
+  #share actions
+  match '/shares/add/' => 'shares#add', :as => :shares_add
+
   match 'about' => 'home#about', :as => :about
   match 'contact' => 'home#contact', :as => :contact
   match 'terms' => 'home#terms', :as => :terms

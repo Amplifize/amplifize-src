@@ -37,10 +37,6 @@ var upPost = function() {
 	return false;
 };
 
-var share = function() {
-	
-};
-
 var updatePostContent = function(postId) {		
 	$.ajax({
 		url: "/posts/"+postId,
@@ -50,6 +46,8 @@ var updatePostContent = function(postId) {
 			$("#contentTitle").html('<a href="'+current_post.url+'">'+current_post.title+'</a></p>');
 			$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 			$("#contentSummary").html(current_post.content);
+
+			$("#sharePostId").val(current_post.id)
 
 			setReadState(0);
 		},
