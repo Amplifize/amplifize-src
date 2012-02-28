@@ -39,15 +39,19 @@ class Post < ActiveRecord::Base
   @private
   def self.add_entries(entries, feed_id)
     entries.each do |entry|
-      unless exists? :uid => entry.id
-        create!(
-          :title        => entry.title.html_safe,
-          :content      => entry.content.nil? ? entry.summary : entry.content,
-          :url          => entry.url,
-          :published_at => entry.published,
-          :uid          => entry.id,
-          :feed_id      => feed_id
-        )
+      begin
+        unless exists? :uid => entry.id
+          create!(
+            :title        => entry.title.html_safe,
+            :content      => entry.content.nil? ? entry.summary : entry.content,
+            :url          => entry.url,
+            :published_at => entry.published,
+            :uid          => entry.id,
+            :feed_id      => feed_id
+          )
+        end
+      rescue
+        next
       end
     end
   end
