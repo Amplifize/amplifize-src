@@ -16,20 +16,23 @@ class Post < ActiveRecord::Base
 
   def self.get_new_posts(feed_url, feed_id)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
-    add_entries(feed.entries, feed_id)
+
+    if not feed.nil? and not feed.is_a? Fixnum then 
+      add_entries(feed.entries, feed_id)
+    end
   end
 
   def self.synchronize_posts_with_users(user_id, feed_id)
     posts = Post.find_all_by_feed_id(feed_id, :limit => 10)
     
-    posts.each do |post| 
+    posts.each do |post|
       PostUser.create(
         :post_id      => post.id,
         :user_id      => user_id,
         :read_state   => 1
       )
     end
-    
+
     return posts
   end
 

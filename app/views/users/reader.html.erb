@@ -45,15 +45,17 @@
 
 <div id="addFeed-modal-content">
 	<div id="addFeed-modal-title">Add feed</div>
-	<div id="addFeed-modal-data"><%= render "feeds/form" %></div>
+	<div id="addFeed-modal-data">
+		<%= render "feeds/form" %>
+		<hr/>
+	
+		<h3>Import feeds</h3>
+		<%= render 'feeds/import' %>
+	</div>
 </div>
 <div id="manageFeed-modal-content">
 	<div id="manageFeed-modal-title">Manage feeds</div>
 	<div id="manageFeed-modal-data">
-		<h3>Import feeds</h3>
-		<%= render 'feeds/import' %>
-		<hr />
-	
 		<h3>Manage feeds</h3>
 		<table id="feedTable">
 			<tr>

@@ -20,6 +20,10 @@ class Feed < ActiveRecord::Base
 
   def setup_feed_metadata
     feed = Feedzirra::Feed.fetch_and_parse(self.url)
-    self.title = feed.title
+    if feed.nil? or feed.is_a? Fixnum then
+      return false
+    else
+      self.title = feed.title  
+    end
   end
 end

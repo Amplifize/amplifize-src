@@ -1,4 +1,6 @@
 class FeedsController < ApplicationController
+  before_filter :require_user, :only => [:import, :refresh]
+
   def new
     @feed = Feed.new
 
@@ -32,22 +34,24 @@ class FeedsController < ApplicationController
     opml_file = params[:feeds][:my_file].tempfile
     opml_xml = Opml.new(opml_file)
 
-    posts = []
     opml_xml.outlines.each do |feed|
-      url = feed.attributes['html_url']
+      url = feed.attributes['xml_url']
       if not url.nil? then
         new_feed = Feed.find_by_url(url)
 
         if new_feed.nil? then
           new_feed = Feed.new
           new_feed.url = url
+          new_feed.users = []
           new_feed.save
           Post.get_new_posts(url, new_feed.id)
+        elsif current_user.feeds.include?(new_feed) then
+          next
         end
 
         new_feed.users.push(current_user)
-
-        posts.insert(Post.synchronize_posts_with_users(current_user.id, @feed.id))
+        
+        Post.synchronize_posts_with_users(current_user.id, new_feed.id)
       end
     end
 
