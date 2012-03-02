@@ -8,6 +8,7 @@ Salon::Application.routes.draw do
   match 'unsubscribe' => 'users#unsubscribe', :as => :unsubscribe
   
   match '/users/search' => 'users#search', :as => :user_search
+  match '/users/edit' => 'users#edit', :as => :account
   
   match 'refresh' => 'feeds#refresh', :as => :refresh
   match '/feed/import' => 'feeds#import', :as => :import

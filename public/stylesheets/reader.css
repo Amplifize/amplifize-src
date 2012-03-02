@@ -6,26 +6,30 @@
 	display: none;
 }
 
-#content {
-	height: 550px;
+#reader_content {
+	height: 100%;
+	
+	margin-left: 20px;
 	
 }
 
 ul.topnav {
 	list-style: none;
-	font-size: 14pt;
-	
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	background-color: #E9E9E9;
+	font-size: 14pt;	
 }
 
 ul.topnav li {
 	float: left;
 	margin: 0;
-	padding: 0 15px 0 0;
-	position: relative; /*--Declare X and Y axis base for sub navigation--*/
+	padding: 5px;
+	position: relative;
+	
+	background-color: #E9E9E9;
+	text-align: center;
+	
+	border: 1px solid black;
 }
+
 ul.topnav li a,
 ul.topnav li a:visited {
 	padding: 10px 5px;

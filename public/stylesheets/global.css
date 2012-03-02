@@ -33,8 +33,6 @@ header > h3 {
 	
 	padding-top: 14px;
 	padding-left: 5px;
-	
-	
 }
 
 header > #navigation {
@@ -48,9 +46,9 @@ header > #navigation > a,
 header > #navigation > a:visited {
 	width: 100px;
 	height: 30px;
-	
-	background-color: #ff9900;
+
 	color: #424242;
+	background-color: #FF9900;
 
 	display: block;
 	
@@ -70,42 +68,35 @@ header > #navigation > a:hover {
 
 #content {
 	width: 940px;
+	min-height: 500px;
 	margin: 0 auto;
+	padding: 10px;
+
+	border-bottom: 1px solid #000000;
 }
 
 #footer {
 	width: 940px;
+	
 	margin: 0 auto;
-
-	font-size: 12px;
+	padding: 10px;
 	
 	color: #999999;
 	
-	padding-top: 10px;
-	padding-bottom: 10px;
-	
-	border-top: 1px solid #000000;
-}
-
-#footer span.copyright {
-	padding-left: 10px;
+	text-align: center;
 }
 
 #footer > a,
 #footer > a:visited {
-	font-size: 12px;
-	
 	color: #999999;
 	
 	text-decoration: none;
 	
 	margin-right: 25px;
-
-	float: right;
 }
 
-#footer > a:first-of-type {
-	margin-right: 50px;
+#footer > span.copyright {
+	margin-left: 25px;
 }
 
 #footer > a:hover {
