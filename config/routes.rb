@@ -4,6 +4,7 @@ Salon::Application.routes.draw do
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
+  match 'reader/{view}' => 'users#reader'
   match 'reader' => 'users#reader', :as => :reader
   match 'unsubscribe' => 'users#unsubscribe', :as => :unsubscribe
   

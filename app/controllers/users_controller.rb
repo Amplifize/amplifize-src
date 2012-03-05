@@ -78,13 +78,23 @@ class UsersController < ApplicationController
   end
 
   def reader
-    @feed = Feed.new
-    @my_feeds = current_user.feeds;
-    @posts = current_user.posts.unread.desc.map(&:id).to_json
-    @my_follows = Follow.find_all_by_follower(current_user.id)
-    @shares = current_user.share_users
+    render_view = 'users/reader/feeds.html.erb'
+    case params[:view]
+    when "shares"
+      @shares = current_user.share_users
+      render_view = 'users/reader/shares.html.erb'
+    when "people"
+      @my_follows = Follow.find_all_by_follower(current_user.id)
+      render_view = 'users/reader/people.html.erb'
+    when "account"
+      render_view = 'users/reader/account.html.erb'
+    else
+      @feed = Feed.new
+      @my_feeds = current_user.feeds;
+      @posts = current_user.posts.unread.desc.map(&:id).to_json
+    end
     
-    render :layout => 'reader_layout'
+    render :file => render_view, :layout => 'reader_layout'
   end
   
   def search

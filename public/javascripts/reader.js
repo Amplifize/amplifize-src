@@ -1,5 +1,18 @@
 $(document).ready(function() {
 	updatePostContent(posts[position]);
+	
+	// Expand Panel
+	$("#open").click(function(){
+		$("div#panel").slideDown("slow");
+	});
+	// Collapse Panel
+	$("#close").click(function(){
+		$("div#panel").slideUp("slow");
+	});
+	// Switch buttons from "Log In | Register" to "Close Panel" on click
+	$("#toggle a").click(function () {
+		$("#toggle a").toggle();
+	}); 
 });
 
 var current_post = undefined;
@@ -43,7 +56,7 @@ var updatePostContent = function(postId) {
 		success: function(data, textStatus, jqXHR) {
 			current_post = data.post;
 			
-			$("#contentTitle").html('<a href="'+current_post.url+'">'+current_post.title+'</a></p>');
+			$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 			$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 			$("#contentSummary").html(current_post.content);
 

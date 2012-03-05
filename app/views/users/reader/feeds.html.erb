@@ -1,0 +1,89 @@
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "feeds.css" %>
+<% end %>
+
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "addFeedModal.js", "manageFeedModal.js", "addShare.js" %>
+	<script type="text/javascript">
+		var posts = <%= @posts %>;
+	</script>
+<% end %>
+
+<!-- Panel -->
+<div id="toppanel">
+	<div id="panel">
+		<div class="content clearfix">
+			<div class="left">
+				<h3>Add feed</h3>
+				<%= render "feeds/form" %>
+			</div>
+			<div class="left">
+				<h3>Import feeds</h3>
+				<%= render 'feeds/import' %>
+			</div>
+			<div class="left right">			
+				<h3>Other feed options</h3>
+				<ul>
+					<li>Manage feeds (coming soon)</li>
+				</ul>
+			</div>
+		</div>
+</div> <!-- /login -->	
+
+	<!-- The tab on top -->	
+	<div class="tab">
+		<ul class="login">
+			<li id="toggle">
+				<a id="open" class="open" href="#">Add feed</a>
+				<a id="close" style="display: none;" class="close" href="#">Cancel</a>			
+			</li>
+			<li class="right">&nbsp;</li>
+		</ul> 
+	</div> <!-- / top -->
+</div> <!--panel -->
+
+<div id="amplifizeContent">
+	<br/><br/>
+	<div id="contentTitle"></div>
+	<div id="contentPublishDate"></div>
+	<div id="contentSummary"></div>
+</div>
+
+<div id="amplifizeContentNavigation">
+	<a href="#" onclick="downPost();">previous</a>
+	<a href="#" onclick="upPost();">next</a>
+	<a href="#" onclick="setReadState(1);">keep unread</a>
+	<a href="#" id="shareNavItem">share</a>
+</div>
+
+<div id="manageFeed-modal-content">
+	<div id="manageFeed-modal-title">Manage feeds</div>
+	<div id="manageFeed-modal-data">
+		<h3>Manage feeds</h3>
+		<table id="feedTable">
+			<tr>
+				<td width="75%">Feed</td>
+				<td>Options</td>
+			</tr>
+		<% @my_feeds.each do |feed|%>
+			<tr id="tr_<%= feed.id %>">
+				<td><%= feed.url %></td>
+				<td>
+					<%= link_to "Delete", unsubscribe_url(:feed_id => feed.id), :remote => true %>
+				</td>
+			</tr>
+		<%end%>
+		</table>
+	</div>
+</div>
+<div id="addShares-modal-content">
+	<div id="addShares-modal-title">Share post</div>
+	<div id="addShares-modal-data">
+		<form method="POST" action="/shares/add" data-remote="true" id="addShareForm">
+			<input type="hidden" value="" id="sharePostId" name="postId" />
+			<label for="summary">Summary</label>
+			<textarea name="summary" id="summary"></textarea>
+			<input type="submit" value="Share" />
+		</form>
+	</div>
+</div>

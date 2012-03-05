@@ -1,0 +1,16 @@
+#amplifizeContentNavigation {
+	font-size: 18px;
+	z-index: 1000;
+
+	text-align: center;
+
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+
+#amplifizeContent {
+	padding-top: 30px;
+	margin-left: 40px;
+	margin-right: 40px;
+}

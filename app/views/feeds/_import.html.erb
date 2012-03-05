@@ -1,4 +1,5 @@
 <%= form_for :feeds, :url => :import, :html => {:multipart => true} do |f| %>
-  <%= f.file_field :my_file %>
+  <%= f.label "OPML file" %><br/>
+  <%= f.file_field :my_file %><br/><br/>
   <%= f.submit "Upload" %>
 <% end %>
