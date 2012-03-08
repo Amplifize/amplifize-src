@@ -1,0 +1,35 @@
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "shares.css" %>
+<% end %>
+
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "shares.js", "commentModal.js" %>
+	<script type="text/javascript">
+		var shares = <%= @shares %>;
+	</script>
+<% end %>
+
+<div id="amplifizeContent">
+	<br/><br/>
+	<div id="contentTitle"></div>
+	<div id="contentPublishDate"></div>
+	<div id="shareSummary"></div>
+	<hr/>
+	<h3>Comments</h3>
+	
+	
+</div>
+
+<div id="amplifizeContentNavigation">
+	<a href="#" onclick="previousShare();">previous</a>
+	<a href="#" onclick="nextShare();">next</a>
+	<a href="#" onclick="setReadState(1);">keep unread</a>
+	<a href="#" id="commentNavItem">comment</a>
+</div>
+
+<div id="addComment-modal-content">
+	<div id="addComment-modal-title">Comment</div>
+	<div id="addComment-modal-data">
+		<%= render 'comments/form' %>
+	</div>
+</div>

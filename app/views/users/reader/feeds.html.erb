@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "addFeedModal.js", "manageFeedModal.js", "addShare.js" %>
+	<%= javascript_include_tag "feeds.js", "manageFeedModal.js", "addShare.js" %>
 	<script type="text/javascript">
 		var posts = <%= @posts %>;
 	</script>
@@ -81,8 +81,8 @@
 	<div id="addShares-modal-data">
 		<form method="POST" action="/shares/add" data-remote="true" id="addShareForm">
 			<input type="hidden" value="" id="sharePostId" name="postId" />
-			<label for="summary">Summary</label>
-			<textarea name="summary" id="summary"></textarea>
+			<label for="summary">Summary (required)</label><br/>
+			<textarea name="summary" id="summary" cols="20"></textarea><br/>
 			<input type="submit" value="Share" />
 		</form>
 	</div>

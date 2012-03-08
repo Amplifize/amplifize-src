@@ -1,10 +1,10 @@
 Salon::Application.routes.draw do
-  resources :users, :user_sessions, :feeds, :posts
+  resources :users, :user_sessions, :feeds, :posts, :shares, :comments
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
-  match 'reader/{view}' => 'users#reader'
+  match 'reader/:view' => 'users#reader'
   match 'reader' => 'users#reader', :as => :reader
   match 'unsubscribe' => 'users#unsubscribe', :as => :unsubscribe
   
@@ -14,7 +14,8 @@ Salon::Application.routes.draw do
   match 'refresh' => 'feeds#refresh', :as => :refresh
   match '/feed/import' => 'feeds#import', :as => :import
 
-  match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state', :as => :set_read_state
+  match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state', :as => :set_share_read_state
+  match '/share_users/:share_id/read_state/:state', :controller => 'share_users', :action => 'set_read_state', :as => :set_post_read_state
 
   #follows actions
   match '/follows/add/:user_id' => 'follows#add', :as => :follows_add

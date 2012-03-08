@@ -3,4 +3,6 @@ class Share < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :post
+  
+  scope :desc, order("shares.created_at DESC")
 end

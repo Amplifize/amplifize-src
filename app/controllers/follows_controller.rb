@@ -3,16 +3,14 @@ class FollowsController < ApplicationController
     relationship = Follow.find_by_follower_and_followed(current_user.id, params[:user_id])
     
     if relationship.nil? then
-      followee = User.find(params[:user_id])
-      follow = Follow.new(:follower => current_user, :followed => followee)
-      current_user.followers.push(follow)    
+      follow = Follow.create(:follower => current_user.id, :followed => params[:user_id]) 
 
       respond_to do |format|
-        format.js { render :json => followee }
+        format.js { render :json => "{\"success\": true}" }
       end
     else
       respond_to do |format|
-        format.js { puts "{\"error\": \"Already following user\"}" }
+        format.js { render :json => "{\"error\": \"Already following user\"}" }
       end
     end
   end

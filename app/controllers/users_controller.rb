@@ -81,7 +81,8 @@ class UsersController < ApplicationController
     render_view = 'users/reader/feeds.html.erb'
     case params[:view]
     when "shares"
-      @shares = current_user.share_users
+      @shares = current_user.shares.desc.map(&:id).to_json
+      @comment = Comment.new
       render_view = 'users/reader/shares.html.erb'
     when "people"
       @my_follows = Follow.find_all_by_follower(current_user.id)

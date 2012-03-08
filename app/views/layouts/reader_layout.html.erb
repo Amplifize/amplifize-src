@@ -4,7 +4,7 @@
   <title>Amplifize | Give good content a voice</title>
   <%= stylesheet_link_tag "global.css", "reader.css", "reader-overlay.css", "slide-panel/slide_panel.css" %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag :defaults, "reader.js", "jquery.simplemodal.js", "dateFormat.js" %>
+  <%= javascript_include_tag :defaults, "jquery.simplemodal.js", "dateFormat.js" %>
   <%= yield :javascripts %>
   <%= csrf_meta_tag %>
 </head>
@@ -19,10 +19,10 @@
 		<!--<p id="notice"><%= notice %></p> -->
 		<div id="navigation">
 			<ul class="topnav">
-				<li><a href="#" onclick="loadFeed();">Feeds</a></li>
-				<li><a href="#" onclick="loadShares();">Shares</a></li>
-				<li><a href="#" onclick="loadPeople();">People</a></li>
-				<li><a href="#" onclick="loadAccount();">Account</a></li>
+				<li><a href="/reader">Feeds</a></li>
+				<li><a href="/reader/shares">Shares</a></li>
+				<li><a href="/reader/people" onclick="loadPeople();">People</a></li>
+				<li><a href="/reader/account" onclick="loadAccount();">Account</a></li>
 				<div style="clear: both;"></div>
 			</ul>
 	    </div>

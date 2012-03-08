@@ -70,7 +70,8 @@ $(document).ready(function() {
 	AddShareOverlay.init();
 
 	$('form#addShareForm').bind("ajax:success", function(data, status, xhr) {
-		
+		$("#summary").val();
+		$.modal.close();
 	});
 
 	$('form#addShareForm').bind("ajax:failure", function(data, status, xhr) {
