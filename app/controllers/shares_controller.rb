@@ -30,7 +30,14 @@ class SharesController < ApplicationController
     share = Share.find_by_id(params[:id])
 
     respond_to do |format|
-      format.js {render :json => share.to_json(:include => [:post, :comments])}
+      format.js {render :json => share.to_json(
+        :include => {
+          :comments => {
+            :include => :user
+          },
+          :post => {}
+        }
+      )}
     end
   end
 end

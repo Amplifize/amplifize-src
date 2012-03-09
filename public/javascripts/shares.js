@@ -50,8 +50,10 @@ var updateShareContent = function(shareId) {
 			$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 			$("#shareSummary").html(data.share.summary);
 
-			for(var comment in data.share.comments) {
-				//insert into end of comment feed
+			for(var i = 0; i < data.share.comments.length; i++) {
+				var comment = data.share.comments[i];
+				var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+comment.user.email+'</p></div>';
+				$("#commentThread").append(html);
 			}
 
 			setReadState(0);
@@ -63,6 +65,3 @@ var updateShareContent = function(shareId) {
 	})
 };
 
-var addComment = function() {
-	
-};
