@@ -1,5 +1,6 @@
 class Feed < ActiveRecord::Base
   has_many :posts
+  has_many :tags
   
   has_and_belongs_to_many :users
   
