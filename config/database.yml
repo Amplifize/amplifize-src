@@ -1,16 +1,27 @@
+# MySQL.  Versions 4.1 and 5.0 are recommended.
+#
+# Install the MySQL driver:
+#   gem install mysql2
+#
+# And be sure to use new-style password hashing:
+#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: amplifize_development
   pool: 5
-  username: postgres
+  username: root
   password:
+  socket: /tmp/mysql.sock
+
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: amplifize_production
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: amplifize
   pool: 5
-  username: postgres
-  password:
-
+  username: amplifize
+  password: b1gFi$hBiGp0Nd
+  socket: /tmp/mysql.sock
