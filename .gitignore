@@ -8,3 +8,4 @@ vendor/cache/*
 lambda
 .DS_Store
 screen\ shots/*
+Gemfile.lock
