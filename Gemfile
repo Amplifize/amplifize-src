@@ -13,6 +13,7 @@ gem 'foreigner'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'opml'
 gem 'delayed_job_active_record'
+gem 'whenever'
 
 # Use unicorn as the web server
 # gem 'unicorn'
