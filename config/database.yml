@@ -20,8 +20,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: amplifize
+  database: amplifize_com
   pool: 5
-  username: amplifize
+  username: amplifize.com
   password: b1gFi$hBiGp0Nd
   socket: /tmp/mysql.sock
