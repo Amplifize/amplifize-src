@@ -13,7 +13,6 @@ development:
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
 
 
 production:
@@ -24,4 +23,3 @@ production:
   pool: 5
   username: amplifize.com
   password: b1gFi$hBiGp0Nd
-  socket: /tmp/mysql.sock
