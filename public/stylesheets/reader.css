@@ -1,7 +1,6 @@
 #addComment-modal-content,
-#manageFeed-modal-content,
-#manageFollows-modal-content,
-#addShares-modal-content {
+#addShares-modal-content,
+#manageFeed-modal-content {
 	display: none;
 }
 
@@ -37,45 +36,9 @@ ul.topnav li a:visited {
 	color: inherit;
 }
 
-ul.topnav li span { /*--Drop down trigger styles--*/
-	width: 17px;
-	height: 35px;
-	float: left;
-	background: url("../images/reader/topnav/down_arrow.png") no-repeat center top;
-}
-
-ul.topnav li span.subhover {background-position: center bottom; cursor: pointer;} /*--Hover effect for trigger--*/
-
-ul.topnav li ul.subnav {
-	list-style: none;
-	position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
-	left: 0; top: 35px;
-	margin: 0; padding: 0;
-	display: none;
-	float: left;
-	width: 170px;
-	border-right: 1px solid #111;
-	border-left: 1px solid #111;
-}
-ul.topnav li ul.subnav li{
-	margin: 0; padding: 0;
-	border-top: 1px solid #252525; /*--Create bevel effect--*/
-	border-bottom: 1px solid #444; /*--Create bevel effect--*/
-	clear: both;
-	width: 170px;
-}
-html ul.topnav li ul.subnav li a {
-	float: left;
-	width: 145px;
-	background-color: #ccc;
-	padding-left: 20px;
-}
-html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
-	background: #999;
-}
 
 #amplifizeContent {
-	height: 470px;
+	height: 400px;
 	overflow-y: auto;
 }
 

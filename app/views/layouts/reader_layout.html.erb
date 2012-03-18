@@ -17,20 +17,22 @@
 	    </header>
 	
 		<!--<p id="notice"><%= notice %></p> -->
+
 		<div id="navigation">
 			<ul class="topnav">
 				<li><a href="/reader">Feeds</a></li>
 				<li><a href="/reader/shares">Shares</a></li>
-				<li><a href="/reader/people" onclick="loadPeople();">People</a></li>
-				<li><a href="/reader/account" onclick="loadAccount();">Account</a></li>
+				<li><a href="/reader/people">People</a></li>
+				<li><a href="/reader/account">Account</a></li>
 				<div style="clear: both;"></div>
 			</ul>
 	    </div>
+
 	    <div id="reader_content">
 		    <%= yield %>
 		    <div style="clear:both"></div>
 	    </div>
-	
+
 		<div id="footer">
 			<%= link_to "About Amplifize", :about %>
 			<%= link_to "Contact Us", :contact %>
@@ -39,6 +41,7 @@
 			<div style="clear:both"></div>
 		</div>
 	</div>
+
 	<script type="text/javascript">
   		var uvOptions = {};
   		(function() {
