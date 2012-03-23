@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
 
   after_save :attach_to_users
 
-  scope :desc, order("posts.published_at DESC")
+  scope :desc, order("posts.published_at ASC")
   
   scope :unread, lambda {
     joins(:post_users).
