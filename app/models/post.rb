@@ -25,12 +25,16 @@ class Post < ActiveRecord::Base
   def self.synchronize_posts_with_users(user_id, feed_id)
     posts = Post.find_all_by_feed_id(feed_id, :limit => 10)
     
-    posts.each do |post|
-      PostUser.create(
-        :post_id      => post.id,
-        :user_id      => user_id,
-        :read_state   => 1
-      )
+    begin
+      posts.each do |post|
+        PostUser.create(
+          :post_id      => post.id,
+          :user_id      => user_id,
+          :read_state   => 1
+        )
+      end
+    rescue ActiveRecord::StatementInvalid => e
+      raise e unless /Mysql::Error: Duplicate entry/.match(e)
     end
 
     return posts

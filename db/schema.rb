@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120310044727) do
+ActiveRecord::Schema.define(:version => 20120325061140) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -68,6 +68,9 @@ ActiveRecord::Schema.define(:version => 20120310044727) do
     t.datetime "updated_at"
   end
 
+  add_index "post_users", ["post_id", "user_id"], :name => "index_post_users_on_post_id_and_user_id", :unique => true
+  add_index "post_users", ["user_id"], :name => "post_users_user_id_fk"
+
   create_table "posts", :force => true do |t|
     t.string   "uid"
     t.string   "title"
@@ -78,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20120310044727) do
     t.datetime "updated_at"
     t.integer  "feed_id"
   end
+
+  add_index "posts", ["feed_id"], :name => "posts_feed_id_fk"
 
   create_table "share_users", :force => true do |t|
     t.integer  "share_id"
