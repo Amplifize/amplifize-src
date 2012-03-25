@@ -60,10 +60,9 @@ var updatePostContent = function(postId) {
 				$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 				$("#contentSummary").html(current_post.content);
-				$("#contentSummary").scrollTop();
+				$("#amplifizeContent").animate({scrollTop: 0});
 
-
-				$("#sharePostId").val(current_post.id)
+				$("#sharePostId").val(current_post.id);
 	
 				setReadState(0);
 			},
