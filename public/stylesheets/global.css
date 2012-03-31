@@ -21,7 +21,7 @@ div#container {
 }
 
 header { 
-	height: 75px;
+	height: 60px;
 	margin: 0 auto;
 	width: 940px;
 }
@@ -49,11 +49,10 @@ header > #navigation {
 
 header > #navigation > a,
 header > #navigation > a:visited {
-	width: 100px;
+	width: 75px;
 	height: 30px;
 
 	color: #424242;
-	background-color: #FF9900;
 
 	display: block;
 	
@@ -68,7 +67,8 @@ header > #navigation > a:visited {
 }
 
 header > #navigation > a:hover {
-	background-color: #3299BB;
+	background-color: #424242;
+	color: #fff;
 }
 
 #content {
@@ -88,6 +88,8 @@ header > #navigation > a:hover {
 	color: #999999;
 	
 	text-align: center;
+	
+	margin-bottom: 10px;
 }
 
 #footer > a,

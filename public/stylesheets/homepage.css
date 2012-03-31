@@ -1,6 +1,7 @@
 #mainRight,
 #mainLeft {
 	float: left;
+	margin-top: 50px;
 }
 
 span.mainNo {
