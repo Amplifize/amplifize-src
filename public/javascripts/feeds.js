@@ -1,23 +1,19 @@
-$(document).ready(function() {
-	updatePostContent(posts[position]);
-	
-	// Expand Panel
-	$("#open").click(function(){
-		$("div#panel").slideDown("slow");
-	});
-	// Collapse Panel
-	$("#close").click(function(){
-		$("div#panel").slideUp("slow");
-	});
-	// Switch buttons from "Log In | Register" to "Close Panel" on click
-	$("#toggle a").click(function () {
-		$("#toggle a").toggle();
-	}); 
-});
-
 var current_post = undefined;
 var position = 0;
-	
+
+var loadAddFeed = function() {
+	$.ajax({
+		url: "/feeds/new",
+		success: function (data, textStatus, jqXHR) {
+			$("#amplifizeContent").html(data);
+		},
+		error: function(xhr, text, error) {
+			alert(error);
+		},
+		dataType: "html"
+	});
+};
+
 var setReadState = function(readState) {
 	$.ajax({
 		url: "/post_users/"+current_post.id+"/read_state/"+readState,
@@ -30,7 +26,7 @@ var setReadState = function(readState) {
 	});
 	
 	return false;
-}
+};
 	
 var downPost = function() {
 	if(position > 0) {
@@ -57,6 +53,7 @@ var updatePostContent = function(postId) {
 			success: function(data, textStatus, jqXHR) {
 				current_post = data.post;
 				
+				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 				$("#contentSummary").html(current_post.content);
@@ -73,3 +70,9 @@ var updatePostContent = function(postId) {
 		})
 	}
 };
+
+$(document).ready(function() {
+	updatePostContent(posts[position]);
+	
+	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
+});

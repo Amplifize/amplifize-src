@@ -32,14 +32,6 @@ header > h1 {
 	padding-left: 10px;
 }
 
-header > h3 {
-	display: inline;
-	float: left;
-	
-	padding-top: 14px;
-	padding-left: 5px;
-}
-
 header > #navigation {
 	float: right;
 	
@@ -76,28 +68,21 @@ header > #navigation > a:hover {
 	min-height: 500px;
 	margin: 0 auto;
 	padding: 10px;
-
+	
 	border-bottom: 1px solid #000000;
 }
 
 #footer {
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	
+	width: 940px;	
 	color: #999999;
-	
 	text-align: center;
-	
-	margin-bottom: 10px;
+	margin: 10px auto;
 }
 
 #footer > a,
 #footer > a:visited {
 	color: #999999;
-	
 	text-decoration: none;
-	
 	margin-right: 25px;
 }
 

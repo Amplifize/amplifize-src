@@ -2,17 +2,6 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:reader, :update, :search]
 
-  # GET /users/new
-  # GET /users/new.xml
-  def new
-    @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
-
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
@@ -88,6 +77,7 @@ class UsersController < ApplicationController
       @my_follows = Follow.find_all_by_follower(current_user.id)
       render_view = 'users/reader/people.html.erb'
     when "account"
+      @user = User.new
       render_view = 'users/reader/account.html.erb'
     else
       @feed = Feed.new

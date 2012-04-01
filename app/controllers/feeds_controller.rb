@@ -2,10 +2,11 @@ class FeedsController < ApplicationController
   before_filter :require_user, :only => [:import, :refresh]
 
   def new
+    
     @feed = Feed.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html {render :layout => false}# new.html.erb
     end
   end
 

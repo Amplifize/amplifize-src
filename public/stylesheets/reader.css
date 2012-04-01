@@ -1,21 +1,37 @@
 #addComment-modal-content,
-#addShares-modal-content,
-#manageFeed-modal-content {
+#addShares-modal-content {
 	display: none;
 }
 
 #reader_content {
 	position:relative;
-	min-height: 100%;
-}
-
-ul.topnav {
-	list-style: none;
-	font-size: 14pt;	
-}
-
-ul.topnav li {
+	height: 100%;
+	width: 100%;
 	float: left;
+}
+
+#amplifizeContent {
+	min-height: 525px;
+	height: 100%;
+	overflow: hidden;
+	padding-left: 20px;
+}
+
+#navigation {
+	float: left;
+	width: 150px;
+}
+
+ul.drawers {
+	list-style: none;
+	font-size: 14pt;
+	margin: 0;
+	padding: 0;
+}
+
+ul.drawers li {
+	float: left;
+	width: 150px;
 	margin: 0;
 	padding: 5px;
 	position: relative;
@@ -26,8 +42,8 @@ ul.topnav li {
 	border: 1px solid black;
 }
 
-ul.topnav li a,
-ul.topnav li a:visited {
+ul.drawers li a,
+ul.drawers li a:visited {
 	padding: 10px 5px;
 	display: block;
 	text-decoration: none;
@@ -36,21 +52,28 @@ ul.topnav li a:visited {
 	color: inherit;
 }
 
-
-#amplifizeContent {
-	height: 400px;
-	overflow-y: auto;
+li#feedsNav.drawer ul {
+	margin: 0 10px;
+	padding: 0;
+	background-color: #999;
+	list-style: none;
+	
+	visibility: hidden;
+	display: none;
 }
 
-#userSearchForm,
-#userSearchResults,
-#userSearchResultsTable
-{
-	margin-left: 25px;
-	padding: 5px;
+li#feedsNav.drawer ul li {
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
+	
+	border: 0;
+	
+	text-align: left;
+	
+	width: 140px;
 }
 
-#userSearch button {
-	margin-left: 10px;
-	padding: 10px;
+li#feedsNav.drawer ul li a {
+	padding: 0;
 }
