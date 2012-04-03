@@ -46,3 +46,8 @@
 	color: #333;
 	margin-bottom: 15px;
 }
+
+.formField {
+	margin-bottom: 10px;
+	padding: 3px;
+}

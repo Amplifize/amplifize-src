@@ -2,7 +2,6 @@ class FeedsController < ApplicationController
   before_filter :require_user, :only => [:import, :refresh]
 
   def new
-    
     @feed = Feed.new
 
     respond_to do |format|

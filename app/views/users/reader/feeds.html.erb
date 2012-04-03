@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "feeds.js", "addShare.js" %>
+	<%= javascript_include_tag "feeds.js", "addShare.js", "addFeed.js", "importFeed.js" %>
 	<script type="text/javascript">
 		var posts = <%= @posts %>;
 	</script>
@@ -37,5 +37,20 @@
 			<textarea name="summary" id="summary" cols="20"></textarea><br/>
 			<input type="submit" value="Share" />
 		</form>
+	</div>
+</div>
+
+<div id="addFeed-modal-content">
+	<div id="addFeed-modal-title">Add feed by URL</div>
+	<div id="addFeed-modal-data">
+		<%= render 'feeds/form' %>
+	</div>
+</div>
+
+
+<div id="importFeed-modal-content">
+	<div id="importFeed-modal-title">Import OPML file</div>
+	<div id="importFeed-modal-data">
+		<%= render 'feeds/import' %>
 	</div>
 </div>

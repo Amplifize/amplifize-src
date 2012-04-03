@@ -1,4 +1,10 @@
 <%= form_for @feed, :remote => true do |f| %>
-    <%= f.label "Feed URL" %><br/>
-    <%= f.text_field :url, :size => 20 %> <%= f.submit :value => "Add feed" %>
+    <div class="formField">
+	    <%= f.label "Feed URL" %>
+	    <%= f.text_field :url, :size => 20 %>
+    </div>
+    <div class="formField">
+    	<%= f.label "Tags" %>
+    </div>
+    <%= f.submit :value => "Add feed" %>
 <% end %>
