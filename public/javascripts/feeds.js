@@ -1,9 +1,10 @@
 var current_post = undefined;
 var position = 0;
+var max_position = 0;
 
-var loadAddFeed = function() {
+var loadManageFeeds = function() {
 	$.ajax({
-		url: "/feeds/new",
+		url: "/feeds/manage",
 		success: function (data, textStatus, jqXHR) {
 			$("#amplifizeContent").html(data);
 		},
@@ -42,7 +43,13 @@ var upPost = function() {
 		position++;
 		updatePostContent(posts[position]);
 	}
-	
+
+	if(position > max_position) {
+		max_position = position;
+		var unread_count = posts.length - max_position;
+		$("#feedUnreadCount").html(unread_count);
+	}
+
 	return false;
 };
 
@@ -66,7 +73,8 @@ var updatePostContent = function(postId) {
 			error: function(xhr, text, error) {
 				alert(error);
 				alert(text);
-			}
+			},
+			dataType: "json"
 		})
 	}
 };
@@ -75,4 +83,6 @@ $(document).ready(function() {
 	updatePostContent(posts[position]);
 	
 	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
+
+	$("#feedUnreadCount").html(posts.length);
 });

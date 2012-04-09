@@ -4,7 +4,6 @@
 	display: none;
 }
 
-
 #amplifizeContentNavigation {
 	font-size: 18px;
 	text-align: center;
@@ -13,7 +12,6 @@
 
 	margin-right: 20px;
 }
-
 
 #feedRow {
 	margin-bottom: 10px;
@@ -57,4 +55,43 @@
 .formField {
 	margin-bottom: 10px;
 	padding: 3px;
+}
+
+.manageFeedRow {
+	padding: 10px;
+	
+	border-bottom: 1px solid black;
+}
+
+.manageFeedRowTitle a,
+.manageFeedRowTitle a:visited {
+	color: #666;
+	
+	text-decoration: none;
+}
+
+.manageFeedRowTitle a:hover {
+	text-decoration: underline;
+}
+
+ul.manageFeedRowTags {
+	list-style: none;
+	
+	float: left;
+}
+
+ul.manageFeedRowTags li {
+	float: left;
+}
+
+#feedUnreadCount {
+	background-color: #FFFFFF;
+    border-radius: 40px 40px 40px 40px;
+    display: -moz-inline-box;
+    float: right;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
 }

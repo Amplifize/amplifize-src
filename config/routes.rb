@@ -1,17 +1,16 @@
 Salon::Application.routes.draw do
-  resources :users, :user_sessions, :feeds, :posts, :shares, :comments
-
   match '/login' => 'user_sessions#new', :as => :login
   match '/logout' => 'user_sessions#destroy', :as => :logout
 
   match '/reader/:view' => 'users#reader'
   match '/reader' => 'users#reader', :as => :reader
-  match '/unsubscribe' => 'users#unsubscribe', :as => :unsubscribe
+  match '/unsubscribe/:feed_id' => 'users#unsubscribe', :as => :unsubscribe
   
   match '/users/search' => 'users#search', :as => :user_search
   match '/users/edit' => 'users#edit', :as => :account
 
-  match '/feed/import' => 'feeds#import', :as => :import
+  match '/feeds/import' => 'feeds#import', :as => :import
+  match '/feeds/manage' => 'feeds#manage'
 
   match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state', :as => :set_share_read_state
   match '/share_users/:share_id/read_state/:state', :controller => 'share_users', :action => 'set_read_state', :as => :set_post_read_state
@@ -25,6 +24,8 @@ Salon::Application.routes.draw do
   match '/about' => 'home#about', :as => :about
   match '/contact' => 'home#contact', :as => :contact
   match '/terms' => 'home#terms', :as => :terms
+
+  resources :users, :user_sessions, :feeds, :posts, :shares, :comments
 
   root :to => "home#index"
 

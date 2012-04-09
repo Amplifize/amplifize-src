@@ -28,6 +28,11 @@ class FeedsController < ApplicationController
     end
   end
 
+  def manage
+    @feeds = current_user.feeds
+    render :layout => false
+  end
+
   def import
     require 'opml'
 

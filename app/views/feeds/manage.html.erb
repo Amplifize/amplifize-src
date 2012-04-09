@@ -1,0 +1,12 @@
+<h3>Manage your feeds</h3>
+<%@feeds.each do |feed| %>
+	<div id="feed_<%= feed.id %>" class="manageFeedRow">
+		<span class="manageFeedRowTitle"><a href="<%= feed.url %>"><%= feed.title %></a></span>
+		<ul class="manageFeedRowTags">
+			<%feed.tags do |tag| %>
+			<li><%= tag.name %></li>	
+			<% end %>
+		</ul>
+		<div class="manageFeedRowUnsubscribe"><%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true %></div>
+	</div>
+<% end %>
