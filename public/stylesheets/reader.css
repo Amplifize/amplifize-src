@@ -3,22 +3,26 @@
 }
 
 #reader_content {
-	position:relative;
 	height: 100%;
 	width: 100%;
-	float: left;
+	
+	overflow: auto;
 }
 
 #amplifizeContent {
 	min-height: 525px;
 	height: 100%;
-	overflow: hidden;
-	padding-left: 20px;
+
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	margin-left: 175px;
 }
 
 #navigation {
 	float: left;
-	width: 150px;
+	width: 175px;
+	height: 100%;
 }
 
 ul.drawers {
@@ -26,6 +30,8 @@ ul.drawers {
 	font-size: 14pt;
 	margin: 0;
 	padding: 0;
+	
+	float: left;
 }
 
 ul.drawers li {
@@ -33,7 +39,6 @@ ul.drawers li {
 	width: 150px;
 	margin: 0;
 	padding: 5px;
-	position: relative;
 	
 	background-color: #E9E9E9;
 	text-align: center;
@@ -47,7 +52,7 @@ ul.drawers li a:visited {
 	display: block;
 	text-decoration: none;
 	float: left;
-	
+
 	color: inherit;
 }
 

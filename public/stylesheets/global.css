@@ -18,6 +18,8 @@ div#container {
 	height:100%;
 
 	min-height:100%;
+	
+	width: 100%;
 }
 
 header { 
@@ -73,10 +75,12 @@ header > #navigation > a:hover {
 }
 
 #footer {
-	width: 940px;	
+	width: 100%;
 	color: #999999;
 	text-align: center;
-	margin: 10px auto;
+	
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #footer > a,

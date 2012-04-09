@@ -14,10 +14,10 @@
     	<div id="navigation">
         <% if current_user %> 
         <%= link_to "Reader", :reader %>
-        <%= link_to "Account", :account %>
+        <!--<%= link_to "Account", :account %>-->
         <%= link_to "Logout", :logout %>
         <% else %>
-        <%= link_to "Register", new_user_path%> 
+        <!--<%= link_to "Register", new_user_path %>--> 
         <%= link_to "Login", :login %>
         <% end %>
         </div>

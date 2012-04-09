@@ -17,7 +17,7 @@
 		<!--<p id="notice"><%= notice %></p> -->
 	    <div id="reader_content">
   			<div id="navigation">
-				<ul class="drawers">
+  				<ul class="drawers">
 					<li id="feedsNav" class="drawer">
 						<a href="/reader">Feeds</a>
 						<span id="feedUnreadCount"></span>
@@ -27,18 +27,25 @@
 							<li><a href="#" id="importFeedLink">Import feeds</a></li>
 						</ul>
 					</li>
+					<!--
 					<li class="drawer">
 						<a href="/reader/shares">Shares</a>
 					</li>
+					-->
+					<!--
 					<li class="drawer">
 						<a href="/reader/people">People</a>
 					</li>
-					<!--<li class="drawer">
+					-->
+					<!--
+					<li class="drawer">
 						<a href="/reader/account">Account</a>
-					</li>-->
+					</li>
+					-->
 					<div style="clear: both;"></div>
 				</ul>
 		    </div>
+
 		    <%= yield %>
 		    <div style="clear:both"></div>
 	    </div>
@@ -50,8 +57,9 @@
 			<span class="copyright">Built by Big Fish, Big Pond Inc. &copy; 2011</span>
 			<div style="clear:both"></div>
 		</div>
+		<div style="clear: both;"></div>
 	</div>
-
+	<div style="clear: both;"></div>
 	<script type="text/javascript">
   		var uvOptions = {};
   		(function() {
