@@ -26,3 +26,31 @@
 	<div id="contentSummary"></div>
 	<div style="clear: both;"></div>
 </div>
+
+<div id="addShares-modal-content">
+	<div id="addShares-modal-title">Share post</div>
+	<div id="addShares-modal-data">
+		<form method="POST" action="/shares/add" data-remote="true" id="addShareForm">
+			<input type="hidden" value="" id="sharePostId" name="postId" />
+			<label for="summary">Summary (required)</label><br/>
+			<textarea name="summary" id="summary" cols="20"></textarea><br/>
+			<input type="submit" value="Share" />
+		</form>
+	</div>
+</div>
+
+<div id="addFeed-modal-content">
+	<div id="addFeed-modal-title">Add feed by URL</div>
+	<div id="addFeed-modal-data">
+		<%= render 'feeds/form' %>
+	</div>
+</div>
+
+
+<div id="importFeed-modal-content">
+	<div id="importFeed-modal-title">Import OPML file</div>
+	<div id="importFeed-modal-data">
+		<%= render 'feeds/import' %>
+	</div>
+</div>
+
