@@ -6,25 +6,32 @@ class Feed < ActiveRecord::Base
   
   validates_uniqueness_of :url
   
-  before_save :check_feed_url, :setup_feed_metadata
+  before_save :setup_feed_metadata
    
   def self.update_feeds
     Delayed::Job.enqueue(FeedsJob.new)
   end
   
-  @private
-  def check_feed_url
-    if self.url[0..3] == "feed"
-      self.url = "http" + self.url[4..-1]
+  
+  def self.check_feed_url(url)
+    if url[0..3] == "feed"
+      url = "http" + url[4..-1]
+    elsif url["://"].nil?
+      url = "http://" + url
     end
+    
+    url
   end
 
+  private
   def setup_feed_metadata
-    feed = Feedzirra::Feed.fetch_and_parse(self.url)
-    if feed.nil? or feed.is_a? Fixnum then
-      return false
-    else
-      self.title = feed.title  
+    if self.title.nil?
+      feed = Feedzirra::Feed.fetch_and_parse(self.url)
+      if feed.nil? or feed.is_a? Fixnum then
+        return false
+      else
+        self.title = feed.title  
+      end
     end
   end
 end

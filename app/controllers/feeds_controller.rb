@@ -12,11 +12,11 @@ class FeedsController < ApplicationController
   # POST /rss_feeds
   # POST /rss_feeds.xml
   def create
-    @feed = Feed.find_by_url(params[:feed][:url])
+    @feed = Feed.find_by_url(Feed.check_feed_url(params[:feed][:url]))
     if @feed.nil? 
       @feed = Feed.new(params[:feed])
       @feed.save
-      Post.get_new_posts(@feed.url, @feed.id)
+      Post.get_new_posts(@feed.url, @feed.id, nil)
     end
 
     @feed.users.push(current_user)

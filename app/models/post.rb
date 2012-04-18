@@ -4,18 +4,17 @@ class Post < ActiveRecord::Base
   has_many :post_users
   has_many :users, :through => :post_users
 
-  after_save :attach_to_users
+  after_create :attach_to_users
 
   scope :desc, order("posts.published_at ASC")
   
   scope :unread, lambda {
-    joins(:post_users).
     where("post_users.read_state = 1")
   }
 
-
-  def self.get_new_posts(feed_url, feed_id)
-    feed = Feedzirra::Feed.fetch_and_parse(feed_url)
+  def self.get_new_posts(feed_url, feed_id, last_update_date)
+    options = last_update_date.nil? ? {} : {:if_modified_since => last_update_date}
+    feed = Feedzirra::Feed.fetch_and_parse(feed_url, options)
 
     if not feed.nil? and not feed.is_a? Fixnum then 
       add_entries(feed.entries, feed_id)
@@ -34,20 +33,21 @@ class Post < ActiveRecord::Base
         )
       end
     rescue ActiveRecord::StatementInvalid => e
-      raise e unless /Mysql::Error: Duplicate entry/.match(e)
+      raise e unless /Mysql2::Error: Duplicate entry/.match(e)
     end
 
     return posts
   end
 
-  @private
+  private
+
   def self.add_entries(entries, feed_id)
     entries.each do |entry|
       begin
         unless exists? :uid => entry.id
           create!(
             :title        => entry.title.html_safe,
-            :content      => entry.content.nil? ? entry.summary : entry.content,
+            :content      => entry.content.nil? ? entry.summary.html_safe : entry.content.html_safe,
             :url          => entry.url,
             :published_at => entry.published,
             :uid          => entry.id,
@@ -59,15 +59,19 @@ class Post < ActiveRecord::Base
       end
     end
   end
-  
+
   def attach_to_users
     feed = Feed.find_by_id(self.feed_id)
     feed.users.each do |user|
-      PostUser.create(
-        :post_id      => self.id,
-        :user_id      => user.id,
-        :read_state   => 1
-      )
+      begin
+        PostUser.create(
+          :post_id      => self.id,
+          :user_id      => user.id,
+          :read_state   => 1
+        )
+      rescue ActiveRecord::StatementInvalid => e
+        raise e unless /Mysql2::Error: Duplicate entry/.match(e)
+      end
     end
   end
 end
