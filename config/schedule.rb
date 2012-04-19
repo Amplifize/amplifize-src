@@ -1,3 +1,3 @@
-every 10.minutes do
+every 20.minutes do
     rake "update_feeds"
 end

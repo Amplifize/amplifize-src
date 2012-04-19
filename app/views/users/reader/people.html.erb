@@ -6,8 +6,13 @@
 	<%= javascript_include_tag "findPeople.js" %>
 <% end %>
 
-<div id="findPeople-content">
+<div id="findPeopleContent">
 	<h3>Find people to follow</h3>
+	<div id="findByAddressBook">
+		<div class="addressBookOption">
+			<%= image_tag("people/gmail_logo.png") %>
+		</div>
+	</div>
 	<%= render "users/search_form" %>
 	<div id="userSearchResultsDiv">
 		<p id="userSearchResults">Results<p>
@@ -17,18 +22,4 @@
 			</tbody>
 		</table>
 	</div>
-</div>
-
-<div id="manageFollows-content">
-	<h3>Manage follows (coming soon)</h3>
-	<table id="followTable">
-		<tr>
-			<td width="75%">Email</td>
-			<td>Options</td>
-		</tr>
-	<% if not @my_follows.nil? then %>
-		<% @my_follows.each do |follow|%>
-		<%end%>
-	<%end%>
-	</table>
 </div>

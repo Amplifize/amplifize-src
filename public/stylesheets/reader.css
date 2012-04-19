@@ -9,7 +9,8 @@
 	overflow: auto;
 }
 
-#amplifizeContent {
+#amplifizeContent,
+#findPeopleContent {
 	min-height: 525px;
 	height: 100%;
 

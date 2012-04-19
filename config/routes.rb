@@ -17,6 +17,9 @@ Salon::Application.routes.draw do
 
   #follows actions
   match '/follows/add/:user_id' => 'follows#add', :as => :follows_add
+  match '/follows/import/twitter' => 'follows#findTwitterFollowers', :as => :twitter_callback
+  match '/follows/import/google' => 'follows#findGmailContacts', :as => :gmail_callback
+  match '/follows/import/fb' => 'follows#findFBFriends', :as => :fb_callback
 
   #share actions
   match '/shares/add/' => 'shares#add', :as => :shares_add

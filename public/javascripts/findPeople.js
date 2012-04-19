@@ -3,7 +3,6 @@ $(document).ready(function() {
 		$("#search_email").val("");
 		//TODO: if data is blank, then say so
 		//else
-		$('#reader-overlay-container').css('height', 'auto');
 		$('#userSearchResultsTable > tbody:last').append('<tr><td>'+data.user.email+'</td><td><a href="#" onclick="followUser('+data.user.id+')">Follow</a></td></tr>');
 	});
 

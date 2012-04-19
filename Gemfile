@@ -6,14 +6,21 @@ gem 'rails', '3.0.10'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '0.2.6'
+gem 'jquery-rails', '>= 1.0.12'
+
 gem 'authlogic'
-gem 'loofah', '1.0.0.beta.1'
+
 gem 'feedzirra'
 gem 'foreigner'
-gem 'jquery-rails', '>= 1.0.12'
 gem 'opml'
+gem 'loofah', '1.0.0.beta.1'
+
 gem 'delayed_job_active_record'
+gem "daemons"
+
 gem 'whenever'
+
+gem 'oauth-plugin'
 
 # Use unicorn as the web server
 # gem 'unicorn'

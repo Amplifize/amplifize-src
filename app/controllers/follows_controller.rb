@@ -14,4 +14,16 @@ class FollowsController < ApplicationController
       end
     end
   end
+  
+  def findGmailContacts
+  
+  end
+  
+  def findTwitterFollowers
+  
+  end
+  
+  def findFBFriends
+  
+  end
 end
