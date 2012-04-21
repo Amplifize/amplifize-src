@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
     where("post_users.read_state = 1")
   }
 
-  def self.get_new_posts(feed_url, feed_id, last_update_date)
+  def self.get_new_posts(feed_url, feed_id, last_update_date = nil)
     options = last_update_date.nil? ? {} : {:if_modified_since => last_update_date}
     feed = Feedzirra::Feed.fetch_and_parse(feed_url, options)
 

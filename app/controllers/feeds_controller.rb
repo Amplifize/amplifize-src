@@ -16,7 +16,7 @@ class FeedsController < ApplicationController
     if @feed.nil? 
       @feed = Feed.new(params[:feed])
       @feed.save
-      Post.get_new_posts(@feed.url, @feed.id, nil)
+      Post.get_new_posts(@feed.url, @feed.id)
     end
 
     @feed.users.push(current_user)
@@ -53,7 +53,6 @@ class FeedsController < ApplicationController
       end
     end
 
-    #TODO: Figure out how to return the posts here
     respond_to do |format|
       format.html { redirect_to(reader_url) }
     end
@@ -83,7 +82,7 @@ class FeedsController < ApplicationController
       new_feed.save
       Post.get_new_posts(url, new_feed.id)
     elsif current_user.feeds.include?(new_feed) then
-       return
+      return
     end
 
     if not tag.nil? then
