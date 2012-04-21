@@ -62,8 +62,9 @@ var updatePostContent = function(postId) {
 				current_post = data.post;
 
 				setReadState(0);
-				var unread_count = posts.length == 0 ? 0 : posts.length - 1; 
+				var unread_count = posts.length - 1; 
 				$("#feedUnreadCount").html(unread_count);
+				document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 
 				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
@@ -78,6 +79,8 @@ var updatePostContent = function(postId) {
 			},
 			dataType: "json"
 		})
+	} else {
+		$("#feedUnreadCount").html(0);
 	}
 };
 
