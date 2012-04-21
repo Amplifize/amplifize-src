@@ -46,8 +46,9 @@ var upPost = function() {
 
 	if(position > max_position) {
 		max_position = position;
-		var unread_count = posts.length - max_position;
+		var unread_count = posts.length - 1 - max_position;
 		$("#feedUnreadCount").html(unread_count);
+		document.title = "Amplifize | Give good content a voice ("+unread_count+")"
 	}
 
 	return false;
@@ -83,5 +84,5 @@ $(document).ready(function() {
 	
 	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
 
-	$("#feedUnreadCount").html(posts.length);
+	$("#feedUnreadCount").html(posts.length - 1);
 });
