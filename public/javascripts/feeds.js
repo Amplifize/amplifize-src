@@ -58,9 +58,10 @@ var updatePostContent = function(postId) {
 		$.ajax({
 			url: "/posts/"+postId,
 			success: function(data, textStatus, jqXHR) {
+				current_post = data.post;
+
 				setReadState(0);
 
-				current_post = data.post;				
 				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
