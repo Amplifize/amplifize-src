@@ -23,7 +23,8 @@ var setReadState = function(readState) {
 		},
 		error: function(xhr, text, error) {
 			//log this
-		}
+		},
+		dataType: "json"
 	});
 	
 	return false;
@@ -81,8 +82,6 @@ var updatePostContent = function(postId) {
 			},
 			dataType: "json"
 		})
-	} else {
-		$("#feedUnreadCount").html(0);
 	}
 };
 
@@ -90,15 +89,15 @@ $(document).ready(function() {
 	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
 
 	if(posts.length > 0) {
-		jQuery(document).bind('keydown', 'j', function(evt) {
-			upPost();
-			return false;
-		});
-		
-		jQuery(document).bind('keydown', 'k', function(evt) {
-			downPost();
-			return false;
-		});
+		// jQuery(document).bind('keydown', 'j', function(evt) {
+			// upPost();
+			// return false;
+		// });
+// 		
+		// jQuery(document).bind('keydown', 'k', function(evt) {
+			// downPost();
+			// return false;
+		// });
 
 		var unread_count = posts.length - 1; 
 		$("#feedUnreadCount").html(unread_count);
