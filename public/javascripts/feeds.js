@@ -33,23 +33,28 @@ var downPost = function() {
 	if(position > 0) {
 		position--;
 		updatePostContent(posts[position]);
+	} else {
+		alert("At the first post");
 	}
 	
 	return false;
 };
 	
 var upPost = function() {
-	if(position < posts.length) {
+	if((position+1) < posts.length) {
 		position++;
 		updatePostContent(posts[position]);
+
+		if(position > max_position) {
+			max_position = position;
+			var unread_count = posts.length - 1 - max_position;
+			$("#feedUnreadCount").html(unread_count);
+			document.title = "Amplifize | Give good content a voice ("+unread_count+")"
+		}
+	} else {
+		alert("No more posts");
 	}
 
-	if(position > max_position) {
-		max_position = position;
-		var unread_count = posts.length - 1 - max_position;
-		$("#feedUnreadCount").html(unread_count);
-		document.title = "Amplifize | Give good content a voice ("+unread_count+")"
-	}
 
 	return false;
 };
@@ -62,9 +67,6 @@ var updatePostContent = function(postId) {
 				current_post = data.post;
 
 				setReadState(0);
-				var unread_count = posts.length - 1; 
-				$("#feedUnreadCount").html(unread_count);
-				document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 
 				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
@@ -85,7 +87,23 @@ var updatePostContent = function(postId) {
 };
 
 $(document).ready(function() {
-	updatePostContent(posts[position]);
-	
 	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
+
+	jQuery(document).bind('keydown', 'j', function(evt) {
+		upPost();
+		return false;
+	});
+	
+	jQuery(document).bind('keydown', 'k', function(evt) {
+		downPost();
+		return false;
+	});
+
+	if(posts.length > 0) {
+		var unread_count = posts.length - 1; 
+		$("#feedUnreadCount").html(unread_count);
+		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
+	}
+
+	updatePostContent(posts[position]);
 });
