@@ -89,17 +89,17 @@ var updatePostContent = function(postId) {
 $(document).ready(function() {
 	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
 
-	jQuery(document).bind('keydown', 'j', function(evt) {
-		upPost();
-		return false;
-	});
-	
-	jQuery(document).bind('keydown', 'k', function(evt) {
-		downPost();
-		return false;
-	});
-
 	if(posts.length > 0) {
+		jQuery(document).bind('keydown', 'j', function(evt) {
+			upPost();
+			return false;
+		});
+		
+		jQuery(document).bind('keydown', 'k', function(evt) {
+			downPost();
+			return false;
+		});
+
 		var unread_count = posts.length - 1; 
 		$("#feedUnreadCount").html(unread_count);
 		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
