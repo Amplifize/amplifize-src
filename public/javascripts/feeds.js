@@ -82,6 +82,8 @@ var updatePostContent = function(postId) {
 			},
 			dataType: "json"
 		})
+	} else {
+		$("#feedUnreadCount").html(0);
 	}
 };
 

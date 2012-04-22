@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
     if not feed.nil? and not feed.is_a? Fixnum then 
       add_entries(feed.entries, feed_id)
     else
-      puts "There was an error with "+feed_url+" => " + feed
+      puts "There was an error with "+feed_url
     end
   end
 
