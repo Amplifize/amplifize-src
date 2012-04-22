@@ -10,12 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325061140) do
+ActiveRecord::Schema.define(:version => 20120422053929) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
     t.integer  "user_id"
     t.text     "comment_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "consumer_tokens", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "type",       :limit => 30
+    t.string   "token",      :limit => 767
+    t.string   "secret"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20120325061140) do
   end
 
   add_index "posts", ["feed_id"], :name => "posts_feed_id_fk"
+  add_index "posts", ["uid"], :name => "index_posts_on_uid", :unique => true
 
   create_table "share_users", :force => true do |t|
     t.integer  "share_id"
