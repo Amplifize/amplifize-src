@@ -12,7 +12,6 @@ class Feed < ActiveRecord::Base
     Delayed::Job.enqueue(FeedsJob.new)
   end
   
-  
   def self.check_feed_url(url)
     if url[0..3] == "feed"
       url = "http" + url[4..-1]
@@ -25,6 +24,8 @@ class Feed < ActiveRecord::Base
 
   private
   def setup_feed_metadata
+    self.url = Feed.check_feed_url(self.url)
+
     if self.title.nil?
       feed = Feedzirra::Feed.fetch_and_parse(self.url)
       if feed.nil? or feed.is_a? Fixnum then

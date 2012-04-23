@@ -18,8 +18,6 @@ class Post < ActiveRecord::Base
 
     if not feed.nil? and not feed.is_a? Fixnum then 
       add_entries(feed.entries, feed_id)
-    else
-      puts "There was an error with "+feed_url
     end
   end
 
@@ -41,7 +39,21 @@ class Post < ActiveRecord::Base
     return posts
   end
 
-  private
+  def attach_to_users
+    feed = Feed.find_by_id(self.feed_id)
+    feed.users.each do |user|
+      begin
+        PostUser.create!(
+          :post_id      => self.id,
+          :user_id      => user.id,
+          :read_state   => 1
+        )
+        puts "created"
+      rescue ActiveRecord::StatementInvalid => e
+        raise e unless /Mysql2::Error: Duplicate entry/.match(e)
+      end
+    end
+  end
 
   def self.add_entries(entries, feed_id)
     entries.each do |entry|
@@ -58,21 +70,6 @@ class Post < ActiveRecord::Base
         end
       rescue
         next
-      end
-    end
-  end
-
-  def attach_to_users
-    feed = Feed.find_by_id(self.feed_id)
-    feed.users.each do |user|
-      begin
-        PostUser.create(
-          :post_id      => self.id,
-          :user_id      => user.id,
-          :read_state   => 1
-        )
-      rescue ActiveRecord::StatementInvalid => e
-        raise e unless /Mysql2::Error: Duplicate entry/.match(e)
       end
     end
   end

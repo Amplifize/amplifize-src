@@ -12,19 +12,21 @@ class FeedsController < ApplicationController
   # POST /rss_feeds
   # POST /rss_feeds.xml
   def create
-    @feed = Feed.find_by_url(Feed.check_feed_url(params[:feed][:url]))
-    if @feed.nil? 
-      @feed = Feed.new(params[:feed])
-      @feed.save
-      Post.get_new_posts(@feed.url, @feed.id)
+    feed = Feed.find_by_url(Feed.check_feed_url(params[:feed][:url]))
+    if feed.nil? 
+      feed = Feed.new(params[:feed])
+      feed.users.push(current_user)
+
+      Post.get_new_posts(feed.url, feed.id)
+
+      feed.last_update_date = Time.now.utc.to_s(:db)
+      feed.save
+    else
+      feed.users.push(current_user)
     end
 
-    @feed.users.push(current_user)
-
-    @posts = Post.synchronize_posts_with_users(current_user.id, @feed.id)
-
     respond_to do |format|
-      format.js { render :json => @posts.map(&:attributes) }
+      format.js { '{"success": true}' }
     end
   end
 
