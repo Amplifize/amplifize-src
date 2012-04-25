@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     else
       @feed = Feed.new
       @my_feeds = current_user.feeds;
-      @posts = current_user.posts.unread.desc.map(&:id).to_json
+      @posts = current_user.posts.unread.rolling_window.desc.map(&:id).to_json
     end
     
     render :file => render_view, :layout => 'reader_layout'

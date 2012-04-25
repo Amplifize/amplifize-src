@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120422053929) do
+ActiveRecord::Schema.define(:version => 20120424033842) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20120422053929) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "feeds_users", ["feed_id", "user_id"], :name => "index_feeds_users_on_feed_id_and_user_id", :unique => true
 
   create_table "follows", :force => true do |t|
     t.integer  "follower"

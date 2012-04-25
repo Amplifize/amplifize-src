@@ -1,3 +1,5 @@
+require 'date'
+
 class Post < ActiveRecord::Base
   belongs_to :feed
 
@@ -10,6 +12,10 @@ class Post < ActiveRecord::Base
   
   scope :unread, lambda {
     where("post_users.read_state = 1")
+  }
+  
+  scope :rolling_window, lambda {
+    where("posts.published_at > '" + (DateTime.now << 2).to_s(:db) + "'")
   }
 
   def self.get_new_posts(feed_url, feed_id, last_update_date = nil)
