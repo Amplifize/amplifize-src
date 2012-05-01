@@ -2,10 +2,7 @@ class FeedsJob
   def perform
     feeds = Feed.all
     feeds.each { |feed|
-      Post.get_new_posts(feed.url, feed.id, feed.last_update_date)
-
-      feed.last_update_date = Time.now.utc.to_s(:db)
-      feed.save
+      Post.get_new_posts(feed)
     }
 
     puts "Finished updating feeds"

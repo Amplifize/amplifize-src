@@ -16,13 +16,12 @@ class FeedsController < ApplicationController
     if feed.nil? 
       feed = Feed.new(params[:feed])
       feed.users.push(current_user)
-
-      Post.get_new_posts(feed.url, feed.id)
-
-      feed.last_update_date = Time.now.utc.to_s(:db)
       feed.save
+      
+      Post.get_new_posts(feed)
     else
       feed.users.push(current_user)
+      Post.synchronize_posts_with_users(current_user.id, feed.id)
     end
 
     respond_to do |format|
@@ -62,7 +61,7 @@ class FeedsController < ApplicationController
 
   def refresh
     feed = Feed.find(params[:feed_id])
-    Post.get_new_posts(feed.url, feed.id)
+    Post.get_new_posts(feed)
 
     posts = Post.synchronize_posts_with_users(current_user.id, feed.id)
 

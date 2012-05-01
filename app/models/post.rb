@@ -18,13 +18,16 @@ class Post < ActiveRecord::Base
     where("posts.published_at > '" + (DateTime.now << 2).to_s(:db) + "'")
   }
 
-  def self.get_new_posts(feed_url, feed_id, last_update_date = nil)
-    options = last_update_date.nil? ? {} : {:if_modified_since => last_update_date}
-    feed = Feedzirra::Feed.fetch_and_parse(feed_url, options)
+  def self.get_new_posts(feed)
+    options = feed.last_update_date.nil? ? {} : {:if_modified_since => last_update_date}
+    rss_feed = Feedzirra::Feed.fetch_and_parse(feed.url, options)
 
-    if not feed.nil? and not feed.is_a? Fixnum then 
-      add_entries(feed.entries, feed_id)
+    if not rss_feed.nil? and not rss_feed.is_a? Fixnum then 
+      add_entries(rss_feed.entries, feed.id)
     end
+    
+    feed.last_update_date = Time.now.utc.to_s(:db)
+    feed.save
   end
 
   def self.synchronize_posts_with_users(user_id, feed_id)
@@ -32,7 +35,7 @@ class Post < ActiveRecord::Base
     
     begin
       posts.each do |post|
-        PostUser.create(
+        PostUser.create!(
           :post_id      => post.id,
           :user_id      => user_id,
           :read_state   => 1
