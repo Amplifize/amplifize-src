@@ -1,0 +1,26 @@
+<div id="amplifizeContent">
+	<div id="feedRow">
+		<span id="feedTitle"></span>
+		<div id="amplifizeContentNavigation">
+			<a href="#" onclick="downPost();">previous</a>
+			<a href="#" onclick="upPost();">next</a>
+			<a href="#" onclick="setReadState(1);">keep unread</a>
+			<% if "shares" == view then %>
+			<a href="#" id="commentNavItem">comment</a>
+			<% else %>
+			<a href="#" id="shareNavItem">share</a>
+			<% end %>
+		</div>
+	</div>
+	<div id="contentRow">
+		<span id="contentTitle"></span>
+		<span id="contentPublishDate"></span>
+	</div>
+	<div id="contentSummary"></div>
+	<% if "shares" == view then %>
+	<hr/>
+	<h3>Comments:</h3>
+	<div id="commentThread"></div>
+	<% end %>
+	<div style="clear: both;"></div>
+</div>

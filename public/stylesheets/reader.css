@@ -57,7 +57,8 @@ ul.drawers li a:visited {
 	color: inherit;
 }
 
-li#feedsNav.drawer ul {
+li#feedsNav.drawer ul,
+li#peopleNav.drawer ul {
 	margin: 0 10px;
 	padding: 0;
 	background-color: #999;
@@ -67,7 +68,8 @@ li#feedsNav.drawer ul {
 	display: none;
 }
 
-li#feedsNav.drawer ul li {
+li#feedsNav.drawer ul li,
+li#peopleNav.drawer ul li {
 	font-size: 16px;
 	padding: 0;
 	margin: 0;
@@ -79,6 +81,55 @@ li#feedsNav.drawer ul li {
 	width: 140px;
 }
 
-li#feedsNav.drawer ul li a {
+li#feedsNav.drawer ul li a,
+li#peopleNav.drawer ul li a {
 	padding: 0;
+}
+
+#amplifizeContentNavigation {
+	font-size: 18px;
+	text-align: center;
+
+	float: right;
+
+	margin-right: 20px;
+}
+
+#feedRow {
+	margin-bottom: 10px;
+}
+
+#feedTitle a,
+#feedTitle a:visited {
+	font-size: 24px;
+	text-decoration: none;
+
+	color: #999;
+}
+
+#feedTitle a:hover {
+	text-decoration: underline;
+}
+
+#contentRow {
+	margin-bottom: 20px;
+}
+
+#contentTitle a,
+#contentTitle a:visited {
+	font-size: 16px;
+	text-decoration: none;
+	
+	color: #333;
+	
+	padding: 0;
+}
+
+#contentTitle a:hover {
+	text-decoration: underline;
+}
+
+#contentPublishDate {
+	color: #333;
+	margin-bottom: 15px;
 }

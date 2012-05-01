@@ -4,54 +4,6 @@
 	display: none;
 }
 
-#amplifizeContentNavigation {
-	font-size: 18px;
-	text-align: center;
-
-	float: right;
-
-	margin-right: 20px;
-}
-
-#feedRow {
-	margin-bottom: 10px;
-}
-
-#feedTitle a,
-#feedTitle a:visited {
-	font-size: 24px;
-	text-decoration: none;
-
-	color: #999;
-}
-
-#feedTitle a:hover {
-	text-decoration: underline;
-}
-
-#contentRow {
-	margin-bottom: 20px;
-}
-
-#contentTitle a,
-#contentTitle a:visited {
-	font-size: 16px;
-	text-decoration: none;
-	
-	color: #333;
-	
-	padding: 0;
-}
-
-#contentTitle a:hover {
-	text-decoration: underline;
-}
-
-#contentPublishDate {
-	color: #333;
-	margin-bottom: 15px;
-}
-
 .formField {
 	margin-bottom: 10px;
 	padding: 3px;

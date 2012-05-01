@@ -1,16 +1,11 @@
-#amplifizeContentNavigation {
-	font-size: 18px;
-	z-index: 1000;
-
-	text-align: center;
-
-	margin-left: 40px;
-	margin-right: 40px;
-}
-
-
-#amplifizeContent {
-	padding-top: 30px;
-	margin-left: 40px;
-	margin-right: 40px;
+#shareUnreadCount {
+	background-color: #FFFFFF;
+    border-radius: 40px 40px 40px 40px;
+    display: -moz-inline-box;
+    float: right;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
 }
