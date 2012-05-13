@@ -24,6 +24,9 @@ class Feed < ActiveRecord::Base
 
   private
   def setup_feed_metadata
+    if self.feed_type > 1
+      return true
+    end
     self.url = Feed.check_feed_url(self.url)
 
     if self.title.nil?

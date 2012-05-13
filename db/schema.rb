@@ -10,21 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424033842) do
+ActiveRecord::Schema.define(:version => 20120512042129) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
     t.integer  "user_id"
     t.text     "comment_text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "consumer_tokens", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "type",       :limit => 30
-    t.string   "token",      :limit => 767
-    t.string   "secret"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20120424033842) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_update_date"
+    t.integer  "feed_type",        :default => 1
   end
 
   add_index "feeds", ["url"], :name => "index_feeds_on_url", :unique => true
@@ -119,6 +111,17 @@ ActiveRecord::Schema.define(:version => 20120424033842) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "twitter_posts", :force => true do |t|
+    t.string  "tweet_id"
+    t.string  "text"
+    t.string  "expanded_url"
+    t.string  "twitter_user_id"
+    t.integer "feed_id"
+    t.integer "post_id"
+  end
+
+  add_index "twitter_posts", ["tweet_id"], :name => "index_twitter_posts_on_tweet_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"
