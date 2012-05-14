@@ -28,7 +28,7 @@ var downPost = function() {
 };
 	
 var upPost = function() {
-	if((position+1) < posts.length) {
+	if((position+1) < shares.length) {
 		position++;
 		updateShareContent(shares[position]);
 		
@@ -36,7 +36,7 @@ var upPost = function() {
 			max_position = position;
 			var unread_count = posts.length - 1 - max_position;
 			$("#shareUnreadCount").html(unread_count);
-			document.title = "Amplifize | Give good content a voice ("+unread_count+")"
+			document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 		}
 	} else {
 		alert("No more posts");
