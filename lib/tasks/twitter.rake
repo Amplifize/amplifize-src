@@ -1,8 +1,8 @@
 task :update_twitter => :environment do
-  #require TwitterWrapper  
+  require 'twitter_wrapper'
   
-  #TwitterWrapper.update_tweets
   puts "Updating Twitter feeds..."
+  #puts TwitterWrapper.get_user_id_for_screen_name("mattadav")
   TwitterPost.get_latest_tweets
   puts "Done running Twitter update..."
   # last_id = 200797329513648127;

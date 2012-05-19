@@ -1,6 +1,7 @@
+require 'redis'
+
 class FeedsController < ApplicationController
   before_filter :require_user, :only => [:import, :refresh]
-
   def new
     @feed = Feed.new
 
@@ -12,13 +13,20 @@ class FeedsController < ApplicationController
   # POST /rss_feeds
   # POST /rss_feeds.xml
   def create
-    feed = Feed.find_by_url(Feed.check_feed_url(params[:feed][:url]))
-    if feed.nil? 
+    new_url = Feed.check_feed_url(params[:feed][:url])
+
+    feed = Feed.find_by_url(new_url)
+    if feed.nil?
+      params[:feed][:url] = new_url
       feed = Feed.new(params[:feed])
+      feed.title = new_url
       feed.users.push(current_user)
+      feed.status = 2
       feed.save
-      
-      Post.get_new_posts(feed)
+
+      sendFeedForUpdate(feed)
+
+    #Post.get_new_posts(feed)
     else
       feed.users.push(current_user)
       Post.synchronize_posts_with_users(current_user.id, feed.id)
@@ -42,7 +50,7 @@ class FeedsController < ApplicationController
 
     opml_xml.outlines.each do |feed|
       url = feed.attributes['xml_url']
-      
+
       if not url.nil? then
         setupFeed url
       else
@@ -71,31 +79,51 @@ class FeedsController < ApplicationController
   end
 
   private
-  
+
   def setupFeed(url, tag=nil)
     new_feed = Feed.find_by_url(url)
 
     if new_feed.nil? then
       new_feed = Feed.new
       new_feed.url = url
+      new_feed.title = url
+      new_feed.status = 2
       new_feed.users = []
       new_feed.tags = []
+      new_feed.users.push(current_user)
       new_feed.save
-      Post.get_new_posts(url, new_feed.id)
+
+    #Post.get_new_posts(url, new_feed.id)
     elsif current_user.feeds.include?(new_feed) then
-      return
+    return
+    else
+      new_feed.users.push(current_user)
+      new_feed.save
+      Post.synchronize_posts_with_users(current_user.id, new_feed.id)
     end
 
     if not tag.nil? then
       Tag.create(
-        :user_id => current_user.id,
-        :feed_id => new_feed.id,
-        :name => tag
-      )
+      :user_id => current_user.id,
+      :feed_id => new_feed.id,
+      :name => tag
+    )
     end
 
-    new_feed.users.push(current_user)
-        
-    Post.synchronize_posts_with_users(current_user.id, new_feed.id)
+    sendFeedForUpdate(new_feed)
+
   end
+
+  def sendFeedForUpdate(feed)
+
+    begin
+      sender = Redis.new
+      sender.rpush("feed_upates", feed.id)
+    rescue
+      Post.get_new_posts(feed)
+      Post.synchronize_posts_with_users(current_user.id, feed.id)
+    end
+
+  end
+
 end

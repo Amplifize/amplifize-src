@@ -32,11 +32,12 @@ class TwitterPost < ActiveRecord::Base
   def self.create(tweet)
     twitter_screen_name = tweet.user.attrs["screen_name"]
     twitter_user_id = tweet.user.attrs["id"]
+    twitter_feed_url = "twitter://#{twitter_user_id}"
     full_screen_name = "@" "#{twitter_screen_name}"
     enclosed_url = tweet.expanded_urls.first
 
     # Check if we have a vaild feed for this Twitter account.  if not, initiliaze
-    feed = Feed.find_or_initialize_by_url_and_feed_type(twitter_user_id, 2)
+    feed = Feed.find_or_initialize_by_url_and_feed_type(twitter_feed_url, 2)
     if (!feed.persisted?) then
       puts "Creating new Twitter feed..."
     feed.title = full_screen_name

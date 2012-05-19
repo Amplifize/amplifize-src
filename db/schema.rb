@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120512042129) do
+ActiveRecord::Schema.define(:version => 20120517042659) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120512042129) do
     t.datetime "updated_at"
     t.datetime "last_update_date"
     t.integer  "feed_type",        :default => 1
+    t.integer  "status",           :default => 1
   end
 
   add_index "feeds", ["url"], :name => "index_feeds_on_url", :unique => true
