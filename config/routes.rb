@@ -12,6 +12,8 @@ Salon::Application.routes.draw do
   match '/feeds/import' => 'feeds#import', :as => :import
   match '/feeds/manage' => 'feeds#manage'
 
+
+  match '/post_users(/:feed_id)/mark_all_read(/:state)', :controller => 'post_users', :action => 'mark_all_read'
   match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state'
   match '/share_users/:share_id/read_state/:state', :controller => 'share_users', :action => 'set_read_state'
 
