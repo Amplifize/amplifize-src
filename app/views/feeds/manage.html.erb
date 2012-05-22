@@ -1,12 +1,24 @@
 <h3>Manage your feeds</h3>
 <%@feeds.each do |feed| %>
 	<div id="feed_<%= feed.id %>" class="manageFeedRow">
-		<span class="manageFeedRowTitle"><a href="<%= feed.url %>"><%= feed.title %></a></span>
+		<span class="manageFeedRowTitle"><strong><a href="<%= feed.url %>"><%= feed.title %></a></strong></span>
+		
+		<!--
+		<%if feed.status == 1 then %>
+			<span class ="manageFeedRowOKStatus">Up to date!</span>
+		<% elsif feed.status == 2 then %>
+			<span class ="manageFeedRowWaitingStatus">Still loading...</span>
+		<% else %>
+			<span class ="manageFeedRowErrorStatus">Uh oh, something is wrong :(</span>
+		<% end %>
+		-->
+		
 		<ul class="manageFeedRowTags">
 			<%feed.tags do |tag| %>
 			<li><%= tag.name %></li>	
 			<% end %>
 		</ul>
+
 		<div class="manageFeedRowUnsubscribe"><%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true %></div>
 	</div>
 <% end %>

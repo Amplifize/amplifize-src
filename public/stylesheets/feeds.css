@@ -36,6 +36,20 @@ ul.manageFeedRowTags li {
 	float: left;
 }
 
+
+.manageFeedRowOKStatus {
+	color: #00ff00;
+}
+
+.manageFeedRowWaitingStatus {
+	color: #ffff00;
+}
+
+.manageFeedRowErrorStatus {
+	color: #ff0000;
+}
+
+
 #feedUnreadCount {
 	background-color: #FFFFFF;
     border-radius: 40px 40px 40px 40px;

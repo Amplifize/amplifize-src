@@ -8,16 +8,8 @@ class FeedUpdater
 
   def self.queue_feed_update(feed)
     begin
-      puts "calling enqueue"
-      #Delayed::Job.enqueue FeedUpdaterJob.new(feed.id)
-      
-      
       job = FeedUpdaterJob.new
-      job.run_update(feed.id)
-      
-      
-      #Delayed::Job.enqueue(FeedUpdaterJob.new)
-
+      job.delay.run_update(feed.id)
       #@@sender.rpush("feed_upates", feed.id)
     rescue
       Post.get_new_posts(feed)

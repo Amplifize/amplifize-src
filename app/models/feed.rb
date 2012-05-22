@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
 
   before_save :setup_feed_metadata
   def self.update_feeds
-    Delayed::Job.enqueue(FeedsJob.new)
+    FeedsJob.new.perform
   end
 
   def self.check_feed_url(url)  
