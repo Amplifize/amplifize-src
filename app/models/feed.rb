@@ -1,5 +1,3 @@
-require 'twitter_wrapper'
-
 class Feed < ActiveRecord::Base
   has_many :posts
   has_many :tags
@@ -13,7 +11,7 @@ class Feed < ActiveRecord::Base
     Delayed::Job.enqueue(FeedsJob.new)
   end
 
-  def self.check_feed_url(url)
+  def self.check_feed_url(url)  
     if url[0,1] == "@"
       twitter_user_id = TwitterWrapper.get_user_id_for_screen_name(url[1..-1])
       if twitter_user_id.nil?

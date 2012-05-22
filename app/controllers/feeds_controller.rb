@@ -1,5 +1,3 @@
-require 'redis'
-
 class FeedsController < ApplicationController
   before_filter :require_user, :only => [:import, :refresh]
   def new
@@ -38,6 +36,9 @@ class FeedsController < ApplicationController
   end
 
   def manage
+  
+    Feed.update_feeds
+  
     @feeds = current_user.feeds
     render :layout => false
   end
@@ -115,15 +116,7 @@ class FeedsController < ApplicationController
   end
 
   def sendFeedForUpdate(feed)
-
-    begin
-      sender = Redis.new
-      sender.rpush("feed_upates", feed.id)
-    rescue
-      Post.get_new_posts(feed)
-      Post.synchronize_posts_with_users(current_user.id, feed.id)
-    end
-
+    FeedUpdater.queue_feed_update(feed)
   end
 
 end

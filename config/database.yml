@@ -10,9 +10,9 @@ development:
   encoding: utf8
   reconnect: false
   database: amplifize_development
-  pool: 5
+  pool: 20
   username: root
-  password:
+  password: ta71xr90
 
 
 production:

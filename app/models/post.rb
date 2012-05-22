@@ -22,24 +22,18 @@ class Post < ActiveRecord::Base
     if feed.feed_type > 1
       return
     end
-    
-    puts "Running post update ...."
-    
-    options = feed.last_update_date.nil? ? {} : {:if_modified_since => last_update_date}
+
+    options = feed.last_update_date.nil? ? {} : {:if_modified_since => feed.last_update_date}
     rss_feed = Feedzirra::Feed.fetch_and_parse(feed.url, options)
 
     if not rss_feed.nil? and not rss_feed.is_a? Fixnum then
-      feed.title = rss_feed.title    
       add_entries(rss_feed.entries, feed.id)
+      feed.title = rss_feed.title   
       feed.status = 1
     end
 
-    
     feed.last_update_date = Time.now.utc.to_s(:db)
     feed.save
-    
-    puts "Done updating"
-    
   end
 
   def self.synchronize_posts_with_users(user_id, feed_id)
@@ -69,7 +63,6 @@ class Post < ActiveRecord::Base
           :user_id      => user.id,
           :read_state   => 1
         )
-        puts "created"
       rescue ActiveRecord::StatementInvalid => e
         raise e unless /Mysql2::Error: Duplicate entry/.match(e)
       end

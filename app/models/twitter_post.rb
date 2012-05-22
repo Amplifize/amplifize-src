@@ -9,22 +9,19 @@ Twitter.configure do |config|
 end
 class TwitterPost < ActiveRecord::Base
   belongs_to :feed
-  #scope :desc, order("twitter_posts.tweet_id DESC")
   def self.get_latest_tweets
     puts "Running Twitter update..."
 
     last_tweet_id = get_last_tweet_id
     tweets = Twitter.mentions({:include_entities => true, :since_id => last_tweet_id})
 
-    #puts tweets.to_yaml
-
-    tweets.reverse_each { |tweet|
+    tweets.reverse_each do |tweet|
       puts "Processing Twitter ID #{tweet.id} for #{tweet.user.attrs["id"]}"
       url = tweet.expanded_urls.first
       if !url.nil? then
         create(tweet)
       end
-    }
+    end
 
   #puts tweets.to_yaml
   end
