@@ -12,13 +12,14 @@ class Feed < ActiveRecord::Base
   end
 
   def self.check_feed_url(url)  
-    if url[0,1] == "@"
-      twitter_user_id = TwitterWrapper.get_user_id_for_screen_name(url[1..-1])
-      if twitter_user_id.nil?
-        return nil
-      end
-      url = "twitter://#{twitter_user_id}"
-    elsif url[0..3] == "feed"
+    #if url[0,1] == "@"
+      #twitter_user_id = TwitterWrapper.get_user_id_for_screen_name(url[1..-1])
+      #if twitter_user_id.nil?
+      #  return nil
+      #end
+      #url = "twitter://#{twitter_user_id}"
+    #elsif url[0..3] == "feed"
+    if url[0..3] == "feed"
       url = "http" + url[4..-1]
     elsif url["://"].nil?
       url = "http://" + url
