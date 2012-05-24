@@ -34,12 +34,12 @@ var upPost = function() {
 		
 		if(position > max_position) {
 			max_position = position;
-			var unread_count = posts.length - 1 - max_position;
+			var unread_count = shares.length - 1 - max_position;
 			$("#shareUnreadCount").html(unread_count);
 			document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 		}
 	} else {
-		alert("No more posts");
+		alert("No more shares");
 	}
 	
 	return false;
@@ -57,6 +57,7 @@ var updateShareContent = function(shareId) {
 			$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 			$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 			$("#contentSummary").html(data.share.summary);
+			$("#commentThread").html("");
 
 			for(var i = 0; i < data.share.comments.length; i++) {
 				var comment = data.share.comments[i];
