@@ -3,6 +3,7 @@ Salon::Application.routes.draw do
   match '/logout' => 'user_sessions#destroy', :as => :logout
 
   match '/reader/:view' => 'users#reader'
+  match '/reader/people' => 'users#reader', :as => :people
   match '/reader' => 'users#reader', :as => :reader
   match '/unsubscribe/:feed_id' => 'users#unsubscribe', :as => :unsubscribe
   
@@ -19,9 +20,7 @@ Salon::Application.routes.draw do
 
   #follows actions
   match '/follows/add/:user_id' => 'follows#add', :as => :follows_add
-  match '/follows/import/twitter' => 'follows#findTwitterFollowers', :as => :twitter_callback
-  match '/follows/import/google' => 'follows#findGmailContacts', :as => :gmail_callback
-  match '/follows/import/fb' => 'follows#findFBFriends', :as => :fb_callback
+  match '/follows/import/google' => 'follows#googleImport'
 
   #share actions
   match '/shares/add/' => 'shares#add', :as => :shares_add
@@ -29,6 +28,7 @@ Salon::Application.routes.draw do
   match '/about' => 'home#about', :as => :about
   match '/contact' => 'home#contact', :as => :contact
   match '/terms' => 'home#terms', :as => :terms
+  match '/faq' => 'home#faq', :as => :faq
 
   resources :users, :user_sessions, :feeds, :posts, :shares, :comments
 
