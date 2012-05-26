@@ -13,6 +13,9 @@
 		</div>
 	</div>
 	<div id="contentRow">
+		<% if "shares" == view then %>
+			Shared by: <span id="sharedBy"></span>
+		<% end %>
 		<span id="contentTitle"></span>
 		<span id="contentPublishDate"></span>
 	</div>

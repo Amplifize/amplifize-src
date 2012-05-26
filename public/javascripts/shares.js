@@ -54,10 +54,12 @@ var updateShareContent = function(shareId) {
 			
 			$("#comment_share_id").val(data.share.id);
 			
-			$("#contentTitle").html('<a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
+			$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 			$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 			$("#contentSummary").html(data.share.summary);
 			$("#commentThread").html("");
+			
+			$("#sharedBy").html(data.share.user.email);
 
 			for(var i = 0; i < data.share.comments.length; i++) {
 				var comment = data.share.comments[i];

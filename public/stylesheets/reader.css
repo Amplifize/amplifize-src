@@ -129,7 +129,8 @@ li#peopleNav.drawer ul li a {
 	text-decoration: underline;
 }
 
-#contentPublishDate {
+#contentPublishDate,
+#sharedBy {
 	color: #333;
 	margin-bottom: 15px;
 }
