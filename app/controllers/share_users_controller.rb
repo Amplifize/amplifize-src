@@ -1,5 +1,5 @@
 class ShareUsersController < ApplicationController
-  def set_read_state()
+  def set_read_state
     share_id = params[:share_id]
     new_state = params[:state]
     

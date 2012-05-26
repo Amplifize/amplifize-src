@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     render_view = 'users/reader/feeds.html.erb'
     case params[:view]
     when "shares"
-      @shares = current_user.shares.desc.map(&:id).to_json
+      @shares = current_user.shares.unread.desc.map(&:id).to_json
       @comment = Comment.new
       render_view = 'users/reader/shares.html.erb'
     when "people"

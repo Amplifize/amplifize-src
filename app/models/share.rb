@@ -5,4 +5,9 @@ class Share < ActiveRecord::Base
   belongs_to :post
   
   scope :desc, order("shares.created_at DESC")
+  
+  scope :unread, lambda {
+    where("share_users.read_state = 1")
+  }
+
 end

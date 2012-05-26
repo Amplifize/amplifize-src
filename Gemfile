@@ -23,7 +23,6 @@ gem 'whenever'
 #gem 'oauth-plugin'
 #gem 'twitter'
 
-
 # Use unicorn as the web server
 # gem 'unicorn'
 
