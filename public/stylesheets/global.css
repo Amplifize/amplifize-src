@@ -34,6 +34,12 @@ header > h1 {
 	padding-left: 10px;
 }
 
+header > h1 > a,
+header > h1 > a:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
 header > #navigation {
 	float: right;
 	

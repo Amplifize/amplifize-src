@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-    	<h1>amplifize</h1>
+    	<h1><a href="/">amplifize</a></h1>
     	<div id="navigation">
         <% if current_user %> 
         <%= link_to "Reader", :reader %>
@@ -29,13 +29,8 @@
 	    <div style="clear:both"></div>
     </div>
 
-	<div id="footer">
-		<%= link_to "About Amplifize", :about %>
-		<%= link_to "Contact Us", :contact %>
-		<%= link_to "Terms & Conditions", :terms %>
-		<span class="copyright">Built by Big Fish, Big Pond Inc. &copy; 2011</span>
-		<div style="clear:both"></div>
-	</div>
+	<%= render 'general/footer.html.erb' %>
+
 	<script type="text/javascript">
   		var uvOptions = {};
   		(function() {
