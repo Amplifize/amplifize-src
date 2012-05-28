@@ -7,6 +7,7 @@ class Feed < ActiveRecord::Base
   validates_uniqueness_of :url
 
   before_save :setup_feed_metadata
+
   def self.update_feeds
     FeedsJob.new.perform
   end
@@ -28,9 +29,9 @@ class Feed < ActiveRecord::Base
   end
 
   def self.get_feed_type_for_url(url)
-    if url.start_with?("twitter")
-    return 2
-    end
+    #if url.start_with?("twitter")
+    #  return 2
+    #end
     return 1
   end
 
