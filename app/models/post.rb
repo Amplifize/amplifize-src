@@ -19,21 +19,34 @@ class Post < ActiveRecord::Base
   }
 
   def self.get_new_posts(feed)
-    if feed.feed_type > 1
+    if feed.feed_type != Feed::FEED_TYPE_RSS
       return
     end
+    
+    feed_status_code = Feed::FEED_STATUS_OK
 
-    options = feed.last_update_date.nil? ? {} : {:if_modified_since => feed.last_update_date}
+    options = {}
+    options[:on_success] = lambda {|url, feed_data| feed_status_code = Feed::FEED_STATUS_OK }
+    options[:on_failure] = lambda {|url, response_code, response_header, response_body| feed_status_code = Feed::FEED_STATUS_ERROR }
+    
+    if not feed.last_update_date.nil? then
+      options[:if_modified_since] = feed.last_update_date
+    end
+
     rss_feed = Feedzirra::Feed.fetch_and_parse(feed.url, options)
 
     if not rss_feed.nil? and not rss_feed.is_a? Fixnum then
       add_entries(rss_feed.entries, feed.id)
-      feed.title = rss_feed.title   
-      feed.status = 1
+      feed.title = rss_feed.title
     end
 
+
+    feed.status = feed_status_code
     feed.last_update_date = Time.now.utc.to_s(:db)
     feed.save
+    
+    # Check if feed status list needs to be updated to reflect current status
+    FeedStatus.update_status(feed,feed_status_code)
   end
 
   def self.synchronize_posts_with_users(user_id, feed_id)

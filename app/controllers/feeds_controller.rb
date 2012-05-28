@@ -69,7 +69,7 @@ class FeedsController < ApplicationController
       new_feed = Feed.new
       new_feed.url = url
       new_feed.title = url
-      new_feed.status = 2
+      new_feed.status = Feed::FEED_STATUS_NEW
       new_feed.users = []
       new_feed.tags = []
       new_feed.users.push(current_user)
