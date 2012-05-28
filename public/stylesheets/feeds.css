@@ -28,14 +28,7 @@
 
 ul.manageFeedRowTags {
 	list-style: none;
-	
-	float: left;
 }
-
-ul.manageFeedRowTags li {
-	float: left;
-}
-
 
 .manageFeedRowOKStatus {
 	color: #00ff00;

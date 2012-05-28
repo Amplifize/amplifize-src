@@ -14,8 +14,10 @@
 		-->
 		
 		<ul class="manageFeedRowTags">
-			<%feed.tags do |tag| %>
-			<li><%= tag.name %></li>	
+			<% @tags.each do |tag| %>
+				<% if tag.feed_id == feed.id then %>
+				<li><%= tag.name %></li>	
+				<% end %>
 			<% end %>
 		</ul>
 

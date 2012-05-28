@@ -11,24 +11,7 @@ class FeedsController < ApplicationController
   # POST /rss_feeds
   # POST /rss_feeds.xml
   def create
-    new_url = Feed.check_feed_url(params[:feed][:url])
-
-    feed = Feed.find_by_url(new_url)
-    if feed.nil?
-      params[:feed][:url] = new_url
-      feed = Feed.new(params[:feed])
-      feed.title = new_url
-      feed.users.push(current_user)
-      feed.status = 2
-      feed.save
-
-      sendFeedForUpdate(feed)
-
-    #Post.get_new_posts(feed)
-    else
-      feed.users.push(current_user)
-      Post.synchronize_posts_with_users(current_user.id, feed.id)
-    end
+    setupFeed(Feed.check_feed_url(params[:feed][:url]), params[:feed][:tags].squish().split(","))
 
     respond_to do |format|
       format.js { '{"success": true}' }
@@ -36,10 +19,8 @@ class FeedsController < ApplicationController
   end
 
   def manage
-  
-    Feed.update_feeds
-  
     @feeds = current_user.feeds
+    @tags = current_user.tags
     render :layout => false
   end
 
@@ -58,7 +39,7 @@ class FeedsController < ApplicationController
         tag = feed.attributes['title']
         feed.outlines.each do |feed_in_folder|
           url = feed_in_folder.attributes['xml_url']
-          setupFeed url, tag
+          setupFeed url, [tag]
         end
       end
     end
@@ -81,7 +62,7 @@ class FeedsController < ApplicationController
 
   private
 
-  def setupFeed(url, tag=nil)
+  def setupFeed(url, tags=nil)
     new_feed = Feed.find_by_url(url)
 
     if new_feed.nil? then
@@ -93,30 +74,28 @@ class FeedsController < ApplicationController
       new_feed.tags = []
       new_feed.users.push(current_user)
       new_feed.save
-
-    #Post.get_new_posts(url, new_feed.id)
     elsif current_user.feeds.include?(new_feed) then
-    return
+      return
     else
       new_feed.users.push(current_user)
       new_feed.save
       Post.synchronize_posts_with_users(current_user.id, new_feed.id)
     end
 
-    if not tag.nil? then
-      Tag.create(
-      :user_id => current_user.id,
-      :feed_id => new_feed.id,
-      :name => tag
-    )
+    if not tags.nil? then
+      tags.each do |tag|
+        Tag.create(
+          :user_id => current_user.id,
+          :feed_id => new_feed.id,
+          :name => tag.strip
+        )
+      end
     end
 
     sendFeedForUpdate(new_feed)
-
   end
 
   def sendFeedForUpdate(feed)
     FeedUpdater.queue_feed_update(feed)
   end
-
 end
