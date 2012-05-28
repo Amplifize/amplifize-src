@@ -10,21 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517042659) do
+ActiveRecord::Schema.define(:version => 20120528212525) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
     t.integer  "user_id"
     t.text     "comment_text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "consumer_tokens", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "type",       :limit => 30
-    t.string   "token",      :limit => 1024
-    t.string   "secret"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +35,17 @@ ActiveRecord::Schema.define(:version => 20120517042659) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "feed_statuses", :force => true do |t|
+    t.integer  "feed_id"
+    t.string   "url"
+    t.integer  "status_code"
+    t.integer  "response_code"
+    t.text     "message"
+    t.datetime "update_time"
+  end
+
+  add_index "feed_statuses", ["feed_id"], :name => "index_feed_statuses_on_feed_id"
 
   create_table "feeds", :force => true do |t|
     t.string   "url"
@@ -93,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20120517042659) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "feed_id"
+    t.text     "author"
   end
 
   add_index "posts", ["feed_id"], :name => "posts_feed_id_fk"

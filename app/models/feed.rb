@@ -12,6 +12,17 @@
 ###
 
 class Feed < ActiveRecord::Base
+  
+  # Feed.status Constants
+  FEED_STATUS_OK = 1
+  FEED_STATUS_NEW = 2
+  FEED_STATUS_ERROR = 3
+  
+  # Feed.feed_type Constants
+  FEED_TYPE_RSS = 1
+  FEED_TYPE_TWITTER = 2
+  
+  
   has_many :posts
   has_many :tags
 
