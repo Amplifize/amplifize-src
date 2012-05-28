@@ -1,3 +1,16 @@
+###
+# Feeds
+#
+# Feed.feed_type Constants:
+#  * 1 - RSS/ATOM over HTTP
+#  * 2 - Twitter 
+#
+# Feed.status Constants:
+#  * 1 - Feed is Normal
+#  * 2 - Feed is new, not yet updated/initialized
+#  * >3 - Feed error, actual meanings tbd
+###
+
 class Feed < ActiveRecord::Base
   has_many :posts
   has_many :tags
