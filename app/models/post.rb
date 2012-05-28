@@ -75,6 +75,7 @@ class Post < ActiveRecord::Base
         unless exists? :uid => entry.id
           create!(
             :title        => entry.title.html_safe,
+            :author       => entry.author,
             :content      => entry.content.nil? ? entry.summary.html_safe : entry.content.html_safe,
             :url          => entry.url,
             :published_at => entry.published,
