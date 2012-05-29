@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  feed_id: 1
+  url: MyString
+  status_code: 1
+  response_code: 1
+
+two:
+  feed_id: 1
+  url: MyString
+  status_code: 1
+  response_code: 1
