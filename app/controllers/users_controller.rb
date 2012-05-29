@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        Mailer.delay.new_user_email(@user)
+        
         format.html { redirect_to(:reader, :notice => 'Welcome to amplifize') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else

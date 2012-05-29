@@ -22,5 +22,13 @@ Salon::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+  
+  # Default domain name for URLs generated with the mailer
+  config.action_mailer.default_url_options = { :host => "amplifize.local", :port => 3000 }
+  
+  # Configurations for Action Mailer
+  config.action_mailer.delivery_method = :file
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
 end
 

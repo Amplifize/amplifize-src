@@ -54,9 +54,9 @@ class Feed < ActiveRecord::Base
 
   def self.get_feed_type_for_url(url)
     #if url.start_with?("twitter")
-    #  return 2
+    #  return FEED_TYPE_TWITTER
     #end
-    return 1
+    return FEED_TYPE_RSS
   end
 
   private
@@ -65,7 +65,7 @@ class Feed < ActiveRecord::Base
     self.url = Feed.check_feed_url(self.url)
     self.feed_type = Feed.get_feed_type_for_url(self.url)
 
-    # if self.feed_type == 1
+    # if self.feed_type == FEED_TYPE_RSS
       # if self.title.nil?
         # #feed = Feedzirra::Feed.fetch_and_parse(self.url)
         # if feed.nil? or feed.is_a? Fixnum then

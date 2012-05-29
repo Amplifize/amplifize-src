@@ -3,6 +3,10 @@ class UserSessionsController < ApplicationController
   # GET /user_sessions/new.xml
   def new
     @user_session = UserSession.new
+  
+    if params[:u] then
+      @user_session.email = params[:u]
+    end
 
     respond_to do |format|
       format.html # new.html.erb

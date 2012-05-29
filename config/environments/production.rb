@@ -46,4 +46,14 @@ Salon::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  # Default domain name for URLs generated with the mailer
+  config.action_mailer.default_url_options = { :host => "amplifize.com" }
+  
+  # Action Mailer configurations.  
+  #  See: http://guides.rubyonrails.org/action_mailer_basics.html
+  # TODO Production should use sendmail for transacting mail
+  config.action_mailer.delivery_method = :file
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
 end
