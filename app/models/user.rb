@@ -12,4 +12,20 @@ class User < ActiveRecord::Base
   has_many :shares, :through => :share_users
   
   has_many :tags  
+  
+  
+  def feeds_with_unread
+    user_feeds = feeds
+    counts = PostUser.joins(:post => [:feed]).where(:user_id => id, :read_state => 1).group(:feed_id).count
+    
+    user_feeds.each { |feed|
+      if not counts[feed.id].nil?
+        feed.unread = counts[feed.id]
+      else
+        feed.unread = 0
+      end
+      
+      user_feeds
+    }
+  end
 end
