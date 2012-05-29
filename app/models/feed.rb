@@ -31,6 +31,16 @@ class Feed < ActiveRecord::Base
   validates_uniqueness_of :url
 
   before_save :setup_feed_metadata
+  
+  # Gets transient attribute for unread count
+  def unread
+    read_attribute(:unread)
+  end
+  
+  # Sets transient attribute for unread count
+  def unread=(value)
+    write_attribute(:unread, value)
+  end
 
   def self.update_feeds
     FeedsJob.new.perform
