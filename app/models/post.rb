@@ -43,6 +43,8 @@ class Post < ActiveRecord::Base
 
     feed.status = feed_status_code
     feed.last_update_date = Time.now.utc.to_s(:db)
+    # Calculate next update time for feeds
+    feed.calculate_next_update
     feed.save
     
     # Check if feed status list needs to be updated to reflect current status
