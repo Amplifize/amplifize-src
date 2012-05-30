@@ -13,6 +13,8 @@
 
 class Feed < ActiveRecord::Base
   
+  FEED_DEFAULT_UPDATE_INTERVAL = 15 # minutes
+  
   # Feed.status Constants
   FEED_STATUS_OK = 1
   FEED_STATUS_NEW = 2
@@ -32,6 +34,11 @@ class Feed < ActiveRecord::Base
 
   before_save :setup_feed_metadata
   
+  scope :to_update, lambda {
+    where("feeds.next_update_at <= '" + DateTime.now.to_s(:db) + "'")
+  }
+
+
   # Gets transient attribute for unread count
   def unread
     read_attribute(:unread)
@@ -68,6 +75,15 @@ class Feed < ActiveRecord::Base
     #end
     return FEED_TYPE_RSS
   end
+  
+  # Calculate and store adaptive next-update-time for the feed
+  # TODO Use feed's average post interval to determine feed update interval
+  # TODO Use backoff algorithm for feeds that are in an error state
+  # TODO Reduce update interval for feeds that have no subscribers
+  def calculate_next_update
+    self.next_update_at = (FEED_DEFAULT_UPDATE_INTERVAL.minutes.since DateTime.now).to_s(:db)
+    next_update_at
+  end
 
   private
 
@@ -86,4 +102,6 @@ class Feed < ActiveRecord::Base
       # end
     # end
   end
+  
+
 end
