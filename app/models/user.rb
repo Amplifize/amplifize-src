@@ -11,8 +11,15 @@ class User < ActiveRecord::Base
   has_many :share_users
   has_many :shares, :through => :share_users
   
-  has_many :tags  
+  has_many :tags
   
+  def shares_unread_count
+    shares.unread.count
+  end
+  
+  def feeds_unread_count
+    posts.unread.count
+  end
   
   def feeds_with_unread
     user_feeds = feeds
