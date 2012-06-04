@@ -1,15 +1,5 @@
 class FeedsController < ApplicationController
-  before_filter :require_user, :only => [:import, :refresh]
-  def new
-    @feed = Feed.new
-
-    respond_to do |format|
-      format.html {render :layout => false}# new.html.erb
-    end
-  end
-
-  # POST /rss_feeds
-  # POST /rss_feeds.xml
+  before_filter :require_user, :only => [:import, :create, :manage]
   def create
     setupFeed(Feed.check_feed_url(params[:feed][:url]), params[:feed][:tags].squish().split(","))
 
@@ -46,17 +36,6 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(reader_url) }
-    end
-  end
-
-  def refresh
-    feed = Feed.find(params[:feed_id])
-    Post.get_new_posts(feed)
-
-    posts = Post.synchronize_posts_with_users(current_user.id, feed.id)
-
-    respond_to do |format|
-      format.js { render :json => posts.map(&:attributes) }
     end
   end
 

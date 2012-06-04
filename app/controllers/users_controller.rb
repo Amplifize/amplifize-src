@@ -2,11 +2,6 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:reader, :update, :search]
 
-  # GET /users/1/edit
-  def edit
-    @user = User.find(params[:id])
-  end
-
   # POST /users
   # POST /users.xml
   def create
@@ -25,9 +20,13 @@ class UsersController < ApplicationController
     end  
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
+  def edit
+    #TODO: This is all scaffold code
+    @user = User.find(params[:id])
+  end
+
   def update
+    #TODO: This is all scaffold code
     @user = User.find(params[:id])
 
     respond_to do |format|
