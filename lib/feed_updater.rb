@@ -1,11 +1,4 @@
 class FeedUpdater
-  #@@sender = Redis.new
-
-  def self.update_feed(feed_id)
-    feed = Feed.find(feed_id)
-    Post.get_new_posts(feed)
-  end
-
   def self.queue_feed_update(feed)
     #begin
       # Using the "delay" syntax queues to delayed_job
@@ -26,9 +19,15 @@ class FeedUpdater
       FeedUpdater.update_feed(feed_id)
     rescue Exception => e
       puts "!! Error with feed #{feed_id}: #{e} : #{t.elapsed}ms"
-    next
+      #next
     end
 
     puts "<< Done with feed #{feed_id} : #{t.elapsed}ms"
   end
+  
+  def self.update_feed(feed_id)
+    feed = Feed.find(feed_id)
+    Post.get_new_posts(feed)
+  end
+
 end
