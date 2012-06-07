@@ -8,7 +8,9 @@ Salon::Application.routes.draw do
   match '/unsubscribe/:feed_id' => 'users#unsubscribe', :as => :unsubscribe
   
   match '/users/search' => 'users#search', :as => :user_search
-  match '/users/edit' => 'users#edit', :as => :account
+
+  match '/profile' => 'users#profile', :as => :profile
+  match '/profile/update' => 'users#update', :as => :update_profile
 
   match '/feeds/import' => 'feeds#import', :as => :import
   match '/feeds/manage' => 'feeds#manage'

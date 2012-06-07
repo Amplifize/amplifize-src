@@ -1,0 +1,24 @@
+<%= form_for(@user, :remote => true, :html => { :id => "updateProfileForm" }, :url => { :action => "update" }) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %> <span id="email_error" class="updateProfileFieldError"></span>
+  </div>
+  
+  <div class="field">
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %> <span id="display_name_error" class="updateProfileFieldError"></span>
+  </div>
+  
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %> <span id="password_error" class="updateProfileFieldError"></span>
+  </div>
+  <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %> <span id="password_confirmation_error" class="updateProfileFieldError"></span>
+    </div>
+  <div class="actions">
+    <%= f.submit :value => 'Update Profile' %>
+  </div>
+  <div id="updateProfileStatusMessage"></span>
+<% end %>

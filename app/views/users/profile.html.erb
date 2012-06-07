@@ -1,0 +1,9 @@
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "profile.css" %>
+<% end %>
+
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "updateProfile.js" %>
+<% end %>
+
+<%= render 'users/profile_form' %>

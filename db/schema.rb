@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530034759) do
+ActiveRecord::Schema.define(:version => 20120604014320) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20120530034759) do
     t.string   "persistence_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "display_name"
   end
 
   add_foreign_key "post_users", "posts", :name => "post_users_post_id_fk"
