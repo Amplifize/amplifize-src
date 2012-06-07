@@ -73,6 +73,8 @@ var updatePostContent = function(postId) {
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				if(current_post.author) {
 					$("#contentAuthor").html("Written by: "+current_post.author+" on ");
+				} else {
+					$("#contentAuthor").html("");
 				}
 				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 				$("#contentSummary").html(current_post.content);
