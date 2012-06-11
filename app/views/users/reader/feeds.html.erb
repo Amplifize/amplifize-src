@@ -3,9 +3,12 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "feeds.js", "addShare.js", "addFeed.js", "importFeed.js" %>
+	<%= javascript_include_tag "feeds.js", "addShare.js", "addFeed.js", "importFeed.js", "addTags.js", "deleteTags.js" %>
 	<script type="text/javascript">
 		var posts = <%= @posts %>;
+		$(document).ready(function() {
+			$("#shareUnreadCount").html("<%= @shares_unread_count %>");
+		});
 	</script>
 <% end %>
 
@@ -30,11 +33,9 @@
 	</div>
 </div>
 
-
 <div id="importFeed-modal-content">
 	<div id="importFeed-modal-title">Import OPML file</div>
 	<div id="importFeed-modal-data">
 		<%= render 'feeds/import' %>
 	</div>
 </div>
-

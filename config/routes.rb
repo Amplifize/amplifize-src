@@ -32,7 +32,7 @@ Salon::Application.routes.draw do
   match '/terms' => 'home#terms', :as => :terms
   match '/faq' => 'home#faq', :as => :faq
 
-  resources :users, :user_sessions, :feeds, :posts, :shares, :comments
+  resources :users, :user_sessions, :feeds, :posts, :shares, :comments, :tags
 
   root :to => "home#index"
 

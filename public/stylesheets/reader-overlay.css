@@ -20,7 +20,9 @@
 #reader-overlay-container #addComment-modal-title,
 #reader-overlay-container #addShares-modal-title,
 #reader-overlay-container #addFeed-modal-title,
-#reader-overlay-container #importFeed-modal-title {
+#reader-overlay-container #importFeed-modal-title,
+#reader-overlay-container #addTags-modal-title,
+#reader-overlay-container #deleteTags-modal-title {
 	color:#000; background-color:#ddd; 
 	border-bottom:1px solid #ccc; 
 	font-weight:bold; 
@@ -31,7 +33,9 @@
 #reader-overlay-container #addComment-modal-data,
 #reader-overlay-container #addShares-modal-data,
 #reader-overlay-container #addFeed-modal-data,
-#reader-overlay-container #importFeed-modal-data {
+#reader-overlay-container #importFeed-modal-data,
+#reader-overlay-container #addTags-modal-data,
+#reader-overlay-container #deleteTags-modal-data {
 	font-size:12px; 
 	padding:6px 12px;
 }

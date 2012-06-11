@@ -11,6 +11,7 @@ class FeedsController < ApplicationController
   def manage
     @feeds = current_user.feeds
     @tags = current_user.tags
+    @tag = Tag.new
     render :layout => false
   end
 

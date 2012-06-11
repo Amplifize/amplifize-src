@@ -85,15 +85,16 @@ class UsersController < ApplicationController
     when "shares"
       @shares = current_user.shares.unread.desc.map(&:id).to_json
       @comment = Comment.new
+      @posts_unread_count = current_user.feeds_unread_count
       render_view = 'users/reader/shares.html.erb'
     when "people"
       @my_follows = Follow.find_all_by_follower(current_user.id)
       render_view = 'users/reader/people.html.erb'
-
     else
       @feed = Feed.new
       @my_feeds = current_user.feeds;
       @posts = current_user.posts.unread.rolling_window.desc.map(&:id).to_json
+      @shares_unread_count = current_user.shares_unread_count
     end
     
     render :file => render_view, :layout => 'reader_layout'
@@ -106,5 +107,4 @@ class UsersController < ApplicationController
       format.js { render :json => user }
     end
   end
-  
 end

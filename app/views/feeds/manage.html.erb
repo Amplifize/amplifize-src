@@ -21,6 +21,22 @@
 			<% end %>
 		</ul>
 
-		<div class="manageFeedRowUnsubscribe"><%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true %></div>
+		<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe" %>
+		<%= link_to "Add tags", "#", :onclick => "addTags("+feed.id.to_s+")" %>
+		<%= link_to "Delete tags", "#", :onclick => "deleteTags("+feed.id.to_s+")" %>
 	</div>
 <% end %>
+
+<div id="addTags-modal-content">
+	<div id="addTags-modal-title">Add tags</div>
+	<div id="addTags-modal-data">
+		<%= render 'tags/form' %>
+	</div>
+</div>
+
+<div id="deleteTags-modal-content">
+	<div id="deleteTags-modal-title">Delete tags</div>
+	<div id="deleteTags-modal-data">
+		
+	</div>
+</div>

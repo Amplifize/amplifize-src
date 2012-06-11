@@ -7,6 +7,20 @@ var loadManageFeeds = function() {
 		url: "/feeds/manage",
 		success: function (data, textStatus, jqXHR) {
 			$("#amplifizeContent").html(data);
+			
+			$('form#new_tag').bind("ajax:success", function(status, data, xhr) {
+				$("#tag_name").val();
+				$.modal.close();
+		
+				var ul = $("#feed_"+data.feed_id+" .manageFeedRowTags");
+				for(var i =0; i < data.tags.length; i++) {
+					ul.append("<li>"+data.tags[i]+"</li>");
+				}
+			});
+
+			$('form#new_tag').bind("ajax:failure", function(status, data, xhr) {
+				alert(status);
+			});
 		},
 		error: function(xhr, text, error) {
 			alert(error);
@@ -60,11 +74,22 @@ var upPost = function() {
 	return false;
 };
 
+var addTags = function(feedId) {
+	$("#tag_feed_id").val(feedId);
+	AddTagsOverlay.init();
+};
+
+var deleteTags = function(feedId) {
+	DeleteTagsOverlay.init();
+};
+
 var updatePostContent = function(postId) {		
 	if (postId) {
 		$.ajax({
 			url: "/posts/"+postId,
 			success: function(data, textStatus, jqXHR) {
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+				
 				current_post = data.post;
 
 				setReadState(0);

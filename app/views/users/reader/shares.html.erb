@@ -6,6 +6,9 @@
 	<%= javascript_include_tag "shares.js", "commentModal.js" %>
 	<script type="text/javascript">
 		var shares = <%= @shares %>;
+		$(document).ready(function() {
+			$("#feedUnreadCount").html("<%= @posts_unread_count %>");
+		});
 	</script>
 <% end %>
 

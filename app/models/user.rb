@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
   
   def feeds_unread_count
-    posts.unread.count
+    posts.unread.rolling_window.count
   end
   
   def feeds_with_unread

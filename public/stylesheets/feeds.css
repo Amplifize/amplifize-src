@@ -1,6 +1,8 @@
 #addShares-modal-content,
 #addFeed-modal-content,
-#importFeed-modal-content {
+#importFeed-modal-content,
+#addTags-modal-content,
+#deleteTags-modal-content {
 	display: none;
 }
 
@@ -28,16 +30,4 @@
 
 ul.manageFeedRowTags {
 	list-style: none;
-}
-
-#feedUnreadCount {
-	background-color: #FFFFFF;
-    border-radius: 40px 40px 40px 40px;
-    display: -moz-inline-box;
-    float: right;
-    font-size: 12px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    width: 40px;
 }
