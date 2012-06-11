@@ -1,3 +1,7 @@
 .updateProfileFieldError {
 	color:#ff0000;
 }
+
+.updateProfileFieldSuccess {
+	color: #00ff00;
+}

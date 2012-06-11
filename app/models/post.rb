@@ -10,6 +10,15 @@ class Post < ActiveRecord::Base
 
   scope :desc, order("posts.published_at ASC")
   
+  scope :filter_by_feed, lambda { |feed_id|
+    where(:feed_id => feed_id)
+  }
+  
+  scope :filter_by_tag, lambda { |tag_name,user_id|
+    tags = Tag.arel_table
+    where(:feed_id => tags.project(:feed_id).where(tags[:name].eq(tag_name)).where(tags[:user_id].eq(user_id)))
+  }
+  
   scope :unread, lambda {
     where("post_users.read_state = 1")
   }

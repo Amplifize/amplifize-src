@@ -35,7 +35,7 @@ class Feed < ActiveRecord::Base
   before_save :setup_feed_metadata
   
   scope :to_update, lambda {
-    where("feeds.next_update_at <= '" + DateTime.now.to_s(:db) + "'")
+    where("feeds.next_update_at <= '" + DateTime.now.to_s(:db) + "' or feeds.next_update_at IS NULL")
   }
 
 
