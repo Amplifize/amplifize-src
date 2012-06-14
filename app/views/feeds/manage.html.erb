@@ -16,7 +16,7 @@
 		<ul class="manageFeedRowTags">
 			<% @tags.each do |tag| %>
 				<% if tag.feed_id == feed.id then %>
-				<li><%= tag.name %></li>	
+				<li id="tag_<%=tag.id %>"><%= tag.name %></li>	
 				<% end %>
 			<% end %>
 		</ul>
@@ -37,6 +37,9 @@
 <div id="deleteTags-modal-content">
 	<div id="deleteTags-modal-title">Delete tags</div>
 	<div id="deleteTags-modal-data">
-		
+		<p>Click on a tag to delete it</p>
+		<div id="feedTagsToDelete">
+		</div>
+		<a href="#" onclick="closeDeleteTagsOverlay(); return false;">Click to close</a>
 	</div>
 </div>

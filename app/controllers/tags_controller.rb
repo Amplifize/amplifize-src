@@ -13,4 +13,12 @@ class TagsController < ApplicationController
       format.js { render :json => {"feed_id" => params[:tag][:feed_id], "tags" => tags}}
     end
   end
+  
+  def destroy
+    Tag.delete(params[:id])
+    
+    respond_to do |format|
+      format.js { render :json => '{"success": true}' }
+    end
+  end
 end

@@ -80,8 +80,44 @@ var addTags = function(feedId) {
 };
 
 var deleteTags = function(feedId) {
-	DeleteTagsOverlay.init();
+	$.ajax({
+		url: "/feeds/"+feedId+"/tags",
+		success: function(data, textStatus, jqXHR) {
+			var deleteDiv = $("#feedTagsToDelete");
+			deleteDiv.html('');
+			for(var i=0; i < data.tags.length; i++) {
+				deleteDiv.append('<a href="#" id="delete_popup_tag_'+data.tags[i].tag.id+'" onclick=deleteTagFromFeed('+ data.tags[i].tag.id +'); return false;">'+data.tags[i].tag.name+'</p>');
+			}
+
+			DeleteTagsOverlay.init();	
+		},
+		error: function(xhr, text, error) {
+			alert(error);
+			alert(text);
+		},
+		dataType: "json"
+	});
 };
+
+var deleteTagFromFeed = function(tagId) {
+	$.ajax({
+		url: "/tags/"+tagId,
+		type: "DELETE",
+		success: function(data, textStatus, jqXHR) {
+			$("#delete_popup_tag_"+tagId).remove();
+			$("#tag_"+tagId).remove();
+		},
+		error: function(xhr, text, error) {
+			alert(error);
+			alert(text);
+		},
+		dataType: "json"
+	});
+}
+
+var closeDeleteTagsOverlay = function() {
+	$.modal.close();
+}
 
 var updatePostContent = function(postId) {		
 	if (postId) {
