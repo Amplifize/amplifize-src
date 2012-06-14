@@ -38,6 +38,7 @@ class Feed < ActiveRecord::Base
     where("feeds.next_update_at <= '" + DateTime.now.to_s(:db) + "' or feeds.next_update_at IS NULL")
   }
 
+  scope :alphabetical, order("feeds.title ASC")
 
   # Gets transient attribute for unread count
   def unread

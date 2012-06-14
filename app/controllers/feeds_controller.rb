@@ -4,15 +4,23 @@ class FeedsController < ApplicationController
     setupFeed(Feed.check_feed_url(params[:feed][:url]), params[:feed][:tags].squish().split(","))
 
     respond_to do |format|
-      format.js { '{"success": true}' }
+      format.js { render :json => '{"success": true}' }
     end
   end
 
   def manage
-    @feeds = current_user.feeds
+    @feeds = current_user.feeds.alphabetical
     @tags = current_user.tags
     @tag = Tag.new
     render :layout => false
+  end
+
+  def tagsByFeed
+    tags = Tag.find_all_by_user_id_and_feed_id(current_user.id, params[:feed_id])
+    
+    respond_to do |format|
+      format.js {render :json => {"feed_id" => params[:feed_id], "tags" => tags }}
+    end
   end
 
   def import
