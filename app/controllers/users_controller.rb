@@ -95,6 +95,7 @@ class UsersController < ApplicationController
       @my_feeds = current_user.feeds;
       @posts = current_user.posts.unread.rolling_window.desc.map(&:id).to_json
       @shares_unread_count = current_user.shares_unread_count
+      @tags = current_user.tags.group(:name)
     end
     
     render :file => render_view, :layout => 'reader_layout'

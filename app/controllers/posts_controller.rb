@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     posts = current_user.posts.filter_by_feed(feed_id).unread.rolling_window.desc.map(&:id)
     
     respond_to do |format|
-      format.js {render :json => posts}
+      format.js {render :json => posts.to_json}
     end
   end
   
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     posts = current_user.posts.filter_by_tag(tag_id,current_user.id).unread.rolling_window.desc.map(&:id)
     
     respond_to do |format|
-      format.js {render :json => posts}
+      format.js {render :json => posts.to_json}
     end
   end
   

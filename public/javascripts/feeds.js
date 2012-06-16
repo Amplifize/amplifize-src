@@ -21,6 +21,8 @@ var loadManageFeeds = function() {
 			$('form#new_tag').bind("ajax:failure", function(status, data, xhr) {
 				alert(status);
 			});
+			
+			$("#amplifizeContentNavigation").hide();
 		},
 		error: function(xhr, text, error) {
 			alert(error);
@@ -153,6 +155,30 @@ var updatePostContent = function(postId) {
 	}
 };
 
+var getFeedsByTag = function(tagName) {
+	if("All feeds" == tagName) {
+		window.location.reload();		
+	}
+
+	$.ajax({
+		url: "/reader/tag/"+tagName,
+		success: function(data, textStatus, jqXHR) {
+			posts = data;
+
+			var unread_count = posts.length - 1; 
+			$("#feedUnreadCount").html(unread_count);
+			document.title = "Amplifize | Give good content a voice ("+unread_count+")";
+
+			updatePostContent(posts[position]);
+		},
+		error: function(xhr, text, error) {
+			alert(error);
+			alert(text);
+		},
+		dataType: "json"
+	});
+};
+
 $(document).ready(function() {
 	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
 
@@ -175,6 +201,12 @@ $(document).ready(function() {
 			downPost();
 			return false;
 		});
+
+		$("#selectTag select").change(function () {
+			$("#selectTag select option:selected").each(function () {
+				getFeedsByTag($(this).text());
+			});
+       	});
 
 		var unread_count = posts.length - 1; 
 		$("#feedUnreadCount").html(unread_count);

@@ -1,0 +1,19 @@
+<div id="amplifizeContentNavigation">
+	<form name="selectTag" id="selectTag">
+		<select>
+			<option value="all">All feeds</option>
+			<% @tags.each do |tag|%>
+			<option value="<%= tag.name %>"><%=tag.name%></option>	
+			<%end%>
+		</select>
+	</form>
+
+	<a href="#" onclick="downPost();">previous</a>
+	<a href="#" onclick="upPost();">next</a>
+	<a href="#" onclick="setReadState(1);">keep unread</a>
+	<% if "shares" == view then %>
+	<a href="#" id="commentNavItem">comment</a>
+	<% else %>
+	<a href="#" id="shareNavItem">share</a>
+	<% end %>
+</div>

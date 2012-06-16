@@ -11,7 +11,11 @@
 <body>
 	<div id="container">
 	    <header>
-	    	<h1><a href="/">amplifize</a></h1>	
+	    	<h1><a href="/">amplifize</a></h1>
+	    	<div id="appNav">
+	    		<%= yield :appNav %>
+	    		<div style="clear:both"></div>
+	    	</div>	
 	        <div style="clear:both"></div>
 	    </header>
 		<!--<p id="notice"><%= notice %></p> -->

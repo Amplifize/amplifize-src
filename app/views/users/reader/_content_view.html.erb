@@ -1,16 +1,6 @@
 <div id="amplifizeContent">
 	<div id="feedRow">
 		<span id="feedTitle"></span>
-		<div id="amplifizeContentNavigation">
-			<a href="#" onclick="downPost();">previous</a>
-			<a href="#" onclick="upPost();">next</a>
-			<a href="#" onclick="setReadState(1);">keep unread</a>
-			<% if "shares" == view then %>
-			<a href="#" id="commentNavItem">comment</a>
-			<% else %>
-			<a href="#" id="shareNavItem">share</a>
-			<% end %>
-		</div>
 	</div>
 	<div id="contentRow">
 		<% if "shares" == view then %>
