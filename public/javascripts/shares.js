@@ -45,35 +45,65 @@ var upPost = function() {
 	return false;
 };
 
-var updateShareContent = function(shareId) {		
+var getSharesByFollows = function(followsId) {
+	if("all" == followsId) {
+		window.location.reload();		
+	}
+
 	$.ajax({
-		url: "/shares/"+shareId,
+		url: "/shares/follows/"+followsId,
 		success: function(data, textStatus, jqXHR) {
-			var current_post = data.share.post;
-			current_share = data.share;
-			
-			$("#comment_share_id").val(data.share.id);
-			
-			$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
-			$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
-			$("#contentSummary").html(data.share.summary);
-			$("#commentThread").html("");
-			
-			$("#sharedBy").html(data.share.user.email);
+			shares = data;
+			position = 0;
 
-			for(var i = 0; i < data.share.comments.length; i++) {
-				var comment = data.share.comments[i];
-				var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+comment.user.email+'</p></div>';
-				$("#commentThread").append(html);
-			}
+			var unread_count = shares.length - 1; 
+			$("#shareUnreadCount").html(unread_count);
+			document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 
-			setReadState(0);
+			updateShareContent(shares[position]);
 		},
 		error: function(xhr, text, error) {
 			alert(error);
 			alert(text);
-		}
-	})
+		},
+		dataType: "json"
+	});
+};
+
+
+var updateShareContent = function(shareId) {		
+	if(shareId) {
+		$.ajax({
+			url: "/shares/"+shareId,
+			success: function(data, textStatus, jqXHR) {
+				var current_post = data.share.post;
+				current_share = data.share;
+				
+				$("#comment_share_id").val(current_share.id);
+				
+				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
+				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+				$("#contentSummary").html(current_share.summary);
+				$("#commentThread").html("");
+				
+				$("#sharedBy").html(current_share.user.email);
+	
+				for(var i = 0; i < data.share.comments.length; i++) {
+					var comment = data.share.comments[i];
+					var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+comment.user.email+'</p></div>';
+					$("#commentThread").append(html);
+				}
+	
+				setReadState(0);
+			},
+			error: function(xhr, text, error) {
+				alert(error);
+				alert(text);
+			}
+		})
+	} else {
+		$("#shareUnreadCount").html(0);
+	}
 };
 
 $(document).ready(function() {
@@ -96,6 +126,12 @@ $(document).ready(function() {
 			downPost();
 			return false;
 		});
+
+		$("#selectFollows select").change(function () {
+			$("#selectFollows select option:selected").each(function () {
+				getSharesByFollows($(this).val());
+			});
+       	});
 
 		var unread_count = shares.length - 1; 
 		$("#shareUnreadCount").html(unread_count);

@@ -86,9 +86,10 @@ class UsersController < ApplicationController
       @shares = current_user.shares.unread.desc.map(&:id).to_json
       @comment = Comment.new
       @posts_unread_count = current_user.feeds_unread_count
+      @followed = User.find_by_sql ['select users.* from users where id in (select follows from follows where user_id = ?)', current_user.id]
       render_view = 'users/reader/shares.html.erb'
     when "people"
-      @my_follows = Follow.find_all_by_follower(current_user.id)
+      @my_follows = Follow.find_all_by_user_id(current_user.id)
       render_view = 'users/reader/people.html.erb'
     else
       @feed = Feed.new

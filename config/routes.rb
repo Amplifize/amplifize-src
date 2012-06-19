@@ -25,10 +25,10 @@ Salon::Application.routes.draw do
 
   #follows actions
   match '/follows/add/:user_id' => 'follows#add', :as => :follows_add
-  match '/follows/import/google' => 'follows#googleImport'
 
   #share actions
   match '/shares/add/' => 'shares#add', :as => :shares_add
+  match '/shares/follows/:followsId' => 'shares#byFollows'
 
   match '/about' => 'home#about', :as => :about
   match '/contact' => 'home#contact', :as => :contact

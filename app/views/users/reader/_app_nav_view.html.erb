@@ -1,4 +1,11 @@
 <div id="amplifizeContentNavigation">
+	<% if "shares" == view then %>
+	<form name="selectFollows" id="selectFollows">
+		<select>
+			<option value="all">All followees</option>
+		</select>
+	</form>
+	<% else %>
 	<form name="selectTag" id="selectTag">
 		<select>
 			<option value="all">All feeds</option>
@@ -7,6 +14,7 @@
 			<%end%>
 		</select>
 	</form>
+	<% end %>
 
 	<a href="#" onclick="downPost();">previous</a>
 	<a href="#" onclick="upPost();">next</a>

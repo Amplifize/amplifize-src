@@ -156,7 +156,7 @@ var updatePostContent = function(postId) {
 };
 
 var getFeedsByTag = function(tagName) {
-	if("All feeds" == tagName) {
+	if("all" == tagName) {
 		window.location.reload();		
 	}
 
@@ -164,6 +164,7 @@ var getFeedsByTag = function(tagName) {
 		url: "/reader/tag/"+tagName,
 		success: function(data, textStatus, jqXHR) {
 			posts = data;
+			position = 0;
 
 			var unread_count = posts.length - 1; 
 			$("#feedUnreadCount").html(unread_count);
@@ -204,7 +205,7 @@ $(document).ready(function() {
 
 		$("#selectTag select").change(function () {
 			$("#selectTag select option:selected").each(function () {
-				getFeedsByTag($(this).text());
+				getFeedsByTag($(this).val());
 			});
        	});
 

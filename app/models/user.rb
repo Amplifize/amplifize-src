@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   end
   
   has_and_belongs_to_many :feeds
-
+  
+  has_many :follows
   has_many :post_users
   has_many :posts, :through => :post_users
   
