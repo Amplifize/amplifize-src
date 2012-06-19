@@ -152,6 +152,7 @@ var updatePostContent = function(postId) {
 		})
 	} else {
 		$("#feedUnreadCount").html(0);
+		clearContent();
 	}
 };
 
@@ -179,6 +180,20 @@ var getFeedsByTag = function(tagName) {
 		dataType: "json"
 	});
 };
+
+var clearContent = function() {
+	$("#feedTitle").html('');
+	$("#contentTitle").html('');
+	$("#contentAuthor").html("");
+	$("#contentPublishDate").html('');
+	$("#contentSummary").html('');
+	$("#amplifizeContent").animate({scrollTop: 0});
+
+	$("#contentSummary").html(
+		"<h3>Looks like you've got no feeds to read</h3><p>"
+	);
+};
+
 
 $(document).ready(function() {
 	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");

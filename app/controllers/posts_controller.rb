@@ -8,16 +8,19 @@ class PostsController < ApplicationController
       format.js {render :json => posts.to_json}
     end
   end
-  
+
   def by_tag
     tag_id = params[:tag_id]
-    posts = current_user.posts.filter_by_tag(tag_id,current_user.id).unread.rolling_window.desc.map(&:id)
-    
+    posts = current_user.posts.filter_by_tag(tag_id,current_user.id).unread.rolling_window
+    if posts.nil? then
+      posts = []
+    end
+
     respond_to do |format|
-      format.js {render :json => posts.to_json}
+      format.js {render :json => posts.desc.map(&:id).to_json}
     end
   end
-  
+
   def show
     post = Post.find_by_id(params[:id])
     

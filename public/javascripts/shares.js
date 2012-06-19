@@ -70,6 +70,18 @@ var getSharesByFollows = function(followsId) {
 	});
 };
 
+var clearContent = function() {
+	$("#feedTitle").html('');
+	$("#contentTitle").html('');
+	$("#contentAuthor").html("");
+	$("#contentPublishDate").html('');
+	$("#contentSummary").html('');
+	$("#amplifizeContent").animate({scrollTop: 0});
+
+	$("#contentSummary").html(
+		"<h3>Looks like you've got no shares to read</h3><p>"
+	);
+};
 
 var updateShareContent = function(shareId) {		
 	if(shareId) {
@@ -103,6 +115,7 @@ var updateShareContent = function(shareId) {
 		})
 	} else {
 		$("#shareUnreadCount").html(0);
+		clearContent();
 	}
 };
 
