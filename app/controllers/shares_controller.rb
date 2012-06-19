@@ -43,7 +43,10 @@ class SharesController < ApplicationController
   end
 
   def byFollows
-    shares = 
+    shares = current_user.shares.where("shares.user_id = ?", params[:followsId]).unread.desc
+    if shares.nil? then
+      shares = []
+    end
     
     respond_to do |format|
       format.js {render :json => shares.map(&:id).to_json}

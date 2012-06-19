@@ -3,6 +3,9 @@
 	<form name="selectFollows" id="selectFollows">
 		<select>
 			<option value="all">All followees</option>
+			<% @followed.each do |followee| %>
+			<option value="<%= followee.id %>"><%=followee.display_name.nil? ? followee.email : followee.display_name %></option>
+			<% end %>
 		</select>
 	</form>
 	<% else %>
