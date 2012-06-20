@@ -69,9 +69,14 @@ $(document).ready(function() {
 
 	AddCommentOverlay.init();
 
-	$('form#new_comment').bind("ajax:success", function(data, status, xhr) {
-		$("#comment_text").val();
+	$('form#new_comment').bind("ajax:success", function(status, data, xhr) {
 		$.modal.close();
+		$("#comment_text").val('');
+
+		var comment = data.comment;
+		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
+		var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+'</p></div>';
+		$("#commentThread").append(html);
 	});
 
 	$('form#new_comment').bind("ajax:failure", function(data, status, xhr) {

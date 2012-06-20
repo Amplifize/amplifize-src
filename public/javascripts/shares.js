@@ -102,7 +102,8 @@ var updateShareContent = function(shareId) {
 	
 				for(var i = 0; i < data.share.comments.length; i++) {
 					var comment = data.share.comments[i];
-					var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+comment.user.email+'</p></div>';
+					var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
+					var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+'</p></div>';
 					$("#commentThread").append(html);
 				}
 	
