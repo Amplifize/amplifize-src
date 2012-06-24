@@ -172,3 +172,23 @@ li#peopleNav.drawer ul li a {
     text-align: center;
     width: 40px;
 }
+
+#overlay {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+     background-image: url("/images/reader/overlay.png");
+}
+
+#overlay div {
+     width:300px;
+     margin: 100px auto;
+     padding:15px;
+     text-align:center;
+     color: #fff;
+}

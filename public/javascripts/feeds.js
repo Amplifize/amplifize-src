@@ -31,6 +31,19 @@ var loadManageFeeds = function() {
 	});
 };
 
+var markAllAsRead = function() {
+	enableOverlay();
+	
+	for(var i = 0; i < posts.length; i++) {
+		$.ajax({
+			url: "/post_users/"+posts[i]+"/read_state/0"
+		});
+	}
+
+	disableOverlay();
+	clearContent();
+}
+
 var setReadState = function(readState) {
 	$.ajax({
 		url: "/post_users/"+current_post.id+"/read_state/"+readState,
@@ -69,7 +82,7 @@ var upPost = function() {
 			document.title = "Amplifize | Give good content a voice ("+unread_count+")"
 		}
 	} else {
-		alert("No more posts");
+		clearContent();
 	}
 
 
@@ -190,7 +203,7 @@ var clearContent = function() {
 	$("#amplifizeContent").animate({scrollTop: 0});
 
 	$("#contentSummary").html(
-		"<h3>Looks like you've got no feeds to read</h3><p>"
+		"<h3>Looks like you've got no more posts to read</h3>"
 	);
 };
 
