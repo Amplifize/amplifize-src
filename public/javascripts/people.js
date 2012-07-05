@@ -1,16 +1,14 @@
 var loadManagePeople = function() {
-	alert("Coming soon!");
-
-	// $.ajax({
-		// url: "/follows/manage",
-		// success: function (data, textStatus, jqXHR) {
-			// $("#amplifizeContent").html(data);
-		// },
-		// error: function(xhr, text, error) {
-			// alert(error);
-		// },
-		// dataType: "html"
-	// });
+	$.ajax({
+		url: "/follows/manage",
+		success: function (data, textStatus, jqXHR) {
+			$("#amplifizeContent").html(data);
+		},
+		error: function(xhr, text, error) {
+			alert(error);
+		},
+		dataType: "html"
+	});
 };
 
 var customValidate = function(input) {

@@ -11,64 +11,20 @@ body {
 	height: 100%;
 }
 
-div#container {
-	position: relative;
-
-	height:auto !important; 
-	height:100%;
-
-	min-height:100%;
-	
-	width: 100%;
-}
-
 header { 
 	height: 60px;
 	margin: 0 auto;
 	width: 940px;
 }
 
-header > h1 {
-	display: inline;
-	float: left;
-	padding-left: 10px;
-}
-
-header > h1 > a,
-header > h1 > a:visited {
+h1 > a,
+h1 > a:visited {
 	text-decoration: none;
-	color: inherit;
+	color: #000000;
 }
 
-header > #navigation {
-	float: right;
-	
-	margin-top: 25px;
-	margin-right: 50px;
-}
-
-header > #navigation > a,
-header > #navigation > a:visited {
-	width: 75px;
-	height: 30px;
-
-	color: #424242;
-
-	display: block;
-	
+h1 > a:hover {
 	text-decoration: none;
-	text-align: center;
-	font-weight: bold;
-
-	padding-top: 10px;
-
-	margin-right: 10px;
-	float: left;
-}
-
-header > #navigation > a:hover {
-	background-color: #424242;
-	color: #fff;
 }
 
 #content {
@@ -76,17 +32,15 @@ header > #navigation > a:hover {
 	min-height: 500px;
 	margin: 0 auto;
 	padding: 10px;
-	
-	border-bottom: 1px solid #000000;
 }
 
 #footer {
-	width: 100%;
-	color: #999999;
-	text-align: center;
-	
-	padding-top: 10px;
-	padding-bottom: 10px;
+   width: 100%;
+   color: #999999;
+   text-align: center;
+   
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
 
 #footer > a,

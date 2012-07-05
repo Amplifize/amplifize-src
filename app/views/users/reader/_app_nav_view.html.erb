@@ -1,17 +1,19 @@
 <div id="amplifizeContentNavigation">
 	<% if "shares" == view then %>
 	<form name="selectFollows" id="selectFollows">
+		<label>Conversation filter</label>
 		<select>
-			<option value="all">All followees</option>
+			<option value="all">All conversations</option>
 			<% @followed.each do |followee| %>
-			<option value="<%= followee.id %>"><%=followee.display_name.nil? ? followee.email : followee.display_name %></option>
+			<option value="<%= followee.id %>"><%=followee.display_name.nil? ? followee.email : followee.display_name %>'s conversations</option>
 			<% end %>
 		</select>
 	</form>
 	<% else %>
 	<form name="selectTag" id="selectTag">
+		<label>Content filter</label>
 		<select>
-			<option value="all">All feeds</option>
+			<option value="all">All content</option>
 			<% @tags.each do |tag|%>
 			<option value="<%= tag.name %>"><%=tag.name%></option>	
 			<%end%>
@@ -19,13 +21,16 @@
 	</form>
 	<% end %>
 
-	<a href="#" onclick="downPost();">previous</a>
-	<a href="#" onclick="upPost();">next</a>
-	<a href="#" onclick="setReadState(1);">keep unread</a>
-	<% if "shares" == view then %>
-	<a href="#" id="commentNavItem">comment</a>
-	<% else %>
-	<a href="#" id="shareNavItem">share</a>
-	<% end %>
-	<a href="#" onclick="markAllAsRead();">Mark all posts as read</a>
+	<div id="menuOptions">
+		<a href="#" onclick="downPost();" class="navTab">previous content</a>
+		<a href="#" onclick="upPost();" class="navTab">next content</a>
+		<a href="#" onclick="setReadState(1);" class="navTab">keep unread</a>
+		<% if "shares" == view then %>
+		<a href="#" id="commentNavItem" class="navTab">comment</a>
+		<% else %>
+		<a href="#" onclick="markAllAsRead();" class="navTab">mark all read</a>
+		<a href="#" id="shareNavItem" class="navTab">share content</a>
+		<% end %>
+	</div>
+	<div style="clear:both;"></div>
 </div>

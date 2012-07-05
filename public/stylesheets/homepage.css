@@ -1,7 +1,11 @@
 #mainRight,
 #mainLeft {
 	float: left;
-	margin-top: 50px;
+	margin-top: 25px;
+}
+
+#mainLeft {
+	margin-right: 50px;
 }
 
 span.mainNo {
@@ -25,15 +29,11 @@ span.mainNo {
 	background-color: #424242;
 	color: #E9E9E9;
 	
-	line-height: 38px;
+	line-height: 31px;
 }
 
 div.mainUpsell {
 	padding: 10px;
 
 	font-size: 32px;
-}
-
-#mainRight > h2 {
-	margin-top: 12px;
 }

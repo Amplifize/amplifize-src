@@ -15,12 +15,8 @@ header > h1 > a:visited {
 }
 
 #appNav {
-	float: left;
-	margin: 0 auto;
-	
-	width: 600px;
-	
-	padding-top: 25px;
+	margin: 0 auto 10px;
+	width: 940px;
 }
 
 #addComment-modal-content {
@@ -28,10 +24,8 @@ header > h1 > a:visited {
 }
 
 #reader_content {
-	height: 100%;
-	width: 100%;
-	
-	overflow: auto;
+	width: 940px;
+	margin: 0 auto;
 }
 
 #amplifizeContent,
@@ -41,83 +35,10 @@ header > h1 > a:visited {
 
 	padding-left: 10px;
 	padding-right: 10px;
-	
-	margin-left: 175px;
-}
-
-#navigation {
-	float: left;
-	width: 175px;
-	height: 100%;
-}
-
-ul.drawers {
-	list-style: none;
-	font-size: 14pt;
-	margin: 0;
-	padding: 0;
-	
-	float: left;
-}
-
-ul.drawers li {
-	float: left;
-	width: 150px;
-	margin: 0;
-	padding: 5px;
-	
-	background-color: #E9E9E9;
-	text-align: center;
-	
-	border: 1px solid black;
-}
-
-ul.drawers li a,
-ul.drawers li a:visited {
-	padding: 10px 5px;
-	display: block;
-	text-decoration: none;
-	float: left;
-
-	color: inherit;
-}
-
-li#feedsNav.drawer ul,
-li#peopleNav.drawer ul {
-	margin: 0 10px;
-	padding: 0;
-	background-color: #999;
-	list-style: none;
-	
-	visibility: hidden;
-	display: none;
-}
-
-li#feedsNav.drawer ul li,
-li#peopleNav.drawer ul li {
-	font-size: 16px;
-	padding: 0;
-	margin: 0;
-	
-	border: 0;
-	
-	text-align: left;
-	
-	width: 140px;
-}
-
-li#feedsNav.drawer ul li a,
-li#peopleNav.drawer ul li a {
-	padding: 0;
 }
 
 #amplifizeContentNavigation {
 	font-size: 18px;
-	text-align: center;
-
-	float: right;
-
-	margin-right: 20px;
 }
 
 #feedRow {
@@ -162,15 +83,39 @@ li#peopleNav.drawer ul li a {
 
 #shareUnreadCount,
 #feedUnreadCount {
-	background-color: #FFFFFF;
-    border-radius: 40px 40px 40px 40px;
-    display: -moz-inline-box;
-    float: right;
+	float: right;
+	margin-left: 10px;
+	
+	background-color: #f00;
+    
     font-size: 12px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
+	color: #fff;
+    
+    height: 20px;
+    line-height: 20px;
     width: 40px;
+    
+    text-align: center;
+    
+}
+
+#selectTag {
+	width: 200px;
+	float: left;
+}
+
+#menuOptions {
+	float: right;
+}
+
+.navTab {
+	width: 50px;
+	margin-right: 10px;
+
+	text-align: center;
+	padding: 2px;
+
+	color: #000;
 }
 
 #overlay {
