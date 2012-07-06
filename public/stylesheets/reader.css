@@ -83,8 +83,8 @@ header > h1 > a:visited {
 
 #shareUnreadCount,
 #feedUnreadCount {
-	float: right;
 	margin-left: 10px;
+	padding: 5px;
 	
 	background-color: #f00;
     
@@ -93,13 +93,12 @@ header > h1 > a:visited {
     
     height: 20px;
     line-height: 20px;
-    width: 40px;
     
     text-align: center;
-    
 }
 
-#selectTag {
+#selectTag,
+#selectFollows {
 	width: 200px;
 	float: left;
 }

@@ -29,6 +29,8 @@ var loadManageFeeds = function() {
 		},
 		dataType: "html"
 	});
+	
+	return false;
 };
 
 var markAllAsRead = function() {
