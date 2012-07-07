@@ -36,4 +36,5 @@ class User < ActiveRecord::Base
       user_feeds
     }
   end
+
 end
