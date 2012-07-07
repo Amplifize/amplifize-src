@@ -48,6 +48,11 @@ class FeedsController < ApplicationController
     end
   end
 
+  # handles import from google reader
+  def import_google
+
+  end
+
   private
 
   def setupFeed(url, tags=nil)
@@ -61,9 +66,9 @@ class FeedsController < ApplicationController
       new_feed.users = []
       new_feed.tags = []
       new_feed.users.push(current_user)
-      new_feed.save
+    new_feed.save
     elsif current_user.feeds.include?(new_feed) then
-      return
+    return
     else
       new_feed.users.push(current_user)
       new_feed.save
@@ -73,9 +78,9 @@ class FeedsController < ApplicationController
     if not tags.nil? then
       tags.each do |tag|
         Tag.create(
-          :user_id => current_user.id,
-          :feed_id => new_feed.id,
-          :name => tag.strip
+        :user_id => current_user.id,
+        :feed_id => new_feed.id,
+        :name => tag.strip
         )
       end
     end
@@ -86,4 +91,5 @@ class FeedsController < ApplicationController
   def sendFeedForUpdate(feed)
     FeedUpdater.queue_feed_update(feed)
   end
+
 end

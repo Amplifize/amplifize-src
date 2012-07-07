@@ -1,0 +1,28 @@
+<%= form_tag("/feeds/import/import", :method => "post") do |f| %>
+<% if @unsubscribed.empty? %>
+You've already subscribed to all the imported feeds!
+<% else %>
+<%
+index = 0
+@unsubscribed.each do |subscription|
+%>
+<div style="border-bottom:1pt solid #000;padding:6px;">	
+	<%= check_box_tag("feeds[#{index}]",subscription[:url], !subscription[:subscribed], :disabled => subscription[:subscribed], :style => "size:15pt;") %>
+	<% if subscription[:subscribed] %><span>Already Subscribed!</span><%end%>
+	<div><strong><%= label_tag(subscription[:url], subscription[:title]) %></strong><br />
+	URL: <em><%=subscription[:url]%></em><br />
+	Tags: <% subscription[:labels].each { |label| %>
+		<%= label %>,
+	<% } %>
+	 <% subscription[:labels].each { |label| %>
+		<%= hidden_field_tag("tags[#{index}][]", label) %>
+	<% } %>
+	</div>
+</div>
+<%
+index = index+1
+%>
+<% end %>
+<%= submit_tag("Import") %>
+<% end %>
+<% end %>

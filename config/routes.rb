@@ -2,6 +2,9 @@ Salon::Application.routes.draw do
   match '/login' => 'user_sessions#new', :as => :login
   match '/logout' => 'user_sessions#destroy', :as => :logout
 
+  match '/oauth2/callback' => 'user_sessions#oauth2_response', :as => :oauth2_response
+  match '/oauth2/request/:service' => 'user_sessions#oauth2_request', :as => :oauth2_request
+
   match '/reader/:view' => 'users#reader'
   match '/reader/people' => 'users#reader', :as => :people
   match '/reader' => 'users#reader', :as => :reader
@@ -11,6 +14,9 @@ Salon::Application.routes.draw do
 
   match '/profile' => 'users#profile', :as => :profile
   match '/profile/update' => 'users#update', :as => :update_profile
+
+  match '/feeds/import/import' => 'import#import', :as => :import_import
+  match '/feeds/import/google' => 'import#google', :as => :import_google
 
   match '/feeds/import' => 'feeds#import', :as => :import
   match '/feeds/manage' => 'feeds#manage'

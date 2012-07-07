@@ -1,4 +1,28 @@
 class UserSessionsController < ApplicationController
+  
+  def oauth2_request
+    require_dependency 'oauth2_handler'
+    service = params[:service]
+    
+    if service.nil?
+      raise "No service specified"
+    end
+    
+    oauth = OAuth2_Handler.new(session)
+    url = oauth.get_auth_url(service.to_sym)
+    
+    redirect_to(url)
+  end
+  
+  
+  def oauth2_response
+    require_dependency 'oauth2_handler'
+    nonce = params[:state]
+    access_code = params[:code]
+    oauth = OAuth2_Handler.new(session)
+    oauth.authorize_token(nonce,access_code)
+  end
+  
   # GET /user_sessions/new
   # GET /user_sessions/new.xml
   def new
@@ -33,8 +57,10 @@ class UserSessionsController < ApplicationController
   # DELETE /user_sessions/1
   # DELETE /user_sessions/1.xml
   def destroy
-    @user_session = UserSession.find
+    @user_session = UserSession.find    
     @user_session.destroy
+
+    reset_session
 
     respond_to do |format|
       format.html { redirect_to(:root, :notice => 'Goodbye!') }
