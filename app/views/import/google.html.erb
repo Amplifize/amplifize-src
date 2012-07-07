@@ -1,0 +1,14 @@
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "googleImport.js" %>
+<% end %>
+
+<p>Imports from Google Reader</p>
+
+<% if @authorized %>
+
+<%= render 'import/select_imports_form' %>
+
+<% else %>
+<br />
+<input type="button" value="Authorize" onclick="openGoogleAuthWindow('<%= @authorize_url %>');return false;" />
+<% end %>

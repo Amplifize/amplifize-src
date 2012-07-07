@@ -86,6 +86,44 @@ class Feed < ActiveRecord::Base
     next_update_at
   end
 
+  def self.setup_feed(user, url, tags=nil)
+      new_feed = Feed.find_by_url(url)
+
+      if new_feed.nil? then
+        new_feed = Feed.new
+        new_feed.url = url
+        new_feed.title = url
+        new_feed.status = Feed::FEED_STATUS_NEW
+        new_feed.users = []
+        new_feed.tags = []
+      new_feed.users.push(user)
+      new_feed.save
+      elsif user.feeds.include?(new_feed) then
+      return
+      else
+        new_feed.users.push(user)
+        new_feed.save
+        Post.synchronize_posts_with_users(user.id, new_feed.id)
+      end
+
+      if not tags.nil? then
+        tags.each do |tag|
+          Tag.create(
+          :user_id => user.id,
+          :feed_id => new_feed.id,
+          :name => tag.strip
+          )
+        end
+      end
+
+      new_feed.queue_feed_update
+    end
+
+    def queue_feed_update
+      FeedUpdater.queue_feed_update(self)
+    end
+
+
   private
 
   def setup_feed_metadata

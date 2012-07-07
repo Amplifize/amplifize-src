@@ -56,4 +56,18 @@ Salon::Application.configure do
   config.action_mailer.delivery_method = :file
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
+  
+ 
+  # Configuration for OAuth2 token providers
+  config.oauth2 = {
+    :google => {
+      :amplifize_service_id => 1,
+      :client_id => "959866842432.apps.googleusercontent.com",
+      :client_secret => "cVhbsQAEkIVolv3F6XhQ9gDi",
+      :redirect_uri => "http://localhost:3000/oauth2/callback",
+      :scope => "http://www.google.com/reader/api/0/subscription/list",
+      :authorize_url => "https://accounts.google.com/o/oauth2/auth",
+      :token_url => "https://accounts.google.com/o/oauth2/token"
+    }
+  } 
 end
