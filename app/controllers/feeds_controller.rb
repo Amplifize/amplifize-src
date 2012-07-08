@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
   before_filter :require_user, :only => [:import, :create, :manage]
   def create
-    setupFeed(Feed.check_feed_url(params[:feed][:url]), params[:feed][:tags].squish().split(","))
+    Feed.setup_feed(current_user, Feed.check_feed_url(params[:feed][:url]), params[:feed][:tags].squish().split(","))
 
     respond_to do |format|
       format.js { render :json => '{"success": true}' }
@@ -33,12 +33,12 @@ class FeedsController < ApplicationController
       url = feed.attributes['xml_url']
 
       if not url.nil? then
-        setupFeed url
+        Feed.setup_feed(current_user, url)
       else
         tag = feed.attributes['title']
         feed.outlines.each do |feed_in_folder|
           url = feed_in_folder.attributes['xml_url']
-          setupFeed url, [tag]
+          Feed.setup_feed(current_user, url, [tag])
         end
       end
     end
@@ -46,50 +46,6 @@ class FeedsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(reader_url) }
     end
-  end
-
-  # handles import from google reader
-  def import_google
-
-  end
-
-  private
-
-  def setupFeed(url, tags=nil)
-    new_feed = Feed.find_by_url(url)
-
-    if new_feed.nil? then
-      new_feed = Feed.new
-      new_feed.url = url
-      new_feed.title = url
-      new_feed.status = Feed::FEED_STATUS_NEW
-      new_feed.users = []
-      new_feed.tags = []
-      new_feed.users.push(current_user)
-    new_feed.save
-    elsif current_user.feeds.include?(new_feed) then
-    return
-    else
-      new_feed.users.push(current_user)
-      new_feed.save
-      Post.synchronize_posts_with_users(current_user.id, new_feed.id)
-    end
-
-    if not tags.nil? then
-      tags.each do |tag|
-        Tag.create(
-        :user_id => current_user.id,
-        :feed_id => new_feed.id,
-        :name => tag.strip
-        )
-      end
-    end
-
-    sendFeedForUpdate(new_feed)
-  end
-
-  def sendFeedForUpdate(feed)
-    FeedUpdater.queue_feed_update(feed)
   end
 
 end
