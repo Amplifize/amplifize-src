@@ -1,0 +1,11 @@
+<div>
+	<h2>Uh oh, something went wrong!</h2>
+	<h3>An error has occurred.  We're not sure what happened, but we'll look into it.</h3>
+	<p>Here's some information that might help</p>
+	<p><em><%=@error_message%></em></p>
+	
+	<pre>
+		<%=@error.to_yaml%>
+		<%=@error.backtrace.to_yaml%>
+	</pre>
+</div>
