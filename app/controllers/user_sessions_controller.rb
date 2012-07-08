@@ -4,14 +4,17 @@ class UserSessionsController < ApplicationController
     require_dependency 'oauth2_handler'
     service = params[:service]
     
-    if service.nil?
-      raise "No service specified"
+    begin
+      oauth = OAuth2_Handler.new(session)
+      url = oauth.get_auth_url(service.to_sym)
+      redirect_to(url)
+    rescue => e
+      @error = e
+      @error_message = e.message
+      respond_to do |format|
+        format.html { render :template => 'general/error' }
+      end
     end
-    
-    oauth = OAuth2_Handler.new(session)
-    url = oauth.get_auth_url(service.to_sym)
-    
-    redirect_to(url)
   end
   
   
@@ -19,8 +22,13 @@ class UserSessionsController < ApplicationController
     require_dependency 'oauth2_handler'
     nonce = params[:state]
     access_code = params[:code]
-    oauth = OAuth2_Handler.new(session)
-    oauth.authorize_token(nonce,access_code)
+    
+    begin 
+      oauth = OAuth2_Handler.new(session)
+      oauth.authorize_token(nonce,access_code)
+    rescue => e
+      @error = e
+    end
   end
   
   # GET /user_sessions/new
