@@ -14,10 +14,9 @@ module Importer
     class <<self
       def load_feeds(user, oauth)
 
-        url = "http://www.google.com/reader/api/0/subscription/list"
-        query_string = "output=json"
-
-        data = oauth.get_for_url(:google, url, query_string)
+        url = "http://www.google.com/reader/api/0/subscription/listasdf?output=json"
+        #url = "http://www.cnn.com"
+        data = oauth.get_for_url(:google, url)
 
         feeds = user.feeds.map(&:url)
         subs = parse_data(data)
@@ -43,23 +42,33 @@ module Importer
 
       def parse_data(data)
         subscriptions = Array.new
-
-        obj = JSON.parse(data)
-        if obj['subscriptions']
-          obj['subscriptions'].each do |sub|
-            labels = nil
-            if sub['categories']
-              labels = Array.new
-              sub['categories'].each do |category|
-                labels << category['label']
-              end
-            end
-            subscriptions << {:url => sub['id'][5..-1], :title => sub['title'], :subscribed => false, :labels => labels}
+        
+        begin
+          obj = JSON.parse(data)
+          if obj['subscriptions'].nil? 
+             raise "Error parsing Google Reader data.  Subscription block not available." 
           end
+        rescue => e
+          raise GoogleDataParseError, "Error parsing Google Reader data.: #{e.message}"
+        end
+
+
+        obj['subscriptions'].each do |sub|
+          labels = nil
+          if sub['categories']
+            labels = Array.new
+            sub['categories'].each do |category|
+              labels << category['label']
+            end
+          end
+          subscriptions << {:url => sub['id'][5..-1], :title => sub['title'], :subscribed => false, :labels => labels}
         end
 
         subscriptions
       end
+    end
+
+    class GoogleDataParseError < StandardError
     end
   end
 end

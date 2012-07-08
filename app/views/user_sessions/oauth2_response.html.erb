@@ -1,3 +1,12 @@
-Authorization Done.
-
+<% if @error %>
+ <% if @error.is_a? OAuth2InvalidRequestError %>
+	<div>Something went wrong in the request. (Message: <%=@error.message%>)</div>
+ <% else %>
+ 	<div>You request did not complete.  <%=@error.message%></div>
+ <% end %>
+<% else %>
+<div>Your authorization is complete!</div>
+<% end %>
+<div>
 <input type="button" value="Close Window" onclick="window.opener.location.reload(); window.close();">
+</div>
