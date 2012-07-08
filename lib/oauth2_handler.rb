@@ -94,12 +94,12 @@ class OAuth2_Handler
       curl.on_success do |c|
         content = c.body_str
       end
-
-      curl.on_complete do |c|
-      end
     end
     sender.http_get
 
+    if (content.nil?)
+      raise OAuth2HttpError.new("No data received", sender.response_code)
+    end
     content
   end
 
@@ -130,21 +130,27 @@ class OAuth2_Handler
     end
 
     sender.http_post(post_data)
-    if !content.nil?
+
+    raise OAuth2HttpError.new("No data received", sender.response_code) unless not content.nil?
+
+    begin
       response_object = JSON.parse(content)
-      if not response_object['access_token'].nil?
-        access_token = response_object['access_token']
 
-        expire_time = nil
-        if not response_object['expires_in'].nil?
-          expire_time = Time.now + response_object['expires_in'].seconds-300.seconds
-        end
-        return {:access_token => access_token, :expire_time => expire_time}
+      if response_object.nil? || response_object['access_token'].nil?
+        raise "Error parsing OAuth2 response. Token not available in response."
       end
+    rescue => e
+      raise OAuth2TokenError, "Error getting access token.  #{e.message}"
     end
-    
-    raise "Error getting access token"
 
+    access_token = response_object['access_token']
+
+    expire_time = nil
+    if not response_object['expires_in'].nil?
+      expire_time = Time.now + response_object['expires_in'].seconds-300.seconds
+    end
+
+    {:access_token => access_token, :expire_time => expire_time}
   end
 
   def get_access_token(service)
@@ -193,6 +199,16 @@ class OAuth2_Handler
     @services[service]
   end
 
+end
+
+class OAuth2HttpError < StandardError
+  def initialize(message,code)
+    super(message)
+    @response_code = code
+  end
+end
+
+class OAuth2TokenError < StandardError
 end
 
 class OAuth2ServiceNotConfiguredError < StandardError

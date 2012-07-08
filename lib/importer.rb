@@ -14,8 +14,7 @@ module Importer
     class <<self
       def load_feeds(user, oauth)
 
-        url = "http://www.google.com/reader/api/0/subscription/listasdf?output=json"
-        #url = "http://www.cnn.com"
+        url = "http://www.google.com/reader/api/0/subscription/list?output=json"
         data = oauth.get_for_url(:google, url)
 
         feeds = user.feeds.map(&:url)
