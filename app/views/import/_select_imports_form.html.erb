@@ -1,6 +1,6 @@
 <%= form_tag("/feeds/import/import", :method => "post") do |f| %>
 <% if @unsubscribed.empty? %>
-<h3>You've already subscribed to all the imported feeds!</h3>
+<h3>There's nothing to import!  You've either already imported all feeds or you have no Google Reader subscriptions</h3>
 <% else %>
 
 <h4>Feeds To Import</h4>
