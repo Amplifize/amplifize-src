@@ -20,14 +20,13 @@ class UserSessionsController < ApplicationController
   
   def oauth2_response
     require_dependency 'oauth2_handler'
-    nonce = params[:state]
-    access_code = params[:code]
-    
-    begin 
+
+    begin
       oauth = OAuth2_Handler.new(session)
-      oauth.authorize_token(nonce,access_code)
+      oauth.authorize_token(params)
     rescue => e
       @error = e
+      @error_message = e.message
     end
   end
   

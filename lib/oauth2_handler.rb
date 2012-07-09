@@ -60,13 +60,23 @@ class OAuth2_Handler
   # Calls the OAuth2 auth token's provider to
   # authorize the request and get a private
   # access token used for requests to a resource
-  def authorize_token(request_id,auth_token)
-    service = @requests[request_id]
-
-    if service.nil?
+  def authorize_token(request)
+    
+    request_id = request[:state]
+    auth_token = request[:code]
+    error = request[:error]
+    
+    puts auth_token
+    
+    if auth_token.nil? || error
+      raise OAuth2AccessDeniedError.new("No authorization token provided", error)
+    end
+    
+    if request_id.nil? || @requests[request_id].nil?
       raise OAuth2InvalidRequestError, "Callback request ID is invalid"
     end
-
+    
+    service = @requests[request_id]
     @services[service] = request_access_token(service,auth_token)
     @requests.delete(request_id)
   end
@@ -131,8 +141,10 @@ class OAuth2_Handler
 
     sender.http_post(post_data)
 
-    raise OAuth2HttpError.new("No data received", sender.response_code) unless not content.nil?
-
+    if content.nil?
+      raise OAuth2HttpError.new("No data received", sender.response_code)
+    end
+    
     begin
       response_object = JSON.parse(content)
 
@@ -202,9 +214,18 @@ class OAuth2_Handler
 end
 
 class OAuth2HttpError < StandardError
+  attr :response_code
   def initialize(message,code)
     super(message)
     @response_code = code
+  end
+end
+
+class OAuth2AccessDeniedError < StandardError
+  attr :error_code
+  def initialize(message,error_code)
+    super(message)
+    @error_code = error_code
   end
 end
 
