@@ -64,7 +64,7 @@ Salon::Application.configure do
       :amplifize_service_id => 1,
       :client_id => "959866842432.apps.googleusercontent.com",
       :client_secret => "cVhbsQAEkIVolv3F6XhQ9gDi",
-      :redirect_uri => "http://localhost:3000/oauth2/callback",
+      :redirect_uri => "http://amplifize.com/oauth2/callback",
       :scope => "http://www.google.com/reader/api/0/subscription/list",
       :authorize_url => "https://accounts.google.com/o/oauth2/auth",
       :token_url => "https://accounts.google.com/o/oauth2/token"
