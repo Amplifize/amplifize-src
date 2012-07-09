@@ -35,8 +35,8 @@ Salon::Application.configure do
   config.oauth2 = {
     :google => {
       :amplifize_service_id => 1,
-      :client_id => "959866842432.apps.googleusercontent.com",
-      :client_secret => "cVhbsQAEkIVolv3F6XhQ9gDi",
+      :client_id => "243455842448-1l1m38cdobel9cvntms6i0h263vhbvbt.apps.googleusercontent.com",
+      :client_secret => "LJWC1V1I1yi9Xe-BdfxRwzZJ",
       :redirect_uri => "http://localhost:3000/oauth2/callback",
       :scope => "http://www.google.com/reader/api/0/subscription/list",
       :authorize_url => "https://accounts.google.com/o/oauth2/auth",
