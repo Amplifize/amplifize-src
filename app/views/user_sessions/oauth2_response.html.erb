@@ -1,6 +1,19 @@
 <% if @error %>
+		<pre>
+		<%=@error.to_yaml%>
+		<%=@error.backtrace.to_yaml%>
+	</pre>
+
+ <h3>Something went wrong...</h3>
  <% if @error.is_a? OAuth2InvalidRequestError %>
 	<div>Something went wrong in the request. (Message: <%=@error.message%>)</div>
+ <% elsif @error.is_a? OAuth2AccessDeniedError %>
+	<% if @error.error_code == 'access_denied' %>
+		The service responded with "Access Denied".  This probably means you 
+		did not give us permission to access your data.  Please try again.
+	<% else %>
+		<div>You request did not complete.  <%=@error.message%></div>
+	<% end %>
  <% else %>
  	<div>You request did not complete.  <%=@error.message%></div>
  <% end %>
@@ -8,5 +21,5 @@
 <div>Your authorization is complete!</div>
 <% end %>
 <div>
-<input type="button" value="Close Window" onclick="window.opener.location.reload(); window.close();">
+	<input type="button" value="Close Window" onclick="window.opener.location.reload(); window.close();">
 </div>
