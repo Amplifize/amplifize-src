@@ -67,6 +67,8 @@ class UsersController < ApplicationController
   def unsubscribe
     @feed = Feed.find(params[:feed_id])
     
+    Tag.delete_all("user_id=#{current_user.id} AND feed_id=#{params[:feed_id]}")
+
     @feed.posts.each do |post|
       current_user.posts.delete(post)
     end
