@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "feeds.js", "addShare.js", "addTags.js", "deleteTags.js" %>
+	<%= javascript_include_tag "feeds.js", "addTags.js", "deleteTags.js" %>
 	<script type="text/javascript">
 		var posts = <%= @posts %>;
 		$(document).ready(function() {
@@ -18,13 +18,16 @@
 
 <%= render "users/reader/content_view.html.erb", :view => "feeds" %>
 
-<div id="addShares-modal-content">
-	<div id="addShares-modal-title">Share post</div>
-	<div id="addShares-modal-data">
+<div id="addShare-modal-content" class="modal hide">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Share content</h3>
+	</div>
+	<div id="modal-body" class="modal-body-style">
 		<form method="POST" action="/shares/add" data-remote="true" id="addShareForm">
 			<input type="hidden" value="" id="sharePostId" name="postId" />
-			<label for="summary">Summary (required)</label><br/>
-			<textarea name="summary" id="summary" cols="20"></textarea><br/>
+			<label for="summary">Comment (required)</label>
+			<textarea name="summary" id="summary" style="width: 500px; height: 51px;"></textarea><br/>
 			<input type="submit" value="Share" />
 		</form>
 	</div>

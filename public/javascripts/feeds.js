@@ -251,7 +251,17 @@ $(document).ready(function() {
 	$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
 		alert(status);
 	});
-	
+
+	$('form#addShareForm').bind("ajax:success", function(data, status, xhr) {
+		$("#summary").val();
+		$('#addShare-modal-content').modal('hide')
+	});
+
+	$('form#addShareForm').bind("ajax:failure", function(data, status, xhr) {
+		alert(status);
+	});
+
+
 	//$('form#importForm').bind("ajax:success", function(data, status, xhr) {
 	//	$('#importFeed-modal-content').modal('hide')
 	//});
