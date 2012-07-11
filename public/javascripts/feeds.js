@@ -10,7 +10,7 @@ var loadManageFeeds = function() {
 			
 			$('form#new_tag').bind("ajax:success", function(status, data, xhr) {
 				$("#tag_name").val();
-				$.modal.close();
+				$("#addTags-modal-content").modal("hide");
 		
 				var ul = $("#feed_"+data.feed_id+" .manageFeedRowTags");
 				for(var i =0; i < data.tags.length; i++) {
@@ -93,7 +93,7 @@ var upPost = function() {
 
 var addTags = function(feedId) {
 	$("#tag_feed_id").val(feedId);
-	AddTagsOverlay.init();
+	$("#addTags-modal-content").modal();
 };
 
 var deleteTags = function(feedId) {
@@ -106,7 +106,7 @@ var deleteTags = function(feedId) {
 				deleteDiv.append('<a href="#" id="delete_popup_tag_'+data.tags[i].tag.id+'" onclick=deleteTagFromFeed('+ data.tags[i].tag.id +'); return false;">'+data.tags[i].tag.name+'</p>');
 			}
 
-			DeleteTagsOverlay.init();	
+			$("#deleteTags-modal-content").modal();
 		},
 		error: function(xhr, text, error) {
 			alert(error);
@@ -133,7 +133,7 @@ var deleteTagFromFeed = function(tagId) {
 }
 
 var closeDeleteTagsOverlay = function() {
-	$.modal.close();
+	$("#deleteTags-modal-content").modal("hide");
 }
 
 var updatePostContent = function(postId) {		
@@ -261,6 +261,10 @@ $(document).ready(function() {
 		alert(status);
 	});
 
+
+	$('#addShare-modal-content').bind('show', function () {
+	  $('#summary').focus();
+	});
 
 	//$('form#importForm').bind("ajax:success", function(data, status, xhr) {
 	//	$('#importFeed-modal-content').modal('hide')

@@ -92,6 +92,8 @@ class UsersController < ApplicationController
       render_view = 'users/reader/shares.html.erb'
     when "people"
       @my_follows = Follow.find_all_by_user_id(current_user.id)
+      @posts_unread_count = current_user.feeds_unread_count
+      @shares_unread_count = current_user.shares_unread_count
       render_view = 'users/reader/people.html.erb'
     else
       @feed = Feed.new

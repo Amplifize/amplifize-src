@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "feeds.js", "addTags.js", "deleteTags.js" %>
+	<%= javascript_include_tag "feeds.js" %>
 	<script type="text/javascript">
 		var posts = <%= @posts %>;
 		$(document).ready(function() {
