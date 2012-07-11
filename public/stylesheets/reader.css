@@ -136,3 +136,8 @@ header > h1 > a:visited {
      text-align:center;
      color: #fff;
 }
+
+.modal-body-style {
+	margin-left: 17px;
+	padding-bottom: 10px;
+}

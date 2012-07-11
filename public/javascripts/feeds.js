@@ -211,8 +211,6 @@ var clearContent = function() {
 
 
 $(document).ready(function() {
-	$("li#feedsNav.drawer ul").css("display", "block").css("visibility", "visible");
-
 	if(posts.length > 0) {
 		//need to do this to prevent firefox from auto searching on typing
 		jQuery(document).bind('keydown', 'j', function(evt) {
@@ -245,4 +243,20 @@ $(document).ready(function() {
 	}
 
 	updatePostContent(posts[position]);
+
+	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
+		$('#addFeed-modal-content').modal('hide')
+	});
+
+	$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
+		alert(status);
+	});
+	
+	//$('form#importForm').bind("ajax:success", function(data, status, xhr) {
+	//	$('#importFeed-modal-content').modal('hide')
+	//});
+
+	//$('form#importForm').bind("ajax:failure", function(data, status, xhr) {
+	//	alert(status);
+	//});
 });
