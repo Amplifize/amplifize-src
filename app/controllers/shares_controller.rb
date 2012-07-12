@@ -35,7 +35,9 @@ class SharesController < ApplicationController
           :comments => {
             :include => :user
           },
-          :post => {},
+          :post => {
+            :include => :feed
+          },
           :user => {}
         }
       )}

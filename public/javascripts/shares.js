@@ -90,12 +90,19 @@ var updateShareContent = function(shareId) {
 			success: function(data, textStatus, jqXHR) {
 				var current_post = data.share.post;
 				current_share = data.share;
-				
+
 				$("#comment_share_id").val(current_share.id);
-				
+
+				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
-				$("#contentSummary").html(current_share.summary);
+				$("#conversationStarter").html(current_share.summary);
+				if(current_post.author) {
+					$("#contentAuthor").html("Written by: "+current_post.author+" on ");
+				} else {
+					$("#contentAuthor").html("");
+				}
+				$("#contentSummary").html(current_post.content);
 				$("#commentThread").html("");
 				
 				$("#sharedBy").html(current_share.user.email);
@@ -107,6 +114,7 @@ var updateShareContent = function(shareId) {
 					$("#commentThread").append(html);
 				}
 	
+				$("#amplifizeContent").animate({scrollTop: 0});
 				setReadState(0);
 			},
 			error: function(xhr, text, error) {
@@ -152,5 +160,20 @@ $(document).ready(function() {
 		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 	}
 
-	updateShareContent(shares[position]); 
+	updateShareContent(shares[position]);
+
+	$('form#new_comment').bind("ajax:success", function(status, data, xhr) {
+		$("#addComment-modal-content").modal("hide");
+		$("#comment_text").val('');
+
+		var comment = data.comment;
+		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
+		var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+'</p></div>';
+		$("#commentThread").append(html);
+	});
+
+	$('form#new_comment').bind("ajax:failure", function(data, status, xhr) {
+		alert(status);
+	});
+
 });

@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "shares.js", "commentModal.js" %>
+	<%= javascript_include_tag "shares.js" %>
 	<script type="text/javascript">
 		var shares = <%= @shares %>;
 		$(document).ready(function() {
@@ -18,9 +18,12 @@
 
 <%= render "users/reader/content_view.html.erb", :view => "shares" %>
 
-<div id="addComment-modal-content">
-	<div id="addComment-modal-title">Comment</div>
-	<div id="addComment-modal-data">
+<div id="addComment-modal-content" class="modal hide">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Continue the conversation</h3>
+	</div>
+	<div id="modal-body" class="modal-body-style">
 		<%= render 'comments/form' %>
 	</div>
 </div>

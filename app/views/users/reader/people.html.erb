@@ -14,19 +14,21 @@
 
 <div id="findPeopleContent">
 	<h3>Find people to follow</h3>
-	<!--
+	
 	<div id="findByAddressBook">
 		<div class="addressBookOption">
-			<a href="/oauth_consumers/google"><%= image_tag("people/gmail_logo.png", :size => "120x60", :alt => "Find GMail contacts on amplifize") %></a>
+			<a href="/oauth_consumers/google">GMail Contacts</a> <!-- <%= image_tag("people/gmail_logo.png", :size => "120x60", :alt => "Find GMail contacts on amplifize") %> -->
 		</div>
+		<!--
 		<div class="addressBookOption">
 			<a href="/oauth_consumers/twitter">Twitter</a>
 		</div>
+		-->
 		<div class="addressBookOption">
 			<a href="/oauth_consumers/facebook">Facebook</a>
 		</div>
 	</div>
-	-->
+	
 	<%= render "users/search_form" %>
 	<div id="userSearchResultsDiv">
 		<p id="userSearchResults">Results<p>

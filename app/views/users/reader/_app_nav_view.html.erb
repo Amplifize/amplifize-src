@@ -5,7 +5,7 @@
 		<select>
 			<option value="all">All conversations</option>
 			<% @followed.each do |followee| %>
-			<option value="<%= followee.id %>"><%=followee.display_name.nil? ? followee.email : followee.display_name %>'s conversations</option>
+			<option value="<%= followee.id %>"><%= followee.display_name.nil? ? followee.email : followee.display_name %>'s conversations</option>
 			<% end %>
 		</select>
 	</form>
@@ -15,25 +15,30 @@
 		<select>
 			<option value="all">All content</option>
 			<% @tags.each do |tag|%>
-			<option value="<%= tag.name %>"><%=tag.name%></option>	
+			<option value="<%= tag.name %>"><%= tag.name%></option>
 			<%end%>
 		</select>
 	</form>
 	<% end %>
 
 	<div id="menuOptions">
-		<a href="#" onclick="downPost();" class="navTab">previous content</a>
-		<a href="#" onclick="upPost();" class="navTab">next content</a>
-		<a href="#" onclick="setReadState(1);" class="navTab">keep unread</a>
 		<% if "shares" == view then %>
-		<a href="#" id="commentNavItem" class="navTab">comment</a>
+			<a href="#" onclick="downPost();" class="navTab">previous conversation</a>
+			<a href="#" onclick="upPost();" class="navTab">next conversation</a>
+			<a href="#" onclick="setReadState(1);" class="navTab">keep unread</a>
+	
+			<a class="navTab" href="#addComment-modal-content" data-toggle="modal">comment</a>
 		<% else %>
-		<a href="#" onclick="markAllAsRead();" class="navTab">mark all read</a>
-		<a href="#addShare-modal-content" data-toggle="modal" class="navTab">share content</a>
-		<br/>
-		<a href="#importFeed-modal-content" data-toggle="modal" class="btn" style="float:right;">Add feeds from Google Reader</a>
-		<a href="#" onclick="loadManageFeeds();" class="btn" style="float:right;">Manage sources</a>
-		<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="float:right;">Add content source</a>
+			<a href="#" onclick="downPost();" class="navTab">previous content</a>
+			<a href="#" onclick="upPost();" class="navTab">next content</a>
+			<a href="#" onclick="setReadState(1);" class="navTab">keep unread</a>
+	
+			<a href="#" onclick="markAllAsRead();" class="navTab">mark all read</a>
+			<a href="#addShare-modal-content" data-toggle="modal" class="navTab">share content</a>
+			<br/>
+			<!--<a href="#importFeed-modal-content" data-toggle="modal" class="btn" style="float:right;">Add feeds from Google Reader</a>-->
+			<a href="#" onclick="loadManageFeeds();" class="btn" style="float:right;">Manage sources</a>
+			<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="float:right;">Add content source</a>
 		<% end %>
 	</div>
 	<div style="clear:both;"></div>

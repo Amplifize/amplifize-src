@@ -1,11 +1,13 @@
 <div id="amplifizeContent">
+	<% if "shares" == view then %>
+		Shared by: <span id="sharedBy"></span> who says: <div id="conversationStarter"></div>
+		<hr/>
+	<% end %>
+
 	<div id="feedRow">
 		<span id="feedTitle"></span>
 	</div>
 	<div id="contentRow">
-		<% if "shares" == view then %>
-			Shared by: <span id="sharedBy"></span>
-		<% end %>
 		<span id="contentTitle"></span>
 		<span id="contentAuthor"></span><span id="contentPublishDate"></span>
 	</div>
