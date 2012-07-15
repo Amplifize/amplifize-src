@@ -12,31 +12,36 @@
 	</script>
 <% end %>
 
-<div id="findPeopleContent">
-	<h3>Find people to follow</h3>
-	
-	<div id="findByAddressBook">
-		<div class="addressBookOption">
-			<a href="/oauth_consumers/google">GMail Contacts</a> <!-- <%= image_tag("people/gmail_logo.png", :size => "120x60", :alt => "Find GMail contacts on amplifize") %> -->
-		</div>
-		<!--
-		<div class="addressBookOption">
-			<a href="/oauth_consumers/twitter">Twitter</a>
-		</div>
-		-->
-		<div class="addressBookOption">
-			<a href="/oauth_consumers/facebook">Facebook</a>
-		</div>
+<% content_for :appNav do %>
+	<a href="#findPeople-modal-content" data-toggle="modal" class="btn">Find people to subscribe to</a>
+	<hr/>
+<% end %>
+
+<div id="subscribedTo">
+	<h3>You are subscribed to:</h3>
+	<% @subscribedTo.each do |subscriber| %>
+	<div id="subscriber_<%= subscriber.id %>" class="subscribedToRow">
+		<span class="subscriberName"><%= subscriber.display_name.nil? ? subscriber.email : subscriber.display_name %></span>
+		<%= link_to "Unsubscribe", unsubscribe_person_path(subscriber.id), :remote => true, :class => "unsubscribe" %>
 	</div>
-	
-	<%= render "users/search_form" %>
-	<div id="userSearchResultsDiv">
-		<p id="userSearchResults">Results<p>
-		<p id="emptyUserSearchResult"></p>
-		<table id="userSearchResultsTable">
-			<tbody>
-				
-			</tbody>
-		</table>
+	<% end %>
+</div>
+
+<div id="findPeople-modal-content" class="modal hide">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Find people to follow</h3>
+	</div>
+	<div id="modal-body" class="modal-body-style">
+		<%= render "users/search_form" %>
+		<div id="userSearchResultsDiv">
+			<p id="userSearchResults">Results<p>
+			<p id="emptyUserSearchResult"></p>
+			<table id="userSearchResultsTable">
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

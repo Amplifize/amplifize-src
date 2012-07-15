@@ -4,10 +4,12 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
+    @posts_unread_count = current_user.feeds_unread_count
+    @shares_unread_count = current_user.shares_unread_count
+
     render :layout => 'reader_layout'
   end
 
-  # GET /users/1/edit
   def update
     @user = current_user
    
@@ -17,19 +19,9 @@ class UsersController < ApplicationController
       else
         format.js { render :json => {:status => :unprocessable_entity, :errors => @user.errors } }
       end
-      
-      # if @user.update_attributes(params[:user])
-        # format.html { redirect_to(:profile, :notice => 'Update was successful.') }
-        # format.xml  { head :ok }
-      # else
-        # format.html { render :action => "profile", :layout => 'reader_layout' }
-        # format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      # end
     end
   end
 
-  # POST /users
-  # POST /users.xml
   def create
     @user = User.new(params[:user])
 
@@ -44,24 +36,6 @@ class UsersController < ApplicationController
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end  
-  end
-
-  def edit
-    #TODO: This is all scaffold code
-    @user = User.find(params[:id])
-  end
-
-
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(root_url) }
-      format.xml  { head :ok }
-    end
   end
 
   def unsubscribe
@@ -91,7 +65,7 @@ class UsersController < ApplicationController
       @followed = User.find_by_sql ['select users.* from users where id in (select follows from follows where user_id = ?)', current_user.id]
       render_view = 'users/reader/shares.html.erb'
     when "people"
-      @my_follows = Follow.find_all_by_user_id(current_user.id)
+      @subscribedTo = User.find_by_sql ['select users.* from users join follows on users.id = follows.follows where user_id = ?', current_user.id]
       @posts_unread_count = current_user.feeds_unread_count
       @shares_unread_count = current_user.shares_unread_count
       render_view = 'users/reader/people.html.erb'
