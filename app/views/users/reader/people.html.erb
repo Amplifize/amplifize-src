@@ -22,7 +22,12 @@
 	<% @subscribedTo.each do |subscriber| %>
 	<div id="subscriber_<%= subscriber.id %>" class="subscribedToRow">
 		<span class="subscriberName"><%= subscriber.display_name.nil? ? subscriber.email : subscriber.display_name %></span>
-		<%= link_to "Unsubscribe", unsubscribe_person_path(subscriber.id), :remote => true, :class => "unsubscribe" %>
+		<%= link_to "Unsubscribe", unsubscribe_person_path(subscriber.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+subscriber.id.to_s %>
+		<script type="text/javascript">
+			$('#unsubscribe_<%= subscriber.id %>').bind("ajax:success", function(status, data, xhr) {
+				$("#subscriber_"+data.user_id).remove();
+			});
+		</script>
 	</div>
 	<% end %>
 </div>
