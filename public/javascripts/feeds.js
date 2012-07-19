@@ -263,7 +263,8 @@ $(document).ready(function() {
 
 
 	$('#addShare-modal-content').bind('show', function () {
-	  $('#summary').focus();
+	  $('#summary').val('');
+	  setTimeout(function(){$("#summary").focus();}, 250);
 	});
 
 	//$('form#importForm').bind("ajax:success", function(data, status, xhr) {
