@@ -94,6 +94,8 @@ var upPost = function() {
 var addTags = function(feedId) {
 	$("#tag_feed_id").val(feedId);
 	$("#addTags-modal-content").modal();
+	$('#tag_name').val('');
+	setTimeout(function(){$("#tag_name").focus();}, 250);
 };
 
 var deleteTags = function(feedId) {
