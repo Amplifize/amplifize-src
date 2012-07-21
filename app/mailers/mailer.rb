@@ -5,5 +5,11 @@ class Mailer < ActionMailer::Base
     @User = user
     mail(:to => user.email, :subject => "Welcome to Amplifize!")
   end
+
+  def new_follower_email(user, follower)
+    @User = user
+    @Follower = follower
+    mail(:to => user.email, :subject => "You have a new follower on Amplifize!")
+  end
   
 end
