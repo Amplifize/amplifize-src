@@ -24,9 +24,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @invite_id = params[:invite_id]
 
     respond_to do |format|
       if @user.save
+        Invite.handle_new_user(@invite_id, @user)
         Mailer.delay.new_user_email(@user)
         
         format.html { redirect_to(:reader, :notice => 'Welcome to amplifize') }

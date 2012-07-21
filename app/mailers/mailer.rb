@@ -12,4 +12,9 @@ class Mailer < ActionMailer::Base
     mail(:to => user.email, :subject => "You have a new follower on Amplifize!")
   end
   
+  def invite_friend_email(invite)
+    @Invite = invite
+    mail(:to => invite.email, :subject => "#{@Invite.user.visible_name} has invited you to join Amplifize!")
+  end
+  
 end

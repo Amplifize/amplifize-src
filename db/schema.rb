@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120616060711) do
+ActiveRecord::Schema.define(:version => 20120721043345) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(:version => 20120616060711) do
   end
 
   add_index "follows", ["user_id"], :name => "follows_user_id_fk"
+
+  create_table "invites", :force => true do |t|
+    t.string   "uid"
+    t.string   "email"
+    t.text     "message"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invites", ["uid"], :name => "index_invites_on_uid", :unique => true
 
   create_table "post_users", :force => true do |t|
     t.integer  "post_id"

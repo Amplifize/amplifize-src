@@ -1,0 +1,9 @@
+<form id="inviteFriendsForm" method="POST" action="/invite/create" data-remote="true">
+	<label for="email">Email: </label>
+	<input type="email" id="invite_email" name="email" oninput="customValidate(this);" />
+	<!--<input type="button" value="Add" />-->
+	<label for="message">Personal Message:</label>
+	<textarea id="invite_message" name="message"></textarea>
+	<br />
+	<input type="submit" value="Invite" />	
+</form>

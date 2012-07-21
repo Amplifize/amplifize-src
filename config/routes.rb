@@ -38,13 +38,17 @@ Salon::Application.routes.draw do
   #share actions
   match '/shares/add/' => 'shares#add', :as => :shares_add
   match '/shares/follows/:followsId' => 'shares#byFollows'
+  
+  #invite actions
+  match '/invite/create' => 'invite#create', :as => :invite_create
+  match '/invite/respond/:invite_id' => 'invite#respond', :as => :invite_respond
 
   match '/about' => 'home#about', :as => :about
   match '/contact' => 'home#contact', :as => :contact
   match '/terms' => 'home#terms', :as => :terms
   match '/faq' => 'home#faq', :as => :faq
 
-  resources :users, :user_sessions, :feeds, :posts, :shares, :comments, :tags
+  resources :users, :user_sessions, :feeds, :posts, :shares, :comments, :tags, :invites
 
   root :to => "home#index"
 

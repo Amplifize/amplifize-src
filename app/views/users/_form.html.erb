@@ -1,4 +1,9 @@
 <%= form_for(@user) do |f| %>
+
+  <% if not @invite_id.nil? %>
+  <%= hidden_field_tag(:invite_id, @invite_id) %>
+  <% end %>
+  
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>

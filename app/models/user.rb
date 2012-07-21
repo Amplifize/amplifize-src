@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     posts.unread.rolling_window.count
   end
   
+  def visible_name
+    display_name.nil? ? email : display_name
+  end
+  
   def feeds_with_unread
     user_feeds = feeds
     counts = PostUser.joins(:post => [:feed]).where(:user_id => id, :read_state => 1).group(:feed_id).count

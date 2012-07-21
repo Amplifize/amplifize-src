@@ -1,11 +1,7 @@
 class FollowsController < ApplicationController
   def add
-    relationship = Follow.find_by_user_id_and_follows(current_user.id, params[:user_id])
-    
-    if relationship.nil? then
-      follow = Follow.create(:user_id => current_user.id, :follows => params[:user_id]) 
-      Mailer.delay.new_follower_email(User.find_by_id(params[:user_id]), current_user)
-      
+    user_to_follow = User.find_by_id(params[:user_id])
+    if Follow.follow_user(current_user, user_to_follow) then
       respond_to do |format|
         format.js { render :json => "{\"success\": true}" }
       end

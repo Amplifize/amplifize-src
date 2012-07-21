@@ -14,6 +14,7 @@
 
 <% content_for :appNav do %>
 	<a href="#findPeople-modal-content" data-toggle="modal" class="btn">Find people to subscribe to</a>
+	<a href="#inviteFriends-modal-content" data-toggle="modal" class="btn">Invite Friends to join Amplifize</a>
 	<hr/>
 <% end %>
 
@@ -50,3 +51,20 @@
 		</div>
 	</div>
 </div>
+
+
+<div id="inviteFriends-modal-content" class="modal hide">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Invite Friends to join Amplifize</h3>
+	</div>
+	<div id="inviteFriends-modal-body" class="modal-body-style">
+		<p>To invite your friends to start sharing on Amplifize, simply enter their email address below.  You can also 
+			include a short, personalized message.</p>
+		<%= render "users/invite_form" %>
+	</div>
+	<div id="inviteFriends-response-modal-body" class="modal-body-style" class="hide">
+		<p>Done! Your friends have been invited.</p>
+	</div>	
+</div>
+
