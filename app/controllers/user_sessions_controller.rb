@@ -24,6 +24,8 @@ class UserSessionsController < ApplicationController
     begin
       oauth = OAuth2_Handler.new(session)
       oauth.authorize_token(params)
+      
+      redirect_to(url_for import_google_path)
     rescue => e
       @error = e
       @error_message = e.message

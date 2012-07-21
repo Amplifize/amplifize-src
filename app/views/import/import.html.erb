@@ -1,6 +1,21 @@
-<p>Imports Feeds</p>
-<% if @success %>
-<strong>Your import was successful.  Go to Manage Feeds.</strong>
-<% else %>
-Please use a proper feed importer
+<h2>Import Feeds</h2>
+<p>Select a service to import from below</p>
+
+<div>
+<h3>From Google Reader</h3>
+<p>Import your subscriptions from Google Reader.  <%= link_to(import_google_path) do %>Get started now<% end %>!</p>
+</div>
+<div>
+<h3>From OPML</h3>
+<p>Import your subscriptions you've exported from another service as OPML.</p>
+<%= form_for :import, :url => :import_opml, :html => {:multipart => true, :id => "importForm"} do |f| %>
+  <div class="formField">
+  	<%= f.label "Select an OPML export file" %>
+  	<%= f.file_field :opml_file %>
+  </div>
+  <div class="formField">
+  	<%= f.submit "Import from OPML" %>
+  </div>
 <% end %>
+
+</div>

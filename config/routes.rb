@@ -15,11 +15,13 @@ Salon::Application.routes.draw do
   match '/profile' => 'users#profile', :as => :profile
   match '/profile/update' => 'users#update', :as => :update_profile
 
-  match '/feeds/import/import' => 'import#import', :as => :import_import
+  match '/feeds/import' => 'import#import', :as => :import
+  match '/feeds/import/import' => 'import#do_import', :as => :import_import
   match '/feeds/import/google' => 'import#google', :as => :import_google
+  match '/feeds/import/opml' => 'import#opml', :as => :import_opml
 
-  match '/feeds/import' => 'feeds#import', :as => :import
-  match '/feeds/manage' => 'feeds#manage'
+
+  match '/feeds/manage' => 'feeds#manage', :as => :feeds_manage
   match '/feeds/:feed_id/tags' => 'feeds#tagsByFeed'
 
   match '/reader/feed/:feed_id' => 'posts#by_feed', :as => :by_feed

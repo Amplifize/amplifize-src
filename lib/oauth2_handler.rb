@@ -65,9 +65,7 @@ class OAuth2_Handler
     request_id = request[:state]
     auth_token = request[:code]
     error = request[:error]
-    
-    puts auth_token
-    
+
     if auth_token.nil? || error
       raise OAuth2AccessDeniedError.new("No authorization token provided", error)
     end
