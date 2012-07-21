@@ -32,4 +32,7 @@ Salon::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  # Whether to show the support/feedback widget on pages
+  config.show_support_widget = false  
 end

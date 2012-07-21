@@ -43,6 +43,10 @@ Salon::Application.configure do
       :token_url => "https://accounts.google.com/o/oauth2/token"
     }
   }
+  
+
+  # Whether to show the support/feedback widget on pages
+  config.show_support_widget = false
 
   
 end
