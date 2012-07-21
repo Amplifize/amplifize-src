@@ -6,11 +6,19 @@ var customValidate = function(input) {
 	}
 }
 
+var inviteEmail = "";
+var openInviteModal = function(email) {
+	inviteEmail = email
+	$('#inviteFriends-modal-content').modal('show');
+}
+
 $(document).ready(function() {
 
 	$("#inviteFriends-modal-content").bind("show", function() {
+		$("#invite_email").val(inviteEmail);
 		$("#inviteFriends-modal-body").show();
 		$("#inviteFriends-response-modal-body").hide();
+		inviteEmail = "";
 	});
 
 	$('form#inviteFriendsForm').bind("ajax:success", function(status, data, xhr) {
