@@ -10,7 +10,7 @@ var customValidate = function(input) {
 // pre-populated in the email box
 var inviteEmail = "";
 var openInviteModal = function(email) {
-	inviteEmail = email
+	inviteEmail = email;
 	$('#inviteFriends-modal-content').modal();
 }
 
