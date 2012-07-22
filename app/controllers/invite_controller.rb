@@ -12,10 +12,10 @@ class InviteController < ApplicationController
 
   def respond
 
+    @user = User.new
     @invite = Invite.find_by_uid(params[:invite_id])
     if not @invite.nil? 
       @invite_id = @invite.uid
-      @user = User.new
       @user.email = @invite.email
     end
   end

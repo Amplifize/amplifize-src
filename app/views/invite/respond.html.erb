@@ -1,7 +1,7 @@
-<% if not @invite.nil? %>
 <h2>Welcome to Amplifize!</h2>
+<% if not @invite.nil? %>
 <p><%= @invite.user.display_name %> has invited you to join Amplifize.  Enter a password below to get started!</p>
-<%= render 'users/form' %>
 <% else %>
-<h3>Sorry, this invitation has expired.</h3>
+<h3>Oops, this invitation is invalid.  But alas you should sign up anyway!</h3>
 <% end %>
+<%= render 'users/form' %>
