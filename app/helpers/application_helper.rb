@@ -8,6 +8,9 @@ module ApplicationHelper
   # @see environment#config.show_support_widget
   #
   def show_support_widget
+    if not Rails.application.config.respond_to?(:show_support_widget)
+      return true
+    end
     Rails.application.config.show_support_widget
   end
 end
