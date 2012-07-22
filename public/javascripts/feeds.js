@@ -94,6 +94,8 @@ var upPost = function() {
 var addTags = function(feedId) {
 	$("#tag_feed_id").val(feedId);
 	$("#addTags-modal-content").modal();
+	$('#tag_name').val('');
+	setTimeout(function(){$("#tag_name").focus();}, 250);
 };
 
 var deleteTags = function(feedId) {
@@ -263,7 +265,8 @@ $(document).ready(function() {
 
 
 	$('#addShare-modal-content').bind('show', function () {
-	  $('#summary').focus();
+	  $('#summary').val('');
+	  setTimeout(function(){$("#summary").focus();}, 250);
 	});
 
 	//$('form#importForm').bind("ajax:success", function(data, status, xhr) {

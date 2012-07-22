@@ -162,6 +162,11 @@ $(document).ready(function() {
 
 	updateShareContent(shares[position]);
 
+	$('#addComment-modal-content').bind('show', function () {
+	  $('#comment_comment_text').val('');
+	  setTimeout(function(){$("#comment_comment_text").focus();}, 250);
+	});
+
 	$('form#new_comment').bind("ajax:success", function(status, data, xhr) {
 		$("#addComment-modal-content").modal("hide");
 		$("#comment_text").val('');
