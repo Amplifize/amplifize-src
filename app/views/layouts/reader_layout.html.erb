@@ -9,6 +9,7 @@
   <%= csrf_meta_tag %>
 </head>
 <body>	    
+	<div id="container">
     <header>
 		<div class="navbar navbar-fixed-top">
 		  <div class="navbar-inner">
@@ -27,13 +28,11 @@
 		</div> 
         <div style="clear:both"></div>
     </header>
-
 	<!--<p id="notice"><%= notice %></p> -->
 	<div id="appNav">
 		<%= yield :appNav %>
 		<div style="clear:both"></div>
-	</div>	
-
+	</div>
     <div id="reader_content">
 	    <%= yield %>
 	    <div style="clear:both"></div>
@@ -55,5 +54,6 @@
   		})();
 	</script>
 	<% end %>
+	</div>
 </body>
 </html>

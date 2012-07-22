@@ -23,6 +23,7 @@ var loadManageFeeds = function() {
 			});
 			
 			$("#amplifizeContentNavigation").hide();
+			$("#reader_content").css("margin-top", "0");
 		},
 		error: function(xhr, text, error) {
 			alert(error);
@@ -143,7 +144,7 @@ var updatePostContent = function(postId) {
 		$.ajax({
 			url: "/posts/"+postId,
 			success: function(data, textStatus, jqXHR) {
-				$("html, body").animate({ scrollTop: 0 }, "slow");
+				$("html, body").animate({ scrollTop: 0 }, "fast");
 				
 				current_post = data.post;
 
@@ -159,7 +160,6 @@ var updatePostContent = function(postId) {
 				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 				$("#contentSummary").html(current_post.content);
 				$("#sharePostId").val(current_post.id);
-				$("#amplifizeContent").animate({scrollTop: 0});
 			},
 			error: function(xhr, text, error) {
 				alert(error);

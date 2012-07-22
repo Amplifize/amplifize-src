@@ -1,3 +1,11 @@
+#container {
+	min-height:100%;
+	position:relative;
+
+	width: 940px;
+	margin: 0px auto;
+}
+
 header { 
 	width: 100%;
 }
@@ -15,8 +23,13 @@ header > h1 > a:visited {
 }
 
 #appNav {
-	margin: 0 auto 10px;
-	width: 940px;
+	left: 50%;
+    margin-left: -470px;
+    position: fixed;
+    width: 940px;
+    padding: 10px;
+    
+    background-color: #fff;    
 }
 
 #addComment-modal-content {
@@ -25,14 +38,15 @@ header > h1 > a:visited {
 
 #reader_content {
 	width: 940px;
-	margin: 0 auto;
+	margin: 89px auto 0px;
+	padding-bottom:40px;
+	padding-top: 25px;
+	
+	background-color: #ffffff;
 }
 
 #amplifizeContent,
 #findPeopleContent {
-	min-height: 525px;
-	height: 100%;
-
 	padding-left: 10px;
 	padding-right: 10px;
 }

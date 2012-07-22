@@ -88,8 +88,11 @@ var updateShareContent = function(shareId) {
 		$.ajax({
 			url: "/shares/"+shareId,
 			success: function(data, textStatus, jqXHR) {
+				$("html, body").animate({ scrollTop: 0 }, "fast");
 				var current_post = data.share.post;
 				current_share = data.share;
+
+				setReadState(0);
 
 				$("#comment_share_id").val(current_share.id);
 
@@ -113,9 +116,6 @@ var updateShareContent = function(shareId) {
 					var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+'</p></div>';
 					$("#commentThread").append(html);
 				}
-	
-				$("#amplifizeContent").animate({scrollTop: 0});
-				setReadState(0);
 			},
 			error: function(xhr, text, error) {
 				alert(error);

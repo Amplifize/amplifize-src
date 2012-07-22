@@ -5,3 +5,7 @@
 .updateProfileFieldSuccess {
 	color: #00ff00;
 }
+
+#reader_content {
+	margin: 0 auto;
+}
