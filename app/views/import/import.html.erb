@@ -1,21 +1,23 @@
-<h2>Import Feeds</h2>
-<p>Select a service to import from below</p>
-
-<div>
-<h3>From Google Reader</h3>
-<p>Import your subscriptions from Google Reader.  <%= link_to(import_google_path) do %>Get started now<% end %>!</p>
-</div>
-<div>
-<h3>From OPML</h3>
-<p>Import your subscriptions you've exported from another service as OPML.</p>
-<%= form_for :import, :url => :import_opml, :html => {:multipart => true, :id => "importForm"} do |f| %>
-  <div class="formField">
-  	<%= f.label "Select an OPML export file" %>
-  	<%= f.file_field :opml_file %>
-  </div>
-  <div class="formField">
-  	<%= f.submit "Import from OPML" %>
-  </div>
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "import.css" %>
 <% end %>
 
+<h2 id="importTitle">Import Feeds</h2>
+<div class="importOption">
+	<h3>From Google Reader</h3>
+	<p>Import your subscriptions from Google Reader.</p>
+	<p><%= link_to(import_google_path) do %>Get started now<% end %>!</p>
+</div>
+<div class="importOption">
+	<h3>From other RSS readers</h3>
+	<p>Export subscriptions from other readers as an OPML file.</p>
+	<%= form_for :import, :url => :import_opml, :html => {:multipart => true, :id => "importForm"} do |f| %>
+  		<div class="formField">
+  			<label for="opml_file">OPML file</label>
+  			<%= f.file_field :opml_file %>
+  		</div>
+  		<div class="formField">
+  			<%= f.submit "Import" %>
+  		</div>
+	<% end %>
 </div>
