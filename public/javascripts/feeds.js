@@ -160,6 +160,8 @@ var updatePostContent = function(postId) {
 				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 				$("#contentSummary").html(current_post.content);
 				$("#sharePostId").val(current_post.id);
+				
+				mixpanel.track("Read another post");
 			},
 			error: function(xhr, text, error) {
 				alert(error);
@@ -252,7 +254,8 @@ $(document).ready(function() {
 	updatePostContent(posts[position]);
 
 	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
-		$('#addFeed-modal-content').modal('hide')
+		$('#addFeed-modal-content').modal('hide');
+		mixpanel.track("Add a new feed");
 	});
 
 	$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
@@ -261,7 +264,8 @@ $(document).ready(function() {
 
 	$('form#addShareForm').bind("ajax:success", function(data, status, xhr) {
 		$("#summary").val();
-		$('#addShare-modal-content').modal('hide')
+		$('#addShare-modal-content').modal('hide');
+		mixpanel.track("Share a post");
 	});
 
 	$('form#addShareForm').bind("ajax:failure", function(data, status, xhr) {

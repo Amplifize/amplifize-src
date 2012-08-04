@@ -39,16 +39,5 @@
     </div>
 
 	<%= render 'general/footer.html.erb' %>
-
-	<% if show_support_widget %>
-	<script type="text/javascript">
-  		var uvOptions = {};
-  		(function() {
-    		var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    		uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/F73fXEQJeNksQxotASDg.js';
-    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  		})();
-	</script>
-	<% end %>
 </body>
 </html>

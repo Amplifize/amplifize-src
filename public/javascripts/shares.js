@@ -175,6 +175,8 @@ $(document).ready(function() {
 		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
 		var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+'</p></div>';
 		$("#commentThread").append(html);
+		
+		mixpanel.track("Comment in a conversation");
 	});
 
 	$('form#new_comment').bind("ajax:failure", function(data, status, xhr) {

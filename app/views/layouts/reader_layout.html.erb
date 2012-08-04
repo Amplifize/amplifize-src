@@ -10,50 +10,40 @@
 </head>
 <body>	    
 	<div id="container">
-    <header>
-		<div class="navbar navbar-fixed-top">
-		  <div class="navbar-inner">
-		    <div class="container">
-		    	<ul class="nav">
-		    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
-		    	</ul>
-				<ul class="nav">
-					<li><a href="/reader/feeds">Content <span id="feedUnreadCount"></span></a></li>
-					<li><a href="/reader/shares">Conversations <span id="shareUnreadCount"></span></a></li>
-					<li><a href="/reader/people">People</a></li>
-					<li><a href="/profile">Account</a></li>
-				</ul>
-		    </div>
-		  </div>
-		</div> 
-        <div style="clear:both"></div>
-    </header>
-	<!--<p id="notice"><%= notice %></p> -->
-	<div id="appNav">
-		<%= yield :appNav %>
-		<div style="clear:both"></div>
-	</div>
-    <div id="reader_content">
-	    <%= yield %>
-	    <div style="clear:both"></div>
-    </div>
-	<%= render 'general/footer.html.erb' %>
-	<div id="overlay">
-	    <div>
-	          <p>Loading</p>
-	          <%= image_tag "reader/loader.gif" %>
-	     </div>
-	</div>
-	<% if show_support_widget %>
-	<script type="text/javascript">
-  		var uvOptions = {};
-  		(function() {
-    		var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    		uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/F73fXEQJeNksQxotASDg.js';
-    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  		})();
-	</script>
-	<% end %>
-	</div>
+	    <header>
+			<div class="navbar navbar-fixed-top">
+			  <div class="navbar-inner">
+			    <div class="container">
+			    	<ul class="nav">
+			    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
+			    	</ul>
+					<ul class="nav">
+						<li><a href="/reader/feeds">Content <span id="feedUnreadCount"></span></a></li>
+						<li><a href="/reader/shares">Conversations <span id="shareUnreadCount"></span></a></li>
+						<li><a href="/reader/people">People</a></li>
+						<li><a href="/profile">Account</a></li>
+					</ul>
+			    </div>
+			  </div>
+			</div> 
+	        <div style="clear:both"></div>
+	    </header>
+		<!--<p id="notice"><%= notice %></p> -->
+		<div id="appNav">
+			<%= yield :appNav %>
+			<div style="clear:both"></div>
+		</div>
+	    <div id="reader_content">
+		    <%= yield %>
+		    <div style="clear:both"></div>
+	    </div>
+		<%= render 'general/footer.html.erb' %>
+		<div id="overlay">
+		    <div>
+		          <p>Loading</p>
+		          <%= image_tag "reader/loader.gif" %>
+		     </div>
+		</div>
+	</div> <!-- ends container -->
 </body>
 </html>
