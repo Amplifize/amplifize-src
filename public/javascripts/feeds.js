@@ -2,38 +2,6 @@ var current_post = undefined;
 var position = 0;
 var max_position = 0;
 
-var loadManageFeeds = function() {
-	$.ajax({
-		url: "/feeds/manage",
-		success: function (data, textStatus, jqXHR) {
-			$("#amplifizeContent").html(data);
-			
-			$('form#new_tag').bind("ajax:success", function(status, data, xhr) {
-				$("#tag_name").val();
-				$("#addTags-modal-content").modal("hide");
-		
-				var ul = $("#feed_"+data.feed_id+" .manageFeedRowTags");
-				for(var i =0; i < data.tags.length; i++) {
-					ul.append("<li>"+data.tags[i]+"</li>");
-				}
-			});
-
-			$('form#new_tag').bind("ajax:failure", function(status, data, xhr) {
-				alert(status);
-			});
-			
-			$("#amplifizeContentNavigation").hide();
-			$("#reader_content").css("margin-top", "0");
-		},
-		error: function(xhr, text, error) {
-			alert(error);
-		},
-		dataType: "html"
-	});
-	
-	return false;
-};
-
 var markAllAsRead = function() {
 	enableOverlay();
 	

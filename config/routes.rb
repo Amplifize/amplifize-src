@@ -20,11 +20,10 @@ Salon::Application.routes.draw do
   match '/feeds/import/google' => 'import#google', :as => :import_google
   match '/feeds/import/opml' => 'import#opml', :as => :import_opml
 
-
-  match '/feeds/manage' => 'feeds#manage', :as => :feeds_manage
   match '/feeds/:feed_id/tags' => 'feeds#tagsByFeed'
 
   match '/reader/feed/:feed_id' => 'posts#by_feed', :as => :by_feed
+  match '/reader/feeds/manage' => 'feeds#manage', :as => :feeds_manage
   match '/reader/tag/:tag_id' => 'posts#by_tag', :as => :by_tag
 
   match '/post_users(/:feed_id)/mark_all_read(/:state)', :controller => 'post_users', :action => 'mark_all_read'

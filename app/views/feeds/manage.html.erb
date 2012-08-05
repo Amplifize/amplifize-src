@@ -1,51 +1,103 @@
-<h3>Manage your feeds</h3>
-<%@feeds.each do |feed| %>
-	<div id="feed_<%= feed.id %>" class="manageFeedRow">
-		<span class="manageFeedRowTitle"><strong><a href="<%= feed.url %>"><%= feed.title %></a></strong></span>
-		
-		<!--
-		<%if feed.status == 1 then %>
-			<span class ="manageFeedRowOKStatus">Up to date!</span>
-		<% elsif feed.status == 2 then %>
-			<span class ="manageFeedRowWaitingStatus">Still loading...</span>
-		<% else %>
-			<span class ="manageFeedRowErrorStatus">Uh oh, something is wrong :(</span>
-		<% end %>
-		-->
-		
-		<ul class="manageFeedRowTags">
-			<% @tags.each do |tag| %>
-				<% if tag.feed_id == feed.id then %>
-				<li id="tag_<%=tag.id %>"><%= tag.name %></li>	
-				<% end %>
-			<% end %>
-		</ul>
-
-		<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe" %>
-		<%= link_to "Add tags", "#addTags-modal-content", :onclick => "addTags("+feed.id.to_s+")" %>
-		<%= link_to "Delete tags", "#deleteTags-modal-content", :onclick => "deleteTags("+feed.id.to_s+")" %>
-	</div>
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "feeds.css", "manageFeeds.css" %>
 <% end %>
 
-<div id="addTags-modal-content" class="modal hide">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Add tags</h3>
-	</div>
-	<div id="modal-body" class="modal-body-style">
-		<%= render 'tags/form' %>
-	</div>
-</div>
+<% content_for :javascripts do %>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#shareUnreadCount").html("<%= @shares_unread_count %>");
+		$("#feedUnreadCount").html("<%= @posts_unread_count %>");
 
-<div id="deleteTags-modal-content" class="modal hide">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Delete tags</h3>
-	</div>
-	<div id="modal-body" class="modal-body-style">
-		<p>Click on a tag to delete it</p>
-		<div id="feedTagsToDelete">
+		$('form#new_tag').bind("ajax:success", function(status, data, xhr) {
+			$("#tag_name").val();
+			$("#addTags-modal-content").modal("hide");
+	
+			var ul = $("#feed_"+data.feed_id+" .manageFeedRowTags");
+			for(var i =0; i < data.tags.length; i++) {
+				ul.append("<li>"+data.tags[i]+"</li>");
+			}
+		});
+	
+		$('form#new_tag').bind("ajax:failure", function(status, data, xhr) {
+			alert(status);
+		});
+	});
+	</script>
+<%end%>
+
+<% content_for :appNav do %>
+	<h3>Manage your content sources</h3>
+
+	<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="float:left; margin-right: 25px;">Add content source</a>
+	<a href="/feeds/import" data-toggle="modal" class="btn" style="float:left;">Import sources</a>
+<% end %>
+
+	
+	<%@feeds.each do |feed| %>
+		<div id="feed_<%= feed.id %>" class="manageFeedRow">
+			<span class="manageFeedRowTitle"><strong><a href="<%= feed.url %>"><%= feed.title %></a></strong></span>
+			
+			<!--
+			<%if feed.status == 1 then %>
+				<span class ="manageFeedRowOKStatus">Up to date!</span>
+			<% elsif feed.status == 2 then %>
+				<span class ="manageFeedRowWaitingStatus">Still loading...</span>
+			<% else %>
+				<span class ="manageFeedRowErrorStatus">Uh oh, something is wrong :(</span>
+			<% end %>
+			-->
+			
+			<ul class="manageFeedRowTags">
+				<% @tags.each do |tag| %>
+					<% if tag.feed_id == feed.id then %>
+					<li id="tag_<%=tag.id %>"><%= tag.name %></li>	
+					<% end %>
+				<% end %>
+			</ul>
+	
+			<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+feed.id.to_s %>
+			<%= link_to "Add tags", "#addTags-modal-content", :onclick => "addTags("+feed.id.to_s+")" %>
+			<%= link_to "Delete tags", "#deleteTags-modal-content", :onclick => "deleteTags("+feed.id.to_s+")" %>
+	
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('#unsubscribe_<%= feed.id %>').bind("ajax:success", function(status, data, xhr) {
+						$("#feed_<%= feed.id %>").remove();
+					});
+				});
+			</script>			
 		</div>
-		<a href="#" onclick="closeDeleteTagsOverlay(); return false;">Click to close</a>
+	<% end %>
+	
+	<div id="addTags-modal-content" class="modal hide">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Add tags</h3>
+		</div>
+		<div id="modal-body" class="modal-body-style">
+			<%= render 'tags/form' %>
+		</div>
 	</div>
-</div>
+	
+	<div id="deleteTags-modal-content" class="modal hide">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Delete tags</h3>
+		</div>
+		<div id="modal-body" class="modal-body-style">
+			<p>Click on a tag to delete it</p>
+			<div id="feedTagsToDelete">
+			</div>
+			<a href="#" onclick="closeDeleteTagsOverlay(); return false;">Click to close</a>
+		</div>
+	</div>
+
+	<div id="addFeed-modal-content" class="modal hide">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Add RSS feed by URL</h3>
+		</div>
+		<div id="modal-body" class="modal-body-style">
+			<%= render 'feeds/form' %>
+		</div>
+	</div>

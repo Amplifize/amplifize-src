@@ -1,5 +1,10 @@
 class FeedsController < ApplicationController
-  before_filter :require_user, :only => [:import, :create, :manage]
+  before_filter :require_user
+
+  def single_access_allowed?
+    (action_name == "create")
+  end
+
   def create
     Feed.setup_feed(current_user, Feed.check_feed_url(params[:feed][:url]), params[:feed][:tags].squish().split(","))
 
@@ -12,7 +17,12 @@ class FeedsController < ApplicationController
     @feeds = current_user.feeds.alphabetical
     @tags = current_user.tags
     @tag = Tag.new
-    render :layout => false
+    @feed = Feed.new
+
+    @posts_unread_count = current_user.feeds_unread_count
+    @shares_unread_count = current_user.shares_unread_count
+    
+    render :layout => 'reader_layout'
   end
 
   def tagsByFeed
