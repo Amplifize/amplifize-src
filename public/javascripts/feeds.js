@@ -74,11 +74,11 @@ var updatePostContent = function(postId) {
 				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				if(current_post.author) {
-					$("#contentAuthor").html("Written by: "+current_post.author+" on ");
+					$("#contentAuthor").html("written by "+current_post.author+" ");
 				} else {
 					$("#contentAuthor").html("");
 				}
-				$("#contentPublishDate").html(dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+				$("#contentPublishDate").html("on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 				$("#contentSummary").html(current_post.content);
 				$("#sharePostId").val(current_post.id);
 				
