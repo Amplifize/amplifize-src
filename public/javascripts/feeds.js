@@ -60,53 +60,6 @@ var upPost = function() {
 	return false;
 };
 
-var addTags = function(feedId) {
-	$("#tag_feed_id").val(feedId);
-	$("#addTags-modal-content").modal();
-	$('#tag_name').val('');
-	setTimeout(function(){$("#tag_name").focus();}, 250);
-};
-
-var deleteTags = function(feedId) {
-	$.ajax({
-		url: "/feeds/"+feedId+"/tags",
-		success: function(data, textStatus, jqXHR) {
-			var deleteDiv = $("#feedTagsToDelete");
-			deleteDiv.html('');
-			for(var i=0; i < data.tags.length; i++) {
-				deleteDiv.append('<a href="#" id="delete_popup_tag_'+data.tags[i].tag.id+'" onclick=deleteTagFromFeed('+ data.tags[i].tag.id +'); return false;">'+data.tags[i].tag.name+'</p>');
-			}
-
-			$("#deleteTags-modal-content").modal();
-		},
-		error: function(xhr, text, error) {
-			alert(error);
-			alert(text);
-		},
-		dataType: "json"
-	});
-};
-
-var deleteTagFromFeed = function(tagId) {
-	$.ajax({
-		url: "/tags/"+tagId,
-		type: "DELETE",
-		success: function(data, textStatus, jqXHR) {
-			$("#delete_popup_tag_"+tagId).remove();
-			$("#tag_"+tagId).remove();
-		},
-		error: function(xhr, text, error) {
-			alert(error);
-			alert(text);
-		},
-		dataType: "json"
-	});
-}
-
-var closeDeleteTagsOverlay = function() {
-	$("#deleteTags-modal-content").modal("hide");
-}
-
 var updatePostContent = function(postId) {		
 	if (postId) {
 		$.ajax({

@@ -3,25 +3,12 @@
 <% end %>
 
 <% content_for :javascripts do %>
+	<%= javascript_include_tag "manageFeeds.js" %>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		$("#shareUnreadCount").html("<%= @shares_unread_count %>");
-		$("#feedUnreadCount").html("<%= @posts_unread_count %>");
-
-		$('form#new_tag').bind("ajax:success", function(status, data, xhr) {
-			$("#tag_name").val();
-			$("#addTags-modal-content").modal("hide");
-	
-			var ul = $("#feed_"+data.feed_id+" .manageFeedRowTags");
-			for(var i =0; i < data.tags.length; i++) {
-				ul.append("<li>"+data.tags[i]+"</li>");
-			}
+		$(document).ready(function() {
+			$("#shareUnreadCount").html("<%= @shares_unread_count %>");
+			$("#feedUnreadCount").html("<%= @posts_unread_count %>");
 		});
-	
-		$('form#new_tag').bind("ajax:failure", function(status, data, xhr) {
-			alert(status);
-		});
-	});
 	</script>
 <%end%>
 
@@ -56,8 +43,8 @@
 			</ul>
 	
 			<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+feed.id.to_s %>
-			<%= link_to "Add tags", "#addTags-modal-content", :onclick => "addTags("+feed.id.to_s+")" %>
-			<%= link_to "Delete tags", "#deleteTags-modal-content", :onclick => "deleteTags("+feed.id.to_s+")" %>
+			<a href="#addTags-modal-content" data-toggle="modal">Add tags</a>
+			<a href="#deleteTags-modal-content" data-toggle="modal" onclick="populateDeleteTags(<%= feed.id %>)">Delete tags</a>
 	
 			<script type="text/javascript">
 				$(document).ready(function() {
@@ -88,7 +75,7 @@
 			<p>Click on a tag to delete it</p>
 			<div id="feedTagsToDelete">
 			</div>
-			<a href="#" onclick="closeDeleteTagsOverlay(); return false;">Click to close</a>
+			<button type="button" data-dismiss="modal">cancel</button>
 		</div>
 	</div>
 
