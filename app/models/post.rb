@@ -61,7 +61,7 @@ class Post < ActiveRecord::Base
   end
 
   def self.synchronize_posts_with_users(user_id, feed_id)
-    posts = Post.find_all_by_feed_id(feed_id, :limit => 10)
+    posts = Post.find_all_by_feed_id(feed_id, :order => 'created_at DESC', :limit => 10)
     
     begin
       posts.each do |post|
