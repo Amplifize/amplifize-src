@@ -12,7 +12,7 @@ development:
   database: amplifize_development
   pool: 20
   username: root
-  password: ta71xr90
+  password: 
 
 
 production:
