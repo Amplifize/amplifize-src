@@ -1,4 +1,10 @@
 class SharesController < ApplicationController
+  before_filter :require_user
+
+  def single_access_allowed?
+    (action_name == "add_remote")
+  end
+
   def add
     #Step 1 generate the share
     share = Share.create(
@@ -24,6 +30,10 @@ class SharesController < ApplicationController
     respond_to do |format|
       format.js { render :json => share }
     end
+  end
+
+  def add_remote
+    
   end
 
   def show

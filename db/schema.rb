@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120721043345) do
+ActiveRecord::Schema.define(:version => 20120805043928) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20120721043345) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "display_name"
+    t.string   "single_access_token", :null => false
   end
 
   add_foreign_key "follows", "users", :name => "follows_user_id_fk"
