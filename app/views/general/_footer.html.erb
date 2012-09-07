@@ -1,47 +1,69 @@
-	<div id="footer">
-			<%= link_to "Blog", "/blog" %>
+<div id="footer">
+	<div class="footerBar">
+		<div class="footerItem">
+			<%= link_to "Blog", "/blog" %>	
+		</div>
+		<div class="footerItem">
 			<%= link_to "About Amplifize", :about %>
+			<ul>
+				<li><a href="/about/team">Who we are</a></li>
+				<li><a href="/about/why-amplifize">Why we built Amplifize</a></li>
+			</ul>
+		</div>
+		<div class="footerItemSmall">
 			<%= link_to "FAQ", :faq %>
+		</div>
+		<div class="footerItem">
 			<%= link_to "Contact Us", :contact %>
+			<ul>
+				<li><a href="http://twitter.com/amplifize">On Twitter</a></li>
+				<li><a href="mailto:tickets@amplifize.uservoice.com">By email</a></li>
+			</ul>			
+		</div>
+		<div class="footerItem">
 			<%= link_to "Terms & Conditions", :terms %>
-		<span class="copyright">Built by Big Fish, Big Pond Inc. &copy; 2012</span>
+		</div>
+		<div class="footerItemBig">
+			<span class="copyright">Big Fish, Big Pond Inc. &copy; 2012</span>
+		</div>
 		<div style="clear:both"></div>
 	</div>
-		
-	<% if show_support_widget %>
-	<script type="text/javascript">
-		//uservoice
-  		var uvOptions = {};
-  		(function() {
-    		var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    		uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/F73fXEQJeNksQxotASDg.js';
-    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  		})();
-
-		//google analytics
-	  	var _gaq = _gaq || [];
-	  	_gaq.push(['_setAccount', 'UA-33864290-1']);
-	  	_gaq.push(['_trackPageview']);
+</div>
 	
-	  	(function() {
-	    	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  	})();
+<% if show_support_widget %>
+<script type="text/javascript">
+	//uservoice
+	var uvOptions = {};
+	(function() {
+		var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+		uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/F73fXEQJeNksQxotASDg.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+	})();
 
-		//mixpanel
-		(function(c,a){
-			window.mixpanel=a;var b,d,h,e;b=c.createElement("script");
-		    b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+
-		    '//api.mixpanel.com/site_media/js/api/mixpanel.2.js';d=c.getElementsByTagName("script")[0];
-		    d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){
-		    var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(
-		    Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?g=a[f]=[]:
-		    f="mixpanel";g.people=g.people||[];h=['disable','track','track_pageview','track_links',
-		    'track_forms','register','register_once','unregister','identify','name_tag',
-		    'set_config','people.set','people.increment'];for(e=0;e<h.length;e++)d(g,h[e]);
-		    a._i.push([b,c,f])};a.__SV=1.1;
-		})(document,window.mixpanel||[]);
-		mixpanel.init("70059c2e62b8d913e6b0c5fa36e4181b");
-	</script>
-	<% end %>
+	//google analytics
+  	var _gaq = _gaq || [];
+  	_gaq.push(['_setAccount', 'UA-33864290-1']);
+  	_gaq.push(['_trackPageview']);
+
+  	(function() {
+    	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  	})();
+
+	//mixpanel
+	(function(c,a){
+		window.mixpanel=a;var b,d,h,e;b=c.createElement("script");
+	    b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+
+	    '//api.mixpanel.com/site_media/js/api/mixpanel.2.js';d=c.getElementsByTagName("script")[0];
+	    d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){
+	    var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(
+	    Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?g=a[f]=[]:
+	    f="mixpanel";g.people=g.people||[];h=['disable','track','track_pageview','track_links',
+	    'track_forms','register','register_once','unregister','identify','name_tag',
+	    'set_config','people.set','people.increment'];for(e=0;e<h.length;e++)d(g,h[e]);
+	    a._i.push([b,c,f])};a.__SV=1.1;
+	})(document,window.mixpanel||[]);
+	mixpanel.init("70059c2e62b8d913e6b0c5fa36e4181b");
+</script>
+<% end %>

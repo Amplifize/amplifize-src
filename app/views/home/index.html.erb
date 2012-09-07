@@ -1,27 +1,37 @@
 <% content_for :stylesheets do %>
 	<%= stylesheet_link_tag "homepage.css" %>
 <% end %>
-
-<div id="mainLeft">
-	<div class="mainUpsell">
-		<span class="mainNo">1</span>
-		Find unique content
+<div id="banner">
+	<div id="pitch">
+		<h2>Great <span class="highlight">content</span> goes best with great <span class="highlight">conversation</span></h2>
+		<p>Discover and share content from across the web while your friends share their own articles, recipes, blog posts, and more. Put it all together and you get the web's best conversation platform &mdash; Amplifize.com.</p>
+		<a href="/users/new">Start sharing now</a>
+		<div style-"clear:both;"></div>
 	</div>
-	<div class="mainUpsell">
-		<span class="mainNo">2</span>
-		Share with friends
-	</div>
-	<div class="mainUpsell">
-		<span class="mainNo">3</span>
-		Have great conversation
-	</div>
-	<div class="mainUpsell">
-		<span class="mainNo">4</span>
-		Rinse. Repeat.
-	</div>
-
+	<div style-"clear:both;"></div>
 </div>
-<div id="mainRight">
-	<h2>Register to get started</h2>
-	<%= render 'users/form' %>
+<div id="sellingPoints">
+	<div class="sellingPoint">
+		<h3>content</h3>
+		<%= image_tag("homepage/content-graphic.png") %>
+		<p>The web is full of great content. Whether it be articles from your favorite newspaper, recipes from an online cookbook, or your Facebook feed, there's a constant stream of things to read.</p> 
+		<p>Amplifize wants to help you take web content to the next level of engagement.</p>
+	</div>
+	<div class="sellingPoint">
+		<h3>conversation</h3>
+		<%= image_tag("homepage/conversation-graphic.png") %>
+		<p>The next level of engagement for web content.</p>
+		<p>Create your own community around the content that you find interesting. You'll re-live those late nights debating how anyone could believe what was written in the Atlantic.</p>
+		<p>All without the headache of too much caffeine to boot.</p>
+	</div>
+	<div class="sellingPoint">
+		<h3>discovery</h3>
+		<p>What's being shared on Amplifize right now?</p>
+		<ul>
+			<li>Check out <a href="http://slice.seriouseats.com/archives/2012/09/behind-the-slice-klausies-pizza-truck.html" target="_blank">this review</a> of a pizza food truck in Raleigh, NC shared on Amplifize</li>
+			<li>Learn what you can do with a <a href="http://www.food52.com/recipes/18619_black_bean_orange_peel_edamame">little imagination</a>, and some edamame</li>
+			<li>See some great <a href="http://www.core77.com/blog/materials/let_us_make_things_clear_23288.asp">concept designs</a> inspired by life meeting art</li>
+		</ul>
+	</div>
+	<div style-"clear:both;"></div>
 </div>

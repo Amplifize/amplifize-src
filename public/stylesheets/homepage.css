@@ -1,39 +1,99 @@
-#mainRight,
-#mainLeft {
-	float: left;
-	margin-top: 25px;
+#banner {
+	background: url('../images/homepage/social-media.jpg') 0 center transparent;
+	width: inherit;
+	height: 400px;
 }
 
-#mainLeft {
-	margin-right: 50px;
+#pitch {
+	background-color: #fff;
+	width: 385px;
+	margin-left: 550px;
+	padding: 3px;
+	height: 394px;
 }
 
-span.mainNo {
-	display:-moz-inline-stack;
-	display: inline-block;
-	zoom: 1;
-	*display: inline;
-	
-	float: left;
-	margin-right: 15px;
-	
-	text-align: center;
-	vertical-align: middle;
-	
-	width: 35px;
-	height: 35px;
-	-moz-border-radius: 35px;
-	-webkit-border-radius: 35px;
-	border-radius: 35px;
-	
-	background-color: #424242;
-	color: #E9E9E9;
-	
-	line-height: 31px;
-}
-
-div.mainUpsell {
-	padding: 10px;
-
+#pitch h2 {
 	font-size: 32px;
+	margin-top: 15px;
+	
+	text-align: justify;
+}
+
+#pitch p {
+	font-size: 18px;
+	line-height: 27px;
+	text-align: justify;
+	
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+#pitch a,
+#pitch a:visited {
+	background-color: #F03000;
+	width: 300px;
+	height: 100px;
+	border-radius: 5px;
+	
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+	
+	margin-left: 110px;
+	padding: 10px;
+}
+
+#pitch a:hover {
+	text-decoration: none;
+	
+	background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+ 
+	/*Shadow*/
+  	-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+  	-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+  	box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);	
+}
+
+#sellingPoints {
+	width: inherit;
+	height: 250px;
+}
+
+.sellingPoint {
+	float: left;
+	height: inherit;
+	width:288px;
+	padding: 5px;
+	margin: 5px;
+}
+
+.sellingPoint h3 {
+	text-align: center;
+	background-color: #D7D7D7;
+	padding: 3px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+
+.sellingPoint img {
+	float:left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.sellingPoint p {
+	font-size: 14px;
+	text-align: justify;
+	
+	padding-right: 3px;
+}
+
+.sellingPoint ul li {
+	margin-bottom: 5px;
+
+	text-align: justify;
 }

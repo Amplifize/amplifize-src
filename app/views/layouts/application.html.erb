@@ -10,25 +10,22 @@
 </head>
 <body>
     <header>
-		<div class="navbar navbar-fixed-top">
-		  <div class="navbar-inner">
-		    <div class="container">
-		    	<ul class="nav">
-		    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
-		    	</ul>
-		        <% if current_user %> 
-		        <ul class="nav pull-right">
-        			<li><%= link_to "Reader", :reader %></li>
-        			<li><%= link_to "Logout", :logout %></li>
-        		</ul>
-        		<% else %>
-        		<ul class="nav pull-right">
-        			<!--<%= link_to "Register", new_user_path %>--> 
-        			<li><%= link_to "Login", :login %></li>
-        		<% end %>
-        		</ul>
-		    </div>
-		  </div>
+		<div class="navbar">
+	    	<ul class="nav">
+	    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
+	    		<li class="slogan"><h3>[Give good content a voice]</h3>
+	    	</ul>
+	        <% if current_user %> 
+	        <ul class="nav pull-right">
+    			<li><%= link_to "Reader", :reader %></li>
+    			<li><%= link_to "Logout", :logout %></li>
+    		</ul>
+    		<% else %>
+    		<ul class="nav pull-right">
+    			<li><%= link_to "Register", new_user_path %></li>
+    			<li><%= link_to "Login", :login %></li>
+    		<% end %>
+    		</ul>
 		</div> 
         <div style="clear:both"></div>
     </header>
