@@ -1,25 +1,9 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:reader, :update, :search]
+  before_filter :require_user, :only => [:reader, :update, :search, :profile]
 
-  def profile
-    @user = current_user
-    @posts_unread_count = current_user.feeds_unread_count
-    @shares_unread_count = current_user.shares_unread_count
-
-    render :layout => 'reader_layout'
-  end
-
-  def update
-    @user = current_user
-   
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.js {render :json => {:status => 0}}
-      else
-        format.js { render :json => {:status => :unprocessable_entity, :errors => @user.errors } }
-      end
-    end
+  def new
+    @user = User.new
   end
 
   def create
@@ -38,6 +22,27 @@ class UsersController < ApplicationController
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end  
+  end
+
+
+  def update
+    @user = current_user
+   
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.js {render :json => {:status => 0}}
+      else
+        format.js { render :json => {:status => :unprocessable_entity, :errors => @user.errors } }
+      end
+    end
+  end
+
+  def profile
+    @user = current_user
+    @posts_unread_count = current_user.feeds_unread_count
+    @shares_unread_count = current_user.shares_unread_count
+
+    render :layout => 'reader_layout'
   end
 
   def unsubscribe

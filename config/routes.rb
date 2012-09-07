@@ -2,6 +2,8 @@ Salon::Application.routes.draw do
   match '/login' => 'user_sessions#new', :as => :login
   match '/logout' => 'user_sessions#destroy', :as => :logout
 
+  match '/register' => 'users#new', :as => :signup
+
   match '/oauth2/callback' => 'user_sessions#oauth2_response', :as => :oauth2_response
   match '/oauth2/request/:service' => 'user_sessions#oauth2_request', :as => :oauth2_request
 

@@ -123,19 +123,13 @@ var getFeedsByTag = function(tagName) {
 
 var clearContent = function() {
 	$("#feedTitle").html('');
-	$("#contentTitle").html('');
-	$("#contentAuthor").html("");
-	$("#contentPublishDate").html('');
+	$("#contentRow").html('');
 	$("#contentSummary").html('');
 	$("#amplifizeContent").animate({scrollTop: 0});
 
 	$("#contentSummary").html(
 		"<h3>Looks like you've got no more posts to read</h3>" +
-		"<p>It might be time to</p>" +
-		"<ul>" +
-		"<li>Add a <a href=\"#addFeed-modal-content\" data-toggle=\"modal\">new feed</a></li>" +
-		"<li>OR <a href=\"/feeds/import\">import your feeds</a> from Google Reader</li>" +
-		"</ul>"
+		"<p>It might be time to add a <a href=\"#addFeed-modal-content\" data-toggle=\"modal\">new feed</a> or <a href=\"/feeds/import\">import your feeds</a> from Google Reader</p>"
 	);
 };
 
