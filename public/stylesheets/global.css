@@ -60,7 +60,7 @@ header h1 > a:hover {
 	background-color: #F7F7F7;
     background-image: -moz-linear-gradient(center bottom, #FFFFFF, #EAEAEA);
     background-repeat: repeat-x;
-    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.25), 0 1px 0 rgba(0, 0, 0, 0.1) inset;
+	border-top: 1px solid rgba(0,0,0,0.25);
 }
 
 .footerBar {
@@ -104,23 +104,3 @@ header h1 > a:hover {
 .footerItem > ul > li > a:hover {
 	text-decoration: underline;	
 }
-
-/*
-#footer {
-   width: 940px;
-   color: #999999;
-   text-align: center;
-   
-   padding-top: 10px;
-   padding-bottom: 10px;
-   
-   height: 25px;
-   position: absolute;
-   bottom: 0;
-   left: 50%;
-   margin-left: -470px;
-   
-   background-color: #ffffff;
-}
-
-*/

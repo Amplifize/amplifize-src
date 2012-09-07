@@ -1,53 +1,24 @@
-#container {
-	min-height:100%;
-	position:relative;
-
-	width: 940px;
-	margin: 0px auto;
-}
-
-header { 
-	width: 100%;
-}
-
-header > h1 {
-	display: inline;
-	float: left;
-	padding-left: 10px;
-}
-
-header > h1 > a,
-header > h1 > a:visited {
-	text-decoration: none;
-	color: inherit;
-}
-
 #appNav {
-	left: 50%;
-    margin-left: -470px;
-    position: fixed;
-    width: 940px;
+	width: 940px;
+    
+    margin: 10px auto;
     padding: 10px;
     
     background-color: #fff;    
 }
 
-#addComment-modal-content {
-	display: none;
-}
-
 #reader_content {
 	width: 940px;
-	margin: 89px auto 0px;
+	min-height: 400px;
+	
+	margin: 0 auto;
 	padding-bottom:40px;
-	padding-top: 25px;
 	
 	background-color: #ffffff;
 }
 
 #amplifizeContent,
 #findPeopleContent {
-	padding-left: 10px;
 	padding-right: 10px;
 }
 
@@ -75,7 +46,7 @@ header > h1 > a:visited {
 
 #contentTitle a,
 #contentTitle a:visited {
-	font-size: 24px;
+	font-size: 22px;
 	text-decoration: none;
 	
 	color: #333;

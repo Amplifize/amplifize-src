@@ -9,30 +9,28 @@
   <%= csrf_meta_tag %>
 </head>
 <body>	    
-	<div id="container">
-	    <header>
-			<div class="navbar navbar-fixed-top">
-			  <div class="navbar-inner">
-			    <div class="container">
-			    	<ul class="nav">
-			    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
-			    	</ul>
-					<ul class="nav">
-						<li><a href="/reader/feeds">Content <span id="feedUnreadCount"></span></a></li>
-						<li><a href="/reader/shares">Conversations <span id="shareUnreadCount"></span></a></li>
-						<li><a href="/reader/people">People</a></li>
-						<li><a href="/profile">Account</a></li>
-					</ul>
-			    </div>
-			  </div>
-			</div> 
-	        <div style="clear:both"></div>
-	    </header>
-		<!--<p id="notice"><%= notice %></p> -->
-		<div id="appNav">
-			<%= yield :appNav %>
-			<div style="clear:both"></div>
-		</div>
+    <header>
+		<div class="navbar">
+	    	<ul class="nav">
+	    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
+	    	</ul>
+			<ul class="nav">
+				<li><a href="/reader/feeds">Content <span id="feedUnreadCount"></span></a></li>
+				<li><a href="/reader/shares">Conversations <span id="shareUnreadCount"></span></a></li>
+				<li><a href="/reader/people">People</a></li>
+			</ul>
+			<ul class="nav pull-right">
+				<li><a href="/profile">Account</a></li>
+				<li><%= link_to "Logout", :logout %></li>
+			</ul>
+		</div> 
+        <div style="clear:both"></div>
+    </header>
+	<!--<p id="notice"><%= notice %></p> -->
+	<div id="appNav">
+		<%= yield :appNav %>
+		<div style="clear:both"></div>
+	</div>
 	    <div id="reader_content">
 		    <%= yield %>
 		    <div style="clear:both"></div>
@@ -44,6 +42,5 @@
 		          <%= image_tag "reader/loader.gif" %>
 		     </div>
 		</div>
-	</div> <!-- ends container -->
 </body>
 </html>
