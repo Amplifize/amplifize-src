@@ -45,6 +45,8 @@ Salon::Application.routes.draw do
   match '/invite/respond/:invite_id' => 'invite#respond', :as => :invite_respond
 
   match '/about' => 'home#about', :as => :about
+  match '/about/team' => 'home#team'
+  match '/about/why-amplifize' => 'home#why_amplifize'
   match '/contact' => 'home#contact', :as => :contact
   match '/terms' => 'home#terms', :as => :terms
   match '/faq' => 'home#faq', :as => :faq
