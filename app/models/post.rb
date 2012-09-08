@@ -10,6 +10,10 @@ class Post < ActiveRecord::Base
 
   scope :desc, order("posts.published_at ASC")
   
+  scope :last_ten, lambda {
+    select(:published_at).order("posts.published_at DESC").limit(10)
+  }
+  
   scope :filter_by_feed, lambda { |feed_id|
     where(:feed_id => feed_id)
   }
@@ -102,7 +106,7 @@ class Post < ActiveRecord::Base
             :author       => entry.author,
             :content      => entry.content.nil? ? entry.summary.html_safe : entry.content.html_safe,
             :url          => entry.url,
-            :published_at => entry.published,
+            :published_at => entry.published.nil? ? Time.now.utc.to_s(:db) : entry.published,
             :uid          => entry.id,
             :feed_id      => feed_id
           )
