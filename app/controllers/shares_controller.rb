@@ -5,35 +5,16 @@ class SharesController < ApplicationController
     (action_name == "add_remote")
   end
 
-  def add
-    #Step 1 generate the share
-    share = Share.create(
-      :post_id      => params[:postId],
-      :user_id      => current_user.id,
-      :summary      => params[:summary]
-    )
+  def add    
+    share = Share.add(params[:summary], params[:postId], current_user.id)
 
-    followers = Follow.find_all_by_follows(current_user.id)
-
-    if not followers.nil? then
-      #Step 2 let all followers know
-      followers.each do |follower|
-        ShareUser.create(
-          :share_id      => share.id,
-          :user_id      => follower.user_id,
-          :read_state   => 1
-        )
-      end
-    end
-
-    #Step 3 respond
     respond_to do |format|
       format.js { render :json => share }
     end
   end
 
   def add_remote
-    
+    render :content_type => 'application/javascript'
   end
 
   def show
