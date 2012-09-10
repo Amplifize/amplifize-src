@@ -139,6 +139,8 @@ $(document).ready(function() {
 		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 	}
 
+	$("#container").css("margin-top", "108px");
+
 	updatePostContent(posts[position]);
 
 	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {

@@ -160,6 +160,8 @@ $(document).ready(function() {
 		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 	}
 
+	$("#container").css("margin-top", "36px");
+
 	updateShareContent(shares[position]);
 
 	$('#addComment-modal-content').bind('show', function () {

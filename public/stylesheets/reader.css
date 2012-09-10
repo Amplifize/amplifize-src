@@ -30,35 +30,20 @@
 	margin-top: 40px;
 }
 
+#amplifizeContentNavigation { 
+  	position: fixed;
+  	width: 940px;
+  	margin-left: -470px;
+  	padding-top: 10px;
+  	left: 50%;
+  	
+  	background-color: white;
+}
+
 #menuOptions {
 	font-size: 16px;
 	
-	position: absolute;
-	top: 0;
-	left: 610px;
-	background-color: white;
-	padding: 5px;
-	
-	border-left: 1px solid #333;
-	border-right: 1px solid #333;
-	border-bottom: 1px solid #333;
-}
-
-#menuOptions.fixed {
-  	position: fixed;
-  	top: 0;
-  	left: 846px;
-	background-color: white;
-	padding: 5px;
-	
-	border-left: 1px solid #333;
-	border-right: 1px solid #333;
-	border-bottom: 1px solid #333;
-}
-
-#amplifizeContentNavigation { 
-  	position: absolute;
-  	width: 940px;
+	float: right;
 }
 
 #menuOptions a {

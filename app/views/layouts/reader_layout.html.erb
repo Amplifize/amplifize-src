@@ -9,7 +9,7 @@
   <%= csrf_meta_tag %>
 </head>
 <body>	    
-    <header>
+    <header class="navbar-fixed-top">
 		<div class="navbar">
 	    	<ul class="nav">
 	    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
@@ -31,20 +31,22 @@
 		<!--<p id="notice"><%= notice %></p> -->
         <div style="clear:both"></div>
     </header>
-	<div id="appNav">
-		<%= yield :appNav %>
-		<div style="clear:both"></div>
-	</div>
+	<div id="container">
+		<div id="appNav">
+			<%= yield :appNav %>
+			<div style="clear:both"></div>
+		</div>
 	    <div id="reader_content">
 		    <%= yield %>
 		    <div style="clear:both"></div>
 	    </div>
-		<%= render 'general/footer.html.erb' %>
-		<div id="overlay">
-		    <div>
-		          <p>Loading</p>
-		          <%= image_tag "reader/loader.gif" %>
-		     </div>
-		</div>
+	</div>
+	<%= render 'general/footer.html.erb' %>
+	<div id="overlay">
+	    <div>
+	          <p>Loading</p>
+	          <%= image_tag "reader/loader.gif" %>
+	     </div>
+	</div>	
 </body>
 </html>
