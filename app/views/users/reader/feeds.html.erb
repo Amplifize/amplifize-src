@@ -12,6 +12,10 @@
 	</script>
 <% end %>
 
+<% content_for :subNav do %>
+	<% render "users/reader/subnav_view.html.erb", :view => "feeds" %>
+<% end %>
+
 <% content_for :appNav do %>
 	<% render "users/reader/app_nav_view.html.erb", :view => "feeds" %>
 <% end %>

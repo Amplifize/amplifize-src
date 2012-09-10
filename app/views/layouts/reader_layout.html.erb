@@ -24,9 +24,13 @@
 				<li><%= link_to "Logout", :logout %></li>
 			</ul>
 		</div> 
+	    <div id="subNav">
+			<%= yield :subNav %>
+			<div style="clear:both"></div>
+	    </div>
+		<!--<p id="notice"><%= notice %></p> -->
         <div style="clear:both"></div>
     </header>
-	<!--<p id="notice"><%= notice %></p> -->
 	<div id="appNav">
 		<%= yield :appNav %>
 		<div style="clear:both"></div>

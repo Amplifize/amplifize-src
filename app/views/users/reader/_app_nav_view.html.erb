@@ -9,36 +9,17 @@
 			<% end %>
 		</select>
 	</form>
-	<% else %>
-	<form name="selectTag" id="selectTag">
-		<label>Content filter</label>
-		<select>
-			<option value="all">All content</option>
-			<% @tags.each do |tag|%>
-			<option value="<%= tag.name %>"><%= tag.name%></option>
-			<%end%>
-		</select>
-	</form>
 	<% end %>
 
 	<div id="menuOptions">
 		<% if "shares" == view then %>
-			<a href="#" onclick="downPost();" class="navTab">previous conversation</a>
-			<a href="#" onclick="upPost();" class="navTab">next conversation</a>
-			<a href="#" onclick="setReadState(1);" class="navTab">keep unread</a>
-	
 			<a class="navTab" href="#addComment-modal-content" data-toggle="modal">comment</a>
 		<% else %>
-			<a href="#" onclick="downPost();" class="navTab">previous content</a>
-			<a href="#" onclick="upPost();" class="navTab">next content</a>
-			<a href="#" onclick="setReadState(1);" class="navTab">read later</a>
-	
-			<a href="#" onclick="markAllAsRead();" class="navTab">mark all read</a>
 			<a href="#addShare-modal-content" data-toggle="modal" class="navTab">share content</a>
-			<br/>
-			<a href="/reader/feeds/manage" class="btn" style="float:right;">Manage sources</a>
-			<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="float:right;">Add content source</a>
 		<% end %>
+		<a href="#" onclick="setReadState(1);" class="navTab">read later</a>
+		<a href="#" onclick="downPost();" title="Previous" class="btn">&lt;</a>
+		<a href="#" onclick="upPost();" title="Next" class="btn">&gt;</a>
 	</div>
 	<div style="clear:both;"></div>
 </div>

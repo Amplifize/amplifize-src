@@ -2,6 +2,10 @@ var current_post = undefined;
 var position = 0;
 var max_position = 0;
 
+var loadFilterView = function () {
+	alert("Coming soon!");
+}
+
 var markAllAsRead = function() {
 	enableOverlay();
 	
@@ -96,31 +100,6 @@ var updatePostContent = function(postId) {
 	}
 };
 
-var getFeedsByTag = function(tagName) {
-	if("all" == tagName) {
-		window.location.reload();		
-	}
-
-	$.ajax({
-		url: "/reader/tag/"+tagName,
-		success: function(data, textStatus, jqXHR) {
-			posts = data;
-			position = 0;
-
-			var unread_count = posts.length - 1; 
-			$("#feedUnreadCount").html(unread_count);
-			document.title = "Amplifize | Give good content a voice ("+unread_count+")";
-
-			updatePostContent(posts[position]);
-		},
-		error: function(xhr, text, error) {
-			alert(error);
-			alert(text);
-		},
-		dataType: "json"
-	});
-};
-
 var clearContent = function() {
 	$("#feedTitle").html('');
 	$("#contentRow").html('');
@@ -154,12 +133,6 @@ $(document).ready(function() {
 			downPost();
 			return false;
 		});
-
-		$("#selectTag select").change(function () {
-			$("#selectTag select option:selected").each(function () {
-				getFeedsByTag($(this).val());
-			});
-       	});
 
 		var unread_count = posts.length - 1; 
 		$("#feedUnreadCount").html(unread_count);

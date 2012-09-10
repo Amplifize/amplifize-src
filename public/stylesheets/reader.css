@@ -1,10 +1,17 @@
-#appNav {
+#subNav {
+	width: 100%;
+}
+
+#appNav,
+#subNavContainer {
 	width: 940px;
     
     margin: 10px auto;
-    padding: 10px;
-    
-    background-color: #fff;    
+    padding: 10px;    
+}
+
+#appNav {
+	background-color: #fff;
 }
 
 #reader_content {
@@ -23,7 +30,7 @@
 }
 
 #amplifizeContentNavigation {
-	font-size: 18px;
+	font-size: 16px;
 }
 
 #feedRow {
@@ -80,10 +87,13 @@
     text-align: center;
 }
 
-#selectTag,
 #selectFollows {
 	width: 200px;
 	float: left;
+}
+
+#subNavContainer a {
+	margin-right: 50px;
 }
 
 #menuOptions {
