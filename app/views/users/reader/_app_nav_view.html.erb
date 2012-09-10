@@ -1,16 +1,4 @@
 <div id="amplifizeContentNavigation">
-	<% if "shares" == view then %>
-	<form name="selectFollows" id="selectFollows">
-		<label>Conversation filter</label>
-		<select>
-			<option value="all">All conversations</option>
-			<% @followed.each do |followee| %>
-			<option value="<%= followee.id %>"><%= followee.display_name.nil? ? followee.email : followee.display_name %>'s conversations</option>
-			<% end %>
-		</select>
-	</form>
-	<% end %>
-
 	<div id="menuOptions">
 		<% if "shares" == view then %>
 			<a class="navTab" href="#addComment-modal-content" data-toggle="modal">comment</a>

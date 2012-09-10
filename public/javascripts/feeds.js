@@ -165,12 +165,4 @@ $(document).ready(function() {
 	  $('#summary').val('');
 	  setTimeout(function(){$("#summary").focus();}, 250);
 	});
-
-	//$('form#importForm').bind("ajax:success", function(data, status, xhr) {
-	//	$('#importFeed-modal-content').modal('hide')
-	//});
-
-	//$('form#importForm').bind("ajax:failure", function(data, status, xhr) {
-	//	alert(status);
-	//});
 });
