@@ -39,7 +39,6 @@ $(document).ready(function() {
 		$("#inviteFriends-modal-body").hide();
 		$("#inviteFriends-response-modal-body").show();
 	});
-	
 
-
+	$("#container").css("margin-top", "45px");
 });
