@@ -40,4 +40,13 @@ class User < ActiveRecord::Base
       user_feeds
     }
   end
+  
+  def single_access_token
+    sat = read_attribute(:single_access_token)
+    if sat.nil? or sat.empty? 
+      reset_single_access_token!
+      sat = read_attribute(:single_access_token)
+    end
+    sat
+  end
 end

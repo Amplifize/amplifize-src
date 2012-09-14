@@ -39,6 +39,7 @@ class Post < ActiveRecord::Base
     feed_status_code = Feed::FEED_STATUS_OK
 
     options = {}
+    options[:timeout] = 15
     options[:on_success] = lambda {|url, feed_data| feed_status_code = Feed::FEED_STATUS_OK }
     options[:on_failure] = lambda {|url, response_code, response_header, response_body| feed_status_code = Feed::FEED_STATUS_ERROR }
     
@@ -83,16 +84,18 @@ class Post < ActiveRecord::Base
   end
 
   def attach_to_users
-    feed = Feed.find_by_id(self.feed_id)
-    feed.users.each do |user|
-      begin
-        PostUser.create!(
-          :post_id      => self.id,
-          :user_id      => user.id,
-          :read_state   => 1
-        )
-      rescue ActiveRecord::StatementInvalid => e
-        raise e unless /Mysql2::Error: Duplicate entry/.match(e)
+    if not self.feed_id.nil?
+      feed = Feed.find_by_id(self.feed_id)
+      feed.users.each do |user|
+        begin
+          PostUser.create!(
+            :post_id      => self.id,
+            :user_id      => user.id,
+            :read_state   => 1
+          )
+        rescue ActiveRecord::StatementInvalid => e
+          raise e unless /Mysql2::Error: Duplicate entry/.match(e)
+        end
       end
     end
   end

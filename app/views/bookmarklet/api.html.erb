@@ -1,0 +1,144 @@
+<%  amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.port}"; %>
+/**
+ * Copyright (C) 2012 Big Fish Big Pond
+ * All Rights Reserved
+ */
+(function() {
+	
+	function ampgettitle()
+	{
+		return document.title;
+	}
+	function ampgetfilteredbody()
+	{
+		return document.body.innerHTML;
+	}
+	function ampsendshare(comment, successFn, errorFn)
+	{
+
+		var url = 'http://<%=amp_host%>/ext/share/v1/<%=@current_user.single_access_token%>';
+		var method = 'POST';
+		var t = ampgettitle();
+		var c = ampgetfilteredbody();
+		//var c = '<html></html>';
+		var u = window.location;
+		
+		var b = "url="+encodeURIComponent(u)+"&comment="+encodeURIComponent(comment)+"&title="+t+"&content="+encodeURIComponent(c);
+
+		try {
+		if (window.XDomainRequest) {
+            var xdr = new XDomainRequest();
+            if (! xdr) throw(0);
+            xdr.onerror = errorFn;
+            xdr.ontimeout = errorFn;
+            xdr.onprogress = function(){};
+            xdr.onload = function(){ successFn();};
+            xdr.open(method, url);
+            xdr.send(b);
+        } else if (window.XMLHttpRequest) {
+        	var x = new XMLHttpRequest();
+            x.open(method, url, true);
+            x.setRequestHeader('Accept','application/json');
+            x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            x.onreadystatechange = function(){
+                try {
+                    if (x.readyState != 4) return;
+                    if (x.status != 200) throw(0);
+                    successFn();
+                } catch (e) { errorFn(); }
+            }
+            x.send(b);
+        } else {
+        	errorFn();
+        }
+      } catch (exception) {
+      	errorFn();
+      }
+	}
+	
+	function ampshowshareoverlay()
+	{
+		// Main Overlay
+		var overlay=document.createElement('div');
+		overlay.setAttribute('id', 'ampshareoverlay');
+		overlay.setAttribute('style','position:fixed;z-index:1000000;top:15px;width:350px;border:3pt solid #000;opacity:1.0;-moz-border-radius:15px;border-radius: 15px;padding:10px;background-color:#aaa;color:#000;font-family:helvetica,arial,sans-serif;');
+		
+		// Status Message Container
+		var msg_container = document.createElement('div');
+		msg_container.setAttribute('id', 'ampdonecontainer');
+		msg_container.setAttribute('style', 'display:none;text-align:center;font-size:4em;');
+		
+		// Form Container
+		var form_container = document.createElement('div');
+		form_container.setAttribute('id', 'ampformcontainer');
+
+		// Header Container
+		var header_container = document.createElement('div');
+		header_container.setAttribute('style', 'font-size: 2.2em;text-align:center;padding:12px;');
+		header_container.innerHTML = 'Share on Amplifize';
+		
+		// Label Container
+		var label_container = document.createElement('div');
+		label_container.setAttribute('style', 'font-size:0.8em;font-style:italic;');
+		label_container.innerHTML = "Comment:";
+		
+		// Textarea Container
+		var ta = document.createElement('textarea');
+		ta.setAttribute('style', 'width:100%;height:70px;font-family:helvetica,arial,sans-serif;');
+		ta.setAttribute('name', 'summary');
+		
+		var ta_container = document.createElement('div');
+		ta_container.appendChild(ta);
+		
+		// Button Container
+		var btn_container = document.createElement('div');
+		//btn_container.setAttribute('id', 'ampbtncontainer');
+		btn_container.setAttribute('style', 'text-align:center;padding:5px;');
+		
+		var submit_btn = document.createElement('button');
+		var cancel_btn = document.createElement('button');
+		
+		btn_container.appendChild(cancel_btn);
+		btn_container.appendChild(submit_btn);
+		
+		submit_btn.innerHTML = 'Share';
+		cancel_btn.innerHTML = 'Cancel';
+		
+		errorFn = function() {
+			ampswapcontainer(form_container,msg_container, 'Error Sharing');
+			setTimeout(function(){overlay.style.display='none'}, 3000);			
+		}
+		
+		successFn = function() {
+			ampswapcontainer(form_container,msg_container, 'Shared!');
+			setTimeout(function(){overlay.style.display='none'}, 2000);
+		}
+		
+		cancel_btn.onclick = function() { overlay.style.display='none';}
+		submit_btn.onclick = function() {ampswapcontainer(form_container,msg_container,'Sharing...'),ampsendshare(ta.value, successFn, errorFn);}
+		
+
+		form_container.appendChild(header_container);
+		form_container.appendChild(label_container);
+		form_container.appendChild(ta_container);
+		form_container.appendChild(btn_container);
+		
+		overlay.appendChild(msg_container);
+		overlay.appendChild(form_container);
+		
+		document.body.appendChild(overlay);
+	}
+	
+	function ampswapcontainer(toHide, toShow, message)
+	{
+		toHide.style.display='none';
+		toShow.style.display='block';
+		toShow.innerHTML = message;
+	}
+	
+	function ampshare()
+	{
+		ampshowshareoverlay();
+	}
+	ampshare();void(0);
+})();

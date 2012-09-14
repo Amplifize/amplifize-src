@@ -12,4 +12,22 @@
 	</script>
 <% end %>
 
+<%
+if Rails.env.production?
+bm_js_host = 'amplifize.com';
+bm_js_func = 'amplifize_share';
+bm_msg = 'Share on Amplifize';
+else
+bm_js_host = "#{request.host}:#{request.port}";
+bm_js_func = 'amplifize_share_dev';
+bm_msg = 'Share on Amplifize [DEV]';
+end
+%>
+
+<p>
+	<a href="javascript:function <%=bm_js_func%>(){var d=document,z=d.createElement(&#039;scr&#039;+&#039;ipt&#039;),b=d.body,l=d.location;try{if(!b)throw(0);z.setAttribute(&#039;src&#039;,&#039;http://<%=bm_js_host%>/ext/share/prompt/v1/<%=@user.single_access_token%>?url=&#039;+encodeURIComponent(l.href)+&#039;&amp;ts=&#039;+(new Date().getTime()));b.appendChild(z);}catch(e){}}<%=bm_js_func%>();void(0)">
+		<%=bm_msg%>
+	</a>
+</p>	
+<br />
 <%= render 'users/profile_form' %>

@@ -19,6 +19,8 @@ gem 'delayed_job_active_record'
 gem "daemons"
 
 gem 'whenever'
+gem 'ruby-readability'
+
 
 # To use debugger
 # gem 'ruby-debug'

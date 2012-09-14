@@ -1,10 +1,6 @@
 class SharesController < ApplicationController
   before_filter :require_user
 
-  def single_access_allowed?
-    (action_name == "add_remote")
-  end
-
   def add    
     share = Share.add(params[:summary], params[:postId], current_user.id)
 
