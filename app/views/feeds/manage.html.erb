@@ -13,10 +13,10 @@
 <%end%>
 
 <% content_for :appNav do %>
-	<h3>Manage your content sources</h3>
+		<h3>Manage your content sources</h3>
 
-	<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="float:left; margin-right: 25px;">Add content source</a>
-	<a href="/feeds/import" data-toggle="modal" class="btn" style="float:left;">Import sources</a>
+		<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="float:left; margin-right: 25px;">Add content source</a>
+		<a href="/feeds/import" data-toggle="modal" class="btn" style="float:left;">Import sources</a>
 <% end %>
 
 	
@@ -43,7 +43,7 @@
 			</ul>
 	
 			<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+feed.id.to_s %>
-			<a href="#addTags-modal-content" data-toggle="modal">Add tags</a>
+			<a class="addTagsLink" href="#addTags-modal-content" data-toggle="modal" data-id="<%= feed.id %>">Add tags</a>
 			<a href="#deleteTags-modal-content" data-toggle="modal" onclick="populateDeleteTags(<%= feed.id %>)">Delete tags</a>
 	
 			<script type="text/javascript">

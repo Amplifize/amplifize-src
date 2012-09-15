@@ -22,6 +22,8 @@ Salon::Application.routes.draw do
   match '/feeds/import/google' => 'import#google', :as => :import_google
   match '/feeds/import/opml' => 'import#opml', :as => :import_opml
 
+  match '/feeds/clear-all' => 'feeds#clearAll'
+
   match '/feeds/:feed_id/tags' => 'feeds#tagsByFeed'
 
   match '/reader/feed/:feed_id' => 'posts#by_feed', :as => :by_feed

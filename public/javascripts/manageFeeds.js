@@ -1,10 +1,3 @@
-var addTags = function(feedId) {
-	$("#tag_feed_id").val(feedId);
-	$("#addTags-modal-content").modal();
-	$('#tag_name').val('');
-	setTimeout(function(){$("#tag_name").focus();}, 250);
-};
-
 var populateDeleteTags = function(feedId) {
 	$.ajax({
 		url: "/feeds/"+feedId+"/tags",
@@ -40,9 +33,13 @@ var deleteTagFromFeed = function(tagId) {
 }
 
 $(document).ready(function() {
-	$("#shareUnreadCount").html("<%= @shares_unread_count %>");
-	$("#feedUnreadCount").html("<%= @posts_unread_count %>");
-
+	$('.addTagsLink').on("click", function() {
+		 $("#tag_feed_id").val($(this).data('id'));
+		 
+		 $('#tag_name').val('');
+		setTimeout(function(){$("#tag_name").focus();}, 250);
+	});
+	
 	$('form#new_tag').bind("ajax:success", function(status, data, xhr) {
 		$("#tag_name").val();
 		$("#addTags-modal-content").modal("hide");
