@@ -5,6 +5,7 @@ require 'open-uri'
 # Calls to this controller will likely be XDR
 # or JSONP and ar eintended for use with a single access token
 class BookmarkletController < ApplicationController
+  before_filter :require_user
   
   def single_access_allowed?
     true
