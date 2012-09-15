@@ -1,4 +1,7 @@
-<%  amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.port}"; %>
+<%  
+amp_protocol = request.protocol;
+amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.port}"; 
+%>
 /**
  * Copyright (C) 2012 Big Fish Big Pond
  * All Rights Reserved
@@ -16,14 +19,21 @@
 	function ampsendshare(comment, successFn, errorFn)
 	{
 
-		var url = 'http://<%=amp_host%>/ext/share/v1/<%=@current_user.single_access_token%>';
+		var url = '<%=amp_protocol%><%=amp_host%>/ext/share/v1/<%=@current_user.single_access_token%>';
 		var method = 'POST';
 		var t = ampgettitle();
 		var c = ampgetfilteredbody();
+		
+		if (c.length > 150000) {
+			c = '';
+			f = 1;
+		} else {
+			f = 0;
+		}
 		//var c = '<html></html>';
 		var u = window.location;
 		
-		var b = "url="+encodeURIComponent(u)+"&comment="+encodeURIComponent(comment)+"&title="+t+"&content="+encodeURIComponent(c);
+		var b = "fetch="+f+"&url="+encodeURIComponent(u)+"&comment="+encodeURIComponent(comment)+"&title="+t+"&content="+encodeURIComponent(c);
 
 		try {
 		if (window.XDomainRequest) {
