@@ -25,6 +25,14 @@ class FeedsController < ApplicationController
     render :layout => 'reader_layout'
   end
 
+  def clearAll
+    PostUser.update_all 'read_state = 0', ["user_id = ?", current_user.id]
+
+    respond_to do |format|
+      format.js {render :json => '{"success": true}'}
+    end
+  end
+
   def tagsByFeed
     tags = Tag.find_all_by_user_id_and_feed_id(current_user.id, params[:feed_id])
     

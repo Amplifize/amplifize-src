@@ -9,14 +9,18 @@ var loadFilterView = function () {
 var markAllAsRead = function() {
 	enableOverlay();
 	
-	for(var i = 0; i < posts.length; i++) {
-		$.ajax({
-			url: "/post_users/"+posts[i]+"/read_state/0"
-		});
-	}
+	$.ajax({
+		url: "/feeds/clear-all",
+		success: function() {
+			disableOverlay();
+			clearContent();			
+		},
+		error: function(xhr, text, error) {
+			//log this
+			disableOverlay();
+		}
+	});
 
-	disableOverlay();
-	clearContent();
 }
 
 var setReadState = function(readState) {
@@ -105,6 +109,10 @@ var clearContent = function() {
 	$("#contentRow").html('');
 	$("#contentSummary").html('');
 	$("#amplifizeContent").animate({scrollTop: 0});
+
+	$("#feedUnreadCount").html("0");
+	document.title = "Amplifize | Give good content a voice (0)";
+
 
 	$("#contentSummary").html(
 		"<h3>Looks like you've got no more posts to read</h3>" +
