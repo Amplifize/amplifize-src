@@ -6,7 +6,16 @@ class FeedsController < ApplicationController
   end
 
   def create
-    Feed.setup_feed(current_user, Feed.check_feed_url(params[:feed][:url]), params[:feed][:tags].squish().split(","))
+    feed_url = params[:feed][:url]
+    
+    valid_urls = FeedValidator.validate_feed_url(feed_url)
+    
+    if (valid_urls.length > 0) 
+      # For now we'll just use the first URL found.  Eventually should
+      # provide user with options to choose from
+      url_to_use = valid_urls[0]
+      Feed.setup_feed(current_user, url_to_use, params[:feed][:tags].squish().split(","))
+    end
 
     respond_to do |format|
       format.js { render :json => '{"success": true}' }
