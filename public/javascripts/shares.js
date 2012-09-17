@@ -164,7 +164,7 @@ $(document).ready(function() {
 		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
 	}
 
-	$("#container").css("margin-top", "36px");
+	$("#container").css("margin-top", "32px");
 
 	updateShareContent(shares[position]);
 
