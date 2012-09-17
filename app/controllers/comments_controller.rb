@@ -6,13 +6,7 @@ class CommentsController < ApplicationController
       :comment_text => params[:comment][:comment_text]
     )
 
-    shares = ShareUser.find_all_by_share_id_and_read_state(params[:comment][:share_id], 0)
-    if not shares.nil? then
-      shares.each do |share|
-        share.read_state = 1
-        share.save
-      end
-    end
+    ShareUser.update_all("read_state = 1", ["share_id = ? AND read_state = 0 AND user_id != ?", params[:comment][:share_id], current_user.id ])
 
     respond_to do |format|
       format.js {render :json => comment.to_json(
