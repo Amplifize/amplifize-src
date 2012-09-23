@@ -71,16 +71,13 @@ amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.
 		// Main Overlay
 		var overlay=document.createElement('div');
 		overlay.setAttribute('id', 'ampshareoverlay');
-		overlay.setAttribute('style','position:fixed;z-index:1000000;top:15px;width:350px;border:3pt solid #000;opacity:1.0;-moz-border-radius:15px;border-radius: 15px;padding:10px;background-color:#aaa;color:#000;font-family:helvetica,arial,sans-serif;');
-		
-		// Status Message Container
-		var msg_container = document.createElement('div');
-		msg_container.setAttribute('id', 'ampdonecontainer');
-		msg_container.setAttribute('style', 'display:none;text-align:center;font-size:4em;');
+		//overlay.setAttribute('style','position:fixed;z-index:1000000;top:15px;width:350px;border:3pt solid #000;opacity:1.0;-moz-border-radius:15px;border-radius: 15px;padding:10px;background-color:#aaa;color:#000;font-family:helvetica,arial,sans-serif;');
+		overlay.setAttribute('style', 'background-color: rgba(0, 0, 0, 0.9);height: 100%;position: absolute;top: 0;left:0;width: 100%;z-index: 1000000;');
 		
 		// Form Container
 		var form_container = document.createElement('div');
 		form_container.setAttribute('id', 'ampformcontainer');
+		form_container.setAttribute('style', 'left: 50%;margin-left: -300px;margin-top: -100px;position: fixed;top: 50%;width: 600px;');
 
 		// Header Container
 		var header_container = document.createElement('div');
@@ -102,50 +99,51 @@ amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.
 		
 		// Button Container
 		var btn_container = document.createElement('div');
-		//btn_container.setAttribute('id', 'ampbtncontainer');
 		btn_container.setAttribute('style', 'text-align:center;padding:5px;');
 		
 		var submit_btn = document.createElement('button');
-		var cancel_btn = document.createElement('button');
+		submit_btn.setAttribute("style", "margin-right:10px;height: 30px;");
 		
-		btn_container.appendChild(cancel_btn);
+		var cancel_btn = document.createElement('button');
+		cancel_btn.setAttribute("style", "height:30px;");
+		
 		btn_container.appendChild(submit_btn);
+		btn_container.appendChild(cancel_btn);
 		
 		submit_btn.innerHTML = 'Share';
 		cancel_btn.innerHTML = 'Cancel';
 		
-		errorFn = function() {
-			ampswapcontainer(form_container,msg_container, 'Error Sharing');
+		var errorFn = function() {
+			header_container.innerHTML = 'Error Sharing';
 			setTimeout(function(){overlay.style.display='none'}, 3000);			
-		}
+		};
 		
-		successFn = function() {
-			ampswapcontainer(form_container,msg_container, 'Shared!');
+		var successFn = function() {
+			header_container.innerHTML = 'Conversation started' ;
 			setTimeout(function(){overlay.style.display='none'}, 2000);
-		}
+		};
 		
-		cancel_btn.onclick = function() { overlay.style.display='none';}
-		submit_btn.onclick = function() {ampswapcontainer(form_container,msg_container,'Sharing...'),ampsendshare(ta.value, successFn, errorFn);}
-		
+		cancel_btn.onclick = function() { overlay.style.display='none';};
+		submit_btn.onclick = function() {
+			header_container.innerHTML = 'Sharing...';
+			
+			ampsendshare(ta.value, successFn, errorFn);
+			
+			label_container.style.display = 'none';
+			ta.style.display = 'none';
+			btn_container.style.display = 'none';
+		};
 
 		form_container.appendChild(header_container);
 		form_container.appendChild(label_container);
 		form_container.appendChild(ta_container);
 		form_container.appendChild(btn_container);
-		
-		overlay.appendChild(msg_container);
+
 		overlay.appendChild(form_container);
 		
 		document.body.appendChild(overlay);
 	}
-	
-	function ampswapcontainer(toHide, toShow, message)
-	{
-		toHide.style.display='none';
-		toShow.style.display='block';
-		toShow.innerHTML = message;
-	}
-	
+
 	function ampshare()
 	{
 		ampshowshareoverlay();
