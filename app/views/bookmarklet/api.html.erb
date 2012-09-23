@@ -1,29 +1,64 @@
-<%  
+<%
 amp_protocol = request.protocol;
-amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.port}"; 
+amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.port}";
 %>
 /**
  * Copyright (C) 2012 Big Fish Big Pond
  * All Rights Reserved
  */
 (function() {
-	
-	function ampgettitle()
-	{
+
+	function ampgettitle() {
 		return document.title;
 	}
-	function ampgetfilteredbody()
-	{
-		return document.body.innerHTML;
+
+	function removeNode(node) {
+		if (node != null) {
+			while (node.firstChild) {
+				node.removeChild(node.firstChild)
+			}
+			node.parentNode.removeChild(node);
+		}
 	}
-	function ampsendshare(comment, successFn, errorFn)
-	{
+
+	function removeHiddenNodes(node) {
+		if (node != null && node.nodeType == 1) {
+			if (node.style.display == "none" || node.style.visibility == "hidden") {
+				node.parentNode.removeChild(node);
+			} else {
+				for (var idx = 0; idx < node.childNodes.length; idx++) {
+					removeHiddenNodes(node.childNodes[idx]);
+				}
+			}
+
+		}
+	}
+
+	function ampgetfilteredbody() {
+		var b = document.body.cloneNode(true);
+		var tagsToRemove = ['script', 'noscript', 'iframe'];
+
+		for (var idx = 0; idx < tagsToRemove.length; idx++) {
+			var nodes = b.getElementsByTagName(tagsToRemove[idx]);
+			var copy = [];
+			for (var idx2 = 0; idx2 < nodes.length; idx2++) {
+				copy[idx2] = nodes[idx2];
+			}
+			for (var idx2 = 0; idx2 < copy.length; idx2++) {
+				copy[idx2].parentNode.removeChild(copy[idx2]);
+			}
+		}
+		removeHiddenNodes(b);
+		return b.innerHTML;
+	}
+
+	function ampsendshare(comment, successFn, errorFn) {
 
 		var url = '<%=amp_protocol%><%=amp_host%>/ext/share/v1/<%=@current_user.single_access_token%>';
 		var method = 'POST';
 		var t = ampgettitle();
 		var c = ampgetfilteredbody();
-		
+
 		if (c.length > 150000) {
 			c = '';
 			f = 1;
@@ -32,48 +67,55 @@ amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.
 		}
 		//var c = '<html></html>';
 		var u = window.location;
-		
-		var b = "fetch="+f+"&url="+encodeURIComponent(u)+"&comment="+encodeURIComponent(comment)+"&title="+t+"&content="+encodeURIComponent(c);
+
+		var b = "fetch=" + f + "&url=" + encodeURIComponent(u) + "&comment=" + encodeURIComponent(comment) + "&title=" + t + "&content=" + encodeURIComponent(c);
 
 		try {
-		if (window.XDomainRequest) {
-            var xdr = new XDomainRequest();
-            if (! xdr) throw(0);
-            xdr.onerror = errorFn;
-            xdr.ontimeout = errorFn;
-            xdr.onprogress = function(){};
-            xdr.onload = function(){ successFn();};
-            xdr.open(method, url);
-            xdr.send(b);
-        } else if (window.XMLHttpRequest) {
-        	var x = new XMLHttpRequest();
-            x.open(method, url, true);
-            x.setRequestHeader('Accept','application/json');
-            x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-            x.onreadystatechange = function(){
-                try {
-                    if (x.readyState != 4) return;
-                    if (x.status != 200) throw(0);
-                    successFn();
-                } catch (e) { errorFn(); }
-            }
-            x.send(b);
-        } else {
-        	errorFn();
-        }
-      } catch (exception) {
-      	errorFn();
-      }
+			if (window.XDomainRequest) {
+				var xdr = new XDomainRequest();
+				if (!xdr)
+					throw (0);
+				xdr.onerror = errorFn;
+				xdr.ontimeout = errorFn;
+				xdr.onprogress = function() {
+				};
+				xdr.onload = function() {
+					successFn();
+				};
+				xdr.open(method, url);
+				xdr.send(b);
+			} else if (window.XMLHttpRequest) {
+				var x = new XMLHttpRequest();
+				x.open(method, url, true);
+				x.setRequestHeader('Accept', 'application/json');
+				x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				x.onreadystatechange = function() {
+					try {
+						if (x.readyState != 4)
+							return;
+						if (x.status != 200)
+							throw (0);
+						successFn();
+					} catch (e) {
+						errorFn();
+					}
+				}
+				x.send(b);
+			} else {
+				errorFn();
+			}
+		} catch (exception) {
+			errorFn();
+		}
 	}
-	
-	function ampshowshareoverlay()
-	{
+
+	function ampshowshareoverlay() {
 		// Main Overlay
-		var overlay=document.createElement('div');
+		var overlay = document.createElement('div');
 		overlay.setAttribute('id', 'ampshareoverlay');
 		//overlay.setAttribute('style','position:fixed;z-index:1000000;top:15px;width:350px;border:3pt solid #000;opacity:1.0;-moz-border-radius:15px;border-radius: 15px;padding:10px;background-color:#aaa;color:#000;font-family:helvetica,arial,sans-serif;');
-		overlay.setAttribute('style', 'background-color: rgba(0, 0, 0, 0.9);height: 100%;position: absolute;top: 0;left:0;width: 100%;z-index: 1000000;');
-		
+		overlay.setAttribute('style', 'background-color: rgba(0, 0, 0, 0.9);height: 100%;position: absolute;top: 0;left:0;width: 100%;z-index: 10000000;');
+
 		// Form Container
 		var form_container = document.createElement('div');
 		form_container.setAttribute('id', 'ampformcontainer');
@@ -83,52 +125,58 @@ amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.
 		var header_container = document.createElement('div');
 		header_container.setAttribute('style', 'font-size: 2.2em;text-align:center;padding:12px;');
 		header_container.innerHTML = 'Share on Amplifize';
-		
+
 		// Label Container
 		var label_container = document.createElement('div');
 		label_container.setAttribute('style', 'font-size:0.8em;font-style:italic;');
 		label_container.innerHTML = "Comment:";
-		
+
 		// Textarea Container
 		var ta = document.createElement('textarea');
 		ta.setAttribute('style', 'width:100%;height:70px;font-family:helvetica,arial,sans-serif;');
 		ta.setAttribute('name', 'summary');
-		
+
 		var ta_container = document.createElement('div');
 		ta_container.appendChild(ta);
-		
+
 		// Button Container
 		var btn_container = document.createElement('div');
 		btn_container.setAttribute('style', 'text-align:center;padding:5px;');
-		
+
 		var submit_btn = document.createElement('button');
 		submit_btn.setAttribute("style", "margin-right:10px;height: 30px;");
-		
+
 		var cancel_btn = document.createElement('button');
 		cancel_btn.setAttribute("style", "height:30px;");
-		
+
 		btn_container.appendChild(submit_btn);
 		btn_container.appendChild(cancel_btn);
-		
+
 		submit_btn.innerHTML = 'Share';
 		cancel_btn.innerHTML = 'Cancel';
-		
+
 		var errorFn = function() {
 			header_container.innerHTML = 'Error Sharing';
-			setTimeout(function(){overlay.style.display='none'}, 3000);			
+			setTimeout(function() {
+				overlay.style.display = 'none'
+			}, 3000);
 		};
-		
+
 		var successFn = function() {
-			header_container.innerHTML = 'Conversation started' ;
-			setTimeout(function(){overlay.style.display='none'}, 2000);
+			header_container.innerHTML = 'Conversation started';
+			setTimeout(function() {
+				overlay.style.display = 'none'
+			}, 2000);
 		};
-		
-		cancel_btn.onclick = function() { overlay.style.display='none';};
+
+		cancel_btn.onclick = function() {
+			overlay.style.display = 'none';
+		};
 		submit_btn.onclick = function() {
 			header_container.innerHTML = 'Sharing...';
-			
+
 			ampsendshare(ta.value, successFn, errorFn);
-			
+
 			label_container.style.display = 'none';
 			ta.style.display = 'none';
 			btn_container.style.display = 'none';
@@ -140,13 +188,14 @@ amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.
 		form_container.appendChild(btn_container);
 
 		overlay.appendChild(form_container);
-		
+
 		document.body.appendChild(overlay);
 	}
 
-	function ampshare()
-	{
+	function ampshare() {
 		ampshowshareoverlay();
 	}
-	ampshare();void(0);
+
+	ampshare();
+	void (0);
 })();
