@@ -19,13 +19,15 @@ class SharesController < ApplicationController
     respond_to do |format|
       format.js {render :json => share.to_json(
         :include => {
-          :comments => {
-            :include => :user
+          :comments => { 
+            :include => {
+              :user => {:only => [:id, :email, :display_name]} 
+             },
           },
           :post => {
             :include => :feed
           },
-          :user => {}
+          :user => {:only => [:id, :email, :display_name] }
         }
       )}
     end

@@ -1,6 +1,7 @@
 var current_share = undefined;
 var position = 0;
 var max_position = 0;
+var all_follows = [];
 
 var setReadState = function(readState) {
 	$.ajax({
@@ -70,6 +71,37 @@ var getSharesByFollows = function(followsId) {
 	});
 };
 
+var followUser = function(userId) {
+	$.ajax({
+		url: '/follows/add/'+userId,
+		success: function(data, textStatus, jqXHR) {
+			$('.followUser_'+userId).html('Followed!');
+		},
+		error: function(xhr, text, error) {
+			alert(error);
+			alert(text);
+		}
+	});
+};
+
+var getFollowers = function() {
+	$.ajax({
+		url: '/follows/all',
+		success: function(data, textStatus, jqXHR) {
+			if (data instanceof Array) {
+				all_follows = data;
+			}
+		},
+		error: function(xhr, text, error) {
+			alert(error);
+			alert(text);
+		},
+		dataType: "json",
+		async:false
+	});
+		
+}
+
 var clearContent = function() {
 	$("#feedTitle").html('');
 	$("#contentTitle").html('');
@@ -83,7 +115,8 @@ var clearContent = function() {
 	);
 };
 
-var updateShareContent = function(shareId) {		
+var updateShareContent = function(shareId) {	
+	
 	if(shareId) {
 		$.ajax({
 			url: "/shares/"+shareId,
@@ -116,8 +149,12 @@ var updateShareContent = function(shareId) {
 	
 				for(var i = 0; i < data.share.comments.length; i++) {
 					var comment = data.share.comments[i];
+					var followsText = '';
+					if ($.inArray(comment.user.id, all_follows) == -1) {
+						followsText = '(<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
+					}
 					var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-					var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+'</p></div>';
+					var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+' '+followsText+'</p></div>';
 					$("#commentThread").append(html);
 				}
 			},
@@ -132,7 +169,11 @@ var updateShareContent = function(shareId) {
 	}
 };
 
+
+
 $(document).ready(function() {
+	getFollowers();
+	
 	if(shares.length > 0) {
 		//need to do this to prevent firefox from auto searching on typing
 		jQuery(document).bind('keydown', 'j', function(evt) {
