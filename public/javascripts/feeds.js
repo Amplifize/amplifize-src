@@ -3,7 +3,43 @@ var position = 0;
 var max_position = 0;
 
 var loadFilterView = function () {
-	alert("Coming soon!");
+	$("#filter-overlay").css("visibility", "visible");
+}
+
+var changeSortOrder = function(order) {
+	/*
+	switch(order) {
+		case 2:
+			$("#previousButton").click(function(evt) {
+				evt.preventDefault();
+				upPost();
+			});
+			
+			$("#nextButton").click(function(evt) {
+				evt.preventDefault();
+				downPost();
+			});
+			
+			position = posts.length - 1;
+			updatePostContent(posts[position]);
+			break;
+		case 1:
+		default:
+			$("#previousButton").click(function(evt) {
+				evt.preventDefault();
+				downPost();
+			});
+			
+			$("#nextButton").click(function(evt) {
+				evt.preventDefault();
+				upPost();
+			});
+
+			position = 0;
+			updatePostContent(posts[position]);
+			break;
+	}
+	*/
 }
 
 var markAllAsRead = function() {
@@ -93,13 +129,11 @@ var updatePostContent = function(postId) {
 				mixpanel.track("Read another post");
 			},
 			error: function(xhr, text, error) {
-				alert(error);
-				alert(text);
+				//log error here
 			},
 			dataType: "json"
 		})
 	} else {
-		$("#feedUnreadCount").html(0);
 		clearContent();
 	}
 };
@@ -113,13 +147,11 @@ var clearContent = function() {
 	$("#feedUnreadCount").html("0");
 	document.title = "Amplifize | Give good content a voice (0)";
 
-
 	$("#contentSummary").html(
 		"<h3>Looks like you've got no more posts to read</h3>" +
 		"<p>It might be time to add a <a href=\"#addFeed-modal-content\" data-toggle=\"modal\">new feed</a> or <a href=\"/feeds/import\">import your feeds</a> from Google Reader</p>"
 	);
 };
-
 
 $(document).ready(function() {
 	if(posts.length > 0) {
@@ -152,6 +184,9 @@ $(document).ready(function() {
 	updatePostContent(posts[position]);
 
 	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
+		$('#feed_url').val('');
+		$('#feed_tags').val('');
+
 		$('#addFeed-modal-content').modal('hide');
 		mixpanel.track("Add a new feed");
 	});
@@ -161,7 +196,7 @@ $(document).ready(function() {
 	});
 
 	$('form#addShareForm').bind("ajax:success", function(data, status, xhr) {
-		$("#summary").val();
+		$("#summary").val('');
 		$('#addShare-modal-content').modal('hide');
 		mixpanel.track("Share a post");
 	});
@@ -169,7 +204,6 @@ $(document).ready(function() {
 	$('form#addShareForm').bind("ajax:failure", function(data, status, xhr) {
 		alert(status);
 	});
-
 
 	$('#addShare-modal-content').bind('show', function () {
 	  $('#summary').val('');
