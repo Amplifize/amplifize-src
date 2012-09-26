@@ -19,11 +19,7 @@
 <% content_for :appNav do %>
 	<%= render "users/reader/app_nav_view.html.erb", :view => "feeds" %>
 <% end %>
-<!--
-<% content_for :filter do %>
-	<%= render "feeds/filter.html.erb" %>
-<% end %>
--->
+
 <%= render "users/reader/content_view.html.erb", :view => "feeds" %>
 
 <div id="addShare-modal-content" class="modal hide">
