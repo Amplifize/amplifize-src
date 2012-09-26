@@ -14,8 +14,8 @@
   <%= f.hidden_field :share_id, :value => '' %>
 
   <div class="field">
-    <%= f.label :comment %>
-    <%= f.text_area :comment_text, :style => "width: 500px; height: 51px;" %>
+    <%= f.text_area :comment_text, :style => "width: 470px; height: 100px;", :class => :htmlEditor %>
+  	<br/>
   </div>
   <div class="actions">
     <%= f.submit :value => 'Add comment' %>

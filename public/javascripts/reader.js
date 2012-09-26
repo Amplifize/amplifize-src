@@ -13,4 +13,6 @@ $(document).ready(function() {
 			window.open($(this).attr("href"));
 		}
 	});
+	
+	$(".htmlEditor").markItUp(markItUpSettings);
 });

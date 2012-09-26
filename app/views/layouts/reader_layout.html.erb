@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Amplifize | Give good content a voice</title>
-  <%= stylesheet_link_tag "bootstrap.css", "global.css", "reader.css" %>
+  <%= stylesheet_link_tag "bootstrap.css", "global.css", "reader.css", "markItUp/skins/markitup/style.css", "markItUp/sets/html/style.css" %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag :defaults, "reader.js", "jquery.hotkeys.js", "dateFormat.js", "bootstrap-modal.js" %>
+  <%= javascript_include_tag :defaults, "reader.js", "jquery.hotkeys.js", "dateFormat.js", "bootstrap-modal.js", "jquery.markitup.js", "markItUp.js" %>
   <%= yield :javascripts %>
   <%= csrf_meta_tag %>
 </head>
@@ -47,6 +47,14 @@
 	          <p>Loading</p>
 	          <%= image_tag "reader/loader.gif" %>
 	     </div>
-	</div>	
+	</div>
+	<!--
+	<div id="filter-overlay">
+		<div id="filterContainer">
+			<%= yield :filter %>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	-->
 </body>
 </html>
