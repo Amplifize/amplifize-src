@@ -10,10 +10,10 @@ gem 'mysql2', '0.2.6'
 gem 'jquery-rails'
 gem 'authlogic'
 
-gem 'feedzirra'
+gem "feedzirra", :path => "vendor/feedzirra"
 gem 'foreigner'
 gem 'opml'
-gem 'loofah', '1.0.0.beta.1'
+gem 'loofah'
 
 gem 'delayed_job_active_record'
 gem "daemons"
