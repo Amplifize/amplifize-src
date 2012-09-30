@@ -1,9 +1,13 @@
 class Mailer < ActionMailer::Base
-  default :from => "amplifize@amplifize.com"
+  default :from => "\"Amplifize\" <support@amplifize.com>"
 
   def new_user_email(user)
+    @title = "Welcome to the conversation on Amplifize"
+    @preview = "Use this email to help you get started with Amplifize"
     @User = user
-    mail(:to => user.email, :subject => "Welcome to Amplifize!")
+    mail(:to => user.email, :subject => @title) do |format|
+      format.html { render :layout => 'email_layout' }
+    end
   end
 
   def new_follower_email(user, follower)

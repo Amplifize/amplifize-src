@@ -1,0 +1,19 @@
+<% content_for :body do %>
+Welcome to Amplifize. Here is how to get started:
+<ol>
+<li><b><em>Bring your content…</em></b><br/>
+Just like when playing basketball at the local park, someone has to bring the ball. Likewise, be sure to bring your favorite content from across the Web with you. 
+</li>
+<br/>
+<li><b><em>Share your fun…</em></b><br/>
+Find something your friends would like to read? Invite them to sign up for Amplifize, and then share with them directly!  With our bookmarklet, you can also share anything you find from across the web.
+</li>
+<br/>
+<li><b><em>And bring your A-Game!</em></b><br/>
+Sharing content with your friends can get super addictive. Be sure to check back often, and comment often on the conversations that pop up in your Amplifize reader.
+</li>
+</ol>
+Want to learn more? Check out our <a href="<%= faq_url(:only_path => false, :utm_medium => 'email', :utm_source => 'welcome') %>">FAQ</a> section.
+<br/></br/>
+<a href="<%= login_url(:only_path => false, :u => @User.email, :utm_medium => 'email', :utm_source => 'welcome') %>">Login</a>, give it a poke around, and start sharing!
+<%end %>

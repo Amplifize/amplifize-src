@@ -53,10 +53,20 @@ Salon::Application.configure do
   # Action Mailer configurations.  
   #  See: http://guides.rubyonrails.org/action_mailer_basics.html
   # TODO Production should use sendmail for transacting mail
-  config.action_mailer.delivery_method = :file
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   
+  
+  config.action_mailer.smtp_settings = {
+    :user_name => "amplifize",
+    :password => "b1gFi$hBiGp0Nd",
+    :domain => "amplifize.com",
+    :address => "smtp.sendgrid.net",
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
  
   # Configuration for OAuth2 token providers
   config.oauth2 = {

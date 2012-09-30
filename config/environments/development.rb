@@ -1,9 +1,9 @@
 Salon::Application.configure do
-  # Settings specified here will take precedence over those in config/environment.rb
+# Settings specified here will take precedence over those in config/environment.rb
 
-  # In the development environment your application's code is reloaded on
-  # every request.  This slows down response time but is perfect for development
-  # since you don't have to restart the webserver when you make code changes.
+# In the development environment your application's code is reloaded on
+# every request.  This slows down response time but is perfect for development
+# since you don't have to restart the webserver when you make code changes.
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
@@ -22,15 +22,25 @@ Salon::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-  
+
   # Default domain name for URLs generated with the mailer
   config.action_mailer.default_url_options = { :host => "amplifize.local", :port => 3000 }
-  
+
   # Configurations for Action Mailer
-  config.action_mailer.delivery_method = :file
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  
+
+  config.action_mailer.smtp_settings = {
+    :user_name => "amplifize",
+    :password => "b1gFi$hBiGp0Nd",
+    :domain => "amplifize.com",
+    :address => "smtp.sendgrid.net",
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
   # Configuration for OAuth2 token providers
   config.oauth2 = {
     :google => {
@@ -43,11 +53,9 @@ Salon::Application.configure do
       :token_url => "https://accounts.google.com/o/oauth2/token"
     }
   }
-  
 
   # Whether to show the support/feedback widget on pages
   config.show_support_widget = false
 
-  
 end
 
