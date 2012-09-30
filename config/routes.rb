@@ -60,6 +60,8 @@ Salon::Application.routes.draw do
   match '/terms' => 'home#terms', :as => :terms
   match '/faq' => 'home#faq', :as => :faq
 
+  match '/googleaf23107439d49301.html' => 'home#google_verification'
+
   resources :users, :user_sessions, :feeds, :posts, :shares, :comments, :tags, :invites
 
   root :to => "home#index"
