@@ -37,11 +37,19 @@ class Post < ActiveRecord::Base
     end
     
     feed_status_code = Feed::FEED_STATUS_OK
-
+    feed_status_message = nil
+    
     options = {}
+    options[:max_redirects] = 5
     options[:timeout] = 15
     options[:on_success] = lambda {|url, feed_data| feed_status_code = Feed::FEED_STATUS_OK }
-    options[:on_failure] = lambda {|url, response_code, response_header, response_body| feed_status_code = Feed::FEED_STATUS_ERROR }
+    options[:on_failure] = lambda {|url, response_code, response_header, response_body, exception| 
+      if not exception.nil? 
+        feed_status_message = exception.message
+      end
+      feed_status_code = Feed::FEED_STATUS_ERROR 
+      puts "ERROR [#{response_code}]:  #{feed_status_message}"
+    }
     
     if not feed.last_update_date.nil? then
       options[:if_modified_since] = feed.last_update_date
@@ -62,7 +70,7 @@ class Post < ActiveRecord::Base
     feed.save
     
     # Check if feed status list needs to be updated to reflect current status
-    FeedStatus.update_status(feed,feed_status_code)
+    FeedStatus.update_status(feed,feed_status_code,feed_status_message)
   end
 
   def self.synchronize_posts_with_users(user_id, feed_id)

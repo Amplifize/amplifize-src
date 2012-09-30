@@ -38,7 +38,7 @@ class FeedValidator
     urls = []
     options = {}
     options[:on_failure] = 
-      lambda {|url, response_code, response_header, response_body| 
+      lambda {|url, response_code, response_header, response_body, exception| 
         if response_code == 200
           urls = urls + get_feeds_from_html(url,response_body)
         end }
