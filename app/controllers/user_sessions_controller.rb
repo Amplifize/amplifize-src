@@ -54,7 +54,7 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-        format.html { redirect_to(:reader, :notice => 'Login Successful') }
+        format.html { redirect_back_or_default(:reader, 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
         format.html { render :action => "new" }
@@ -76,5 +76,11 @@ class UserSessionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  def redirect_back_or_default(default, notice)
+    redirect_to(session[:return_to] || default, :notice => notice)
+    session[:return_to] = nil
+  end  
 end
 

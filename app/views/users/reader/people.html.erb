@@ -18,6 +18,17 @@
 	<hr/>
 <% end %>
 
+<% if flash[:notice] %>
+<div id="noticeBlock">
+	<p class="notice"><%= flash[:notice] %></p>
+</div>
+<% end %>
+<% if flash[:error] %>
+<div id="noticeBlock">
+	<p class="error"><%= flash[:error] %></p>
+</div>    
+<% end %>
+
 <div id="subscribedTo">
 	<h3>You are subscribed to:</h3>
 	<% @subscribedTo.each do |subscriber| %>
