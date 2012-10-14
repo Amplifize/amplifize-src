@@ -114,7 +114,7 @@ amp_host = Rails.env.production? ? 'amplifize.com' : "#{request.host}:#{request.
 		var overlay = document.createElement('div');
 		overlay.setAttribute('id', 'ampshareoverlay');
 		//overlay.setAttribute('style','position:fixed;z-index:1000000;top:15px;width:350px;border:3pt solid #000;opacity:1.0;-moz-border-radius:15px;border-radius: 15px;padding:10px;background-color:#aaa;color:#000;font-family:helvetica,arial,sans-serif;');
-		overlay.setAttribute('style', 'background-color: rgba(0, 0, 0, 0.9);height: 100%;position: absolute;top: 0;left:0;width: 100%;z-index: 10000000;');
+		overlay.setAttribute('style', 'background-color: rgba(0, 0, 0, 0.9);height: 100%;position: fixed;top: 0;left:0;width: 100%;z-index: 10000000;');
 
 		// Form Container
 		var form_container = document.createElement('div');

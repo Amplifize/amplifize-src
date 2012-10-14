@@ -1,0 +1,13 @@
+<% content_for :body do %>
+Hello from Amplifize,
+<br/></br/>
+<%= @current_user_name %> is now following your conversations.  Now you've got one more reason to share great content!
+
+<% if not @am_following %>
+<br/></br/>
+To get in on more great conversations <a href="<%= follows_add_url(:only_path => false, :user_id => @current_user_id, :utm_medium => 'email', :utm_source => 'new_follower') %>">follow</a> <%= @current_user_name %> back. 
+<% end %>
+
+<br/></br/>
+Keep sharing,
+<% end %>
