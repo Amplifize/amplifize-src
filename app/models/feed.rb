@@ -133,7 +133,7 @@ class Feed < ActiveRecord::Base
 
       end
     rescue
-      puts "here"
+      #puts "here"
     end
 
     if (update_interval < FEED_MIN_UPDATE_INTERVAL)

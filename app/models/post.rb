@@ -110,19 +110,32 @@ class Post < ActiveRecord::Base
 
   def self.add_entries(entries, feed_id)
     entries.each do |entry|
+      title = ""
+      content = ""
+      if not entry.content.nil? 
+        content = entry.content.html_safe
+      elsif not entry.summary.nil?
+        content = entry.summary.html_safe
+      end
+      
+      conditions = {:uid => entry.id, :feed_id => feed_id}
       begin
-        unless exists? :uid => entry.id
+        if not exists?(conditions)
           create!(
-            :title        => entry.title.html_safe,
+            :title        => entry.title.nil? ? entry.url : entry.title.html_safe,
             :author       => entry.author,
-            :content      => entry.content.nil? ? entry.summary.html_safe : entry.content.html_safe,
+            :content      => content,
             :url          => entry.url,
             :published_at => entry.published.nil? ? Time.now.utc.to_s(:db) : entry.published,
             :uid          => entry.id,
             :feed_id      => feed_id
           )
+          puts "Added #{feed_id}/#{entry.id}"
+        else 
+          #puts "Not adding #{feed_id}/#{entry.id}"
         end
-      rescue
+      rescue Exception => e
+        puts "Error adding post #{e}"
         next
       end
     end
