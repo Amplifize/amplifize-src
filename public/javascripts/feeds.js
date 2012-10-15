@@ -2,45 +2,13 @@ var current_post = undefined;
 var position = 0;
 var max_position = 0;
 
-var loadFilterView = function () {
+var loadFilterOverlay = function () {
 	$("#filter-overlay").css("visibility", "visible");
-}
+};
 
-var changeSortOrder = function(order) {
-	/*
-	switch(order) {
-		case 2:
-			$("#previousButton").click(function(evt) {
-				evt.preventDefault();
-				upPost();
-			});
-			
-			$("#nextButton").click(function(evt) {
-				evt.preventDefault();
-				downPost();
-			});
-			
-			position = posts.length - 1;
-			updatePostContent(posts[position]);
-			break;
-		case 1:
-		default:
-			$("#previousButton").click(function(evt) {
-				evt.preventDefault();
-				downPost();
-			});
-			
-			$("#nextButton").click(function(evt) {
-				evt.preventDefault();
-				upPost();
-			});
-
-			position = 0;
-			updatePostContent(posts[position]);
-			break;
-	}
-	*/
-}
+var closeFilterOverlay = function () {
+	$("#filter-overlay").css("visibility", "hidden");
+};
 
 var markAllAsRead = function() {
 	enableOverlay();
@@ -94,7 +62,7 @@ var upPost = function() {
 			max_position = position;
 			var unread_count = posts.length - 1 - max_position;
 			$("#feedUnreadCount").html(unread_count);
-			document.title = "Amplifize | Give good content a voice ("+unread_count+")"
+			document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")"
 		}
 	} else {
 		clearContent();
@@ -145,7 +113,7 @@ var clearContent = function() {
 	$("#amplifizeContent").animate({scrollTop: 0});
 
 	$("#feedUnreadCount").html("0");
-	document.title = "Amplifize | Give good content a voice (0)";
+	document.title = "Amplifize | Great conversation goes best with great content (0)";
 
 	$("#contentSummary").html(
 		"<h3>Looks like you've got no more posts to read</h3>" +
@@ -176,10 +144,15 @@ $(document).ready(function() {
 
 		var unread_count = posts.length - 1; 
 		$("#feedUnreadCount").html(unread_count);
-		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
+		document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
 	}
 
 	$("#container").css("margin-top", "108px");
+
+	$("#filterViewTab a").click(function (e) {
+  		e.preventDefault();
+  		$(this).tab('show');
+	});
 
 	updatePostContent(posts[position]);
 

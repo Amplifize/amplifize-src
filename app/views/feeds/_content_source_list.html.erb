@@ -1,0 +1,9 @@
+<ul id="sourceList">
+	<li><a href="/reader/feeds">All sources</a></li>
+<% @my_feeds.each do |feed| %>
+	<li><a href="#" onclick="loadSource('feed', <%= feed.id %>);"><%= feed.title %></a></li>
+<% end %>
+</ul>
+<form method="post" action="/reader/feeds" id="readerSourceForm">
+	<input type="hidden" value="" id="readerSourceForm-feed_id" name="feed_id" />
+</form>

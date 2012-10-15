@@ -37,7 +37,7 @@ var upPost = function() {
 			max_position = position;
 			var unread_count = shares.length - 1 - max_position;
 			$("#shareUnreadCount").html(unread_count);
-			document.title = "Amplifize | Give good content a voice ("+unread_count+")";
+			document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
 		}
 	} else {
 		alert("No more shares");
@@ -59,7 +59,7 @@ var getSharesByFollows = function(followsId) {
 
 			var unread_count = shares.length - 1; 
 			$("#shareUnreadCount").html(unread_count);
-			document.title = "Amplifize | Give good content a voice ("+unread_count+")";
+			document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
 
 			updateShareContent(shares[position]);
 		},
@@ -202,7 +202,7 @@ $(document).ready(function() {
 
 		var unread_count = shares.length - 1; 
 		$("#shareUnreadCount").html(unread_count);
-		document.title = "Amplifize | Give good content a voice ("+unread_count+")";
+		document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
 	}
 
 	$("#container").css("margin-top", "32px");

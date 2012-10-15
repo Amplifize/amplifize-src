@@ -63,7 +63,6 @@ class UsersController < ApplicationController
   end
 
   def reader
-    render_view = 'users/reader/feeds.html.erb'
     case params[:view]
     when "shares"
       @shares = current_user.shares.unread.desc.map(&:id).to_json
@@ -78,10 +77,15 @@ class UsersController < ApplicationController
       render_view = 'users/reader/people.html.erb'
     else
       @feed = Feed.new
-      @my_feeds = current_user.feeds;
-      @posts = current_user.posts.unread.rolling_window.desc.map(&:id).to_json
+      @my_feeds = current_user.feeds.alphabetical;
+      if params[:feed_id]
+        @posts = current_user.posts.where("feed_id = ?", params[:feed_id]).unread.rolling_window.desc.map(&:id).to_json
+      else
+        @posts = current_user.posts.unread.rolling_window.desc.map(&:id).to_json
+      end
+
       @shares_unread_count = current_user.shares_unread_count
-      @tags = current_user.tags.group(:name)
+      render_view = 'users/reader/feeds.html.erb'
     end
     
     render :file => render_view, :layout => 'reader_layout'

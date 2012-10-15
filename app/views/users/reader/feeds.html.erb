@@ -19,6 +19,9 @@
 <% content_for :appNav do %>
 	<%= render "users/reader/app_nav_view.html.erb", :view => "feeds" %>
 <% end %>
+<% content_for :content_source_list do %>
+	<%= render "feeds/content_source_list.html.erb" %>
+<% end %>
 
 <%= render "users/reader/content_view.html.erb", :view => "feeds" %>
 

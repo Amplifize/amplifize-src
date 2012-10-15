@@ -48,11 +48,27 @@
 	          <%= image_tag "reader/loader.gif" %>
 	     </div>
 	</div>
-	<div id="filter-overlay">
-		<div id="filterContainer">
-			<%= yield :filter %>
+<div id="readerOrder-overlay" class="modal hide">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Change reader view</h3>
+	</div>
+	<div id="modal-body" class="modal-body-style">
+		Coming soon
+		<div style="clear:both;"></div>
+	</div>
+</div>
+<div id="readerSource-overlay" class="hide">
+	<div id="readerSource-overlay-modal">
+		<div class="modal-header">
+			<button type="button" class="close" onclick="closeReaderSourceOverlay();">×</button>
+			<h3>Set reader source</h3>
+		</div>
+		<div id="modal-body" class="modal-body-style">
+			<%= yield :content_source_list %>
 			<div style="clear:both;"></div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
