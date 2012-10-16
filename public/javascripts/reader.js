@@ -34,4 +34,6 @@ $(document).ready(function() {
 	});
 	
 	$(".htmlEditor").markItUp(markItUpSettings);
+	
+	$("#sourceList").quickPagination({pagerLocation:"bottom", pageSize: 13})
 });
