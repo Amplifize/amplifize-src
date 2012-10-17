@@ -183,15 +183,18 @@
 }
 
 #sourceList {
-	margin: 0;
+	margin: 10px 0 0;
 	
 	height: 400px;
 }
 
 #sourceList li {
 	list-style: none;
-	width: 200px;
 	margin-bottom: 10px;
+}
+
+ul.simplePagerNav {
+	margin-left: -5px;
 }
 
 ul.simplePagerNav li {
