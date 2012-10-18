@@ -63,9 +63,36 @@ class UsersController < ApplicationController
   end
 
   def reader
+    if params[:read_state] then
+      session[:read_state] = params[:read_state]
+    end
+    
+    if params[:content_order] then
+      session[:content_order] = params[:content_order]
+    end
+    
     case params[:view]
     when "shares"
-      @shares = current_user.shares.unread.desc.map(&:id).to_json
+      #build the @shares query based on user preferences
+      @shares = current_user.shares
+
+      #TODO Re-write to use the follower id instead
+      #if params[:feed_id]
+      #  @posts = @posts.where("feed_id = ?", params[:feed_id])
+      #end
+
+      if session[:read_state] == "unread" then
+        @shares = @shares.unread
+      end
+
+      if session[:read_state] == "oldToNew" then
+        @shares = @shares.oldest_to_newest
+      else
+        @shares = @shares.newest_to_oldest
+      end
+
+      @shares = @shares.map(&:id).to_json
+
       @comment = Comment.new
       @posts_unread_count = current_user.feeds_unread_count
       @followed = User.find_by_sql ['select users.* from users where id in (select follows from follows where user_id = ?)', current_user.id]
@@ -78,11 +105,27 @@ class UsersController < ApplicationController
     else
       @feed = Feed.new
       @my_feeds = current_user.feeds.alphabetical;
+      
+      #build the @posts query based on user preferences
+      @posts = current_user.posts
+      
       if params[:feed_id]
-        @posts = current_user.posts.where("feed_id = ?", params[:feed_id]).unread.rolling_window.desc.map(&:id).to_json
-      else
-        @posts = current_user.posts.unread.rolling_window.desc.map(&:id).to_json
+        @posts = @posts.where("feed_id = ?", params[:feed_id])
       end
+
+      if session[:read_state] == "unread" then
+        @posts = @posts.unread
+      end
+
+      @posts = @posts.rolling_window
+
+      if session[:read_state] == "oldToNew" then
+        @posts = @posts.oldest_to_newest
+      else
+        @posts = @posts.newest_to_oldest
+      end
+
+      @posts = @posts.map(&:id).to_json
 
       @shares_unread_count = current_user.shares_unread_count
       render_view = 'users/reader/feeds.html.erb'

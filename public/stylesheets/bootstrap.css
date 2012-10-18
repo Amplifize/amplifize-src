@@ -596,16 +596,17 @@ form {
 }
 fieldset {
   padding: 0;
-  margin: 0;
+  margin: 0 0 10px 0;
   border: 0;
 }
+
 legend {
   display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: 27px;
-  font-size: 19.5px;
-  line-height: 36px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 25px;
   color: #333333;
   border: 0;
   border-bottom: 1px solid #e5e5e5;

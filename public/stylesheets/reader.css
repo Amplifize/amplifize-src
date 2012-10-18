@@ -179,6 +179,7 @@
 	padding: 10px;
 	
 	height: 500px;
+	min-width: 215px;
 	overflow: hidden;
 }
 
@@ -211,4 +212,15 @@ li.currentPage {
 li.currentPage a,
 li.currentPage a:visited {
 	color: #fff;
+}
+
+.readerViewFormField {
+	float: left;
+	margin-right: 20px;
+}
+
+.readerViewFormField label {
+	float: right;
+	margin-left: 5px;
+	line-height: 22px;
 }

@@ -54,7 +54,26 @@
 		<h3>Change reader view</h3>
 	</div>
 	<div id="modal-body" class="modal-body-style">
-		Coming soon
+		<form method="post" action="<%= yield :reader_view_action %>" id="reader_view_form">
+			<fieldset>
+				<legend>Content read state</legend>
+				<div class="readerViewFormField"><input type="radio" name="read_state" id="allContent" value="all" /><label for="allContent">All content</label></div>
+				<div class="readerViewFormField"><input type="radio" name="read_state" id="unreadContent" value="unread" checked="checked" /><label for="unreadContent">Unread content only</label></div>
+			</fieldset>
+			<fieldset>
+				<legend>Content order</legend>
+				<div class="readerViewFormField"><input type="radio" name="content_order" id="oldToNew" value="oldToNew" checked="checked"/><label for="oldToNew">Oldest to newest</label></div>
+				<div class="readerViewFormField"><input type="radio" name="content_order" id="newToOld" value="newToOld" /><label for="newToOld">Newest to oldest</label></div>
+			</fieldset>
+			<fieldset>
+				<legend><em>Post view (coming soon)</em></legend>
+				<div class="readerViewFormField"><input disabled="disabled" type="radio" name="post_view" id="fullPost" value="fullPost" checked="checked" /><label for="fullPost">Full post</label></div>
+				<div class="readerViewFormField"><input disabled="disabled" type="radio" name="post_view" id="titleOnly" value="titleOnly" /><label for="titleOnly">Title only</label></div>
+			</fieldset>
+			<fieldset>
+				<input type="submit" value="Save" />
+			</fieldset>
+		</form>
 		<div style="clear:both;"></div>
 	</div>
 </div>

@@ -20,7 +20,7 @@
 	<%= render "users/reader/app_nav_view.html.erb", :view => "feeds" %>
 <% end %>
 <% content_for :content_source_list do %>
-	<%= render "feeds/content_source_list.html.erb" %>
+	<%= render "feeds/content_source_list.html.erb", :view => "feeds" %>
 <% end %>
 
 <%= render "users/reader/content_view.html.erb", :view => "feeds" %>

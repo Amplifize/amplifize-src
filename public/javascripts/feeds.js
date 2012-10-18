@@ -52,6 +52,12 @@ var downPost = function() {
 	
 	return false;
 };
+
+var openNewWindow = function() {
+	if(current_post) {
+		window.open(current_post.url);
+	}
+};
 	
 var upPost = function() {
 	if((position+1) < posts.length) {
@@ -123,25 +129,6 @@ var clearContent = function() {
 
 $(document).ready(function() {
 	if(posts.length > 0) {
-		//need to do this to prevent firefox from auto searching on typing
-		jQuery(document).bind('keydown', 'j', function(evt) {
-			return false;
-		});
-
-		jQuery(document).bind('keydown', 'k', function(evt) {
-			return false;
-		});
-		
-		jQuery(document).bind('keyup', 'j', function(evt) {
-			 upPost();
-			 return false;
-		});
-
-		jQuery(document).bind('keyup', 'k', function(evt) {
-			downPost();
-			return false;
-		});
-
 		var unread_count = posts.length - 1; 
 		$("#feedUnreadCount").html(unread_count);
 		document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";

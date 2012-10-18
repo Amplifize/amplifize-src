@@ -16,6 +16,16 @@
 	<% render "users/reader/app_nav_view.html.erb", :view => "shares" %>
 <% end %>
 
+<% content_for :subNav do %>
+	<%= render "users/reader/subnav_view.html.erb", :view => "shares" %>
+<% end %>
+
+<% content_for :content_source_list do %>
+	<%= render "feeds/content_source_list.html.erb", :view => "shares" %>
+<% end %>
+
+
+
 <%= render "users/reader/content_view.html.erb", :view => "shares" %>
 
 <div id="addComment-modal-content" class="modal hide">

@@ -8,7 +8,8 @@ class Post < ActiveRecord::Base
 
   after_create :attach_to_users
 
-  scope :desc, order("posts.published_at ASC")
+  scope :oldest_to_newest, order("posts.published_at ASC")
+  scope :newest_to_oldest, order("posts.published_at DESC")
   
   scope :last_ten, lambda {
     select(:published_at).order("posts.published_at DESC").limit(10)

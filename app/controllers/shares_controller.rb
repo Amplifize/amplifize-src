@@ -34,7 +34,7 @@ class SharesController < ApplicationController
   end
 
   def byFollows
-    shares = current_user.shares.where("shares.user_id = ?", params[:followsId]).unread.desc
+    shares = current_user.shares.where("shares.user_id = ?", params[:followsId]).unread.oldest_to_newest
     if shares.nil? then
       shares = []
     end

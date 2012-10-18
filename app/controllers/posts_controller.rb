@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   
   def by_feed
     feed_id = params[:feed_id]
-    posts = current_user.posts.filter_by_feed(feed_id).unread.rolling_window.desc.map(&:id)
+    posts = current_user.posts.filter_by_feed(feed_id).unread.rolling_window.oldest_to_newest.map(&:id)
     
     respond_to do |format|
       format.js {render :json => posts.to_json}
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      format.js {render :json => posts.desc.map(&:id).to_json}
+      format.js {render :json => posts.oldest_to_newest.map(&:id).to_json}
     end
   end
 

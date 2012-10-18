@@ -46,29 +46,10 @@ var upPost = function() {
 	return false;
 };
 
-var getSharesByFollows = function(followsId) {
-	if("all" == followsId) {
-		window.location.reload();		
+var openNewWindow = function() {
+	if(current_share) {
+		window.open(current_share.url);
 	}
-
-	$.ajax({
-		url: "/shares/follows/"+followsId,
-		success: function(data, textStatus, jqXHR) {
-			shares = data;
-			position = 0;
-
-			var unread_count = shares.length - 1; 
-			$("#shareUnreadCount").html(unread_count);
-			document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
-
-			updateShareContent(shares[position]);
-		},
-		error: function(xhr, text, error) {
-			alert(error);
-			alert(text);
-		},
-		dataType: "json"
-	});
 };
 
 var followUser = function(userId) {
@@ -175,37 +156,12 @@ $(document).ready(function() {
 	getFollowers();
 	
 	if(shares.length > 0) {
-		//need to do this to prevent firefox from auto searching on typing
-		jQuery(document).bind('keydown', 'j', function(evt) {
-			return false;
-		});
-
-		jQuery(document).bind('keydown', 'k', function(evt) {
-			return false;
-		});
-		
-		jQuery(document).bind('keyup', 'j', function(evt) {
-			 upPost();
-			 return false;
-		});
-
-		jQuery(document).bind('keyup', 'k', function(evt) {
-			downPost();
-			return false;
-		});
-
-		$("#selectFollows select").change(function () {
-			$("#selectFollows select option:selected").each(function () {
-				getSharesByFollows($(this).val());
-			});
-       	});
-
 		var unread_count = shares.length - 1; 
 		$("#shareUnreadCount").html(unread_count);
 		document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
 	}
 
-	$("#container").css("margin-top", "32px");
+	$("#container").css("margin-top", "108px");
 
 	updateShareContent(shares[position]);
 
