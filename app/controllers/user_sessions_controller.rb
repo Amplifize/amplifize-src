@@ -41,9 +41,6 @@ class UserSessionsController < ApplicationController
       @user_session.email = params[:u]
     end
 
-    session[:read_state] = "unread"
-    session[:read_order] = "oldToNew"
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user_session }
@@ -56,7 +53,10 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
 
     respond_to do |format|
-      if @user_session.save
+      if @user_session.save        
+        session[ :read_state] = "unread"
+        session[ :read_order] = "oldToNew"
+        
         format.html { redirect_back_or_default(:reader, 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
