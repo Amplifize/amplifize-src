@@ -2007,6 +2007,7 @@ table .span24 {
 }
 .open  > .dropdown-menu {
   display: block;
+  padding: 10px;
 }
 .pull-right > .dropdown-menu {
   right: 0;

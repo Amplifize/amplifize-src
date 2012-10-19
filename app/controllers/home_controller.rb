@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   before_filter :require_no_user, :only => :index
   
+  def index
+    @user_session = UserSession.new
+  end
+  
   def team
     render :file => 'home/about/team'    
   end
