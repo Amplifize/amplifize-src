@@ -41,6 +41,9 @@ class UserSessionsController < ApplicationController
       @user_session.email = params[:u]
     end
 
+    session[:read_state] = "unread"
+    session[:read_order] = "oldToNew"
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user_session }

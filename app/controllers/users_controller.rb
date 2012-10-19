@@ -85,7 +85,7 @@ class UsersController < ApplicationController
         @shares = @shares.unread
       end
 
-      if session[:read_state] == "oldToNew" then
+      if session[:read_order] == "oldToNew" then
         @shares = @shares.oldest_to_newest
       else
         @shares = @shares.newest_to_oldest
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
 
       @posts = @posts.rolling_window
 
-      if session[:read_state] == "oldToNew" then
+      if session[:read_order] == "oldToNew" then
         @posts = @posts.oldest_to_newest
       else
         @posts = @posts.newest_to_oldest
