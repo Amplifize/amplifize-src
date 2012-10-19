@@ -99,7 +99,7 @@ class UsersController < ApplicationController
       render_view = 'users/reader/shares.html.erb'
     when "people"
       @subscribed_to = User.find_by_sql ['select users.* from users join follows on users.id = follows.follows where user_id = ?', current_user.id]
-      @followed_by = User.find_by_sql ['select distinct users.* from users join follows on users.id = follows.user_id where user_id = ?', current_user.id]
+      @followed_by = User.find_by_sql ['select distinct users.* from users join follows on users.id = follows.user_id where follows.follows = ?', current_user.id]
       @posts_unread_count = current_user.feeds_unread_count
       @shares_unread_count = current_user.shares_unread_count
       render_view = 'users/reader/people.html.erb'
