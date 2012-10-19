@@ -2,3 +2,10 @@
 	display: inline-block;
 	width: 200px;
 }
+
+#followedBy,
+#subscribedTo {
+	float: left;
+	width: 45%;
+	margin-right: 20px;
+}

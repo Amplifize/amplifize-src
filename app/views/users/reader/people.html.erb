@@ -12,10 +12,11 @@
 	</script>
 <% end %>
 
-<% content_for :appNav do %>
-	<a href="#findPeople-modal-content" data-toggle="modal" class="btn">Find people to subscribe to</a>
-	<a href="#inviteFriends-modal-content" data-toggle="modal" class="btn">Invite Friends to join Amplifize</a>
-	<hr/>
+<% content_for :subNav do %>
+	<div id="subNavContainer">
+		<a href="#findPeople-modal-content" data-toggle="modal">Find friends to follow</a>
+		<a href="#inviteFriends-modal-content" data-toggle="modal">Invite friends to join Amplifize</a>
+	</div>
 <% end %>
 
 <% if flash[:notice] %>
@@ -31,7 +32,7 @@
 
 <div id="subscribedTo">
 	<h3>You are subscribed to:</h3>
-	<% @subscribedTo.each do |subscriber| %>
+	<% @subscribed_to.each do |subscriber| %>
 	<div id="subscriber_<%= subscriber.id %>" class="subscribedToRow">
 		<span class="subscriberName"><%= subscriber.display_name.nil? ? subscriber.email : subscriber.display_name %></span>
 		<%= link_to "Unsubscribe", unsubscribe_person_path(subscriber.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+subscriber.id.to_s %>
@@ -40,6 +41,14 @@
 				$("#subscriber_"+data.user_id).remove();
 			});
 		</script>
+	</div>
+	<% end %>
+</div>
+<div id="followedBy">
+	<h3>You are followed by:</h3>
+	<% @followed_by.each do |follower| %>
+	<div>
+		<%= follower.display_name.nil? ? follower.email : follower.display_name %>
 	</div>
 	<% end %>
 </div>

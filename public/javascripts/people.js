@@ -40,5 +40,5 @@ $(document).ready(function() {
 		$("#inviteFriends-response-modal-body").show();
 	});
 
-	$("#container").css("margin-top", "45px");
+	$("#container").css("margin-top", "98px");
 });
