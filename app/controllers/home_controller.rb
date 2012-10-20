@@ -5,11 +5,29 @@ class HomeController < ApplicationController
     @user_session = UserSession.new
   end
   
+  def about
+    @user_session = UserSession.new
+  end
+  
+  def contact
+    @user_session = UserSession.new
+  end
+  
+  def faq
+    @user_session = UserSession.new
+  end
+  
   def team
-    render :file => 'home/about/team'    
+    @user_session = UserSession.new
+    render :file => 'home/about/team'
+  end
+  
+  def terms
+    @user_session = UserSession.new
   end
   
   def why_amplifize
+    @user_session = UserSession.new
     render :file => 'home/about/why'
   end
   
