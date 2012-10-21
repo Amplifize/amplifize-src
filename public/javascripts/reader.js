@@ -25,13 +25,16 @@ var loadSource = function(contentType, contentId) {
 	}	
 };
 
+var linksInNewWindow = function(evt) {
+	if($(this).attr("href").indexOf("http") != -1) {
+		evt.preventDefault();
+		window.open($(this).attr("href"));
+	}	
+}
+
 $(document).ready(function() {
-	$("#contentSummary").on("click", "a", function(evt) {
-		if($(this).attr("href").indexOf("http") != -1) {
-			evt.preventDefault();
-			window.open($(this).attr("href"));
-		}
-	});
+	$("#contentSummary").on("click", "a", linksInNewWindow);
+	$("#commentThread").on("click", "a", linksInNewWindow)
 	
 	$(".htmlEditor").markItUp(markItUpSettings);
 	
