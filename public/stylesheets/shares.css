@@ -6,3 +6,34 @@
 	font-size: 20px;
 	margin-top: 15px;
 }
+
+#commentThread {
+	border: 0;
+
+	width: 960px;
+
+	margin-bottom: 20px;
+}
+
+#commentThread tr {
+	padding: 5px;
+	margin: 2px;
+}
+
+.commentAuthor {
+	float: left;
+	margin-right: 10px;
+	
+	font-style: italic;
+	
+	color: #454545;
+}
+
+tr.commentInstance:nth-child(even) {
+  background-color: rgba(0,0,0, 0.1);
+}
+
+tr.commentInstance td {
+	padding-left: 10px;
+	padding-top: 10px;
+}

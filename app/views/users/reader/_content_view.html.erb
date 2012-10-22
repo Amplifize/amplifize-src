@@ -1,8 +1,12 @@
 <div id="amplifizeContent">
 	<% if "shares" == view then %>
 	<div id="shareInfo">
-		Shared by: <span id="sharedBy"></span> who says: <blockquote id="conversationStarter"></blockquote>
-		<hr/>
+		<!--<p id="commentsHeader">Hide comments</p>-->
+		<table id="commentThread">
+			<tr>
+				<td>Shared by: <span id="sharedBy"></span> who says: <blockquote id="conversationStarter"></blockquote></td>
+			</tr>
+		</table>
 	</div>
 	<% end %>
 
@@ -11,10 +15,5 @@
 		From <span id="feedTitle"></span> <span id="contentAuthor"></span><span id="contentPublishDate"></span>
 	</div>
 	<div id="contentSummary"></div>
-	<% if "shares" == view then %>
-	<hr/>
-	<h3>Comments:</h3>
-	<div id="commentThread"></div>
-	<% end %>
 	<div style="clear: both;"></div>
 </div>

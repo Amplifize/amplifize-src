@@ -124,7 +124,7 @@ var updateShareContent = function(shareId) {
 					$("#contentAuthor").html("");
 				}
 				$("#contentSummary").html(current_post.content);
-				$("#commentThread").html("");
+				$("#commentThread").find("tr:gt(0)").remove();
 				
 				$("#sharedBy").html(current_share.user.email);
 	
@@ -132,11 +132,10 @@ var updateShareContent = function(shareId) {
 					var comment = data.share.comments[i];
 					var followsText = '';
 					if ($.inArray(comment.user.id, all_follows) == -1) {
-						followsText = '(<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
+						followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
 					}
 					var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-					var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+' '+followsText+'</p></div>';
-					$("#commentThread").append(html);
+					$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
 				}
 			},
 			error: function(xhr, text, error) {
