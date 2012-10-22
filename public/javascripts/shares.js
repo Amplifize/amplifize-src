@@ -1,7 +1,5 @@
 var current_share = undefined;
 var position = 0;
-var max_position = 0;
-var all_follows = [];
 
 var setReadState = function(readState) {
 	$.ajax({
@@ -31,14 +29,7 @@ var downPost = function() {
 var upPost = function() {
 	if((position+1) < shares.length) {
 		position++;
-		updateShareContent(shares[position]);
-		
-		if(position > max_position) {
-			max_position = position;
-			var unread_count = shares.length - 1 - max_position;
-			$("#shareUnreadCount").html(unread_count);
-			document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
-		}
+		updateShareContent(shares[position]);		
 	} else {
 		alert("No more shares");
 	}
@@ -65,24 +56,6 @@ var followUser = function(userId) {
 	});
 };
 
-var getFollowers = function() {
-	$.ajax({
-		url: '/follows/all',
-		success: function(data, textStatus, jqXHR) {
-			if (data instanceof Array) {
-				all_follows = data;
-			}
-		},
-		error: function(xhr, text, error) {
-			alert(error);
-			alert(text);
-		},
-		dataType: "json",
-		async:false
-	});
-		
-}
-
 var clearContent = function() {
 	$("#feedTitle").html('');
 	$("#contentTitle").html('');
@@ -96,17 +69,23 @@ var clearContent = function() {
 	);
 };
 
-var updateShareContent = function(shareId) {	
-	
-	if(shareId) {
+var updateShareContent = function(shareId) {
+	if(shareId[0]) {
+		enableOverlay();
 		$.ajax({
-			url: "/shares/"+shareId,
+			url: "/shares/"+shareId[0],
 			success: function(data, textStatus, jqXHR) {
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				var current_post = data.share.post;
 				current_share = data.share;
 
-				setReadState(0);
+				if(1 == shares[position][1]) {
+					shares[position][1] == 0;
+					setReadState(0);
+					
+					$("#sharesUnreadCount").html(--shares_unread);
+					document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
+				}
 
 				$("#comment_share_id").val(current_share.id);
 				
@@ -137,10 +116,12 @@ var updateShareContent = function(shareId) {
 					var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
 					$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
 				}
+				disableOverlay();
+				mixpanel.track("Read another post");
 			},
 			error: function(xhr, text, error) {
-				alert(error);
-				alert(text);
+				disableOverlay();
+				//TODO: Log error
 			}
 		})
 	} else {
@@ -149,20 +130,14 @@ var updateShareContent = function(shareId) {
 	}
 };
 
-
-
 $(document).ready(function() {
-	getFollowers();
-	
-	if(shares.length > 0) {
-		var unread_count = shares.length - 1; 
-		$("#shareUnreadCount").html(unread_count);
-		document.title = "Amplifize | Great conversation goes best with great content ("+unread_count+")";
-	}
-
+	document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")";
 	$("#container").css("margin-top", "108px");
-
-	updateShareContent(shares[position]);
+	if(shares[position]) {
+		updateShareContent(shares[position]);
+	} else {
+		clearContent();
+	}
 
 	$('#addComment-modal-content').bind('show', function () {
 	  $('#comment_comment_text').val('');
@@ -184,5 +159,4 @@ $(document).ready(function() {
 	$('form#new_comment').bind("ajax:failure", function(data, status, xhr) {
 		alert(status);
 	});
-
 });

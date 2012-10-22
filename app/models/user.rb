@@ -15,16 +15,25 @@ class User < ActiveRecord::Base
   has_many :tags
   
   def shares_unread_count
-    shares.unread.count
+    share_users.unread.rolling_window.count
+  end
+
+  def share_unread_count(follower_id)
+    share_users.joins(:share).where("shares.user_id = ?", follower_id).unread.rolling_window.count
   end
   
   def feeds_unread_count
-    posts.unread.rolling_window.count
+    post_users.unread.rolling_window.count
+  end
+
+  def feed_unread_count(feed_id)
+    post_users.joins(:post).where("posts.feed_id = ?", feed_id).unread.rolling_window.count    
   end
   
   def visible_name
     display_name.nil? ? email : display_name
   end
+  
   
   def feeds_with_unread
     user_feeds = feeds

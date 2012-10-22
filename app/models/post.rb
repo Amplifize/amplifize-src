@@ -7,9 +7,6 @@ class Post < ActiveRecord::Base
   has_many :users, :through => :post_users
 
   after_create :attach_to_users
-
-  scope :oldest_to_newest, order("posts.published_at ASC")
-  scope :newest_to_oldest, order("posts.published_at DESC")
   
   scope :last_ten, lambda {
     select(:published_at).order("posts.published_at DESC").limit(10)
@@ -22,14 +19,6 @@ class Post < ActiveRecord::Base
   scope :filter_by_tag, lambda { |tag_name,user_id|
     tags = Tag.arel_table
     where(:feed_id => tags.project(:feed_id).where(tags[:name].eq(tag_name)).where(tags[:user_id].eq(user_id)))
-  }
-  
-  scope :unread, lambda {
-    where("post_users.read_state = 1")
-  }
-  
-  scope :rolling_window, lambda {
-    where("posts.published_at > '" + (DateTime.now << 2).to_s(:db) + "'")
   }
 
   def self.get_new_posts(feed)

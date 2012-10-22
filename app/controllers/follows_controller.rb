@@ -1,16 +1,6 @@
 class FollowsController < ApplicationController
   before_filter :require_user
 
-  # Gets all the IDs of the users followed by the current user
-  # as a JSON Array
-  def all
-    all_follows = current_user.follows.map(&:follows)
-    all_follows << current_user.id
-    respond_to do |format|
-      format.js { render :json => all_follows }
-    end
-  end
-
   def add
     user_to_follow = User.find_by_id(params[:user_id])
 

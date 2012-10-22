@@ -4,13 +4,6 @@ class Share < ActiveRecord::Base
   belongs_to :user
   belongs_to :post
   
-  scope :oldest_to_newest, order("shares.created_at ASC")
-  scope :newest_to_oldest, order("shares.created_at DESC")
-  
-  scope :unread, lambda {
-    where("share_users.read_state = 1")
-  }
-  
   def self.add(summary, post_id, user_id)
     #Step 1 generate the share
     share = Share.create(

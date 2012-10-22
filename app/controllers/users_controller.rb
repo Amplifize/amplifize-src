@@ -71,16 +71,23 @@ class UsersController < ApplicationController
     if params[:content_order] then
       session[:content_order] = params[:content_order]
     end
-    
+
+    @posts_unread_count = current_user.feeds_unread_count
+    @shares_unread_count = current_user.shares_unread_count
+
     case params[:view]
     when "shares"
-      #build the @shares query based on user preferences
-      @shares = current_user.shares
+      @all_follows = current_user.follows.map(&:follows)
+      @all_follows << current_user.id
+      @all_follows = @all_follows.to_json
 
-      #TODO Re-write to use the follower id instead
-      #if params[:feed_id]
-      #  @posts = @posts.where("feed_id = ?", params[:feed_id])
-      #end
+      #build the @shares query based on user preferences
+      @shares = current_user.share_users
+
+      if params[:follower_id]
+        @shares = @shares.joins(:share).where("shares.user_id = ?", params[:follower_id])
+        @shares_unread_count = current_user.share_unread_count(params[:follower_id])
+      end
 
       if session[:read_state] == "unread" then
         @shares = @shares.unread
@@ -92,27 +99,24 @@ class UsersController < ApplicationController
         @shares = @shares.newest_to_oldest
       end
 
-      @shares = @shares.map(&:id).to_json
+      @shares = @shares.map{|s| [s.share_id, s.read_state]}.to_json
 
       @comment = Comment.new
-      @posts_unread_count = current_user.feeds_unread_count
-      @followed = User.find_by_sql ['select users.* from users where id in (select follows from follows where user_id = ?)', current_user.id]
       render_view = 'users/reader/shares.html.erb'
     when "people"
       @subscribed_to = User.find_by_sql ['select users.* from users join follows on users.id = follows.follows where user_id = ?', current_user.id]
       @followed_by = User.find_by_sql ['select distinct users.* from users join follows on users.id = follows.user_id where follows.follows = ?', current_user.id]
-      @posts_unread_count = current_user.feeds_unread_count
-      @shares_unread_count = current_user.shares_unread_count
       render_view = 'users/reader/people.html.erb'
     else
       @feed = Feed.new
       @my_feeds = current_user.feeds.alphabetical;
       
       #build the @posts query based on user preferences
-      @posts = current_user.posts
+      @posts = current_user.post_users
       
       if params[:feed_id]
-        @posts = @posts.where("feed_id = ?", params[:feed_id])
+        @posts = @posts.joins(:post).where("posts.feed_id = ?", params[:feed_id])
+        @posts_unread_count = current_user.feed_unread_count(params[:feed_id])
       end
 
       if session[:read_state] == "unread" then
@@ -127,9 +131,8 @@ class UsersController < ApplicationController
         @posts = @posts.newest_to_oldest
       end
 
-      @posts = @posts.map(&:id).to_json
+      @posts = @posts.map{|p| [p.post_id, p.read_state]}.to_json
 
-      @shares_unread_count = current_user.shares_unread_count
       render_view = 'users/reader/feeds.html.erb'
     end
     
