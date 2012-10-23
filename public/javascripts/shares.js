@@ -83,7 +83,7 @@ var updateShareContent = function(shareId) {
 					shares[position][1] == 0;
 					setReadState(0);
 					
-					$("#sharesUnreadCount").html(--shares_unread);
+					$("#shareUnreadCount").html(--shares_unread);
 					document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
 				}
 
