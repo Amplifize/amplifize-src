@@ -15,11 +15,11 @@ class User < ActiveRecord::Base
   has_many :tags
   
   def shares_unread_count
-    share_users.joins(:share).unread.rolling_window.count
+    share_users.joins(:share).unread.count
   end
 
   def share_unread_count(follower_id)
-    share_users.joins(:share).where("shares.user_id = ?", follower_id).unread.rolling_window.count
+    share_users.joins(:share).where("shares.user_id = ?", follower_id).unread.count
   end
   
   def feeds_unread_count
