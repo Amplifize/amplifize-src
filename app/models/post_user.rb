@@ -6,15 +6,15 @@ class PostUser < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
   
-  scope :oldest_to_newest, order("post_users.created_at ASC")
-  scope :newest_to_oldest, order("post_users.created_at DESC")
+  scope :oldest_to_newest, order("posts.published_at ASC")
+  scope :newest_to_oldest, order("posts.published_at DESC")
 
   scope :unread, lambda {
     where("post_users.read_state = 1")
   }
 
   scope :rolling_window, lambda {
-    where("post_users.created_at > '" + (DateTime.now << 2).to_s(:db) + "'")
+    where("posts.published_at > '" + (DateTime.now << 2).to_s(:db) + "'")
   }
 
 end

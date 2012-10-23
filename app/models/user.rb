@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :tags
   
   def shares_unread_count
-    share_users.unread.rolling_window.count
+    share_users.joins(:share).unread.rolling_window.count
   end
 
   def share_unread_count(follower_id)
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
   
   def feeds_unread_count
-    post_users.unread.rolling_window.count
+    post_users.joins(:post).unread.rolling_window.count
   end
 
   def feed_unread_count(feed_id)

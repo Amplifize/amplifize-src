@@ -6,15 +6,15 @@ class ShareUser < ActiveRecord::Base
   belongs_to :share
   belongs_to :user
 
-  scope :oldest_to_newest, order("share_users.created_at ASC")
-  scope :newest_to_oldest, order("share_users.created_at DESC")
+  scope :oldest_to_newest, order("shares.created_at ASC")
+  scope :newest_to_oldest, order("shares.created_at DESC")
   
   scope :unread, lambda {
     where("share_users.read_state = 1")
   }
 
   scope :rolling_window, lambda {
-    where("share_users.created_at > '" + (DateTime.now << 2).to_s(:db) + "'")
+    where("shares.created_at > '" + (DateTime.now << 2).to_s(:db) + "'")
   }
 
 end

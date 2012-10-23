@@ -82,7 +82,7 @@ class UsersController < ApplicationController
       @all_follows = @all_follows.to_json
 
       #build the @shares query based on user preferences
-      @shares = current_user.share_users
+      @shares = current_user.share_users.joins(:share)
 
       if params[:follower_id]
         @shares = @shares.joins(:share).where("shares.user_id = ?", params[:follower_id])
@@ -92,6 +92,8 @@ class UsersController < ApplicationController
       if session[:read_state] == "unread" then
         @shares = @shares.unread
       end
+
+      @shares = @shares.rolling_window
 
       if session[:read_order] == "oldToNew" then
         @shares = @shares.oldest_to_newest
@@ -112,7 +114,7 @@ class UsersController < ApplicationController
       @my_feeds = current_user.feeds.alphabetical;
       
       #build the @posts query based on user preferences
-      @posts = current_user.post_users
+      @posts = current_user.post_users.joins(:post)
       
       if params[:feed_id]
         @posts = @posts.joins(:post).where("posts.feed_id = ?", params[:feed_id])
@@ -135,7 +137,7 @@ class UsersController < ApplicationController
 
       render_view = 'users/reader/feeds.html.erb'
     end
-    
+
     render :file => render_view, :layout => 'reader_layout'
   end
   
