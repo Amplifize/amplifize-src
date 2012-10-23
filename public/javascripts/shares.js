@@ -144,6 +144,10 @@ $(document).ready(function() {
 	  setTimeout(function(){$("#comment_comment_text").focus();}, 250);
 	});
 
+	$('form#new_comment').bind("submit", function() {
+		enableOverlay();
+	});
+
 	$('form#new_comment').bind("ajax:success", function(status, data, xhr) {
 		$("#addComment-modal-content").modal("hide");
 		$("#comment_text").val('');
@@ -152,10 +156,13 @@ $(document).ready(function() {
 		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
 		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')		
 
+		disableOverlay();
+
 		mixpanel.track("Comment in a conversation");
 	});
 
 	$('form#new_comment').bind("ajax:failure", function(data, status, xhr) {
-		alert(status);
+		//TODO: log error
+		disableOverlay();
 	});
 });
