@@ -150,9 +150,8 @@ $(document).ready(function() {
 
 		var comment = data.comment;
 		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-		var html = '<div class="commentInstanceDiv"><p class="commentText">'+comment.comment_text+'</p><p class="commentAuthor">'+username+'</p></div>';
-		$("#commentThread").append(html);
-		
+		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')		
+
 		mixpanel.track("Comment in a conversation");
 	});
 
