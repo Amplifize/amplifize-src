@@ -148,17 +148,6 @@ ActiveRecord::Schema.define(:version => 20121013042347) do
     t.datetime "updated_at"
   end
 
-  create_table "twitter_posts", :force => true do |t|
-    t.string  "tweet_id"
-    t.string  "text"
-    t.string  "expanded_url"
-    t.string  "twitter_user_id"
-    t.integer "feed_id"
-    t.integer "post_id"
-  end
-
-  add_index "twitter_posts", ["tweet_id"], :name => "index_twitter_posts_on_tweet_id", :unique => true
-
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "crypted_password"
