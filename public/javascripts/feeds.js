@@ -81,7 +81,7 @@ var updatePostContent = function(postId) {
 				current_post = data.post;
 
 				if(1 == posts[position][1]) {
-					posts[position][1] == 0;
+					posts[position][1] = 0;
 					setReadState(0);
 					
 					$("#feedUnreadCount").html(--posts_unread);

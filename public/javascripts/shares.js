@@ -80,7 +80,7 @@ var updateShareContent = function(shareId) {
 				current_share = data.share;
 
 				if(1 == shares[position][1]) {
-					shares[position][1] == 0;
+					shares[position][1] = 0;
 					setReadState(0);
 					
 					$("#shareUnreadCount").html(--shares_unread);
