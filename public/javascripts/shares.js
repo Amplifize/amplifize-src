@@ -105,7 +105,8 @@ var updateShareContent = function(shareId) {
 				$("#contentSummary").html(current_post.content);
 				$("#commentThread").find("tr:gt(0)").remove();
 				
-				$("#sharedBy").html(current_share.user.email);
+				var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
+				$("#sharedBy").html(displayName);
 	
 				for(var i = 0; i < data.share.comments.length; i++) {
 					var comment = data.share.comments[i];
