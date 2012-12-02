@@ -16,6 +16,7 @@
 		<div class="footerItem">
 			<%= link_to "Contact Us", :contact %>
 			<ul>
+				<li><a href="javascript:UserVoice.showPopupWidget();">Feedback &amp; support</a></li>
 				<li><a href="http://twitter.com/amplifize">On Twitter</a></li>
 				<li><a href="mailto:tickets@amplifize.uservoice.com">By email</a></li>
 			</ul>			
@@ -57,5 +58,13 @@
 	    a._i.push([b,c,f])};a.__SV=1.1;
 	})(document,window.mixpanel||[]);
 	mixpanel.init("70059c2e62b8d913e6b0c5fa36e4181b");
+
+	//uservoice
+	var uvOptions = {};
+	(function() {
+	  var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+	  uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/DOhSrsgqFvHlgyiyELBoqA.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+	})();
 </script>
 <% end %>
