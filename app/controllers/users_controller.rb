@@ -76,7 +76,10 @@ class UsersController < ApplicationController
     @shares_unread_count = current_user.shares_unread_count
 
     case params[:view]
+    when "home"
+      render_view = 'users/reader/home.html.erb'
     when "shares"
+    when "conversations"
       @all_follows = current_user.follows.map(&:follows)
       @all_follows << current_user.id
       @all_follows = @all_follows.to_json
