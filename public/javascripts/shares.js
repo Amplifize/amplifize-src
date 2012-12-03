@@ -5,7 +5,7 @@ var setReadState = function(readState) {
 	if(1 == readState) {
 		shares[position][1] = 1;
 		++shares_unread;
-		$("#feedUnreadCount").html(shares_unread);
+		$("#shareUnreadCount").html(shares_unread);
 		document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
 	}
 
