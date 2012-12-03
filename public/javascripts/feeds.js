@@ -27,6 +27,13 @@ var markAllAsRead = function() {
 }
 
 var setReadState = function(readState) {
+	if(1 == readState) {
+		posts[position][1] = 1;
+		++posts_unread;
+		$("#feedUnreadCount").html(posts_unread);
+		document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
+	}
+
 	$.ajax({
 		url: "/post_users/"+current_post.id+"/read_state/"+readState,
 		success: function() {
