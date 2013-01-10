@@ -43,11 +43,6 @@ header h1 > a:hover {
 	color: #000000;
 }
 
-.slogan {
-	padding-top:5px;
-	margin-left: 10px;
-}
-
 #content {
 	width: 940px;
 	margin: 0 auto;
