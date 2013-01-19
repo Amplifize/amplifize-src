@@ -57,7 +57,7 @@ class UserSessionsController < ApplicationController
         session[ :read_state] = "unread"
         session[ :read_order] = "oldToNew"
         
-        format.html { redirect_back_or_default(:reader, 'Login Successful') }
+        format.html { redirect_back_or_default(:homepage, 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
         format.html { render :action => "new" }

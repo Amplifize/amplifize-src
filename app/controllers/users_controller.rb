@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         Invite.handle_new_user(@invite_id, @user)
         Mailer.delay.new_user_email(@user)
         
-        format.html { redirect_to(:reader, :notice => 'Welcome to amplifize') }
+        format.html { redirect_to(:homepage, :notice => 'Welcome to amplifize') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     current_user.feeds.delete(@feed)
     
     respond_to do |format|
-      format.html {redirect_to(reader_url)}
+      format.html {redirect_to(:feeds_manage)}
       format.js
     end
   end
