@@ -2,7 +2,7 @@ Amplifize::Application.routes.draw do
 
   match '/login' => 'user_sessions#create', :as => :login
   match '/logout' => 'user_sessions#destroy', :as => :logout
-  match '/register' => 'users#create', :as => :signup
+  match '/register' => 'users#new', :as => :signup
 
   #part of the Google Reader import process
   match '/oauth2/callback' => 'user_sessions#oauth2_response', :as => :oauth2_response
