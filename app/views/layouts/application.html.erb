@@ -9,38 +9,40 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-    <header>
-		<div class="navbar">
-	    	<ul class="nav">
-	    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
-	    	</ul>
-	        <% if current_user %> 
-	        <ul class="nav pull-right">
-    			<li><%= link_to "Reader", :reader %></li>
-    			<li><%= link_to "Logout", :logout %></li>
-    		</ul>
-    		<% else %>
-    		<ul class="nav pull-right">
-    			<li><%= link_to "Register", signup_path %></li>
-    			<li class="dropdown">
-    				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
-    				<ul class="dropdown-menu">
-    					<li>
-    						<%= render 'user_sessions/form' %>
-    					</li>
-    				</ul>
-    			</li>
-    		<% end %>
-    		</ul>
-		</div> 
-        <div style="clear:both"></div>
-    </header>
-
-    <div id="content">
-	    <%= yield %>
-	    <div style="clear:both"></div>
-    </div>
-
-	<%= render 'general/footer.html.erb' %>
+    <div id="container">
+	    <header class="navbar-fixed-top">
+			<div class="navbar">
+		    	<ul class="nav">
+		    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
+		    	</ul>
+		        <% if current_user %> 
+		        <ul class="nav pull-right">
+	    			<li><%= link_to "Home", :homepage %></li>
+	    			<li><%= link_to "Logout", :logout %></li>
+	    		</ul>
+	    		<% else %>
+	    		<ul class="nav pull-right">
+	    			<li><%= link_to "Register", signup_path %></li>
+	    			<li class="dropdown">
+	    				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
+	    				<ul class="dropdown-menu">
+	    					<li>
+	    						<%= render 'user_sessions/form' %>
+	    					</li>
+	    				</ul>
+	    			</li>
+	    		<% end %>
+	    		</ul>
+	    		<div class="clear"></div>
+			</div>
+			<div class="clear"></div> 
+	    </header>    
+	    <div id="content" style="margin-top: 50px;">
+		    <%= yield %>
+	      	<div class="clear"></div>
+	    </div>
+		<%= render 'general/footer.html.erb' %>
+		<div class="clear"></div>
+	</div>
 </body>
 </html>

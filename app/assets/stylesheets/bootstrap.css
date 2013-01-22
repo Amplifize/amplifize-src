@@ -132,7 +132,6 @@ textarea {
   box-sizing: border-box;
 }
 body {
-  margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
@@ -2979,7 +2978,6 @@ input[type="submit"].btn.btn-mini {
   *position: relative;
   *z-index: 2;
   overflow: visible;
-  margin-bottom: 18px;
 }
 .navbar-inner {
   min-height: 40px;
@@ -4199,9 +4197,6 @@ a.badge:hover {
 }
 .invisible {
   visibility: hidden;
-}
-.navbar {
-  border-bottom: 1px solid #CACACA;
 }
 .navbar .navbar-inner {
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) ,  0 0 10px rgba(0, 0, 0, 0.1);

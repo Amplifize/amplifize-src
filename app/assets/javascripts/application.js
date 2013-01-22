@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require global.js
+//= require global
 
 
 /* require_tree . */
