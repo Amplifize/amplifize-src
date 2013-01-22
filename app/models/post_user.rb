@@ -3,6 +3,8 @@ class PostUser < ActiveRecord::Base
   # => 0 == read
   # => 1 == unread
 
+  attr_accessible :post_id, :user_id, :read_state
+
   belongs_to :post
   belongs_to :user
   

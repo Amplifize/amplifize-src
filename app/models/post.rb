@@ -1,6 +1,8 @@
 require 'date'
 
 class Post < ActiveRecord::Base
+  attr_accessible :title, :author, :content, :url, :published_at, :uid, :feed_id
+  
   belongs_to :feed
 
   has_many :post_users
