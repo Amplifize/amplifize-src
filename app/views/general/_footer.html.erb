@@ -1,35 +1,39 @@
 <div id="footer">
-	<div class="footerBar">
-		<div class="footerItem">
-			<%= link_to "Blog", "/blog" %>	
-		</div>
-		<div class="footerItem">
-			<%= link_to "About Amplifize", :about %>
-			<ul>
-				<li><a href="/about/team">Who we are</a></li>
-				<li><a href="/about/why-amplifize">Why we built Amplifize</a></li>
-			</ul>
-		</div>
-		<div class="footerItemSmall">
-			<%= link_to "FAQ", :faq %>
-		</div>
-		<div class="footerItem">
-			<%= link_to "Contact Us", :contact %>
-			<ul>
-				<li><a href="javascript:UserVoice.showPopupWidget();">Feedback &amp; support</a></li>
-				<li><a href="http://twitter.com/amplifize">On Twitter</a></li>
-				<li><a href="mailto:tickets@amplifize.uservoice.com">By email</a></li>
-			</ul>			
-		</div>
-		<div class="footerItem">
-			<%= link_to "Terms & Conditions", :terms %>
-		</div>
-		<div class="footerItemBig">
-			<span class="copyright">Big Fish, Big Pond Inc. &copy; 2012</span>
-		</div>
-		<div style="clear:both"></div>
-	</div>
+  <div id="footerBar">
+    <div class="footerItem"><a href="/blog">Blog</a></div>
+    <div class="footerItem">
+        <a href="/about">About Amplifize</a>
+        <ul>
+          <li><a href="/about/team">Who we are</a></li>
+          <li><a href="/about/why-amplifize">Why we built Amplifize</a></li>
+        </ul>
+      </div>
+      <div class="footerItemSmall">
+        <a href="/faq">FAQ</a>
+      </div>
+      <div class="footerItem">
+        <a href="/contact">Contact us</a>
+        <ul>
+          <li><a href="javascript:UserVoice.showPopupWidget();">Feedback &amp; support</a></li>
+          <li><a href="http://twitter.com/amplifize">On Twitter</a></li>
+          <li><a href="mailto:tickets@amplifize.uservoice.com">By email</a></li>
+        </ul>
+      </div>
+      <div class="footerItem">
+        <a href="/terms">Legal</a>
+        <ul>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footerItemBig">
+        <span class="copyright">Big Fish, Big Pond, LLC &copy; 2012 &mdash; 2013</span>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
 </div>
+
 	
 <% if show_support_widget %>
 <script type="text/javascript">

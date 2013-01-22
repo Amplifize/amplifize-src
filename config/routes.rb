@@ -12,7 +12,7 @@ Amplifize::Application.routes.draw do
   match '/my/homepage' => 'users#homepage', :as => :homepage
   match '/my/content' => 'users#content', :as => :content
   match '/my/conversations' => 'users#conversations', :as => :conversations
-  match '/my/people' => 'users#reader', :as => :people
+  match '/my/people' => 'users#people', :as => :people
 
   match '/my/profile' => 'users#profile', :as => :profile, :via => :get
   match '/my/profile/' => 'users#update', :as => :update_profile, :via => :post
