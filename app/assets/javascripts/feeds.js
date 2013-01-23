@@ -2,10 +2,6 @@ var current_post = undefined;
 var position = 0;
 var posts_unread = 0;
 
-$("#contentOrderSwitch:before").show();
-$("#contentLayoutSwitch:before").show();
-$("#contentSortSwitch:before").show();
-
 var resetAppState = function () {
 	current_post = undefined;
 	position = 0;
@@ -137,10 +133,14 @@ var updatePostsArray = function() {
 			posts_unread = posts.length;
 			document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")";
 
-			if("postView" == contentLayout) {
-				updatePostContent(posts[position]);	
+			if(0 == posts_unread) {
+				clearContent();
 			} else {
-				updateTitleContent();
+				if("postView" == contentLayout) {
+					updatePostContent(posts[position]);	
+				} else {
+					updateTitleContent();
+				}
 			}
 		},
 		error: function(xhr, text, error) {
@@ -164,7 +164,7 @@ var updateTitleContent = function() {
 	for(var i = 0; i < posts.length; i++) {
 		$("#titleList").append(
 			'<li id="post_'+posts[i]["id"]+'"> ' +
-			'<a href="#" onclick="openPost('+posts[i]["id"]+');">'+posts[i]["post_title"]+'</a>'+
+			'<a href="#" onclick="openPost('+posts[i]["post_id"]+');">'+posts[i]["post_title"]+'</a>'+
 			'<span>From '+posts[i]["feed_title"]+' published on '+dateFormat(posts[i]["published_at"], "dddd, mmmm dS, yyyy, h:MM:ss TT")+'</span></li>'
 		);
 	}
@@ -177,27 +177,25 @@ var openPost = function(postId) {
 		url: "/posts/"+postId,
 		success: function(data, textStatus, jqXHR) {
 			current_post = data;
+			setReadState(0);
 
-			if(1 == posts[position][1]) {
-				posts[position][1] = 0;
-				setReadState(0);
-				
-				$("#feedUnreadCount").html(--posts_unread);
-				document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
-			}
+			$("#feedUnreadCount").html(--posts_unread);
+			document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
 
-			$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
-			$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
+			$("#popup_feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
+			$("#popup_contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 			if(current_post.author) {
-				$("#contentAuthor").html("by "+current_post.author+" ");
+				$("#popup_contentAuthor").html("by "+current_post.author+" ");
 			} else {
-				$("#contentAuthor").html("");
+				$("#popup_contentAuthor").html("");
 			}
-			$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
-			$("#contentBody").html(current_post.content);
+
+			$("#popup_contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+			$("#popup_contentBody").html(current_post.content);
 			$("#sharePostId").val(current_post.id);
 
 			disableOverlay();
+			$("#postPopup-modal-content").modal('show');
 			mixpanel.track("Read another post");
 		},
 		error: function(xhr, text, error) {
@@ -256,15 +254,17 @@ var updatePostContent = function(postId) {
 };
 
 var clearContent = function() {
+	disableOverlay();
+	
 	$("#feedTitle").html('');
 	$("#contentRow").html('');
 	$("#contentSummary").html('');
-	$("#amplifizeContent").animate({scrollTop: 0});
+	$("#content").animate({scrollTop: 0});
 
 	$("#feedUnreadCount").html("0");
 	document.title = "Amplifize | Great conversation goes best with great content (0)";
 
-	$("#contentSummary").html(
+	$("#contentBody").html(
 		"<h3>Looks like you've got no more posts to read</h3>" +
 		"<p>It might be time to add a <a href=\"#addFeed-modal-content\" data-toggle=\"modal\">new feed</a> or <a href=\"/feeds/import\">import your feeds</a> from Google Reader</p>"
 	);
@@ -273,13 +273,7 @@ var clearContent = function() {
 $(document).ready(function() {
 	resetAppState();
 	updatePostsArray();
-	/*
-	if(posts[position]) {
-		updatePostContent(posts[position]);
-	} else {
-		clearContent();
-	}
-*/
+
 	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
 		$('#feed_url').val('');
 		$('#feed_tags').val('');

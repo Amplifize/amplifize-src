@@ -54,11 +54,18 @@
   padding-left: 20px;
 }
 
-#contentSourceSite {
+#popup_source_content {
+	padding-left:20px;
+	padding-right: 20px;
+}
+
+#contentSourceSite,
+#popup_contentSourceSite {
   margin-bottom: 10px;
 }
 
-#contentTitle {
+#contentTitle,
+#popup_contentTitle {
   font-size: 28px;
   float: left;
   margin-right: 20px;
@@ -67,6 +74,10 @@
 
 #contentOptions {
   text-align:center;
+}
+
+#popup_contentOptions a {
+	float: left;
 }
 
 #titleList li {

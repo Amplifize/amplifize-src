@@ -1,5 +1,5 @@
 <% content_for :stylesheets do %>
-	<%= stylesheet_link_tag "feeds.css" %>
+	<%= stylesheet_link_tag "feeds" %>
 <% end %>
 
 <% content_for :javascripts do %>
@@ -59,7 +59,7 @@
         </div>
       	<div id="sectionNavigation">
       		<a href="#addFeed-modal-content" data-toggle="modal"><%= image_tag "reader/add.png", :alt => "Add a new feed", :title => "Add a new feed" %></a>
-      		<a href="/reader/feeds/manage"><%= image_tag "reader/manage.png", :alt => "Manage existing feeds", :title => "Manage existing feeds" %></a>
+      		<a href="/my/feeds"><%= image_tag "reader/manage.png", :alt => "Manage existing feeds", :title => "Manage existing feeds" %></a>
       		<a href="#" onclick="markAllAsRead();"><%= image_tag "reader/clear.png", :alt => "Clear all content", :title => "Clear all content" %></a>
       	</div>
       	<div class="clear"></div>
@@ -77,7 +77,7 @@
 		</div>
 	</div>
 
-<div id="addShare-modal-content" class="modal hide">
+<div id="addShare-modal-content" class="modal hide" style="z-index:2000;">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
 		<h3>Share content</h3>
@@ -99,5 +99,28 @@
 	</div>
 	<div id="modal-body" class="modal-body-style">
 		<%= render 'feeds/form' %>
+	</div>
+</div>
+
+<div id="postPopup-modal-content" class="modal hide" style="width: 960px;margin: -350px 0 0 -450px; scrolling:auto;">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3 id="popup_contentTitle"></h3>
+		<div class="clear"></div>
+	</div>
+	<div id="modal-body" class="modal-body-style">
+		<div id="popup_contentOptions">
+			<a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>
+			<a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
+			<div class="clear"></div>
+		</div>
+		<div id="popup_source_content">
+			<div id="popup_contentSourceSite">You are currently reading <span id="popup_feedTitle"></span> from <span id="popup_currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
+			<div id="popup_contentMetadata">
+				<p id="popup_contentInfoLine"><span id="popup_contentPublishDate"></span><span id="popup_contentArthur"></span></p>
+			</div>
+			<div id="popup_contentBody">
+			</div>
+		</div>
 	</div>
 </div>
