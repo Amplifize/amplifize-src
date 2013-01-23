@@ -4,12 +4,6 @@
 
 <% content_for :javascripts do %>
 	<%= javascript_include_tag "people.js", "findPeople.js" %>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#shareUnreadCount").html("<%= @shares_unread_count %>");
-			$("#feedUnreadCount").html("<%= @posts_unread_count %>");
-		});
-	</script>
 <% end %>
 
 <% content_for :subNav do %>
@@ -17,17 +11,6 @@
 		<a href="#findPeople-modal-content" data-toggle="modal">Find friends to follow</a>
 		<a href="#inviteFriends-modal-content" data-toggle="modal">Invite friends to join Amplifize</a>
 	</div>
-<% end %>
-
-<% if flash[:notice] %>
-<div id="noticeBlock">
-	<p class="notice"><%= flash[:notice] %></p>
-</div>
-<% end %>
-<% if flash[:error] %>
-<div id="noticeBlock">
-	<p class="error"><%= flash[:error] %></p>
-</div>    
 <% end %>
 
 <div id="subscribedTo">

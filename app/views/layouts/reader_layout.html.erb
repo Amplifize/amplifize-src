@@ -2,93 +2,54 @@
 <html>
 <head>
   <title>Amplifize | Great conversation goes best with great content</title>
-  <%= stylesheet_link_tag "bootstrap.css", "global.css", "reader.css", "markitup/skins/markitup/style.css", "markitup/sets/html/style.css" %>
+  <%= stylesheet_link_tag "application", "reader", "reader-overlay", "flipswitch", "markitup/skins/markitup/style", "markitup/sets/html/style" %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag :defaults, "reader.js", "jquery.hotkeys.js", "dateFormat.js", "bootstrap-modal.js", "jquery.markitup.js", "markItUp.js", "jquery.quick.pagination.min.js" %>
+  <%= javascript_include_tag "application", "reader", "jquery.hotkeys", "dateFormat", "bootstrap-modal", "jquery.markitup", "markItUp" %>
   <%= yield :javascripts %>
+    <script type="text/javascript">
+    	//application state
+    	var contentOrder = "newestFirst";
+    	var contentLayout = "postView";
+    	var contentSort = "unreadOnly";
+    
+		$(document).ready(function() {
+			$("#shareUnreadCount").html("<%= @shares_unread_count %>");
+			$("#feedUnreadCount").html("<%= @posts_unread_count %>");
+		});
+  </script>
   <%= csrf_meta_tag %>
 </head>
-<body>	    
-    <header class="navbar-fixed-top">
+<body>
+    <header>
 		<div class="navbar">
 	    	<ul class="nav">
 	    		<li class="active"><h1><a href="/">amplifize</a></h1></li>
 	    	</ul>
 			<ul class="nav">
-				<!--<li><a href="/reader/home">Home</a></li>-->
-				<li><a href="/reader/content">Content <span id="feedUnreadCount"></span></a></li>
-				<li><a href="/reader/conversations">Conversations <span id="shareUnreadCount"></span></a></li>
-				<li><a href="/reader/people">People</a></li>
+				<li><%= link_to 'Home', :homepage %></li>
+				<li><a href="/my/content">Content <span id="feedUnreadCount"></span></a></li>
+				<li><a href="/my/conversations">Conversations <span id="shareUnreadCount"></span></a></li>
+				<li><%= link_to 'People', :people %></li>
 			</ul>
 			<ul class="nav pull-right">
-				<li><a href="/profile">Account</a></li>
+				<li><%= link_to 'Account', :profile %></li>
 				<li><%= link_to "Logout", :logout %></li>
 			</ul>
-		</div> 
-	    <div id="subNav">
-			<%= yield :subNav %>
-			<div style="clear:both"></div>
-	    </div>
-		<!--<p id="notice"><%= notice %></p> -->
-        <div style="clear:both"></div>
-    </header>
-	<div id="container">
-		<div id="appNav">
-			<%= yield :appNav %>
 			<div style="clear:both"></div>
 		</div>
-	    <div id="reader_content">
-		    <%= yield %>
-		    <div style="clear:both"></div>
-	    </div>
-	</div>
-	<%= render 'general/footer.html.erb' %>
+		<div style="clear:both"></div>
+    </header>
+    <div id="content">
+		<%= yield %>
+      	<div class="clear"></div>
+    </div>
+	<%= render 'general/footer' %>
 	<div id="overlay">
 	    <div>
 	          <p>Loading</p>
 	          <%= image_tag "reader/loader.gif" %>
 	     </div>
 	</div>
-<div id="readerOrder-overlay" class="modal hide">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Change reader view</h3>
-	</div>
-	<div id="modal-body" class="modal-body-style">
-		<form method="post" action="<%= yield :reader_view_action %>" id="reader_view_form">
-			<fieldset>
-				<legend>Content read state</legend>
-				<div class="readerViewFormField"><input type="radio" name="read_state" id="allContent" value="all" /><label for="allContent">All content</label></div>
-				<div class="readerViewFormField"><input type="radio" name="read_state" id="unreadContent" value="unread" checked="checked" /><label for="unreadContent">Unread content only</label></div>
-			</fieldset>
-			<fieldset>
-				<legend>Content order</legend>
-				<div class="readerViewFormField"><input type="radio" name="content_order" id="oldToNew" value="oldToNew" checked="checked"/><label for="oldToNew">Oldest to newest</label></div>
-				<div class="readerViewFormField"><input type="radio" name="content_order" id="newToOld" value="newToOld" /><label for="newToOld">Newest to oldest</label></div>
-			</fieldset>
-			<fieldset>
-				<legend><em>Post view (coming soon)</em></legend>
-				<div class="readerViewFormField"><input disabled="disabled" type="radio" name="post_view" id="fullPost" value="fullPost" checked="checked" /><label for="fullPost">Full post</label></div>
-				<div class="readerViewFormField"><input disabled="disabled" type="radio" name="post_view" id="titleOnly" value="titleOnly" /><label for="titleOnly">Title only</label></div>
-			</fieldset>
-			<fieldset>
-				<input type="submit" value="Refresh" />
-			</fieldset>
-		</form>
-		<div style="clear:both;"></div>
-	</div>
-</div>
-<div id="readerSource-overlay" class="hide">
-	<div id="readerSource-overlay-modal">
-		<div class="modal-header">
-			<button type="button" class="close" onclick="closeReaderSourceOverlay();">×</button>
-			<h3>Select a feed</h3>
-		</div>
-		<div id="modal-body" class="modal-body-style">
-			<%= yield :content_source_list %>
-			<div style="clear:both;"></div>
-		</div>
-	</div>
-</div>
+	<div class="clear"></div>
 </body>
 </html>

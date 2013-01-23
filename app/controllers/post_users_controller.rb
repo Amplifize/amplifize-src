@@ -1,5 +1,7 @@
 class PostUsersController < ApplicationController
-  def set_read_state()
+  before_filter :require_user, :only => [:set_read_state, :get_posts]
+
+  def set_read_state
     post_id = params[:post_id]
     new_state = params[:state]
 
@@ -12,25 +14,39 @@ class PostUsersController < ApplicationController
     end
   end
 
-  # Marks all posts for a given feed with the given state
-  # * If no feed_id is supplied, then all posts for the user are set to the state ("mark all as read")
-  # * State will be set to 1 (unread) iff the state param is equal to '1'.  Otherwise, state will be 0 (read)
-  def mark_all_read
-    feed_id = params[:feed_id]
-    state = params[:state]
-    new_state = 0
-    if state == '1'
-      new_state = 1
-    end
-    
-    if feed_id.nil? then
-      PostUser.where(:user_id => current_user.id).update_all(:read_state => new_state)
+  def retrieve
+    #build the @posts query based on user preferences
+    if "titleView" == params[:content_layout]
+      posts = current_user.post_users.select("post_users.*, feeds.title AS feed_title, posts.title AS post_title, posts.published_at AS published_at, posts.author AS author").joins(:post => :feed)
+      #posts = current_user.post_users.joins("INNER JOIN `posts` ON `posts`.`id` = `post_users`.`post_id` INNER JOIN `feeds` ON `feeds`.`id` = `posts`.`feed_id`")
     else
-      PostUser.joins(:post => [:feed]).where(:feeds => {:id => feed_id}, :post_users => {:user_id => current_user.id}).update_all(:read_state => new_state)
+      posts = current_user.post_users.joins(:post)
+    end
+      
+    if params[:feed_id]
+      posts = posts.where("posts.feed_id = ?", params[:feed_id])
+      posts_unread_count = current_user.feed_unread_count(params[:feed_id])
+    end
+
+    if params[:content_sort] == "unreadOnly" then
+      posts = posts.unread
+    end
+
+    posts = posts.rolling_window
+
+    if params[:content_order] == "oldestFirst" then
+      posts = posts.oldest_to_newest
+    else
+      posts = posts.newest_to_oldest
+    end
+
+    if params[:content_layout] == "postView" then
+      posts = posts.map{|p| [p.post_id, p.read_state]}  
     end
 
     respond_to do |format|
-      format.js {"{'success': true}"}
+      format.js { render :json => posts }
+      format.html { render :json => posts }
     end
   end
 end

@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   
   def require_no_user
     if current_user
-      redirect_to reader_url
+      redirect_to homepage_url
       return false
     end
   end

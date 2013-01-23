@@ -4,29 +4,78 @@
 
 <% content_for :javascripts do %>
 	<%= javascript_include_tag "feeds.js" %>
-	<script type="text/javascript">
-		var posts = <%= @posts %>;
-		var posts_unread = <%= @posts_unread_count %>;
-
-		$(document).ready(function() {
-			$("#shareUnreadCount").html("<%= @shares_unread_count %>");
-			$("#feedUnreadCount").html("<%= @posts_unread_count %>");
-		});
-	</script>
 <% end %>
 
-<% content_for :subNav do %>
-	<%= render "users/reader/subnav_view.html.erb", :view => "feeds" %>
-<% end %>
+	<div id="subNav">
+		<div id="contentViewOptions">
+			<div class="subNavItem">
+				<span class="navLabel">Content order:</span>
+				<div id="contentOrderSwitchDiv" class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentOrderSwitch" checked>
+					<label class="onoffswitch-label" for="contentOrderSwitch" onclick="toggleContentOrder();">
+						<div class="onoffswitch-inner" id="contentOrder"></div>
+						<div class="onoffswitch-switch"></div>
+              		</label>
+            	</div>
+            	<div class="clear"></div>
+          	</div>
 
-<% content_for :appNav do %>
-	<%= render "users/reader/app_nav_view.html.erb", :view => "feeds" %>
-<% end %>
-<% content_for :content_source_list do %>
-	<%= render "feeds/content_source_list.html.erb", :view => "feeds" %>
-<% end %>
+          	<div class="subNavItem">
+				<span class="navLabel">Content layout:</span>
+            	<div id="contentLayoutSwitchDiv" class="onoffswitch">
+              		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentLayoutSwitch" checked>
+              		<label class="onoffswitch-label" for="contentLayoutSwitch" onclick="toggleContentLayout();">
+                		<div class="onoffswitch-inner" id="contentLayout"></div>
+                		<div class="onoffswitch-switch"></div>
+              		</label>
+            	</div>
+            	<div class="clear"></div>
+          	</div>
 
-<%= render "users/reader/content_view.html.erb", :view => "feeds" %>
+          <div class="subNavItem">
+			<span class="navLabel">Content sort:</span>
+            <div class="onoffswitch" id="contentSortSwitchDiv">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentSortSwitch" checked>
+              <label class="onoffswitch-label" for="contentSortSwitch" onclick="toggleContentSort();">
+                <div class="onoffswitch-inner" id="contentSort"></div>
+                <div class="onoffswitch-switch"></div>
+              </label>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div id="contentStateOptions">
+          <a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
+          <a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
+          <div class="clear"></div>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div id="menubar">
+        <div id="contentOptions">
+          <a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>
+          <a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
+        </div>
+      	<div id="sectionNavigation">
+      		<a href="#addFeed-modal-content" data-toggle="modal"><%= image_tag "reader/add.png", :alt => "Add a new feed", :title => "Add a new feed" %></a>
+      		<a href="/reader/feeds/manage"><%= image_tag "reader/manage.png", :alt => "Manage existing feeds", :title => "Manage existing feeds" %></a>
+      		<a href="#" onclick="markAllAsRead();"><%= image_tag "reader/clear.png", :alt => "Clear all content", :title => "Clear all content" %></a>
+      	</div>
+      	<div class="clear"></div>
+      </div>
+	<div id="source_content">
+      	<div id="contentSourceSite">You are currently reading <span id="feedTitle"></span> from <span id="currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
+		<div id="contentMetadata">
+    		<div id="contentTitleBanner">
+    			<div id="contentTitle"></div>
+    			<div class="clear"></div>
+    		</div>
+    		<p id="contentInfoLine"><span id="contentPublishDate"></span><span id="contentArthur"></span></p>
+		</div>
+		<div id="contentBody">
+		</div>
+	</div>
 
 <div id="addShare-modal-content" class="modal hide">
 	<div class="modal-header">

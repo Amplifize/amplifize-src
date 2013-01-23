@@ -38,8 +38,6 @@ $(document).ready(function() {
 	
 	$(".htmlEditor").markItUp(markItUpSettings);
 	
-	$("#sourceList").quickPagination({pagerLocation:"bottom", pageSize: 13})
-	
 	//need to do this to prevent firefox from auto searching on typing
 	jQuery(document).bind('keydown', 'j', function(evt) {
 		return false;

@@ -1,27 +1,107 @@
 #subNav {
-	width: 100%;
+  padding: 0px 0 10px 0;
 }
 
-#appNav,
-#subNavContainer {
+#contentViewOptions {
+  float: left;
+}
+
+#contentStateOptions {
+  float: right;
+}
+
+.subNavItem {
+  float: left;
+  margin-right: 20px;
+  margin-top: 8px;
+}
+
+#previousContent, #nextContent {
+  float: left;
+  margin-right: 20px;
+  margin-top: 8px;
+}
+
+.navLabel {
+  float: left;
+  margin-right: 10px;
+  line-height: 28px;
+}
+
+#shareUnreadCount, #feedUnreadCount {
+  margin-left: 10px;
+  padding: 5px;
+  background-color: #f00;
+  font-size: 12px;
+  color: #fff;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* BEGINNING OF SUB-NAVIGATION SECTION */
+#menubar {
+  width: 40px;
+  margin: 0;
+  position: fixed;
+}
+
+/* END OF SUB-NAVIGATION SECTION */
+
+/* CONTENT SECTION */
+#source_content {
+  margin-left: 40px;
+  padding-left: 20px;
+}
+
+#contentSourceSite {
+  margin-bottom: 10px;
+}
+
+#contentTitle {
+  font-size: 28px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
+
+#contentOptions {
+  text-align:center;
+}
+
+#titleList li {
+  list-style: none;
+  padding: 5px 10px;
+  margin-left: -27px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#titleList li:nth-child(2n) {
+  background-color: #ccc;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#titleList a {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+/* END OF CONTENT SECTION */
+
+
+#appNav{
 	width: 940px;
     
     margin: 10px auto;
     padding: 10px;    
-}
 
-#appNav {
 	background-color: #fff;
 }
 
-#reader_content {
-	width: 940px;
-	min-height: 400px;
-	
-	margin: 0 auto;
+#content {
 	padding-bottom:40px;
-	
-	background-color: #ffffff;
 }
 
 #amplifizeContent,
@@ -136,7 +216,7 @@
      height:100%;
      text-align:center;
      z-index: 1200;
-     background-image: url("/images/reader/overlay.png");
+     background-image: url("/assets/reader/overlay.png");
 }
 
 #overlay div {
@@ -223,4 +303,13 @@ li.currentPage a:visited {
 	float: right;
 	margin-left: 5px;
 	line-height: 22px;
+}
+
+#titleView {
+	display: none;
+	visibility: hidden;
+}
+
+#sectionNavigation {
+	padding-top: 60px;
 }

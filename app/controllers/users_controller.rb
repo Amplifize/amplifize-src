@@ -40,8 +40,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
-    @posts_unread_count = current_user.feeds_unread_count
-    @shares_unread_count = current_user.shares_unread_count
+    set_unread_counts
 
     render :layout => 'reader_layout'
   end
@@ -63,82 +62,57 @@ class UsersController < ApplicationController
     end
   end
 
-  def reader
-    if params[:read_state] then
-      session[:read_state] = params[:read_state]
-    end
+  def homepage
+    set_unread_counts
     
-    if params[:content_order] then
-      session[:content_order] = params[:content_order]
+    render :file => 'users/reader/home', :layout => 'reader_layout'
+  end
+
+  def content
+    set_unread_counts    
+    @feed = Feed.new
+
+    render :file => 'users/reader/feeds.html.erb', :layout => 'reader_layout'
+  end
+
+  def people  
+    set_unread_counts
+
+    @subscribed_to = User.find_by_sql ['select users.* from users join follows on users.id = follows.follows where user_id = ?', current_user.id]
+    @followed_by = User.find_by_sql ['select distinct users.* from users join follows on users.id = follows.user_id where follows.follows = ?', current_user.id]
+
+    render :file => 'users/reader/people', :layout => 'reader_layout'
+  end
+
+  def conversations
+    @all_follows = current_user.follows.map(&:follows)
+    @all_follows << current_user.id
+    @all_follows = @all_follows.to_json
+
+    #build the @shares query based on user preferences
+    @shares = current_user.share_users.joins(:share)
+
+    if params[:follower_id]
+      @shares = @shares.joins(:share).where("shares.user_id = ?", params[:follower_id])
+      @shares_unread_count = current_user.share_unread_count(params[:follower_id])
     end
 
-    @posts_unread_count = current_user.feeds_unread_count
-    @shares_unread_count = current_user.shares_unread_count
+    if params[:read_state] == "unread" then
+      @shares = @shares.unread
+    end
 
-    case params[:view]
-    when "home"
-      render_view = 'users/reader/home.html.erb'
-    when "shares", "conversations"
-      @all_follows = current_user.follows.map(&:follows)
-      @all_follows << current_user.id
-      @all_follows = @all_follows.to_json
-
-      #build the @shares query based on user preferences
-      @shares = current_user.share_users.joins(:share)
-
-      if params[:follower_id]
-        @shares = @shares.joins(:share).where("shares.user_id = ?", params[:follower_id])
-        @shares_unread_count = current_user.share_unread_count(params[:follower_id])
-      end
-
-      if session[:read_state] == "unread" then
-        @shares = @shares.unread
-      end
-
-      if session[:read_order] == "oldToNew" then
-        @shares = @shares.oldest_to_newest
-      else
-        @shares = @shares.newest_to_oldest
-      end
-
-      @shares = @shares.map{|s| [s.share_id, s.read_state]}.to_json
-
-      @comment = Comment.new
-      render_view = 'users/reader/shares.html.erb'
-    when "people"
-      @subscribed_to = User.find_by_sql ['select users.* from users join follows on users.id = follows.follows where user_id = ?', current_user.id]
-      @followed_by = User.find_by_sql ['select distinct users.* from users join follows on users.id = follows.user_id where follows.follows = ?', current_user.id]
-      render_view = 'users/reader/people.html.erb'
+    if params[:read_order] == "oldToNew" then
+      @shares = @shares.oldest_to_newest
     else
-      @feed = Feed.new
-      @my_feeds = current_user.feeds.alphabetical;
-      
-      #build the @posts query based on user preferences
-      @posts = current_user.post_users.joins(:post)
-      
-      if params[:feed_id]
-        @posts = @posts.joins(:post).where("posts.feed_id = ?", params[:feed_id])
-        @posts_unread_count = current_user.feed_unread_count(params[:feed_id])
-      end
-
-      if session[:read_state] == "unread" then
-        @posts = @posts.unread
-      end
-
-      @posts = @posts.rolling_window
-
-      if session[:read_order] == "oldToNew" then
-        @posts = @posts.oldest_to_newest
-      else
-        @posts = @posts.newest_to_oldest
-      end
-
-      @posts = @posts.map{|p| [p.post_id, p.read_state]}.to_json
-
-      render_view = 'users/reader/feeds.html.erb'
+      @shares = @shares.newest_to_oldest
     end
 
-    render :file => render_view, :layout => 'reader_layout'
+    #TODO: Need to add a title view to conversations
+    @shares = @shares.map{|s| [s.share_id, s.read_state]}.to_json
+
+    @comment = Comment.new
+
+    render :file => 'users/reader/shares', :layout => 'reader_layout'
   end
   
   def search
@@ -147,5 +121,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.js { render :json => user }
     end
+  end
+  
+  private
+  
+  def set_unread_counts
+    @posts_unread_count = current_user.feeds_unread_count
+    @shares_unread_count = current_user.shares_unread_count
   end
 end

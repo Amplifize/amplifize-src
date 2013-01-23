@@ -1,5 +1,15 @@
 var current_post = undefined;
 var position = 0;
+var posts_unread = 0;
+
+$("#contentOrderSwitch:before").show();
+$("#contentLayoutSwitch:before").show();
+$("#contentSortSwitch:before").show();
+
+var resetAppState = function () {
+	current_post = undefined;
+	position = 0;
+};
 
 var loadFilterOverlay = function () {
 	$("#filter-overlay").css("visibility", "visible");
@@ -7,6 +17,40 @@ var loadFilterOverlay = function () {
 
 var closeFilterOverlay = function () {
 	$("#filter-overlay").css("visibility", "hidden");
+};
+
+var toggleContentOrder = function() {
+	if("newestFirst" == contentOrder) {
+		contentOrder = "oldestFirst";
+	} else {
+		contentOrder = "newestFirst";
+	}
+
+	updatePostsArray();
+};
+
+var toggleContentLayout = function() {
+	if("postView" == contentLayout) {
+		contentLayout = "titleView";
+	} else {
+		contentLayout = "postView";
+	}
+	
+	updatePostsArray();
+};
+
+var toggleContentSort = function() {
+	if("unreadOnly" == contentSort) {
+		contentSort = "allContent";
+	} else {
+		contentSort = "unreadOnly";
+	}
+	
+	updatePostsArray();
+};
+
+var filterContent = function() {
+	alert("coming soon");
 };
 
 var markAllAsRead = function() {
@@ -77,15 +121,106 @@ var upPost = function() {
 	return false;
 };
 
+var updatePostsArray = function() {
+	resetAppState();
+	enableOverlay();
+	
+	$.ajax({
+		url: "/post_users/",
+		data: {
+			"content_order" : contentOrder,
+			"content_sort" : contentSort,
+			"content_layout" : contentLayout
+		},
+		success: function(data, textStatus, jqXHR) {
+			posts = data;
+			posts_unread = posts.length;
+			document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")";
+
+			if("postView" == contentLayout) {
+				updatePostContent(posts[position]);	
+			} else {
+				updateTitleContent();
+			}
+		},
+		error: function(xhr, text, error) {
+				//log error here
+				disableOverlay();
+		},
+		dataType: "json"
+	});
+};
+
+var updateTitleContent = function() {
+	$("#contentMetadata").css("visibility", "hidden").css("display", "none");
+	$("#contentSourceSite").css("visibility", "hidden").css("display", "none");
+	$("#contentStateOptions").css("visibility", "hidden");
+	$("#contentOptions").css("visibility", "hidden");
+
+	current_post = undefined;
+
+	$("#contentBody").html("");
+	$("#contentBody").append('<ul id="titleList"></ul>');
+	for(var i = 0; i < posts.length; i++) {
+		$("#titleList").append(
+			'<li id="post_'+posts[i]["id"]+'"> ' +
+			'<a href="#" onclick="openPost('+posts[i]["id"]+');">'+posts[i]["post_title"]+'</a>'+
+			'<span>From '+posts[i]["feed_title"]+' published on '+dateFormat(posts[i]["published_at"], "dddd, mmmm dS, yyyy, h:MM:ss TT")+'</span></li>'
+		);
+	}
+	
+	disableOverlay();
+};
+
+var openPost = function(postId) {
+	$.ajax({
+		url: "/posts/"+postId,
+		success: function(data, textStatus, jqXHR) {
+			current_post = data;
+
+			if(1 == posts[position][1]) {
+				posts[position][1] = 0;
+				setReadState(0);
+				
+				$("#feedUnreadCount").html(--posts_unread);
+				document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
+			}
+
+			$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
+			$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
+			if(current_post.author) {
+				$("#contentAuthor").html("by "+current_post.author+" ");
+			} else {
+				$("#contentAuthor").html("");
+			}
+			$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+			$("#contentBody").html(current_post.content);
+			$("#sharePostId").val(current_post.id);
+
+			disableOverlay();
+			mixpanel.track("Read another post");
+		},
+		error: function(xhr, text, error) {
+			//log error here
+			disableOverlay();
+		},
+		dataType: "json"
+	});
+}
+
 var updatePostContent = function(postId) {
 	if (postId[0]) {
-		enableOverlay();
+		$("#contentMetadata").css("visibility", "visible").css("display", "block");
+		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
+		$("#contentStateOptions").css("visibility", "visible");
+		$("#contentOptions").css("visibility", "visible");
+
 		$.ajax({
 			url: "/posts/"+postId[0],
 			success: function(data, textStatus, jqXHR) {
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				
-				current_post = data.post;
+				current_post = data;
 
 				if(1 == posts[position][1]) {
 					posts[position][1] = 0;
@@ -98,12 +233,12 @@ var updatePostContent = function(postId) {
 				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				if(current_post.author) {
-					$("#contentAuthor").html("written by "+current_post.author+" ");
+					$("#contentAuthor").html("by "+current_post.author+" ");
 				} else {
 					$("#contentAuthor").html("");
 				}
-				$("#contentPublishDate").html("on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
-				$("#contentSummary").html(current_post.content);
+				$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+				$("#contentBody").html(current_post.content);
 				$("#sharePostId").val(current_post.id);
 
 				disableOverlay();
@@ -136,14 +271,15 @@ var clearContent = function() {
 };
 
 $(document).ready(function() {
-	document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")";
-	$("#container").css("margin-top", "108px");
+	resetAppState();
+	updatePostsArray();
+	/*
 	if(posts[position]) {
 		updatePostContent(posts[position]);
 	} else {
 		clearContent();
 	}
-
+*/
 	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
 		$('#feed_url').val('');
 		$('#feed_tags').val('');

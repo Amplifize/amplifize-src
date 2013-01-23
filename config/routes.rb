@@ -17,6 +17,9 @@ Amplifize::Application.routes.draw do
   match '/my/profile' => 'users#profile', :as => :profile, :via => :get
   match '/my/profile/' => 'users#update', :as => :update_profile, :via => :post
 
+  #Logged in content retrieval
+  match '/post_users/', :controller => 'post_users', :action => 'retrieve', :as => :retrieve_posts
+
   #People actions
   match '/users/search' => 'users#search', :as => :user_search
 

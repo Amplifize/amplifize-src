@@ -21,7 +21,7 @@
 
 .markItUpContainer  {
 	border:1px solid #3C769D;	
-	background:#FFF url(/images/markitup/bg-container.png) repeat-x top left;
+	background:#FFF url(/assets/markitup/bg-container.png) repeat-x top left;
 	padding:5px 5px 2px 5px;
 }
 
@@ -29,7 +29,7 @@
 	padding:5px;
 	border:3px solid #3C769D;
 	height:320px;
-	/*background:#FFF url(/images/markitup/bg-editor.png) no-repeat;*/
+	/*background:#FFF url(/assets/markitup/bg-editor.png) no-repeat;*/
 	clear:both;
 	line-height:18px;
 	overflow:auto;
@@ -51,7 +51,7 @@
 	width:22px; height:5px;
 	margin-left:auto;
 	margin-right:auto;
-	background-image:url(/images/markitup/handle.png);
+	background-image:url(/assets/markitup/handle.png);
 	cursor:n-resize;
 }
 /***************************************************************************************/
@@ -68,7 +68,7 @@
 	display:block;
 }
 .markItUpHeader ul .markItUpDropMenu {
-	background:transparent url(/images/markitup/menu.png) no-repeat 115% 50%;
+	background:transparent url(/assets/markitup/menu.png) no-repeat 115% 50%;
 	margin-right:5px;
 }
 .markItUpHeader ul .markItUpDropMenu li {
@@ -99,7 +99,7 @@
 	border-bottom:1px solid #3C769D;
 }
 .markItUpHeader ul ul .markItUpDropMenu {
-	background:#F5F5F5 url(/images/markitup/submenu.png) no-repeat 100% 50%;
+	background:#F5F5F5 url(/assets/markitup/submenu.png) no-repeat 100% 50%;
 }
 /* next rows of buttons */
 .markItUpHeader ul ul ul {
@@ -131,18 +131,18 @@
 }
 /***************************************************************************************/
 .html .markItUpEditor {
-	background-image:url(/images/markitup/bg-editor-html.png);
+	background-image:url(/assets/markitup/bg-editor-html.png);
 }
 .markdown .markItUpEditor {
-	background-image:url(/images/markitup/bg-editor-markdown.png);
+	background-image:url(/assets/markitup/bg-editor-markdown.png);
 }
 .textile .markItUpEditor {
-	background-image:url(/images/markitup/bg-editor-textile.png);
+	background-image:url(/assets/markitup/bg-editor-textile.png);
 }
 .bbcode .markItUpEditor {
-	background-image:url(/images/markitup/bg-editor-bbcode.png);
+	background-image:url(/assets/markitup/bg-editor-bbcode.png);
 }
 .wiki .markItUpEditor,
 .dotclear .markItUpEditor {
-	background-image:url(/images/markitup/bg-editor-wiki.png);
+	background-image:url(/assets/markitup/bg-editor-wiki.png);
 }

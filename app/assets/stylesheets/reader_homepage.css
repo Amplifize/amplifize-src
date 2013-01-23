@@ -1,0 +1,9 @@
+#contentPreview,
+#conversationPreview {
+	float: left;
+	width: 50%;
+	
+	margin:25px 0;
+}
+
+
