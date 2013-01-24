@@ -1,4 +1,5 @@
 var current_post = undefined;
+var posts = undefined;
 var position = 0;
 var posts_unread = 0;
 
@@ -68,7 +69,7 @@ var markAllAsRead = function() {
 
 var setReadState = function(readState) {
 	if(1 == readState) {
-		posts[position][1] = 1;
+		posts[position]["read_state"] = 1;
 		++posts_unread;
 		$("#feedUnreadCount").html(posts_unread);
 		document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
@@ -207,21 +208,21 @@ var openPost = function(postId) {
 }
 
 var updatePostContent = function(postId) {
-	if (postId[0]) {
+	if (postId["post_id"]) {
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
 		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 		$("#contentStateOptions").css("visibility", "visible");
 		$("#contentOptions").css("visibility", "visible");
 
 		$.ajax({
-			url: "/posts/"+postId[0],
+			url: "/posts/"+postId["post_id"],
 			success: function(data, textStatus, jqXHR) {
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				
 				current_post = data;
 
-				if(1 == posts[position][1]) {
-					posts[position][1] = 0;
+				if(1 == posts[position]["read_state"]) {
+					posts[position]["read_state"] = 0;
 					setReadState(0);
 					
 					$("#feedUnreadCount").html(--posts_unread);

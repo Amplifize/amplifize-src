@@ -18,9 +18,8 @@ class PostUsersController < ApplicationController
     #build the @posts query based on user preferences
     if "titleView" == params[:content_layout]
       posts = current_user.post_users.select("post_users.*, feeds.title AS feed_title, posts.title AS post_title, posts.published_at AS published_at, posts.author AS author").joins(:post => :feed)
-      #posts = current_user.post_users.joins("INNER JOIN `posts` ON `posts`.`id` = `post_users`.`post_id` INNER JOIN `feeds` ON `feeds`.`id` = `posts`.`feed_id`")
     else
-      posts = current_user.post_users.joins(:post)
+      posts = current_user.post_users.select("post_users.post_id, post_users.read_state").joins(:post)
     end
       
     if params[:feed_id]
@@ -38,10 +37,6 @@ class PostUsersController < ApplicationController
       posts = posts.oldest_to_newest
     else
       posts = posts.newest_to_oldest
-    end
-
-    if params[:content_layout] == "postView" then
-      posts = posts.map{|p| [p.post_id, p.read_state]}  
     end
 
     respond_to do |format|
