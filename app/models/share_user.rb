@@ -3,6 +3,8 @@ class ShareUser < ActiveRecord::Base
   # => 0 == read
   # => 1 == unread
 
+  attr_accessible :share_id, :user_id, :read_state
+
   belongs_to :share
   belongs_to :user
 

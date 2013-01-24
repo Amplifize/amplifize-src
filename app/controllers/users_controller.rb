@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   end
 
   def content
-    set_unread_counts    
+    set_unread_counts
     @feed = Feed.new
 
     render :file => 'users/reader/feeds.html.erb', :layout => 'reader_layout'
@@ -85,30 +85,11 @@ class UsersController < ApplicationController
   end
 
   def conversations
+    set_unread_counts
+
     @all_follows = current_user.follows.map(&:follows)
     @all_follows << current_user.id
     @all_follows = @all_follows.to_json
-
-    #build the @shares query based on user preferences
-    @shares = current_user.share_users.joins(:share)
-
-    if params[:follower_id]
-      @shares = @shares.joins(:share).where("shares.user_id = ?", params[:follower_id])
-      @shares_unread_count = current_user.share_unread_count(params[:follower_id])
-    end
-
-    if params[:read_state] == "unread" then
-      @shares = @shares.unread
-    end
-
-    if params[:read_order] == "oldToNew" then
-      @shares = @shares.oldest_to_newest
-    else
-      @shares = @shares.newest_to_oldest
-    end
-
-    #TODO: Need to add a title view to conversations
-    @shares = @shares.map{|s| [s.share_id, s.read_state]}.to_json
 
     @comment = Comment.new
 

@@ -19,6 +19,7 @@ Amplifize::Application.routes.draw do
 
   #Logged in content retrieval
   match '/post_users/', :controller => 'post_users', :action => 'retrieve', :as => :retrieve_posts
+  match '/share_users/', :controller => 'share_users', :action => 'retrieve', :as => :retrieve_conversations
 
   #People actions
   match '/users/search' => 'users#search', :as => :user_search

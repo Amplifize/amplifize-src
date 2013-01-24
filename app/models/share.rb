@@ -1,4 +1,6 @@
 class Share < ActiveRecord::Base
+  attr_accessible :post_id, :user_id, :summary
+
   has_many :comments
   
   belongs_to :user

@@ -1,5 +1,5 @@
 class PostUsersController < ApplicationController
-  before_filter :require_user, :only => [:set_read_state, :get_posts]
+  before_filter :require_user, :only => [:set_read_state, :retrieve]
 
   def set_read_state
     post_id = params[:post_id]
@@ -21,11 +21,11 @@ class PostUsersController < ApplicationController
     else
       posts = current_user.post_users.select("post_users.post_id, post_users.read_state").joins(:post)
     end
-      
-    if params[:feed_id]
-      posts = posts.where("posts.feed_id = ?", params[:feed_id])
-      posts_unread_count = current_user.feed_unread_count(params[:feed_id])
-    end
+     
+    #TODO: Fix this 
+    #if params[:feed_id]
+    #  posts = posts.where("posts.feed_id = ?", params[:feed_id])
+    #end
 
     if params[:content_sort] == "unreadOnly" then
       posts = posts.unread
