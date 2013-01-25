@@ -1,13 +1,16 @@
-#shareInfo {
+#shareInfo,
+#popup_shareInfo {
 	font-size: 16px;
 }
 
-#conversationStarter {
+#conversationStarter,
+#popup_conversationStarter {
 	font-size: 20px;
 	margin-top: 15px;
 }
 
-#commentThread {
+#commentThread,
+#popup_commentThread {
 	border: 0;
 
 	width: 960px;
@@ -15,7 +18,8 @@
 	margin-bottom: 20px;
 }
 
-#commentThread tr {
+#commentThread tr,
+#popup_commentThread tr {
 	padding: 5px;
 	margin: 2px;
 }

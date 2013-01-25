@@ -38,6 +38,8 @@ Amplifize::Application.configure do
   # Default domain name for URLs generated with the mailer
   config.action_mailer.default_url_options = { :host => "amplifize.local", :port => 3000 }
 
+  config.show_support_widget = false
+
   # Configurations for Action Mailer
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

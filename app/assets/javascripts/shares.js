@@ -143,7 +143,7 @@ var clearContent = function() {
 	
 	$("#feedTitle").html('');
 	$("#contentRow").html('');
-	$("#shareInfo").html('');
+	$("#shareInfo").css("visibility", "hidden").css("display", "none");
 	$("#contentSourceSite").html('');
 	$("#contentBody").html("<h3>Looks like you've got no more conversations to read</h3>");
 	$("#content").animate({scrollTop: 0});
@@ -311,17 +311,6 @@ $(document).ready(function() {
 	resetAppState();
 	updateSharesArray();
 
-	
-	/*
-	document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")";
-	$("#container").css("margin-top", "108px");
-	if(shares[position]) {
-		updateShareContent(shares[position]);
-	} else {
-		clearContent();
-	}
-	*/
-
 	$('#addComment-modal-content').bind('show', function () {
 	  $('#comment_comment_text').val('');
 	  setTimeout(function(){$("#comment_comment_text").focus();}, 250);
@@ -335,9 +324,10 @@ $(document).ready(function() {
 		$("#addComment-modal-content").modal("hide");
 		$("#comment_text").val('');
 
-		var comment = data.comment;
+		var comment = data;
 		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')		
+		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>');
+		$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>');
 
 		disableOverlay();
 
