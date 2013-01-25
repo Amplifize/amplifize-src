@@ -209,6 +209,8 @@ var openPost = function(postId) {
 
 var updatePostContent = function(postId) {
 	if (postId["post_id"]) {
+		$("#contentBody").html('');
+		
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
 		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 		$("#contentStateOptions").css("visibility", "visible");

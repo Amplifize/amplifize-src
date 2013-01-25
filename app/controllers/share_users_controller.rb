@@ -17,7 +17,7 @@ class ShareUsersController < ApplicationController
   def retrieve
     #build the @shares query based on user preferences
     if "titleView" == params[:content_layout]
-      shares = current_user.share_users.select("share_users.*, posts.title AS post_title, users.display_name AS display_name, users.email AS email").joins(:user, :share => [:post])
+      shares = current_user.share_users.select("share_users.*, posts.title AS post_title, users.display_name AS display_name, users.email AS email").joins(:share => [:post, :user])
     else
       shares = current_user.share_users.select("share_users.share_id, share_users.read_state").joins(:share)
     end

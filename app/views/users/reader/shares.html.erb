@@ -66,7 +66,7 @@
       		<a href="#" onclick="markAllAsRead();"><%= image_tag "reader/clear.png", :alt => "Clear all content", :title => "Clear all content" %></a>
       	</div>
       	<div class="clear"></div>
-      </div>
+    </div>
 	<div id="source_content">
 		<div id="shareInfo">
 			<table id="commentThread">
@@ -98,7 +98,7 @@
 	</div>
 </div>
 
-<div id="postPopup-modal-content" class="modal hide" style="width: 960px;margin: -350px 0 0 -450px;">
+<div id="postPopup-modal-content" class="modal hide" style="width: 960px;margin: -350px 0 0 -450px;overflow-y:auto;max-height:90%;">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
 		<h3 id="popup_contentTitle"></h3>
@@ -111,6 +111,13 @@
 			<div class="clear"></div>
 		</div>
 		<div id="popup_source_content">
+			<div id="popup_shareInfo">
+				<table id="popup_commentThread">
+					<tr>
+						<td>Shared by: <span id="popup_sharedBy"></span> who says: <blockquote id="popup_conversationStarter"></blockquote></td>
+					</tr>
+				</table>
+			</div>
 			<div id="popup_contentSourceSite">You are currently reading <span id="popup_feedTitle"></span> from <span id="popup_currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
 			<div id="popup_contentMetadata">
 				<p id="popup_contentInfoLine"><span id="popup_contentPublishDate"></span><span id="popup_contentArthur"></span></p>

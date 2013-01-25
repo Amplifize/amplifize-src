@@ -6,12 +6,10 @@
 	<%= javascript_include_tag "people.js", "findPeople.js" %>
 <% end %>
 
-<% content_for :subNav do %>
-	<div id="subNavContainer">
-		<a href="#findPeople-modal-content" data-toggle="modal">Find friends to follow</a>
-		<a href="#inviteFriends-modal-content" data-toggle="modal">Invite friends to join Amplifize</a>
-	</div>
-<% end %>
+<div id="subNav" style="padding-top:20px;">
+	<a href="#findPeople-modal-content" class="btn" data-toggle="modal">Find friends to follow</a>
+	<a href="#inviteFriends-modal-content" class="btn" data-toggle="modal">Invite friends to join Amplifize</a>
+</div>
 
 <div id="subscribedTo">
 	<h3>You are subscribed to:</h3>

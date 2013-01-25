@@ -176,7 +176,6 @@ var updateTitleContent = function() {
 	disableOverlay();
 };
 
-
 var openPost = function(shareId) {
 	$.ajax({
 		url: "/shares/"+shareId,
@@ -187,7 +186,17 @@ var openPost = function(shareId) {
 			$("#shareUnreadCount").html(--shares_unread);
 			document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
 
-			$("#popup_feedTitle").html('<a href="'+current_share.post.feed.url+'" target="_blank">'+current_share.post.feed.title+'</a>');
+			var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
+			$("#popup_sharedBy").html(displayName);
+			$("#popup_conversationStarter").html(current_share.summary);	
+
+
+			if(current_share.post.feed) {
+				$("#popup_feedTitle").html('<a href="'+current_share.post.feed.url+'" target="_blank">'+current_share.post.feed.title+'</a>');
+			} else {
+				$("#contentSourceSite").html('');	
+			}
+
 			$("#popup_contentTitle").html('<p><a href="'+current_share.post.url+'" target="_blank">'+current_share.post.title+'</a></p>');
 			if(current_share.post.author) {
 				$("#popup_contentAuthor").html("by "+current_share.post.author+" ");
@@ -198,6 +207,19 @@ var openPost = function(shareId) {
 			$("#popup_contentPublishDate").html("Written on "+dateFormat(current_share.post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 			$("#popup_contentBody").html(current_share.post.content);
 			$("#comment_share_id").val(current_share.id);
+
+			$("#popup_commentThread").find("tr:gt(0)").remove();
+			
+			for(var i = 0; i < data.comments.length; i++) {
+				var comment = data.comments[i];
+				var followsText = '';
+				if ($.inArray(comment.user.id, all_follows) == -1) {
+					followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
+				}
+				var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
+				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
+			}
+
 
 			disableOverlay();
 			$("#postPopup-modal-content").modal('show');
@@ -213,6 +235,8 @@ var openPost = function(shareId) {
 
 var updateShareContent = function(shareId) {
 	if(shareId["share_id"]) {
+		$("#contentBody").html('');
+		
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
 		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 		$("#contentStateOptions").css("visibility", "visible");
@@ -240,7 +264,6 @@ var updateShareContent = function(shareId) {
 				var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
 				$("#sharedBy").html(displayName);
 				$("#conversationStarter").html(current_share.summary);	
-				
 
 				if (typeof(current_post.feed) != "undefined") {
 					$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');

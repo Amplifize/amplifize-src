@@ -152,7 +152,7 @@
 #feedTitle a,
 #feedTitle a:visited {
 	text-decoration: none;
-	color: inherit;
+	color: #333;
 }
 
 #feedTitle a:hover {
@@ -164,7 +164,9 @@
 }
 
 #contentTitle a,
-#contentTitle a:visited {
+#contentTitle a:visited,
+#popup_contentTitle a,
+#popup_contentTitle a:visited {
 	font-size: 22px;
 	text-decoration: none;
 	
@@ -173,12 +175,15 @@
 	padding: 0;
 }
 
-#contentTitle a:hover {
+#contentTitle a:hover,
+#popup_contentTitle a:hover {
 	text-decoration: underline;
 }
 
 #contentPublishDate,
-#sharedBy {
+#popup_contentPublishDate
+#sharedBy,
+#popup_sharedBy {
 	color: #333;
 	margin-bottom: 15px;
 }
@@ -197,11 +202,6 @@
     line-height: 20px;
     
     text-align: center;
-}
-
-#selectFollows {
-	width: 200px;
-	float: left;
 }
 
 #subNavContainer a {
@@ -272,37 +272,6 @@
 	height: 500px;
 	min-width: 215px;
 	overflow: hidden;
-}
-
-#sourceList {
-	margin: 10px 0 0;
-	
-	height: 400px;
-}
-
-#sourceList li {
-	list-style: none;
-	margin-bottom: 10px;
-}
-
-ul.simplePagerNav {
-	margin-left: -5px;
-}
-
-ul.simplePagerNav li {
-    display: block;
-    float: left;
-    font-size: 14px;
-    padding: 5px;
-}
-
-li.currentPage {
-    background: none repeat scroll 0 0 #F03000;
-}
-
-li.currentPage a,
-li.currentPage a:visited {
-	color: #fff;
 }
 
 .readerViewFormField {
