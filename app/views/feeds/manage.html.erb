@@ -4,21 +4,17 @@
 
 <% content_for :javascripts do %>
 	<%= javascript_include_tag "manageFeeds.js" %>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#shareUnreadCount").html("<%= @shares_unread_count %>");
-			$("#feedUnreadCount").html("<%= @posts_unread_count %>");
-		});
-	</script>
 <%end%>
 
-<% content_for :appNav do %>
-		<h3>Manage your content sources</h3>
-
-		<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="float:left; margin-right: 25px;">Add content source</a>
-		<a href="/feeds/import" data-toggle="modal" class="btn" style="float:left;">Import sources</a>
-<% end %>
-
+<div style="margin-bottom: 20px;">
+	<h3 style="margin-bottom: 10px;">Manage your feeds</h3>
+	<div>
+		<a href="#addFeed-modal-content" data-toggle="modal" class="btn" style="margin-right: 25px;">Add feed</a>
+		<a href="/feeds/import" data-toggle="modal" class="btn">Import feeds</a>
+		<div style="clear"></div>
+	</div>
+	<div style="clear"></div>
+</div>
 	
 	<%@feeds.each do |feed| %>
 		<div id="feed_<%= feed.id %>" class="manageFeedRow">
@@ -43,8 +39,8 @@
 			</ul>
 	
 			<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+feed.id.to_s %>
-			<a class="addTagsLink" href="#addTags-modal-content" data-toggle="modal" data-id="<%= feed.id %>">Add tags</a>
-			<a href="#deleteTags-modal-content" data-toggle="modal" onclick="populateDeleteTags(<%= feed.id %>)">Delete tags</a>
+			<a onclick="return false;" class="addTagsLink" href="#addTags-modal-content" data-toggle="modal" data-id="<%= feed.id %>">Add tags</a>
+			<a onclick="return false;" href="#deleteTags-modal-content" data-toggle="modal" onclick="populateDeleteTags(<%= feed.id %>)">Delete tags</a>
 	
 			<script type="text/javascript">
 				$(document).ready(function() {

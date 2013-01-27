@@ -165,7 +165,7 @@ var updateTitleContent = function() {
 	for(var i = 0; i < posts.length; i++) {
 		$("#titleList").append(
 			'<li id="post_'+posts[i]["id"]+'"> ' +
-			'<a href="#" onclick="openPost('+posts[i]["post_id"]+');">'+posts[i]["post_title"]+'</a>'+
+			'<a href="#" onclick="openPost('+posts[i]["post_id"]+');return false;">'+posts[i]["post_title"]+'</a>'+
 			'<span>From '+posts[i]["feed_title"]+' published on '+dateFormat(posts[i]["published_at"], "dddd, mmmm dS, yyyy, h:MM:ss TT")+'</span></li>'
 		);
 	}

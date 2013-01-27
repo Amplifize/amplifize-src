@@ -168,7 +168,7 @@ var updateTitleContent = function() {
 		
 		$("#titleList").append(
 			'<li id="share_'+shares[i]["id"]+'"> ' +
-			'<a href="#" onclick="openPost('+shares[i]["share_id"]+');">'+shares[i]["post_title"]+'</a>'+
+			'<a href="#" onclick="openPost('+shares[i]["share_id"]+');return false;">'+shares[i]["post_title"]+'</a>'+
 			'<span>Shared by '+sharerName+'</span></li>'
 		);
 	}
