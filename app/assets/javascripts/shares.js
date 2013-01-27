@@ -280,7 +280,7 @@ var updateShareContent = function(shareId) {
 					$("#contentAuthor").html("");
 				}
 				
-				$("#contentSummary").html(current_post.content);
+				$("#contentBody").html(current_post.content);
 				$("#commentThread").find("tr:gt(0)").remove();
 				
 				for(var i = 0; i < data.comments.length; i++) {
