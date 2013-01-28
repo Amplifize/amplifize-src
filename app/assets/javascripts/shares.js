@@ -127,7 +127,7 @@ var openNewWindow = function() {
 
 var followUser = function(userId) {
 	$.ajax({
-		url: '/follows/add/'+userId,
+		url: '/follows/'+userId+'/add',
 		success: function(data, textStatus, jqXHR) {
 			$('.followUser_'+userId).html('Followed!');
 		},
