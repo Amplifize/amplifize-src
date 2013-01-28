@@ -282,7 +282,6 @@ $(document).ready(function() {
 		$('#feed_tags').val('');
 
 		$('#addFeed-modal-content').modal('hide');
-		mixpanel.track("Add a new feed");
 	});
 
 	$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
