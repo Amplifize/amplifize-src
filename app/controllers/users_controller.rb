@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  autocomplete :tag, :name, :full => true
+  
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:hompage, :content, :conversations, :people, :update, :search, :profile]
 
@@ -103,7 +105,11 @@ class UsersController < ApplicationController
       format.js { render :json => user }
     end
   end
-  
+
+  def get_autocomplete_items(parameters)
+    super(parameters).group("tags.name")
+  end
+
   private
   
   def set_unread_counts

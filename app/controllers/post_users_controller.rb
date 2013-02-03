@@ -21,11 +21,11 @@ class PostUsersController < ApplicationController
     else
       posts = current_user.post_users.select("post_users.post_id, post_users.read_state").joins(:post)
     end
-     
-    #TODO: Fix this 
-    #if params[:feed_id]
-    #  posts = posts.where("posts.feed_id = ?", params[:feed_id])
-    #end
+
+    if "all" != params[:filter]
+      feeds = current_user.feeds.select("feeds.id").joins(:tags).where("tags.name = ?", params[:filter])
+      posts = posts.where("posts.feed_id IN (?)", feeds)
+    end
 
     if params[:content_sort] == "unreadOnly" then
       posts = posts.unread

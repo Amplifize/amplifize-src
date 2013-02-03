@@ -40,6 +40,10 @@ Amplifize::Application.routes.draw do
   match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state'
   match '/share_users/:share_id/read_state/:state', :controller => 'share_users', :action => 'set_read_state'
 
+  resources :users do
+    get :autocomplete_tag_name, :on => :collection
+  end
+
   #Share bookmarklet actions
   match '/ext/share/prompt(/:api_version)/:user_credentials' => 'bookmarklet#share_prompt', :as => :ext_share_prompt
   match '/ext/share/:api_version/:user_credentials' => 'bookmarklet#share', :as => :ext_share

@@ -3,56 +3,54 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "feeds.js" %>
+	<%= javascript_include_tag "feeds", "autocomplete-rails" %>
 <% end %>
 
-	<div id="subNav">
-		<div id="contentViewOptions">
-			<div class="subNavItem">
-				<span class="navLabel">Content order:</span>
-				<div id="contentOrderSwitchDiv" class="onoffswitch">
-					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentOrderSwitch" checked>
-					<label class="onoffswitch-label" for="contentOrderSwitch" onclick="toggleContentOrder();">
-						<div class="onoffswitch-inner" id="contentOrder"></div>
-						<div class="onoffswitch-switch"></div>
-              		</label>
-            	</div>
-            	<div class="clear"></div>
-          	</div>
-
-          	<div class="subNavItem">
-				<span class="navLabel">Content layout:</span>
-            	<div id="contentLayoutSwitchDiv" class="onoffswitch">
-              		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentLayoutSwitch" checked>
-              		<label class="onoffswitch-label" for="contentLayoutSwitch" onclick="toggleContentLayout();">
-                		<div class="onoffswitch-inner" id="contentLayout"></div>
-                		<div class="onoffswitch-switch"></div>
-              		</label>
-            	</div>
-            	<div class="clear"></div>
-          	</div>
-
-          <div class="subNavItem">
+<div id="subNav">
+	<div id="contentViewOptions">
+		<div class="subNavItem">
+			<span class="navLabel">Content order:</span>
+			<div id="contentOrderSwitchDiv" class="onoffswitch">
+				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentOrderSwitch" checked>
+				<label class="onoffswitch-label" for="contentOrderSwitch" onclick="toggleContentOrder();">
+					<div class="onoffswitch-inner" id="contentOrder"></div>
+					<div class="onoffswitch-switch"></div>
+				</label>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="subNavItem">
+			<span class="navLabel">Content layout:</span>
+			<div id="contentLayoutSwitchDiv" class="onoffswitch">
+				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentLayoutSwitch" checked>
+				<label class="onoffswitch-label" for="contentLayoutSwitch" onclick="toggleContentLayout();">
+					<div class="onoffswitch-inner" id="contentLayout"></div>
+					<div class="onoffswitch-switch"></div>
+				</label>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="subNavItem">
 			<span class="navLabel">Content sort:</span>
-            <div class="onoffswitch" id="contentSortSwitchDiv">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentSortSwitch" checked>
-              <label class="onoffswitch-label" for="contentSortSwitch" onclick="toggleContentSort();">
-                <div class="onoffswitch-inner" id="contentSort"></div>
-                <div class="onoffswitch-switch"></div>
-              </label>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <div class="clear"></div>
-        </div>
-        <div id="contentStateOptions">
-          <a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
-          <a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
-          <div class="clear"></div>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-      <div id="menubar">
+			<div class="onoffswitch" id="contentSortSwitchDiv">
+				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentSortSwitch" checked>
+				<label class="onoffswitch-label" for="contentSortSwitch" onclick="toggleContentSort();">
+					<div class="onoffswitch-inner" id="contentSort"></div>
+					<div class="onoffswitch-switch"></div>
+				</label>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="contentStateOptions">
+		<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
+		<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
+		<div class="clear"></div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<div id="menubar">
         <div id="contentOptions">
           <a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>
           <a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
@@ -95,7 +93,7 @@
 <div id="addFeed-modal-content" class="modal hide">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Add content source by URL</h3>
+		<h3>Add feeds by URL</h3>
 	</div>
 	<div id="modal-body" class="modal-body-style">
 		<%= render 'feeds/form' %>
@@ -122,5 +120,20 @@
 			<div id="popup_contentBody">
 			</div>
 		</div>
+	</div>
+</div>
+
+<div id="filterContent-modal-content" class="modal hide">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Filter feed sources</h3>
+		<div class="clear"></div>
+	</div>
+	<div class="modal-body" class="modal-body-style">
+		<form id="filterForm" onsubmit="setNewFilter();">
+			<input type="text" id="newFilter" data-autocomplete="/users/autocomplete_tag_name" />
+			<input type="submit" value="Set filter" />
+		</form>
+		<a href="#" onclick="clearFilter();return false;">Clear filter</a>
 	</div>
 </div>

@@ -8,6 +8,22 @@ var resetAppState = function () {
 	position = 0;
 };
 
+var setNewFilter = function() {
+	currentFilter = $("#newFilter").val();
+	$("#currentTag").html("the "+currentFilter+" tag");
+	$("#popup_currentTag").html("the "+currentFilter+" tag");
+	updatePostsArray();
+	$("#filterContent-modal-content").modal("hide");
+};
+
+var clearFilter = function() {
+	currentFilter = "all";
+	$("#currentTag").html("all tags");
+	$("#popup_currentTag").html("all tags");
+	updatePostsArray();
+	$("#filterContent-modal-content").modal("hide");
+}
+
 var loadFilterOverlay = function () {
 	$("#filter-overlay").css("visibility", "visible");
 };
@@ -47,7 +63,7 @@ var toggleContentSort = function() {
 };
 
 var filterContent = function() {
-	alert("coming soon");
+	$("#filterContent-modal-content").modal("show");
 };
 
 var markAllAsRead = function() {
@@ -127,7 +143,8 @@ var updatePostsArray = function() {
 		data: {
 			"content_order" : contentOrder,
 			"content_sort" : contentSort,
-			"content_layout" : contentLayout
+			"content_layout" : contentLayout,
+			"filter" : currentFilter
 		},
 		success: function(data, textStatus, jqXHR) {
 			posts = data;
@@ -296,6 +313,11 @@ $(document).ready(function() {
 
 	$('form#addShareForm').bind("ajax:failure", function(data, status, xhr) {
 		alert(status);
+	});
+
+	$('#filterContent-modal-content').bind('show', function () {
+	  $('#newFilter').val('');
+	  setTimeout(function(){$("#newFilter").focus();}, 250);
 	});
 
 	$('#addShare-modal-content').bind('show', function () {
