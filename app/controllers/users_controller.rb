@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   autocomplete :tag, :name, :full => true
-  
+
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:hompage, :content, :conversations, :people, :update, :search, :profile]
 
@@ -17,16 +17,14 @@ class UsersController < ApplicationController
       if @user.save
         Invite.handle_new_user(@invite_id, @user)
         Mailer.delay.new_user_email(@user)
-        
+
+        UserSession.create(@user)
         format.html { redirect_to(:homepage, :notice => 'Welcome to amplifize') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end  
   end
-
 
   def update
     @user = current_user
