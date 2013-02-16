@@ -4,13 +4,13 @@
   <title>Amplifize | Great conversation goes best with great content</title>
   <%= stylesheet_link_tag "application", "reader", "reader-overlay", "jquery-ui-1.10.0.custom", "markitup/skins/markitup/style", "markitup/sets/html/style" %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag "application", "reader", "jquery.hotkeys", "dateFormat", "bootstrap-modal", "jquery.markitup", "jquery-ui-1.10.0.custom.min", "markItUp" %>
+  <%= javascript_include_tag "application", "reader", "jquery.hotkeys", "jquery.cookie", "dateFormat", "bootstrap-modal", "jquery.markitup", "jquery-ui-1.10.0.custom.min", "markItUp" %>
   <%= yield :javascripts %>
     <script type="text/javascript">
     	//application state
-    	var contentOrder = "newestFirst";
-    	var contentLayout = "postView";
-    	var contentSort = "unreadOnly";
+    	var contentOrder = $.cookie("contentOrder") ? $.cookie("contentOrder") : "newestFirst";
+    	var contentLayout = $.cookie("contentLayout") ? $.cookie("contentLayout") : "postView";
+    	var contentSort = $.cookie("contentSort") ? $.cookie("contentSort") : "unreadOnly";
 
     	var currentFilter = "all";
 

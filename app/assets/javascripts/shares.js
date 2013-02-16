@@ -15,6 +15,7 @@ var toggleContentOrder = function() {
 		contentOrder = "newestFirst";
 	}
 
+	$.cookie("contentOrder", contentOrder);
 	updateSharesArray();
 };
 
@@ -25,6 +26,7 @@ var toggleContentLayout = function() {
 		contentLayout = "postView";
 	}
 	
+	$.cookie("contentLayout", contentLayout);
 	updateSharesArray();
 };
 
@@ -35,6 +37,7 @@ var toggleContentSort = function() {
 		contentSort = "unreadOnly";
 	}
 	
+	$.cookie("contentSort", contentSort);
 	updateSharesArray();
 };
 
@@ -339,7 +342,7 @@ $(document).ready(function() {
 		disableOverlay();
 	});
 	
-	$("#toggleContentSelect").val("newestFirst");
-	$("#toggleContentLayout").val("postView");
-	$("#toggleContentSort").val("unreadOnly");
+	$("#toggleContentSelect").val(contentOrder);
+	$("#toggleContentLayout").val(contentLayout);
+	$("#toggleContentSort").val(contentSort);
 });
