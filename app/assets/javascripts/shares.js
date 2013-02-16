@@ -338,4 +338,8 @@ $(document).ready(function() {
 		//TODO: log error
 		disableOverlay();
 	});
+	
+	$("#toggleContentSelect").val("newestFirst");
+	$("#toggleContentLayout").val("postView");
+	$("#toggleContentSort").val("unreadOnly");
 });

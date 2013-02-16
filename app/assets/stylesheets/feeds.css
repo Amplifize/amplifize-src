@@ -30,3 +30,9 @@
 ul.manageFeedRowTags {
 	list-style: none;
 }
+
+#toggleContentSelect,
+#toggleContentLayout,
+#toggleContentSort {
+	width: 150px;
+}

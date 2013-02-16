@@ -324,4 +324,8 @@ $(document).ready(function() {
 	  $('#summary').val('');
 	  setTimeout(function(){$("#summary").focus();}, 250);
 	});
+
+	$("#toggleContentSelect").val("newestFirst");
+	$("#toggleContentLayout").val("postView");
+	$("#toggleContentSort").val("unreadOnly");
 });

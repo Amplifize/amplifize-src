@@ -9,45 +9,34 @@
 	</script>
 <% end %>
 
-	<div id="subNav">
-		<div id="contentViewOptions">
-			<div class="subNavItem">
-				<span class="navLabel">Content order:</span>
-				<div id="contentOrderSwitchDiv" class="onoffswitch">
-					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentOrderSwitch" checked>
-					<label class="onoffswitch-label" for="contentOrderSwitch" onclick="toggleContentOrder();">
-						<div class="onoffswitch-inner" id="contentOrder"></div>
-						<div class="onoffswitch-switch"></div>
-              		</label>
-            	</div>
-            	<div class="clear"></div>
-          	</div>
-
-          	<div class="subNavItem">
-				<span class="navLabel">Content layout:</span>
-            	<div id="contentLayoutSwitchDiv" class="onoffswitch">
-              		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentLayoutSwitch" checked>
-              		<label class="onoffswitch-label" for="contentLayoutSwitch" onclick="toggleContentLayout();">
-                		<div class="onoffswitch-inner" id="contentLayout"></div>
-                		<div class="onoffswitch-switch"></div>
-              		</label>
-            	</div>
-            	<div class="clear"></div>
-          	</div>
-
-          <div class="subNavItem">
+<div id="subNav">
+	<div id="contentViewOptions">
+		<div class="subNavItem">
+			<span class="navLabel">Content order:</span>
+			<select id="toggleContentSelect" onchange="toggleContentOrder();">
+				<option value="newestFirst">Newest first</option>
+				<option value="oldestFirst">Oldest first</option>
+			</select>
+			<div class="clear"></div>
+		</div>
+		<div class="subNavItem">
+			<span class="navLabel">Content layout:</span>
+			<select id="toggleContentLayout" onchange="toggleContentLayout();">
+				<option value="postView">Post view</option>
+				<option value="titleView">Title view</option>
+			</select>
+			<div class="clear"></div>
+		</div>
+		<div class="subNavItem">
 			<span class="navLabel">Content sort:</span>
-            <div class="onoffswitch" id="contentSortSwitchDiv">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="contentSortSwitch" checked>
-              <label class="onoffswitch-label" for="contentSortSwitch" onclick="toggleContentSort();">
-                <div class="onoffswitch-inner" id="contentSort"></div>
-                <div class="onoffswitch-switch"></div>
-              </label>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <div class="clear"></div>
-        </div>
+			<select id="toggleContentSort" onchange="toggleContentSort();">
+				<option>New content only</option>
+				<option>All content</option>
+			</select>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
         <div id="contentStateOptions">
           <a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
           <a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>

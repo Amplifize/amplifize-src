@@ -41,3 +41,9 @@ tr.commentInstance td {
 	padding-left: 10px;
 	padding-top: 10px;
 }
+
+#toggleContentSelect,
+#toggleContentLayout,
+#toggleContentSort {
+	width: 150px;
+}
