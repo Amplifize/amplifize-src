@@ -217,6 +217,7 @@ var openPost = function(postId) {
 
 			disableOverlay();
 			$("#postPopup-modal-content").modal('show');
+
 			mixpanel.track("Read another post");
 		},
 		error: function(xhr, text, error) {
@@ -296,6 +297,10 @@ var clearContent = function() {
 $(document).ready(function() {
 	resetAppState();
 	updatePostsArray();
+
+	$("#postPopup-modal-content").bind('show', function() {
+		$("#postPopup-modal-content .modal-body").animate({scrollTop: 0});
+	});
 
 	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
 		$('#feed_url').val('');

@@ -223,9 +223,9 @@ var openPost = function(shareId) {
 				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
 			}
 
-
 			disableOverlay();
 			$("#postPopup-modal-content").modal('show');
+
 			mixpanel.track("Read another conversation");
 		},
 		error: function(xhr, text, error) {
@@ -317,6 +317,10 @@ $(document).ready(function() {
 	$('#addComment-modal-content').bind('show', function () {
 	  $('#comment_comment_text').val('');
 	  setTimeout(function(){$("#comment_comment_text").focus();}, 250);
+	});
+
+	$("#postPopup-modal-content").bind('show', function() {
+		$("#postPopup-modal-content .modal-body").animate({scrollTop: 0});
 	});
 
 	$('form#new_comment').bind("submit", function() {

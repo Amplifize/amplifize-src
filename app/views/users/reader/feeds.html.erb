@@ -86,7 +86,7 @@
 		<button type="button" class="close" data-dismiss="modal">×</button>
 		<h3>Add feeds by URL</h3>
 	</div>
-	<div id="modal-body" class="modal-body-style">
+	<div class="modal-body modal-body-style">
 		<%= render 'feeds/form' %>
 	</div>
 </div>
@@ -97,7 +97,7 @@
 		<h3 id="popup_contentTitle"></h3>
 		<div class="clear"></div>
 	</div>
-	<div id="modal-body" class="modal-body-style">
+	<div class="modal-body modal-body-style" style="max-height: none; min-height:90%;">
 		<div id="popup_contentOptions">
 			<a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>
 			<a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
@@ -120,7 +120,7 @@
 		<h3>Filter feed sources</h3>
 		<div class="clear"></div>
 	</div>
-	<div class="modal-body" class="modal-body-style">
+	<div class="modal-body modal-body-style">
 		<form id="filterForm" onsubmit="setNewFilter();">
 			<input type="text" id="newFilter" data-autocomplete="/users/autocomplete_tag_name" />
 			<input type="submit" value="Set filter" />
