@@ -293,3 +293,10 @@
 #sectionNavigation {
 	padding-top: 60px;
 }
+
+#postPopup-modal-content {
+	width: 960px;
+	margin: -300px 0 0 -450px;
+	overflow-y:auto;
+	max-height:90%;
+}
