@@ -35,7 +35,13 @@ class FeedsController < ApplicationController
   end
 
   def clearAll
-    PostUser.update_all 'read_state = 0', ["user_id = ?", current_user.id]
+    if "all" != params[:filter]
+      feeds = current_user.feeds.select("feeds.id").joins(:tags).where("tags.name = ?", params[:filter])
+      posts_to_clear = PostUser.joins(:post).where("posts.feed_id IN (?) AND post_users.user_id = ?", feeds, current_user.id)
+      posts_to_clear.update_all 'read_state=0'
+    else 
+      PostUser.update_all 'read_state = 0', ["user_id = ?", current_user.id]
+    end
 
     respond_to do |format|
       format.js {render :json => '{"success": true}'}

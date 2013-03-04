@@ -74,6 +74,7 @@ var markAllAsRead = function() {
 	
 	$.ajax({
 		url: "/feeds/clear-all",
+		data: "filter="+currentFilter,
 		success: function() {
 			disableOverlay();
 			clearContent();			
@@ -241,6 +242,7 @@ var updatePostContent = function(postId) {
 			url: "/posts/"+postId["post_id"],
 			success: function(data, textStatus, jqXHR) {
 				$("html, body").animate({ scrollTop: 0 }, "fast");
+				$("#contentMetadata").css("visibility", "visible").css("display", "block");
 				
 				current_post = data;
 
@@ -284,6 +286,7 @@ var clearContent = function() {
 	$("#contentRow").html('');
 	$("#contentSummary").html('');
 	$("#content").animate({scrollTop: 0});
+	$("#contentMetadata").css("visibility", "hidden").css("display", "none");
 
 	$("#feedUnreadCount").html("0");
 	document.title = "Amplifize | Great conversation goes best with great content (0)";
