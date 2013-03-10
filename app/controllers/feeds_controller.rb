@@ -55,30 +55,4 @@ class FeedsController < ApplicationController
       format.js {render :json => {"feed_id" => params[:feed_id], "tags" => tags }}
     end
   end
-
-  def import
-    require 'opml'
-
-    opml_file = params[:feeds][:my_file].tempfile
-    opml_xml = Opml.new(opml_file)
-
-    opml_xml.outlines.each do |feed|
-      url = feed.attributes['xml_url']
-
-      if not url.nil? then
-        Feed.setup_feed(current_user, url)
-      else
-        tag = feed.attributes['title']
-        feed.outlines.each do |feed_in_folder|
-          url = feed_in_folder.attributes['xml_url']
-          Feed.setup_feed(current_user, url, [tag])
-        end
-      end
-    end
-
-    respond_to do |format|
-      format.html { redirect_to(reader_url) }
-    end
-  end
-
 end

@@ -28,7 +28,7 @@ gem 'jquery-rails'
 gem 'jbuilder'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger', group: [:development, :test]
 
 gem 'authlogic'
 
