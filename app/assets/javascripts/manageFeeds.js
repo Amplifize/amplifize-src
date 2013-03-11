@@ -5,7 +5,7 @@ var populateDeleteTags = function(feedId) {
 			var deleteDiv = $("#feedTagsToDelete");
 			deleteDiv.html('');
 			for(var i=0; i < data.tags.length; i++) {
-				deleteDiv.append('<a href="#" id="delete_popup_tag_'+data.tags[i].tag.id+'" onclick=deleteTagFromFeed('+ data.tags[i].tag.id +'); return false;">'+data.tags[i].tag.name+'</p>');
+				deleteDiv.append('<p><a href="#" id="delete_popup_tag_'+data.tags[i].id+'" onclick="deleteTagFromFeed('+ data.tags[i].id +'); return false;">'+data.tags[i].name+'</a></p>');
 			}
 		},
 		error: function(xhr, text, error) {
