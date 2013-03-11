@@ -15,42 +15,31 @@
 	</div>
 	<div style="clear"></div>
 </div>
-	
-	<%@feeds.each do |feed| %>
-		<div id="feed_<%= feed.id %>" class="manageFeedRow">
-			<span class="manageFeedRowTitle"><strong><a href="<%= feed.url %>"><%= feed.title %></a></strong></span>
-			
-			<!--
-			<%if feed.status == 1 then %>
-				<span class ="manageFeedRowOKStatus">Up to date!</span>
-			<% elsif feed.status == 2 then %>
-				<span class ="manageFeedRowWaitingStatus">Still loading...</span>
-			<% else %>
-				<span class ="manageFeedRowErrorStatus">Uh oh, something is wrong :(</span>
-			<% end %>
-			-->
-			
-			<ul class="manageFeedRowTags">
-				<% @tags.each do |tag| %>
-					<% if tag.feed_id == feed.id then %>
-					<li id="tag_<%=tag.id %>"><%= tag.name %></li>	
-					<% end %>
+
+<%@feeds.each do |feed| %>
+	<div id="feed_<%= feed.id %>" class="manageFeedRow">
+		<span class="manageFeedRowTitle"><strong><a href="<%= feed.url %>"><%= feed.title %></a></strong></span>
+		<ul class="manageFeedRowTags">
+			<% @tags.each do |tag| %>
+				<% if tag.feed_id == feed.id then %>
+				<li id="tag_<%=tag.id %>"><%= tag.name %></li>	
 				<% end %>
-			</ul>
-	
-			<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+feed.id.to_s %>
-			<a onclick="return false;" class="addTagsLink" href="#addTags-modal-content" data-toggle="modal" data-id="<%= feed.id %>">Add tags</a>
-			<a onclick="return false;" href="#deleteTags-modal-content" data-toggle="modal" onclick="populateDeleteTags(<%= feed.id %>)">Delete tags</a>
-	
-			<script type="text/javascript">
-				$(document).ready(function() {
-					$('#unsubscribe_<%= feed.id %>').bind("ajax:success", function(status, data, xhr) {
-						$("#feed_<%= feed.id %>").remove();
-					});
+			<% end %>
+		</ul>
+
+		<%= link_to "Delete feed", unsubscribe_path(feed.id), :remote => true, :class => "unsubscribe", :id => "unsubscribe_"+feed.id.to_s %>
+		<a onclick="return false;" class="addTagsLink" href="#addTags-modal-content" data-toggle="modal" data-id="<%= feed.id %>">Add tags</a>
+		<a href="#deleteTags-modal-content" data-toggle="modal" onclick="populateDeleteTags(<%= feed.id %>);return false;">Delete tags</a>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#unsubscribe_<%= feed.id %>').bind("ajax:success", function(status, data, xhr) {
+					$("#feed_<%= feed.id %>").remove();
 				});
-			</script>			
-		</div>
-	<% end %>
+			});
+		</script>			
+	</div>
+<% end %>
 	
 	<div id="addTags-modal-content" class="modal hide">
 		<div class="modal-header">
@@ -71,7 +60,7 @@
 			<p>Click on a tag to delete it</p>
 			<div id="feedTagsToDelete">
 			</div>
-			<button type="button" data-dismiss="modal">cancel</button>
+			<button type="button" data-dismiss="modal">Finished</button>
 		</div>
 	</div>
 
