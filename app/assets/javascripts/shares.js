@@ -220,7 +220,7 @@ var openPost = function(shareId) {
 					followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
 				}
 				var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
+				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>')
 			}
 
 			disableOverlay();
