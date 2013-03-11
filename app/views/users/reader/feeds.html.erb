@@ -95,14 +95,14 @@
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
 		<h3 id="popup_contentTitle"></h3>
-		<div class="clear"></div>
-	</div>
-	<div class="modal-body modal-body-style" style="max-height: none; min-height:90%;">
 		<div id="popup_contentOptions">
 			<a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>
 			<a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
 			<div class="clear"></div>
 		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="modal-body modal-body-style" style="max-height: none; min-height:90%;padding-left:0px;">
 		<div id="popup_source_content">
 			<div id="popup_contentSourceSite">You are currently reading <span id="popup_feedTitle"></span> from <span id="popup_currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
 			<div id="popup_contentMetadata">

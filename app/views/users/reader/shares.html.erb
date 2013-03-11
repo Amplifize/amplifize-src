@@ -89,14 +89,14 @@
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
 		<h3 id="popup_contentTitle"></h3>
-		<div class="clear"></div>
-	</div>
-	<div class="modal-body modal-body-style" style="max-height: none; min-height:90%;">
 		<div id="popup_contentOptions">
 			<a class="navTab" href="#addComment-modal-content" data-toggle="modal"><%= image_tag "reader/comment.png", :alt => "Comment", :title => "Comment" %></a>
 			<a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
 			<div class="clear"></div>
 		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="modal-body modal-body-style" style="max-height: none; min-height:90%; padding-left: 0px;">
 		<div id="popup_source_content">
 			<div id="popup_shareInfo">
 				<table id="popup_commentThread">
