@@ -55,7 +55,6 @@
 }
 
 #popup_source_content {
-	padding-left:20px;
 	padding-right: 20px;
 }
 
@@ -240,6 +239,7 @@
 
 .modal-body-style {
 	padding-bottom: 10px;
+	padding-left: 15px;
 }
 
 #readerSource-overlay {
