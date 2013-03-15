@@ -68,13 +68,16 @@
   font-size: 28px;
   margin-right: 20px;
   margin-bottom: 5px;
+  float: left;
+}
+
+#popup_contentTitle {
+	width: 690px;
 }
 
 #contentOptions {
   text-align:center;
 }
-
-
 
 #popup_contentOptions a {
 	float: left;
@@ -304,6 +307,7 @@
 #popup_contentOptions {
 	float: right;
 	width: 200px;
+	margin-top: -20px;
 }
 
 #popup_read-later_icon {
