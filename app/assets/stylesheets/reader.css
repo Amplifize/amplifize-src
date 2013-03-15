@@ -63,8 +63,7 @@
   margin-bottom: 10px;
 }
 
-#contentTitle,
-#popup_contentTitle {
+#contentTitle {
   font-size: 28px;
   margin-right: 20px;
   margin-bottom: 5px;
@@ -73,6 +72,9 @@
 
 #popup_contentTitle {
 	width: 690px;
+	margin-right: 0px;
+	font-size: 28px;
+	float: left;
 }
 
 #contentOptions {
