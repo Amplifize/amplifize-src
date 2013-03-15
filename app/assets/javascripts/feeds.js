@@ -112,7 +112,11 @@ var setReadState = function(readState) {
 var downPost = function() {
 	if(position > 0) {
 		position--;
-		updatePostContent(posts[position]);
+		if("titleView" == contentLayout) {
+			openPost(posts[position]["post_id"]);
+		} else {
+			updatePostContent(posts[position]);
+		}
 	} else {
 		alert("At the first post");
 	}
@@ -129,7 +133,11 @@ var openNewWindow = function() {
 var upPost = function() {
 	if((position+1) < posts.length) {
 		position++;
-		updatePostContent(posts[position]);
+		if("titleView" == contentLayout) {
+			openPost(posts[position]["post_id"]);
+		} else {
+			updatePostContent(posts[position]);
+		}
 	} else {
 		clearContent();
 	}
@@ -175,7 +183,6 @@ var updatePostsArray = function() {
 
 var updateTitleContent = function() {
 	$("#contentMetadata").css("visibility", "hidden").css("display", "none");
-	$("#contentSourceSite").css("visibility", "hidden").css("display", "none");
 	$("#contentStateOptions").css("visibility", "hidden");
 	$("#contentOptions").css("visibility", "hidden");
 
@@ -234,7 +241,6 @@ var updatePostContent = function(postId) {
 		$("#contentBody").html('');
 		
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
-		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 		$("#contentStateOptions").css("visibility", "visible");
 		$("#contentOptions").css("visibility", "visible");
 

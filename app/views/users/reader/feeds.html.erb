@@ -27,8 +27,8 @@
 		<div class="subNavItem">
 			<span class="navLabel">Content sort:</span>
 			<select id="toggleContentSort" onchange="toggleContentSort();">
-				<option>New content only</option>
-				<option>All content</option>
+				<option value="unreadOnly">New content only</option>
+				<option value="allContent">All content</option>
 			</select>
 			<div class="clear"></div>
 		</div>
@@ -54,7 +54,7 @@
       	<div class="clear"></div>
       </div>
 	<div id="source_content">
-      	<div id="contentSourceSite">You are currently reading <span id="feedTitle"></span> from <span id="currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
+      	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span> from <span id="currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
 		<div id="contentMetadata">
     		<div id="contentTitleBanner">
     			<div id="contentTitle"></div>
@@ -96,15 +96,17 @@
 		<button type="button" class="close" data-dismiss="modal">×</button>
 		<h3 id="popup_contentTitle"></h3>
 		<div id="popup_contentOptions">
-			<a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>
-			<a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
+			<a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content", :id => "popup_share_icon" %></a>
+			<a style="margin-left: -10px;" href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later", :id => "popup_read-later_icon" %></a>
+			<a style="margin-left: 10px;" href="#" onclick="downPost();" id="popup_previousContent" class="btn" title="Previous content">&lt;</a>
+			<a style="margin-left: 10px;" href="#" onclick="upPost();" id="popup_nextContent" class="btn" title="Next content">&gt;</a>			
 			<div class="clear"></div>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div class="modal-body modal-body-style" style="max-height: none; min-height:90%; width:910px;">
 		<div id="popup_source_content">
-			<div id="popup_contentSourceSite">You are currently reading <span id="popup_feedTitle"></span> from <span id="popup_currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
+			<div id="popup_contentSourceSite">Currently reading <span id="popup_feedTitle"></span> from <span id="popup_currentTag">all tags</span>.</div>
 			<div id="popup_contentMetadata">
 				<p id="popup_contentInfoLine"><span id="popup_contentPublishDate"></span><span id="popup_contentArthur"></span></p>
 			</div>
