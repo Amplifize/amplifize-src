@@ -103,7 +103,11 @@ var setReadState = function(readState) {
 var downPost = function() {
 	if(position > 0) {
 		position--;
-		updateShareContent(shares[position]);
+		if("titleView" == contentLayout) {
+			openPost(shares[position]["share_id"]);
+		} else {
+			updateShareContent(shares[position]);
+		}
 	} else {
 		alert("At the first share");
 	}
@@ -114,7 +118,11 @@ var downPost = function() {
 var upPost = function() {
 	if((position+1) < shares.length) {
 		position++;
-		updateShareContent(shares[position]);		
+		if("titleView" == contentLayout) {
+			openPost(shares[position]["share_id"]);
+		} else {
+			updateShareContent(shares[position]);
+		}		
 	} else {
 		alert("No more shares");
 	}
@@ -147,7 +155,6 @@ var clearContent = function() {
 	$("#feedTitle").html('');
 	$("#contentRow").html('');
 	$("#shareInfo").css("visibility", "hidden").css("display", "none");
-	$("#contentSourceSite").html('');
 	$("#contentBody").html("<h3>Looks like you've got no more conversations to read</h3>");
 	$("#content").animate({scrollTop: 0});
 
@@ -157,10 +164,10 @@ var clearContent = function() {
 
 var updateTitleContent = function() {
 	$("#contentMetadata").css("visibility", "hidden").css("display", "none");
-	$("#contentSourceSite").css("visibility", "hidden").css("display", "none");
 	$("#contentStateOptions").css("visibility", "hidden");
 	$("#contentOptions").css("visibility", "hidden");
 	$("#shareInfo").css("visibility", "hidden").css("display", "none");
+	$("#contentSourceSite").css("visibility", "hidden").css("display", "none");
 
 	current_share = undefined;
 
@@ -196,8 +203,6 @@ var openPost = function(shareId) {
 
 			if(current_share.post.feed) {
 				$("#popup_feedTitle").html('<a href="'+current_share.post.feed.url+'" target="_blank">'+current_share.post.feed.title+'</a>');
-			} else {
-				$("#contentSourceSite").html('');	
 			}
 
 			$("#popup_contentTitle").html('<p><a href="'+current_share.post.url+'" target="_blank">'+current_share.post.title+'</a></p>');
@@ -241,7 +246,6 @@ var updateShareContent = function(shareId) {
 		$("#contentBody").html('');
 		
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
-		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 		$("#contentStateOptions").css("visibility", "visible");
 		$("#contentOptions").css("visibility", "visible");
 		$("#shareInfo").css("visibility", "visible").css("display", "block");
@@ -270,10 +274,8 @@ var updateShareContent = function(shareId) {
 
 				if (typeof(current_post.feed) != "undefined") {
 					$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
-				} else {
-					$("#contentSourceSite").html('');
 				}
-				
+
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 				
