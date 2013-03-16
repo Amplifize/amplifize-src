@@ -230,6 +230,7 @@ var openPost = function(shareId) {
 
 			disableOverlay();
 			$("#postPopup-modal-content").modal('show');
+			$("#postPopup-modal-content").animate({scrollTop: 0}, "slow");
 
 			mixpanel.track("Read another conversation");
 		},
