@@ -28,7 +28,7 @@ gem 'jquery-rails'
 gem 'jbuilder'
 
 # To use debugger
-gem 'debugger', group: [:development, :test]
+#gem 'debugger', group: [:development, :test]
 
 gem 'authlogic'
 
@@ -48,3 +48,6 @@ gem 'therubyracer'
 
 gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
+
+gem 'newrelic_rpm'
+
