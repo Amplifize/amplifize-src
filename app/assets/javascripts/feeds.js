@@ -14,6 +14,8 @@ var setNewFilter = function() {
 	$("#popup_currentTag").html("the "+currentFilter+" tag");
 	updatePostsArray();
 	$("#filterContent-modal-content").modal("hide");
+	
+	return false;
 };
 
 var clearFilter = function() {
@@ -22,6 +24,8 @@ var clearFilter = function() {
 	$("#popup_currentTag").html("all tags");
 	updatePostsArray();
 	$("#filterContent-modal-content").modal("hide");
+	
+	return false;
 }
 
 var loadFilterOverlay = function () {
