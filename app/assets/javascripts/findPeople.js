@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 var followUser = function(userId) {
 	$.ajax({
-		url: '/follows/add/'+userId,
+		url: '/follows/'+userId+'/add/',
 		success: function(data, textStatus, jqXHR) {
 			$("#follow_"+userId).html("Successfully followed");
 		},
