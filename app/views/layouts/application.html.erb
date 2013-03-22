@@ -4,9 +4,11 @@
   <title>Amplifize | Great conversation goes best with great content</title>
   <%= stylesheet_link_tag "application" %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag "application", "bootstrap-dropdown.js" %>
+  <%= javascript_include_tag "jquery.min", "jquery_ujs", "bootstrap-dropdown.js" %>
   <%= yield :javascripts %>
   <script type="text/javascript">
+  	$.ajaxSettings.dataType = "json";
+  
   	$(document).ready(function(){
 		$('#loginLink').bind('click', function () {
 	  		setTimeout(function(){$("#user_session_email").focus();}, 250);
