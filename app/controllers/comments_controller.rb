@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
       :comment_text => params[:comment][:comment_text]
     )
 
+    ShareUser.update_all("updated_at = now()", ["share_id = ? AND read_state = 1 and user_id != ?", params[:comment][:share_id], current_user.id])
     ShareUser.update_all("read_state = 1", ["share_id = ? AND read_state = 0 AND user_id != ?", params[:comment][:share_id], current_user.id ])
 
     respond_to do |format|

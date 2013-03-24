@@ -41,8 +41,5 @@ class ShareUsersController < ApplicationController
       format.js { render :json => shares }
       format.html { render :json => shares }
     end
-
   end
 end
-    
-      #feeds.title AS feed_title, posts.title AS post_title, posts.published_at AS published_at, posts.author AS author").joins(:post => :feed)
