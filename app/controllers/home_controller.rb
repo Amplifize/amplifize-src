@@ -34,4 +34,8 @@ class HomeController < ApplicationController
   def google_verification
     render :layout => false
   end
+  
+  def verifyforzoho
+    render :layout => false
+  end
 end

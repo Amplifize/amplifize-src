@@ -70,6 +70,7 @@ Amplifize::Application.routes.draw do
   match '/faq' => 'home#faq', :as => :faq
 
   match '/googleaf23107439d49301.html' => 'home#google_verification'
+  match '/zohoverify/verifyforzoho.html' => 'home#verifyforzoho'
 
   resources :users, :user_sessions, :feeds, :posts, :shares, :comments, :tags, :invites
 
