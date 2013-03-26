@@ -39,6 +39,8 @@ class PostUsersController < ApplicationController
       posts = posts.newest_to_oldest
     end
 
+    posts = posts.limit(1000)
+
     respond_to do |format|
       format.js { render :json => posts }
       format.html { render :json => posts }

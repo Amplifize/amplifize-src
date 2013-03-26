@@ -37,6 +37,8 @@ class ShareUsersController < ApplicationController
       shares = shares.newest_to_oldest
     end
 
+    shares = shares.limit(1000);
+
     respond_to do |format|
       format.js { render :json => shares }
       format.html { render :json => shares }
