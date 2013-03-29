@@ -1,36 +1,42 @@
 #banner {
-	background: url('../assets/homepage/social-media.jpg') 0 center transparent;
-	width: inherit;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #072229 url(/assets/homepage/banner-background.png) no-repeat fixed 0px 235px;
 	height: 400px;
+	
+	overflow: hidden;
 }
 
 #pitch {
-	background-color: #fff;
-	width: 385px;
-	margin-left: 550px;
-	padding: 3px;
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 100px;
 	height: 394px;
 }
 
+#pitch img {
+	float: left;
+	padding-left: 150px;
+	padding-right: 150px;
+	margin-top: -25px;
+}
+
 #pitch h2 {
+	color: #fff;
 	font-size: 32px;
 	margin-top: 15px;
 	
 	text-align: justify;
-}
-
-#pitch p {
-	font-size: 18px;
-	line-height: 27px;
-	text-align: justify;
 	
-	margin-top: 20px;
-	margin-bottom: 40px;
+	font-weight: normal;
 }
 
 #pitch a,
 #pitch a:visited {
-	background-color: #F03000;
+	background-color: #23a64d;
 	width: 300px;
 	height: 100px;
 	border-radius: 5px;
@@ -39,7 +45,7 @@
 	font-size: 18px;
 	text-align: center;
 	
-	margin-left: 110px;
+	margin-top: 40px;
 	padding: 10px;
 }
 
@@ -60,7 +66,7 @@
 
 #sellingPoints {
 	width: inherit;
-	height: 250px;
+	padding-top: 360px;
 }
 
 .sellingPoint {
@@ -73,20 +79,18 @@
 
 .sellingPoint h3 {
 	text-align: center;
-	background-color: #D7D7D7;
 	padding: 3px;
 	margin-bottom: 10px;
-	border-radius: 5px;
 }
 
 .sellingPoint img {
-	float:left;
-	margin-right: 5px;
 	margin-bottom: 5px;
+	margin-left: 75px;
 }
 
 .sellingPoint p {
-	font-size: 14px;
+	font-size: 16px;
+	color: #959595;
 	text-align: justify;
 	
 	padding-right: 3px;

@@ -1,74 +1,120 @@
 <div id="footer">
-  <div id="footerBar">
-    <div class="footerItem"><a href="/blog">Blog</a></div>
-    <div class="footerItem">
-        <a href="/about">About Amplifize</a>
-        <ul>
-          <li><a href="/about/team">Who we are</a></li>
-          <li><a href="/about/why-amplifize">Why we built Amplifize</a></li>
-        </ul>
-      </div>
-      <div class="footerItemSmall">
-        <a href="/faq">FAQ</a>
-      </div>
-      <div class="footerItem">
-        <a href="/contact">Contact us</a>
-        <ul>
-          <li><a href="javascript:UserVoice.showPopupWidget();">Feedback &amp; support</a></li>
-          <li><a href="http://twitter.com/amplifize">On Twitter</a></li>
-          <li><a href="mailto:tickets@amplifize.uservoice.com">By email</a></li>
-        </ul>
-      </div>
-      <div class="footerItem">
-        <a href="/terms">Legal</a>
-        <ul>
-          <li><a href="/terms">Terms &amp; Conditions</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div class="footerItemBig">
-        <span class="copyright">Big Fish, Big Pond, LLC &copy; 2012 &mdash; 2013</span>
-      </div>
-      <div class="clear"></div>
-    </div>
-  </div>
+	<div id="footerBar">
+		<div class="footerItem">
+			<h3>Quick links</h3>
+			<ul>
+				<li>
+					<a href="/about">About amplifize</a>
+				</li>
+				<li>
+					<a href="/about/team">Who we are</a>
+				</li>
+				<li>
+					<a href="/about/why-amplifize">Why we built amplifize</a>
+				</li>
+				<li>
+					<a href="/faq">FAQ</a>
+				</li>
+				<li>
+					<a href="/blog">Blog</a>
+				</li>
+			</ul>
+		</div>
+		<div class="footerItem">
+			<h3>Get connected</h3>
+			<ul>
+				<li>
+					<a href="/contact">Contact us</a>
+				</li>
+				<li>
+					<a href="javascript:UserVoice.showPopupWidget();">Feedback &amp; support</a>
+				</li>
+				<li>
+					<a href="http://twitter.com/amplifize">On Twitter</a>
+				</li>
+				<li>
+					<a href="mailto:tickets@amplifize.uservoice.com">By email</a>
+				</li>
+			</ul>
+		</div>
+		<div class="footerItem">
+			<h3>Legal</h3>
+			<ul>
+				<li>
+					<a href="/terms">Terms &amp; Conditions</a>
+				</li>
+				<li>
+					<a href="/privacy">Privacy Policy</a>
+				</li>
+			</ul>
+		</div>
+		<div class="footerItemBig">
+			<%= image_tag 'shared/inverse-logo.gif' %>
+			<br/>
+			<span class="copyright">Big Fish, Big Pond, LLC &copy; 2012 &mdash; 2013</span>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
 </div>
 
-	
 <% if show_support_widget %>
 <script type="text/javascript">
 	//google analytics
-  	var _gaq = _gaq || [];
-  	_gaq.push(['_setAccount', 'UA-33864290-1']);
-  	_gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-33864290-1']);
+	_gaq.push(['_trackPageview']);
 
-  	(function() {
-    	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  	})();
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
 
 	//mixpanel
-	(function(c,a){
-		window.mixpanel=a;var b,d,h,e;b=c.createElement("script");
-	    b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+
-	    '//api.mixpanel.com/site_media/js/api/mixpanel.2.js';d=c.getElementsByTagName("script")[0];
-	    d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){
-	    var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(
-	    Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?g=a[f]=[]:
-	    f="mixpanel";g.people=g.people||[];h=['disable','track','track_pageview','track_links',
-	    'track_forms','register','register_once','unregister','identify','name_tag',
-	    'set_config','people.set','people.increment'];for(e=0;e<h.length;e++)d(g,h[e]);
-	    a._i.push([b,c,f])};a.__SV=1.1;
-	})(document,window.mixpanel||[]);
+	(function(c, a) {
+		window.mixpanel = a;
+		var b, d, h, e;
+		b = c.createElement("script");
+		b.type = "text/javascript";
+		b.async = !0;
+		b.src = ("https:" === c.location.protocol ? "https:" : "http:") + '//api.mixpanel.com/site_media/js/api/mixpanel.2.js';
+		d = c.getElementsByTagName("script")[0];
+		d.parentNode.insertBefore(b, d);
+		a._i = [];
+		a.init = function(b, c, f) {
+			function d(a, b) {
+				var c = b.split(".");
+				2 == c.length && ( a = a[c[0]], b = c[1]);
+				a[b] = function() {
+					a.push([b].concat(Array.prototype.slice.call(arguments, 0)))
+				}
+			}
+
+			var g = a;
+			"undefined" !== typeof f ? g = a[f] = [] : f = "mixpanel";
+			g.people = g.people || [];
+			h = ['disable', 'track', 'track_pageview', 'track_links', 'track_forms', 'register', 'register_once', 'unregister', 'identify', 'name_tag', 'set_config', 'people.set', 'people.increment'];
+			for ( e = 0; e < h.length; e++)
+				d(g, h[e]);
+			a._i.push([b, c, f])
+		};
+		a.__SV = 1.1;
+	})(document, window.mixpanel || []);
 	mixpanel.init("70059c2e62b8d913e6b0c5fa36e4181b");
 
 	//uservoice
 	var uvOptions = {};
 	(function() {
-	  var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-	  uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/DOhSrsgqFvHlgyiyELBoqA.js';
-	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-	})();
+		var uv = document.createElement('script');
+		uv.type = 'text/javascript';
+		uv.async = true;
+		uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/DOhSrsgqFvHlgyiyELBoqA.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(uv, s);
+	})(); 
 </script>
 <% end %>

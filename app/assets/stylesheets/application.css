@@ -44,15 +44,31 @@ html, body {
 }
 
 header {
-  background-color: #F7F7F7;
-  background-image: -moz-linear-gradient(center top , #FFFFFF, #EAEAEA);
-  background-repeat: repeat-x;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+  background-color: #fff;
+  height: 50px;
+}
+
+.logo {
+	margin-top: 3px;
+	
+	position: absolute;
+	display: block;
+	height: 44px;
+	background: no-repeat url(/assets/shared/logo.gif);
+	padding: 0;
+	padding-left: 50px;
 }
 
 header h1 > a, header h1 > a:visited, header h1 > a:hover {
   text-decoration: none;
   color: #000000;
+}
+
+header li > a,
+header li > a:visited,
+header li > a:hover {
+  font-size: 16px;
+  margin-top:3px;
 }
 
 .navbar {
@@ -72,13 +88,9 @@ header h1 > a, header h1 > a:visited, header h1 > a:hover {
 
 /* BEGINNING OF FOOTER SECTION */
 #footer {
-  background-color: #F7F7F7;
-  background-image: -moz-linear-gradient(center bottom, #FFFFFF, #EAEAEA);
-  background-repeat: repeat-x;
-  border-top: 1px solid rgba(0,0,0,0.25);
-  /*TODO: Figure out how to make this fill in whatever is left*/
   margin: 0;
   padding: 0;
+  background-color: #171f21;
 }
 
 #footerBar {
@@ -87,23 +99,13 @@ header h1 > a, header h1 > a:visited, header h1 > a:hover {
   padding: 10px;
 }
 
+.footerItem h3 {
+	color: #c1c1c1;
+}
+
 .footerItem {
   float: left;
-  width: 150px;
-}
-
-.footerItemSmall {
-  float: left;
-  width: 100px;
-}
-
-.footerItemBig {
-  float: left;
-  width: 235px;
-}
-
-.footerItem a, .footerItemSmall a, .footerItemBig a {
-  font-weight: bold;
+  width: 230px;
 }
 
 .footerItem > ul > li {
@@ -111,9 +113,14 @@ header h1 > a, header h1 > a:visited, header h1 > a:hover {
   margin-left: -25px;
 }
 
-.footerItem > ul > li > a, .footerItem > ul > li > a:visited {
-  color: #666;
+.footerItem > ul > li > a, .footerItem > ul > li > a:visited,
+.copyright {
+  color: #5a6264;
   font-weight: normal;
+}
+
+.copyright {
+	margin-left: 10px;
 }
 
 .footerItem > ul > li > a:hover {
