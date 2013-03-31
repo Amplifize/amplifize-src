@@ -49,7 +49,8 @@ module Importer
       private
 
       def parse_data_from_file(file)
-        opml_xml = Opml.new(file)
+        require 'Opml'
+        opml_xml = Opml::Opml.new(file)
 
         subscriptions = Array.new
         opml_xml.outlines.each do |feed|

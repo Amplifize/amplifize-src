@@ -7,6 +7,11 @@ PATH
       nokogiri (~> 1.5.3)
       sax-machine (~> 0.2.0.rc1)
 
+PATH
+  remote: vendor/opml
+  specs:
+    opml (1.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -92,7 +97,6 @@ GEM
     newrelic_rpm (3.6.0.78)
     nifty-generators (0.4.6)
     nokogiri (1.5.9)
-    opml (1.0.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -171,7 +175,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   nifty-generators
-  opml
+  opml!
   rails (= 3.2.11)
   rails3-jquery-autocomplete
   ruby-readability

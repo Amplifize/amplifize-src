@@ -27,7 +27,7 @@ gem 'authlogic'
 
 gem "feedzirra", :path => "vendor/feedzirra"
 gem 'foreigner'
-gem 'opml'
+gem 'opml', :path => "vendor/opml"
 gem 'loofah'
 
 gem 'delayed_job_active_record'

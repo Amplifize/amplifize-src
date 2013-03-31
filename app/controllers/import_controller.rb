@@ -2,6 +2,7 @@ class ImportController < ApplicationController
   before_filter :require_user
   
   def import
+    #static page from which to import feeds
   end
 
   def do_import
@@ -25,7 +26,6 @@ class ImportController < ApplicationController
 
   def opml
     require_dependency 'importer'
-    require_dependency 'opml'
 
     if params[:import]
       if !params[:import][:opml_file].nil?
