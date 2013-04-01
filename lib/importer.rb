@@ -49,7 +49,7 @@ module Importer
       private
 
       def parse_data_from_file(file)
-        require 'Opml'
+        require 'opml'
         opml_xml = Opml::Opml.new(file)
 
         subscriptions = Array.new

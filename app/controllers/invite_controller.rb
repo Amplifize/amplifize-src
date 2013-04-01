@@ -11,8 +11,9 @@ class InviteController < ApplicationController
   end
 
   def respond
-
     @user = User.new
+    @user_session = UserSession.new
+
     @invite = Invite.find_by_uid(params[:invite_id])
     if not @invite.nil? 
       @invite_id = @invite.uid
