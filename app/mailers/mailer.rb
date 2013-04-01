@@ -24,7 +24,9 @@ class Mailer < ActionMailer::Base
   
   def invite_friend_email(invite)
     @Invite = invite
-    mail(:to => invite.email, :subject => "#{@Invite.user.visible_name} has invited you to join Amplifize!")
+    mail(:to => invite.email, :subject => "Join the conversation with #{@Invite.user.visible_name} on amplifize!") do |format|
+      format.html {render :layout => 'email_layout'}
+    end
   end
   
 end

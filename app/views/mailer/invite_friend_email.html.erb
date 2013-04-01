@@ -1,0 +1,15 @@
+<% content_for :body do %>
+
+<p>Hey there.</p>
+
+<%= @Invite.user.visible_name %> has invited you to the conversation on amplifize.
+
+<% if not @Invite.message.nil? %>
+<blockquote><%= @Invite.message %></blockquote>
+<% end %>
+
+<p>Amplifize lets you discover great content worth talking about. Read your favorite feeds, share great content with your friends, and get a new perspective on an old article. >Get started sharing great content by clicking the link (or copy and paste it into your web browser)</p>
+
+<p><%= invite_respond_url(:only_path => false, :invite_id => @Invite.uid) %></p>
+
+<% end %>
