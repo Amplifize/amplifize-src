@@ -60,4 +60,10 @@ class User < ActiveRecord::Base
     end
     sat
   end
+
+  def deliver_password_reset_instructions!  
+    reset_perishable_token!  
+    Mailer.delay.forgot_password_email(self)  
+  end  
+
 end

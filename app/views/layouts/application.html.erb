@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Amplifize | Great conversation goes best with great content</title>
-  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Roboto:400,700,100", "http://fonts.googleapis.com/css?family=Droid+Sans", "jquery.labels" %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag "jquery.min", "jquery_ujs", "bootstrap-dropdown.js" %>
+  <%= javascript_include_tag "jquery.min", "jquery_ujs", "bootstrap-dropdown", "jquery.labels" %>
   <%= yield :javascripts %>
   <script type="text/javascript">
   	$.ajaxSettings.dataType = "json";

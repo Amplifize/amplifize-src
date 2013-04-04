@@ -40,6 +40,11 @@ Amplifize::Application.routes.draw do
   match '/post_users/:post_id/read_state/:state', :controller => 'post_users', :action => 'set_read_state'
   match '/share_users/:share_id/read_state/:state', :controller => 'share_users', :action => 'set_read_state'
 
+  match '/onboarding/import', :controller => 'onboardings', :action => 'import'
+  match '/onboarding/friends', :controller => 'onboardings', :action => 'find_friends'
+  match '/onboarding/profile', :controller => 'onboardings', :action => 'setup_profile'
+  match '/onboarding/the-rest', :controller => 'onboardings', :action => 'the_rest'
+
   resources :users do
     get :autocomplete_tag_name, :on => :collection
   end
@@ -69,7 +74,7 @@ Amplifize::Application.routes.draw do
   match '/terms' => 'home#terms', :as => :terms
   match '/faq' => 'home#faq', :as => :faq
 
-  resources :users, :user_sessions, :feeds, :posts, :shares, :comments, :tags, :invites
+  resources :users, :user_sessions, :feeds, :posts, :shares, :comments, :tags, :invites, :password_resets
 
   root :to => "home#index"
 

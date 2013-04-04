@@ -1,0 +1,10 @@
+<h2>Forgot Password</h2>
+
+<p>Fill out the form below and instructions to reset your password will be emailed to you:</p>
+<%= form_tag password_resets_path do %>
+  <label class="input" style="float:left;">
+  	<span>Email</span>
+  	<%= email_field_tag :email %>
+  </label>
+  <input type="submit" style="float:left; color: rgb(255, 255, 255);padding: 5px;width: 150px;font-size: 15px;background-color: rgb(58, 170, 219);font-family: 'Droid Sans',sans-serif;border-radius: 12px 12px 12px 12px;border: 1px solid rgb(58, 170, 219);margin-left: 20px;margin-top: 6px;" value="Reset my password" />
+<% end %>

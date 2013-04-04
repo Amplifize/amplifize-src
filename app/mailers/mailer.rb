@@ -29,4 +29,10 @@ class Mailer < ActionMailer::Base
     end
   end
   
+  def forgot_password_email(user)
+    @reset_url = edit_password_reset_url(user.perishable_token)
+    mail(:to => user.email, :subject => "Reset your amplifize password") do |format|
+      format.html {render :layout => 'email_layout'}
+    end
+  end
 end
