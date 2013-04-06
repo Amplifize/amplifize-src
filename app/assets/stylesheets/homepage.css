@@ -26,12 +26,11 @@
 
 #pitch h2 {
 	color: #fff;
-	font-size: 32px;
+	font-size: 45px;
 	margin-top: 15px;
 	
-	text-align: justify;
-	
-	font-weight: normal;
+	font-family: 'Roboto', sans-serif; 
+	font-weight: 100;
 }
 
 #pitch a,
@@ -47,6 +46,9 @@
 	
 	margin-top: 40px;
 	padding: 10px;
+	
+	font-family: "Calibri";
+	font-size: 20px;
 }
 
 #pitch a:hover {
@@ -81,6 +83,10 @@
 	text-align: center;
 	padding: 3px;
 	margin-bottom: 10px;
+	
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size:25px;
 }
 
 .sellingPoint img {
@@ -89,9 +95,10 @@
 }
 
 .sellingPoint p {
-	font-size: 16px;
-	color: #959595;
-	text-align: justify;
+	font-size: 15px;
+	color: #5c5c5c;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
 	
 	padding-right: 3px;
 }
