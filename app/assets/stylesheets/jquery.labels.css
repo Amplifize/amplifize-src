@@ -9,6 +9,9 @@
   padding: 5px;
   margin-left: 3px;
   color: #999;
+  
+  font-family: "Calibri", sans-serif;
+  font-size: 12px;
 }
 .input input, .input textarea, .input select {
   position: relative;
@@ -18,6 +21,7 @@
   background: transparent;
   font: inherit;
 }
+
 /* Hack to remove Safari's extra padding. Remove if you don't care about pixel-perfection. */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .input input, .input textarea, .input select { padding: 4px; }
