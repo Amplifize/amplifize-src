@@ -1,5 +1,11 @@
 #subNav {
-  padding: 0px 0 10px 0;
+  background: #072229 url(/assets/homepage/banner-background.png) no-repeat fixed 0px 50px;
+  margin-bottom: 20px;
+}
+
+#subNavContainer {
+  width: 940px;
+  margin: 0 auto;
 }
 
 #contentViewOptions {
@@ -30,13 +36,24 @@
 
 #shareUnreadCount, #feedUnreadCount {
   margin-left: 10px;
+  margin-top: -20px;
   padding: 5px;
-  background-color: #f00;
   font-size: 12px;
   color: #fff;
   height: 20px;
   line-height: 20px;
   text-align: center;
+  border-radius: 15px;
+  
+  font-family: "Arial", sans-serif;
+}
+
+#feedUnreadCount {
+	background-color: #55d278;
+}
+
+#shareUnreadCount {
+	background-color: #3aaadb;
 }
 
 /* BEGINNING OF SUB-NAVIGATION SECTION */
@@ -193,22 +210,6 @@
 	margin-bottom: 15px;
 }
 
-#shareUnreadCount,
-#feedUnreadCount {
-	margin-left: 10px;
-	padding: 5px;
-	
-	background-color: #f00;
-    
-    font-size: 12px;
-	color: #fff;
-    
-    height: 20px;
-    line-height: 20px;
-    
-    text-align: center;
-}
-
 #subNavContainer a {
 	margin-right: 50px;
 }
@@ -315,3 +316,8 @@
 	margin-top: -4px;
 }
 
+.instructions {
+	font-face: "Roboto", sans-serif;
+	font-size: 12px;
+	font-weight: 100;
+}

@@ -33,7 +33,9 @@ html, body {
   margin: 0;
   padding: 0;
   
-  font-family: "Calibri", sans-serif;
+  font-family: "Droid Sans", sans-serif;
+  
+  color: #09222A;
 }
 
 #container {
@@ -125,7 +127,6 @@ header li > a:hover {
 .copyright {
   color: #5a6264;
   font-weight: normal;
-  font-family: "Calibri", sans-serif;
   font-size: 15px;
 }
 
@@ -137,3 +138,7 @@ header li > a:hover {
   text-decoration: underline;
 }
 /* END OF FOOTER SECTION */
+
+.modal-header h3 {
+	font-family: "Roboto", sans-serif;	
+}

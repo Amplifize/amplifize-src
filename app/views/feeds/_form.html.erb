@@ -1,12 +1,16 @@
 <%= form_for @feed, :remote => true do |f| %>
     <div class="formField">
-	    <%= f.label "Feed URL" %>
-	    <%= f.text_field :url, :size => 20 %>
+    	<label class="input">
+    		<span>URL</span>
+    		<%= f.text_field :url, :size => 20 %>
+    	</label>
     </div>
     <div class="formField">
-    	<%= f.label "Tags" %>
-    	<%= f.text_field :tags, :size => 20 %>
-    	<p class="instructions">Tags should be comma separated</p>
+    	<label class="input">
+    		<span>Tags</span>
+    		<%= f.text_field :tags, :size => 20, :value => '' %>	
+    	</label>
+    	<p class="instructions">Seperate multiple tags with a comma.</p>
     </div>
-    <%= f.submit :value => "Add feed" %>
+    <%= f.submit :value => "Subscribe" %>
 <% end %>

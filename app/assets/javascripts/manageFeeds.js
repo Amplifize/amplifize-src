@@ -1,32 +1,16 @@
-var populateDeleteTags = function(feedId) {
-	$.ajax({
-		url: "/feeds/"+feedId+"/tags",
-		success: function(data, textStatus, jqXHR) {
-			var deleteDiv = $("#feedTagsToDelete");
-			deleteDiv.html('');
-			for(var i=0; i < data.tags.length; i++) {
-				deleteDiv.append('<p><a href="#" id="delete_popup_tag_'+data.tags[i].id+'" onclick="deleteTagFromFeed('+ data.tags[i].id +'); return false;">'+data.tags[i].name+'</a></p>');
-			}
-		},
-		error: function(xhr, text, error) {
-			alert(error);
-			alert(text);
-		},
-		dataType: "json"
-	});
-};
+var deleteTag = function(tagId) {
+	enableOverlay();
 
-var deleteTagFromFeed = function(tagId) {
 	$.ajax({
 		url: "/tags/"+tagId,
 		type: "DELETE",
 		success: function(data, textStatus, jqXHR) {
-			$("#delete_popup_tag_"+tagId).remove();
 			$("#tag_"+tagId).remove();
+			disableOverlay();
 		},
 		error: function(xhr, text, error) {
-			alert(error);
-			alert(text);
+			//TODO: Log the error
+			disableOverlay();
 		},
 		dataType: "json"
 	});
@@ -45,8 +29,9 @@ $(document).ready(function() {
 		$("#addTags-modal-content").modal("hide");
 
 		var ul = $("#feed_"+data.feed_id+" .manageFeedRowTags");
-		for(var i =0; i < data.tags.length; i++) {
-			ul.append("<li>"+data.tags[i]+"</li>");
+		for(var new_tag in data.tags) {
+			var tag = data.tags[new_tag];
+			ul.prepend("<li id='tag_"+tag['id']+"' onclick='deleteTag("+tag['id']+")'><div class='manageFeedTagName'>"+tag['name']+"</div><div class='icon deleteTag' style='background-position:-207px;'></div></li>");
 		}
 	});
 

@@ -1,11 +1,21 @@
 <%= form_for @tag, :remote=>true do |f| %>
 	<%= f.hidden_field :feed_id %>
     <div class="formField">
-    	<%= f.label "Tags" %>
-    	<%= f.text_field :name, :size => 20 %>
-    	<p class="instructions">Tags should be comma separated</p>
+    	<label class="input">
+    		<span>Tags</span>
+    		<%= f.text_field :name, :size => 20, :style=> "float:left;" %>
+    	</label>
+    	<%= f.submit :value => "Add", :style => "float: left;margin-left: 10px; margin-top: 2px;" %>
+    	<div class="clear"></div>
     </div>
-  <div class="actions">
-    <%= f.submit :value => "Add" %>
-  </div>
+    <p class="instructions">Seperate multiple tags with a comma.</p>
 <% end %>
+
+<p class="instructions">
+		Tags are a way to organize your feeds. Use tags to:
+		<ul>
+			<li>Help sort through feeds</li>
+			<li>Share specific types of content with your network</li>
+			<li>Mute the conversations you know you don't want to be a part of</li>
+		</ul>
+</p>

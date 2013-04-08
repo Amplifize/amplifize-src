@@ -138,11 +138,9 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #F03000;
   text-decoration: none;
 }
 a:hover {
-  color: #F03000;
   text-decoration: underline;
 }
 .row {

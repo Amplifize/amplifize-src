@@ -6,7 +6,7 @@
 	<%= javascript_include_tag "feeds", "autocomplete-rails" %>
 <% end %>
 
-<div id="subNav">
+<% content_for :subnav do %>
 	<div id="contentViewOptions">
 		<div class="subNavItem">
 			<span class="navLabel">Content order:</span>
@@ -40,7 +40,7 @@
 		<div class="clear"></div>
 	</div>
 	<div style="clear:both"></div>
-</div>
+<% end %>
 <div id="menubar">
         <div id="contentOptions">
           <a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>

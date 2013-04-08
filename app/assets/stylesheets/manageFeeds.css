@@ -1,8 +1,116 @@
-#reader_content {
-	margin: 30px auto 0;
+#subNavContainer h3 {
+	margin-right:20px;
+	float:left;
+	font-family:'Roboto', sans-serif;
+	font-weight:100;
+	color:#fff;
+	font-size:21px;
+}
+
+.manageFeedRow {
+	padding: 10px;
+	
+	border-bottom: 1px solid #333;
+	margin-bottom: 20px;
+}
+
+ul.manageFeedRowTags {
+	list-style: none;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	margin-left: 0px;
+}
+
+ul.manageFeedRowTags li {
+	float: left;
+	margin-right: 20px;
+	margin-left: 0px;
+	
+	background-color: #7b7165;
+	color: #fff;
+	padding: 5px;
+	border-radius: 10px;
+
+	text-align:center;
+}
+
+ul.manageFeedRowTags li:hover {
+	cursor: pointer;
+	
+	background-color: #353326;
+}
+
+ul.manageFeedRowTags li:hover .deleteTag {
+	display: block;
 }
 
 
-#appNav {
-	margin-top: 50px;
+.manageButton,
+.manageButton:visited {
+	display:block;
+	float:left;
+	color:#fff;
+	font-size:20px;
+	text-decoration:none;
+	text-align:center;
+	border-radius:10px;
+	padding-top:12px;
+	margin-top:-8px;
+	height:30px;
+}
+
+.manageButton:hover {
+	color:#fff;
+	
+	text-decoration: none;
+	
+	background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  	background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+ 
+	/*Shadow*/
+  	-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+  	-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+  	box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);	
+}
+
+.icon {
+	background-color: transparent;
+	background-image: url("/assets/shared/amplifize_icons.png");
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 23px;
+	width: 32px;
+	margin-left: 10px;
+	float: left;
+}
+
+.manageFeedRowTitle,
+.manageFeedRowTitle:visited {
+	color: #09222A;
+	font-family: "Roboto", sans-serif;
+	font-size: 25px;
+	
+	text-decoration: none;
+}
+
+.manageButtonText {
+	float: left;
+	margin-top: 1px;
+	margin-left: 5px;
+}
+
+.deleteTag {
+	display: none;
+	margin-top:1px;
+}
+
+.manageFeedTagName {
+	float:left;
+	height:23px;
+	padding-top:3px;
+	padding-left:2px;
+	padding-right:2px;
 }
