@@ -349,9 +349,9 @@ $(document).ready(function() {
 		disableOverlay();
 	});
 	
-	$("#toggleContentSelect").val(contentOrder);
-	$("#toggleContentLayout").val(contentLayout);
-	$("#toggleContentSort").val(contentSort);
+	$("#toggleContentSelect").val(contentOrder).selectbox();
+	$("#toggleContentLayout").val(contentLayout).selectbox();
+	$("#toggleContentSort").val(contentSort).selectbox();
 	
 	//need to do this to prevent firefox from auto searching on typing
 	jQuery(document).bind('keydown', 'j', function(evt) {

@@ -71,6 +71,7 @@ class UsersController < ApplicationController
   def content
     set_unread_counts
     @feed = Feed.new
+    @tags = current_user.tags.group(:name)
 
     render :file => 'users/reader/feeds.html.erb', :layout => 'reader_layout'
   end

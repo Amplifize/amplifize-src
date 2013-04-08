@@ -1,15 +1,15 @@
 <% content_for :stylesheets do %>
-	<%= stylesheet_link_tag "shares.css" %>
+	<%= stylesheet_link_tag "shares", "jquery.selectbox" %>
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "shares.js" %>
+	<%= javascript_include_tag "shares", "jquery.selectbox-0.2.min" %>
 	<script type="text/javascript">
 		var all_follows = <%= @all_follows %>;
 	</script>
 <% end %>
 
-<div id="subNav">
+<% content_for :subnav do %>
 	<div id="contentViewOptions">
 		<div class="subNavItem">
 			<span class="navLabel">Content order:</span>
@@ -44,6 +44,7 @@
         </div>
         <div style="clear:both"></div>
       </div>
+	<% end %>
       <div id="menubar">
         <div id="contentOptions">
           <a class="navTab" href="#addComment-modal-content" data-toggle="modal"><%= image_tag "reader/comment.png", :alt => "Comment", :title => "Comment" %></a>

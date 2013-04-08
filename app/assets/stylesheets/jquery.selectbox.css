@@ -1,0 +1,105 @@
+@CHARSET "UTF-8";
+.sbHolder{
+background-color: #235562;
+font-size: 12px;
+height: 30px;
+position: relative;
+width: 150px;
+/*border-radius: 5px;*/
+
+outline: none;
+}
+
+.sbHolder:focus .sbSelector{
+	
+}
+
+.sbSelector{
+	display: block;
+	height: 30px;
+	left: 0;
+	line-height: 30px;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 170px;
+}
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover{
+	color: #fff;
+	outline: none;
+	text-decoration: none;
+}
+.sbToggle{
+	background: url(/assets/shared/amplifize_icons.png) -534px 0 no-repeat;
+	display: block;
+	height: 23px;
+	outline: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 23px;
+	margin-right: 10px;
+}
+.sbToggleOpen{
+	url(/assets/shared/amplifize_icons.png) -534px 0 no-repeat;
+}
+.sbHolderDisabled{
+	background-color: #3C3C3C;
+}
+.sbHolderDisabled .sbHolder{
+	
+}
+.sbHolderDisabled .sbToggle{
+	
+}
+.sbOptions{
+	background-color: #235562;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	width: 150px;
+	z-index: 1;
+	overflow-y: auto;
+	border-top: 1px solid #7b7165;
+}
+.sbOptions li{
+	padding: 0 7px;
+}
+.sbOptions a{
+	border-bottom: dotted 1px #515151;
+	display: block;
+	outline: none;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions a:link, .sbOptions a:visited{
+	color: #ddd;
+	text-decoration: none;
+}
+.sbOptions a:hover,
+.sbOptions a:focus,
+.sbOptions a.sbFocus{
+	color: #c47612;
+}
+.sbOptions li.last a{
+	border-bottom: none;
+}
+.sbOptions .sbDisabled{
+	border-bottom: dotted 1px #515151;
+	color: #999;
+	display: block;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbGroup{
+	border-bottom: dotted 1px #515151;
+	color: #EBB52D;
+	display: block;
+	font-weight: bold;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbSub{
+	padding-left: 17px;
+}

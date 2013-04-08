@@ -347,9 +347,10 @@ $(document).ready(function() {
 	  setTimeout(function(){$("#summary").focus();}, 250);
 	});
 
-	$("#toggleContentSelect").val(contentOrder);
-	$("#toggleContentLayout").val(contentLayout);
-	$("#toggleContentSort").val(contentSort);
+	$("#toggleContentSelect").val(contentOrder).selectbox();
+	$("#toggleContentLayout").val(contentLayout).selectbox();
+	$("#toggleContentSort").val(contentSort).selectbox();
+	$("#newFilter").selectbox();
 	
 	//need to do this to prevent firefox from auto searching on typing
 	jQuery(document).bind('keydown', 'j', function(evt) {

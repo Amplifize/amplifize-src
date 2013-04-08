@@ -1,9 +1,9 @@
 <% content_for :stylesheets do %>
-	<%= stylesheet_link_tag "feeds" %>
+	<%= stylesheet_link_tag "feeds", "jquery.selectbox" %>
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "feeds", "autocomplete-rails" %>
+	<%= javascript_include_tag "feeds", "jquery.selectbox-0.2.min" %>
 <% end %>
 
 <% content_for :subnav do %>
@@ -32,6 +32,16 @@
 			</select>
 			<div class="clear"></div>
 		</div>
+		<div class="subNavItem">
+			<span class="navLabel">Filter content:</span>
+			<select id="newFilter" onchange="setNewFilter();">
+					<option value="all">All tags</option>
+				<% @tags.each do |tag| %>
+					<option value="<%= tag.name %>"><%= tag.name %></option>
+				<% end %>
+			</select>
+			<div class="clear"></div>
+		</div>
 		<div class="clear"></div>
 	</div>
 	<div id="contentStateOptions">
@@ -54,7 +64,7 @@
       	<div class="clear"></div>
       </div>
 	<div id="source_content">
-      	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span> from <span id="currentTag">all tags</span>. <a href="#" onclick="filterContent();">Filter content</a></div>
+      	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span> from <span id="currentTag">all tags</span>.</div>
 		<div id="contentMetadata">
     		<div id="contentTitleBanner">
     			<div id="contentTitle"></div>
@@ -113,20 +123,5 @@
 			<div id="popup_contentBody">
 			</div>
 		</div>
-	</div>
-</div>
-
-<div id="filterContent-modal-content" class="modal hide">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Filter feed sources</h3>
-		<div class="clear"></div>
-	</div>
-	<div class="modal-body modal-body-style">
-		<form id="filterForm" onsubmit="setNewFilter();">
-			<input type="text" id="newFilter" data-autocomplete="/users/autocomplete_tag_name" />
-			<input type="submit" value="Set filter" />
-		</form>
-		<a href="#" onclick="clearFilter();return false;">Clear filter</a>
 	</div>
 </div>

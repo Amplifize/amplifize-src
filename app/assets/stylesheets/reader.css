@@ -8,12 +8,19 @@
   margin: 0 auto;
 }
 
-#contentViewOptions {
+#contentViewOptions,
+#contentStateOptions {
   float: left;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+#contentViewOptions {
+	width: 710px;
 }
 
 #contentStateOptions {
-  float: right;
+	margin-left: 
 }
 
 .subNavItem {
@@ -29,9 +36,12 @@
 }
 
 .navLabel {
-  float: left;
-  margin-right: 10px;
-  line-height: 28px;
+	line-height: 28px;
+	display: block;
+	font-size: 15px;
+	color: white;
+	font-family: "Roboto", sans-serif;
+	font-weight: 100;
 }
 
 #shareUnreadCount, #feedUnreadCount {
@@ -210,10 +220,6 @@
 	margin-bottom: 15px;
 }
 
-#subNavContainer a {
-	margin-right: 50px;
-}
-
 .navTab {
 	width: 50px;
 	margin-right: 10px;
@@ -317,7 +323,7 @@
 }
 
 .instructions {
-	font-face: "Roboto", sans-serif;
+	font-family: "Roboto", sans-serif;
 	font-size: 12px;
 	font-weight: 100;
 }
