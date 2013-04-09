@@ -67,20 +67,14 @@
 }
 
 /* BEGINNING OF SUB-NAVIGATION SECTION */
-#menubar {
-  width: 40px;
-  margin: 0;
-  position: fixed;
+
+#contentNavigation {
+	float: right;
 }
 
 /* END OF SUB-NAVIGATION SECTION */
 
 /* CONTENT SECTION */
-#source_content {
-  margin-left: 40px;
-  padding-left: 20px;
-}
-
 #popup_source_content {
 	padding-right: 20px;
 }
@@ -221,13 +215,49 @@
 }
 
 .navTab {
-	width: 50px;
-	margin-right: 10px;
+	width: 70px;
+	height: 57px;
+	margin-top: 10px;
+	margin-right: 5px;
 
 	text-align: center;
-	padding: 2px;
 
-	color: #000;
+	color: #fff;
+	
+	float: left;
+	display: block;
+}
+
+.contentOptionText {
+	visibility: hidden;
+}
+
+.navTab:hover {
+	text-decoration: none;
+	background-color: #4ac36c;
+	border-radius: 5px;
+}
+
+.navTab:hover .contentOptionText {
+	visibility: visible;
+}
+
+.contentOptionBackground {
+	background-image: url("/assets/shared/amplifize_icons_hover.png");
+	background-repeat: no-repeat;
+	width: 45px;
+	height: 32px;
+	margin-left: 10px;
+	margin-top: 3px; 
+}
+
+.contentOptionBackground2 {
+	background-image: url("/assets/shared/amplifize_icons.png");
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 32px;
+	margin-left: 8px;
+	margin-top: 3px; 
 }
 
 #overlay {

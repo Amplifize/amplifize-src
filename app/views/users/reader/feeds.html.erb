@@ -45,24 +45,36 @@
 		<div class="clear"></div>
 	</div>
 	<div id="contentStateOptions">
-		<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
-		<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
-		<div class="clear"></div>
-	</div>
-	<div style="clear:both"></div>
-<% end %>
-<div id="menubar">
         <div id="contentOptions">
-          <a href="#addShare-modal-content" data-toggle="modal" class="navTab"><%= image_tag "reader/share.png", :alt => "Share content", :title => "Share content" %></a>
-          <a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
+          	<a href="#addShare-modal-content" data-toggle="modal" class="navTab">
+          		<div class="contentOptionBackground" style="background-position:-113px bottom;"></div>
+          		<span class="contentOptionText">Share</span>
+          	</a>
+          	<a href="#" onclick="setReadState(1);" class="navTab">
+          		<div class="contentOptionBackground2" style="background-position:-408px;"></div>
+          		<span class="contentOptionText">Read later</span>
+          	</a>
+        	<a href="#" onclick="markAllAsRead();" class="navTab">
+        		<div class="contentOptionBackground" style="background-position:-39px bottom;"></div>
+        		<span class="contentOptionText">Clear all</span>
+        	</a>
         </div>
+        <!--
       	<div id="sectionNavigation">
       		<a href="#addFeed-modal-content" data-toggle="modal"><%= image_tag "reader/add.png", :alt => "Add a new feed", :title => "Add a new feed" %></a>
       		<a href="/my/feeds"><%= image_tag "reader/manage.png", :alt => "Manage existing feeds", :title => "Manage existing feeds" %></a>
-      		<a href="#" onclick="markAllAsRead();"><%= image_tag "reader/clear.png", :alt => "Clear all content", :title => "Clear all content" %></a>
       	</div>
+      	-->
       	<div class="clear"></div>
-      </div>
+	</div>
+	<div style="clear:both"></div>
+<% end %>
+<div id="contentNavigation">
+	<!--<div><span id="beginningPoint">1</span>-<span id="endPoint">50</span> of <span id="totalPosts">200</span></div>-->
+	<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
+	<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
+	<div class="clear"></div>
+</div>      
 	<div id="source_content">
       	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span> from <span id="currentTag">all tags</span>.</div>
 		<div id="contentMetadata">
