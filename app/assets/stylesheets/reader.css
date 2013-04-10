@@ -82,19 +82,25 @@
 #contentSourceSite,
 #popup_contentSourceSite {
   margin-bottom: 10px;
+  
+  color: #737373;
+  font-size: 12px;
+}
+
+#contentTitleBanner {
+	margin-bottom: -7px;
 }
 
 #contentTitle {
-  font-size: 28px;
+  font-size: 25px;
   margin-right: 20px;
-  margin-bottom: 5px;
-  float: left;
+  /*float: left;*/
 }
 
 #popup_contentTitle {
 	width: 690px;
 	margin-right: 0px;
-	font-size: 28px;
+	font-size: 25px;
 	float: left;
 }
 
@@ -178,7 +184,10 @@
 #feedTitle a,
 #feedTitle a:visited {
 	text-decoration: none;
-	color: #333;
+	color: #737373;
+	
+	font-size: 12px;
+	font-style: italic;
 }
 
 #feedTitle a:hover {
@@ -193,10 +202,13 @@
 #contentTitle a:visited,
 #popup_contentTitle a,
 #popup_contentTitle a:visited {
-	font-size: 22px;
+	font-size: 25px;
+	font-family: "Roboto";
+	font-weight: 400;
+
 	text-decoration: none;
 	
-	color: #333;
+	color: #4ac36c;
 	
 	padding: 0;
 }
@@ -210,8 +222,9 @@
 #popup_contentPublishDate
 #sharedBy,
 #popup_sharedBy {
-	color: #333;
+	color: #b8b8b8;
 	margin-bottom: 15px;
+	font-size: 12px;
 }
 
 .navTab {
@@ -356,4 +369,10 @@
 	font-family: "Roboto", sans-serif;
 	font-size: 12px;
 	font-weight: 100;
+}
+
+#contentBody {
+	font-size: 13px;
+	color: #737373;
+	line-height: 20px;
 }
