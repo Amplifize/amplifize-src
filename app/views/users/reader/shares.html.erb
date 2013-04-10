@@ -37,44 +37,52 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-        <div id="contentStateOptions">
-          <a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
-          <a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
-          <div class="clear"></div>
-        </div>
-        <div style="clear:both"></div>
-      </div>
-	<% end %>
-      <div id="menubar">
+	<div id="contentStateOptions">
         <div id="contentOptions">
-          <a class="navTab" href="#addComment-modal-content" data-toggle="modal"><%= image_tag "reader/comment.png", :alt => "Comment", :title => "Comment" %></a>
-          <a href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later" %></a>
+        	<a class="navTab" href="#addComment-modal-content" data-toggle="modal">
+          		<div class="contentOptionBackground" style="background-position:-7px bottom;"></div>
+          		<span class="contentOptionText">Comment</span>
+          	</a>
+          	<a href="#" onclick="setReadState(1);" class="navTab">
+          		<div class="contentOptionBackground2" style="background-position:-408px;"></div>
+          		<span class="contentOptionText">Read later</span>
+          	</a>
+        	<a href="#" onclick="markAllAsRead();" class="navTab">
+        		<div class="contentOptionBackground" style="background-position:-39px bottom;"></div>
+        		<span class="contentOptionText">Clear all</span>
+        	</a>
+        	<div class="clear"></div>
         </div>
-      	<div id="sectionNavigation">
-      		<a href="#" onclick="markAllAsRead();"><%= image_tag "reader/clear.png", :alt => "Clear all content", :title => "Clear all content" %></a>
-      	</div>
       	<div class="clear"></div>
-    </div>
-	<div id="source_content">
-		<div id="shareInfo">
-			<table id="commentThread">
-				<tr>
-					<td>Shared by: <span id="sharedBy"></span> who says: <blockquote id="conversationStarter"></blockquote></td>
-				</tr>
-			</table>
-		</div>
-
-      	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span>.</div>
-		<div id="contentMetadata">
-    		<div id="contentTitleBanner">
-    			<div id="contentTitle"></div>
-    			<div class="clear"></div>
-    		</div>
-    		<p id="contentInfoLine"><span id="contentPublishDate"></span><span id="contentArthur"></span></p>
-		</div>
-		<div id="contentBody">
-		</div>
 	</div>
+	<div class="clear"></div>
+<% end %>
+<div id="contentNavigation">
+	<!--<div><span id="beginningPoint">1</span>-<span id="endPoint">50</span> of <span id="totalPosts">200</span></div>-->
+	<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
+	<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
+	<div class="clear"></div>
+</div>
+<div id="source_content">
+	<div id="shareInfo">
+		<table id="commentThread">
+			<tr>
+				<td>Shared by: <span id="sharedBy"></span> who says: <blockquote id="conversationStarter"></blockquote></td>
+			</tr>
+		</table>
+	</div>
+
+  	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span>.</div>
+	<div id="contentMetadata">
+		<div id="contentTitleBanner">
+			<div id="contentTitle"></div>
+			<div class="clear"></div>
+		</div>
+		<p id="contentInfoLine"><span id="contentPublishDate"></span><span id="contentArthur"></span></p>
+	</div>
+	<div id="contentBody">
+	</div>
+</div>
 
 <div id="addComment-modal-content" class="modal hide" style="z-index:2000;">
 	<div class="modal-header">

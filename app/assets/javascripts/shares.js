@@ -157,6 +157,7 @@ var clearContent = function() {
 	$("#shareInfo").css("visibility", "hidden").css("display", "none");
 	$("#contentBody").html("<h3>Looks like you've got no more conversations to read</h3>");
 	$("#content").animate({scrollTop: 0});
+	$("#contentSourceSite").css("visibility", "hidden").css("display", "none");
 
 	$("#shareUnreadCount").html("0");
 	document.title = "Amplifize | Great conversation goes best with great content (0)";
@@ -250,6 +251,7 @@ var updateShareContent = function(shareId) {
 		$("#contentStateOptions").css("visibility", "visible");
 		$("#contentOptions").css("visibility", "visible");
 		$("#shareInfo").css("visibility", "visible").css("display", "block");
+		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 
 		enableOverlay();
 		$.ajax({

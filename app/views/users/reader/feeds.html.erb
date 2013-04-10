@@ -59,12 +59,6 @@
         		<span class="contentOptionText">Clear all</span>
         	</a>
         </div>
-        <!--
-      	<div id="sectionNavigation">
-      		<a href="#addFeed-modal-content" data-toggle="modal"><%= image_tag "reader/add.png", :alt => "Add a new feed", :title => "Add a new feed" %></a>
-      		<a href="/my/feeds"><%= image_tag "reader/manage.png", :alt => "Manage existing feeds", :title => "Manage existing feeds" %></a>
-      	</div>
-      	-->
       	<div class="clear"></div>
 	</div>
 	<div style="clear:both"></div>
@@ -100,16 +94,6 @@
 			<textarea name="summary" id="summary" style="width: 470px; height: 100px;" class="htmlEditor"></textarea><br/>
 			<input type="submit" value="Share" />
 		</form>
-	</div>
-</div>
-
-<div id="addFeed-modal-content" class="modal hide">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Add feeds by URL</h3>
-	</div>
-	<div class="modal-body modal-body-style">
-		<%= render 'feeds/form' %>
 	</div>
 </div>
 
