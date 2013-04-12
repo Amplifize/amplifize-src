@@ -97,17 +97,28 @@
 <div id="postPopup-modal-content" class="modal hide">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3 id="popup_contentTitle"></h3>
-		<div id="popup_contentOptions">
-			<a class="navTab" href="#addComment-modal-content" data-toggle="modal"><%= image_tag "reader/comment.png", :alt => "Comment", :title => "Comment" %></a>
-			<a style="margin-left: -10px;" href="#" onclick="setReadState(1);"><%= image_tag "reader/read-later.png", :alt => "Read later", :title => "Read later", :id => "popup_read-later_icon" %></a>
+		<div id="popup_contentOptions" style="margin-left: 449px;">
+			<a href="#addComment-modal-content" data-toggle="modal" class="popup_navTab">
+          		<div class="popup_contentOptionBackground comment_icon"></div>
+          		<span class="popup_contentOptionText">Add comment</span>
+          		<div class="clear"></div>
+			</a>
+			<a style="margin-left: -10px;" href="#" onclick="setReadState(1);return false;" class="popup_navTab">
+				<div class="popup_contentOptionBackground read-later_icon"></div>
+				<span class="popup_contentOptionText">Read later</span>
+				<div class="clear"></div>
+			</a>
+			<div class="clear"></div>
+		</div>
+		<div id="popup_navigation" style="margin-right:25px;">
 			<a style="margin-left: 10px;" href="#" onclick="downPost();" id="popup_previousContent" class="btn" title="Previous content">&lt;</a>
-			<a style="margin-left: 10px;" href="#" onclick="upPost();" id="popup_nextContent" class="btn" title="Next content">&gt;</a>			
+			<a style="margin-left: 10px;" href="#" onclick="upPost();" id="popup_nextContent" class="btn" title="Next content">&gt;</a>
 			<div class="clear"></div>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div class="modal-body" style="max-height: none; min-height:90%; width: 910px; padding-bottom: 10px; padding-top: 0px;">
+		<h3 id="popup_contentTitle"></h3>
 		<div id="popup_source_content">
 			<div id="popup_shareInfo">
 				<table id="popup_commentThread">

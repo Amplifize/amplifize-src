@@ -94,14 +94,11 @@
 #contentTitle {
   font-size: 25px;
   margin-right: 20px;
-  /*float: left;*/
 }
 
 #popup_contentTitle {
-	width: 690px;
 	margin-right: 0px;
 	font-size: 25px;
-	float: left;
 }
 
 #contentOptions {
@@ -110,6 +107,8 @@
 
 #popup_contentOptions a {
 	float: left;
+	margin-right: 30px;
+	padding: 5px;
 }
 
 #titleList li {
@@ -199,9 +198,7 @@
 }
 
 #contentTitle a,
-#contentTitle a:visited,
-#popup_contentTitle a,
-#popup_contentTitle a:visited {
+#contentTitle a:visited {
 	font-size: 25px;
 	font-family: "Roboto";
 	font-weight: 400;
@@ -213,6 +210,21 @@
 	
 	padding: 0;
 }
+
+#popup_contentTitle a,
+#popup_contentTitle a:visited {
+	font-size: 25px;
+	font-family: "Roboto";
+	font-weight: 400;
+	line-height: 32px;
+
+	text-decoration: none;
+	
+	color: #5c5c5c;
+	
+	padding: 0;
+}
+
 
 #contentTitle a:hover,
 #popup_contentTitle a:hover {
@@ -254,6 +266,70 @@
 
 .navTab:hover .contentOptionText {
 	visibility: visible;
+}
+
+.popup_navTab {
+	float: left;
+}
+
+.popup_navTab:hover {	
+	background-color: #4ac36c;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+.popup_contentOptionText {
+	color: #888888;
+	float: left;
+	font-size: 15px;
+}
+
+.popup_navTab:hover .popup_contentOptionText {
+	color: #fff;
+}
+
+.popup_contentOptionBackground {
+	float: left;
+	
+	background-image: url("/assets/shared/amplifize_icons_hover2.png");
+	background-repeat: no-repeat;
+	width: 45px;
+	height: 27px;
+	margin-right: 10px;
+	margin-top: -7px;
+}
+
+.share_icon {
+	background-position:-113px top;
+}
+
+.popup_navTab:hover .share_icon {
+	background-position: -113px -40px;
+}
+
+.read-later_icon {
+	background-position:-290px top;
+	margin-top: -5px;
+	margin-right: -10px;
+}
+
+.popup_navTab:hover .read-later_icon {
+	background-position:-290px -40px;
+	margin-right: -10px;
+}
+
+.comment_icon {
+	background-position: 0px top;
+}
+
+.popup_navTab:hover .comment_icon {
+	background-position: 0px -40px;
+}
+
+
+#popup_navigation,
+#popup_contentOptions {
+	float: left;
 }
 
 .contentOptionBackground {
@@ -355,11 +431,6 @@
 	margin: -300px 0 0 -450px;
 	overflow-y:auto;
 	max-height:90%;
-}
-
-#popup_contentOptions {
-	float: right;
-	width: 200px;
 }
 
 #popup_read-later_icon {
