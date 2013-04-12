@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Amplifize | Great conversation goes best with great content</title>
-  <%= stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Roboto:400,700,100", "http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700", "reader", "reader-overlay", "jquery-ui-1.10.0.custom", "markitup/skins/markitup/style", "markitup/sets/html/style" %>
+  <%= stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Roboto:400,700,100", "http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700", "reader", "reader-overlay", "jquery-ui-1.10.0.custom", "markitup/skins/markitup/style", "markitup/sets/html/style", "jquery.labels" %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag "jquery.min", "jquery_ujs", "reader", "jquery.hotkeys", "jquery.cookie", "dateFormat", "bootstrap-modal", "jquery.markitup", "jquery-ui-1.10.0.custom.min", "markItUp" %>
+  <%= javascript_include_tag "jquery.min", "jquery_ujs", "reader", "jquery.hotkeys", "jquery.cookie", "dateFormat", "bootstrap-modal", "jquery.markitup", "jquery-ui-1.10.0.custom.min", "markItUp", "jquery.labels" %>
   <%= yield :javascripts %>
     <script type="text/javascript">
     	$.ajaxSettings.dataType = "json";

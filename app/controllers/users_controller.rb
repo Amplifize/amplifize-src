@@ -64,6 +64,7 @@ class UsersController < ApplicationController
 
   def homepage
     set_unread_counts
+    @feed = Feed.new
     
     render :file => 'users/reader/home', :layout => 'reader_layout'
   end
