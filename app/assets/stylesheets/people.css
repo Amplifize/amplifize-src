@@ -1,3 +1,7 @@
+#subNav {
+    background: url("/assets/homepage/banner-background.png") no-repeat fixed 0px 180px rgb(7, 34, 41);
+}
+
 .subscriberName {
 	display: inline-block;
 	width: 200px;
@@ -8,4 +12,97 @@
 	float: left;
 	width: 45%;
 	margin-right: 20px;
+}
+
+.peopleForm {
+	float: left;
+	margin-top: 35px;
+}
+
+#findFormDiv {
+	width: 320px;
+	margin-left: 50px;
+}
+
+#orDiv {
+	width: 230px;
+	padding-top: 115px;
+	text-align: center;
+}
+
+#emailDiv {
+	width: 325px;
+}
+
+.orCircle {
+	background-color: #3AAADB;
+    border-radius: 20px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: "Roboto",sans-serif;
+    font-size: 21px;
+    font-weight: 100;
+    height: 29px;
+    line-height: 21px;
+    padding-top: 6px;
+    width: 35px;
+}
+
+.peopleForm h3 {
+	font-family: "Roboto", sans-serif;
+	font-size: 25px;
+	font-weight: 100;
+	
+	color: #44a9df;
+}
+
+.peopleForm p {
+	font-size: 15px;
+	color: #fff;
+	
+	line-height: 20px;
+}
+
+.peopleForm input[type='text'],
+.peopleForm input[type='textarea'],
+.peopleForm input[type='email'] {
+	width: 275px;
+	background-color: #245563;
+	border-radius: 5px;
+	border: none;
+	color: #fff;
+}
+
+.input {
+	background: none repeat scroll 0 0 transparent;
+}
+
+.input span {
+	z-index: 10;
+}
+
+.peopleSubmit {
+	color: #fff; 
+	padding: 5px; 
+	width: 110px; 
+	height: 30px; 
+	font-size: 15px; 
+	background-color: #23a64d; 
+	border-radius: 12px; 
+	border: 1px solid #23a64d;
+}
+
+#inviteFriends-response {
+	height: 247px;
+}
+
+.peopleInfo h3 {
+	font-family: "Roboto", sans-serif;
+	font-size: 25px;
+	font-weight: 400;
+	color: #5e5e5e;
+}
+
+#subscribedTo {
+	margin-left: 50px;
 }

@@ -3,15 +3,39 @@
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "people.js", "findPeople.js" %>
+	<%= javascript_include_tag "people.js" %>
 <% end %>
 
-<div id="subNav2" style="padding-bottom:20px;">
-	<a href="#findPeople-modal-content" class="btn" data-toggle="modal">Find friends to follow</a>
-	<a href="#inviteFriends-modal-content" class="btn" data-toggle="modal">Invite friends to join Amplifize</a>
-</div>
+<% content_for :subnav do %>
+	<div id="findFormDiv" class="peopleForm">
+		<div id="findFriends-form">
+			<h3>Find people to follow</h3>
+			<p>Find the people you know on amplifize by entering their email in the form below.</p>
+			<%= render "users/search_form" %>
+		</div>
+		<div id="findFriends-response" class="hide">
+			<p id="userSearchResults">Results<p>
+			<div id="emptyUserSearchResult"></div>
+			<div id="userSearchResult"></div>
+		</div>
+	</div>
+	<div id="orDiv" class="peopleForm">
+		<span class="orCircle">or</span>
+	</div>
+	<div id="emailDiv" class="peopleForm">
+		<div id="inviteFriends-form">
+			<h3>Invite friends to join amplifize</h3>
+			<p>Invite others to start sharing on amplifize by entering their email below.</p>
+			<%= render "users/invite_form" %>
+		</div>
+		<div id="inviteFriends-response" class="hide">
+			<p>Done! Your friends have been invited.</p>
+		</div>
+	</div>
+	<div class="clear"></div>
+<% end %>
 
-<div id="subscribedTo">
+<div id="subscribedTo" class="peopleInfo">
 	<h3>You are subscribed to:</h3>
 	<% @subscribed_to.each do |subscriber| %>
 	<div id="subscriber_<%= subscriber.id %>" class="subscribedToRow">
@@ -25,7 +49,7 @@
 	</div>
 	<% end %>
 </div>
-<div id="followedBy">
+<div id="followedBy" class="peopleInfo">
 	<h3>You are followed by:</h3>
 	<% @followed_by.each do |follower| %>
 	<div>
@@ -33,39 +57,3 @@
 	</div>
 	<% end %>
 </div>
-
-<div id="findPeople-modal-content" class="modal hide">
-		<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Find people to follow</h3>
-	</div>
-	<div id="modal-body" class="modal-body-style">
-		<%= render "users/search_form" %>
-		<div id="userSearchResultsDiv">
-			<p id="userSearchResults">Results<p>
-			<p id="emptyUserSearchResult"></p>
-			<table id="userSearchResultsTable">
-				<tbody>
-					
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
-
-
-<div id="inviteFriends-modal-content" class="modal hide">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Invite friends to join amplifize</h3>
-	</div>
-	<div id="inviteFriends-modal-body" class="modal-body-style">
-		<p>To invite your friends to start sharing on Amplifize, simply enter their email address below.  You can also 
-			include a short, personalized message.</p>
-		<%= render "users/invite_form" %>
-	</div>
-	<div id="inviteFriends-response-modal-body" class="modal-body-style">
-		<p>Done! Your friends have been invited.  <a href="#" data-dismiss="modal">Close</a></p>
-	</div>	
-</div>
-

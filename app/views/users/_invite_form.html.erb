@@ -1,9 +1,17 @@
 <form id="inviteFriendsForm" method="POST" action="/invite/create" data-remote="true">
-	<label for="email">Email: </label>
-	<input type="email" id="invite_email" name="email" oninput="customValidate(this);" />
-	<!--<input type="button" value="Add" />-->
-	<label for="message">Personal Message:</label>
-	<textarea id="invite_message" name="message"></textarea>
-	<br />
-	<input type="submit" value="Invite" />	
+	<div class="formField">
+		<label class="input">
+			<span>Email address</span>
+			<input type="email" id="invite_email" name="email" oninput="customValidate(this);" />
+		</label>
+	</div>
+	<div class="formField">
+		<label class="input">
+			<span>Personal message</span>
+			<textarea id="invite_message" name="message" rows="3" style="width:270px;color:#fff;">Join me in finding great content worth talking about by signing up for amplifize.</textarea>
+		</label>
+	</div>
+	<div class="formField">
+		<input type="submit" value="Invite" class='peopleSubmit' />
+	</div>
 </form>

@@ -6,39 +6,66 @@ var customValidate = function(input) {
 	}
 }
 
-// Opens the invite modal with the given email address
-// pre-populated in the email box
-var inviteEmail = "";
-var openInviteModal = function(email) {
-	inviteEmail = email;
-	$('#inviteFriends-modal-content').modal();
+var inviteFriendFromSearch = function(email) {
+	$("#invite_email").val(email);
+
+	$("#findFriends-form").show();
+	$("#findFriends-response").hide();
 }
 
+var followUser = function(userId) {
+	$.ajax({
+		url: '/follows/'+userId+'/add/',
+		success: function(data, textStatus, jqXHR) {
+			$("#follow_"+userId).html("<p>Successfully followed</p>");
+			
+			setTimeout(function(){
+				$("#findFriends-form").show();
+				$("#findFriends-response").hide();
+			}, 2000);
+		},
+		error: function(xhr, text, error) {
+			//TODO: Log errors
+			$("#follow_"+userId).html("<p>There was an error. Please try again.");
+			
+			setTimeout(function(){
+				$("#findFriends-form").show();
+				$("#findFriends-response").hide();
+			}, 2000);
+		}
+	});
+};
+
 $(document).ready(function() {
-
-	// "Shown" Listener for findPeople modal
-	$("#findPeople-modal-content").on("shown", function() {
-		$("#search_email").focus();
-	});
-
-	// "Show" listener for inviteFriends modal
-	$("#inviteFriends-modal-content").on("show", function() {
-		$("#invite_email").val(inviteEmail);
-		$("#inviteFriends-modal-body").show();
-		$("#inviteFriends-response-modal-body").hide();
-		inviteEmail = "";
-	});
-
-	// "Shown" listener for inviteFriends modal
-	$("#inviteFriends-modal-content").on("shown", function() {
-		$("#invite_email").focus();
-	});
-
-	// Response listener for inviteFriends form
 	$('form#inviteFriendsForm').on("ajax:success", function(status, data, xhr) {
-		$("#inviteFriends-modal-body").hide();
-		$("#inviteFriends-response-modal-body").show();
+		$("#inviteFriends-form").hide();
+		$("#inviteFriends-response").show();
+		setTimeout(function(){
+			$("#invite_email").val();
+			$("#inviteFriends-form").show();
+			$("#inviteFriends-response").hide();	
+		}, 2000);
 	});
 
-	$("#container").css("margin-top", "98px");
+	$('form#userSearchForm').bind("ajax:success", function(status, data, xhr) {
+		var formField = $("#search_email");
+
+		if(null == data) {
+			$("#userSearchResult").html("");
+			$("#emptyUserSearchResult").html("<p>No amplifize user found with email address:<br/><br/> "+formField.val() +".<br /><br/><a href=\"#\" onclick=\"inviteFriendFromSearch('"+formField.val()+"');return false;\">Why not invite them?</a></p>");
+		}
+		else {
+			$("#emptyUserSearchResult").html('');
+			$('#userSearchResult').html('<p><a href="#" onclick="followUser('+data.id+');return false;">Follow</a> '+data.email+' on amplifize</p>');
+		}
+
+		$("#findFriends-form").hide();
+		$("#findFriends-response").show();
+
+		formField.val("");
+	});
+
+	$('form#userSearchForm').bind("ajax:failure", function(xhr, status, error) {
+		alert(error);
+	});
 });
