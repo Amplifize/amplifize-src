@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   
   acts_as_authentic do |c| 
-     c.login_field = :email 
+     c.login_field = :email
   end
   
   has_and_belongs_to_many :feeds
