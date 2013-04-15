@@ -20,4 +20,9 @@ $(document).ready(function() {
 	$("#popup_commentThread").on("click", "a", linksInNewWindow);
 
 	$(".htmlEditor").markItUp(markItUpSettings);
+	
+	$('.confirm-delete').on('click', function(e) {
+    	e.preventDefault();
+    	$('#confirm-delete-modal').modal('show');
+	});
 });

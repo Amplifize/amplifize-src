@@ -54,7 +54,7 @@
           		<div class="contentOptionBackground2" style="background-position:-408px;"></div>
           		<span class="contentOptionText">Read later</span>
           	</a>
-        	<a href="#" onclick="markAllAsRead();" class="navTab">
+        	<a href="#" class="navTab confirm-delete">
         		<div class="contentOptionBackground" style="background-position:-39px bottom;"></div>
         		<span class="contentOptionText">Clear all</span>
         	</a>
@@ -95,6 +95,20 @@
 			<input type="submit" value="Share" />
 		</form>
 	</div>
+</div>
+
+<div id="confirm-delete-modal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+        <p>You are about to clear all content from the current tag.</p>
+        <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="markAllAsRead();" class="btn danger">Yes</a>
+        <a href="javascript:$('#confirm-delete-modal').modal('hide')" class="btn secondary">No</a>
+    </div>
 </div>
 
 <div id="postPopup-modal-content" class="modal hide">

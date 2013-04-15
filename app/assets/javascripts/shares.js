@@ -41,10 +41,6 @@ var toggleContentSort = function() {
 	updateSharesArray();
 };
 
-var filterContent = function() {
-	alert("coming soon");
-};
-
 var updateSharesArray = function() {
 	resetAppState();
 	enableOverlay();

@@ -69,10 +69,6 @@ var toggleContentSort = function() {
 	updatePostsArray();
 };
 
-var filterContent = function() {
-	$("#filterContent-modal-content").modal("show");
-};
-
 var markAllAsRead = function() {
 	enableOverlay();
 	
@@ -81,11 +77,14 @@ var markAllAsRead = function() {
 		data: "filter="+currentFilter,
 		success: function() {
 			disableOverlay();
-			clearContent();			
+			clearContent();
+
+			$('#confirm-delete-modal').modal('hide');		
 		},
 		error: function(xhr, text, error) {
-			//log this
+			//TODO: Log this
 			disableOverlay();
+			$('#confirm-delete-modal').modal('hide');
 		}
 	});
 
