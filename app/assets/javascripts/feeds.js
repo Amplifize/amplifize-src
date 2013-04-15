@@ -190,6 +190,9 @@ var updateTitleContent = function() {
 	$("#contentOptions").css("visibility", "hidden");
 
 	current_post = undefined;
+	
+	$("#feedUnreadCount").html(posts.length);
+	document.title = "Amplifize | Great conversation goes best with great content ("+posts.length+")";
 
 	$("#contentBody").html("");
 	$("#contentBody").append('<ul id="titleList"></ul>');
@@ -209,6 +212,16 @@ var openPost = function(postId) {
 		url: "/posts/"+postId,
 		success: function(data, textStatus, jqXHR) {
 			current_post = data;
+			
+			if(0 == position) {
+				for(var i = 0; i < posts.length; i++) {
+					if(postId == posts[i]["post_id"]) {
+						position = i;
+						break;
+					}
+				}
+			}
+
 			setReadState(0);
 
 			$("#feedUnreadCount").html(--posts_unread);

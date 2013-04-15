@@ -168,6 +168,10 @@ var updateTitleContent = function() {
 
 	current_share = undefined;
 
+	$("#feedUnreadCount").html(shares.length);
+	document.title = "Amplifize | Great conversation goes best with great content ("+shares.length+")";
+
+
 	$("#contentBody").html("");
 	$("#contentBody").append('<ul id="titleList"></ul>');
 	for(var i = 0; i < shares.length; i++) {
@@ -188,6 +192,15 @@ var openPost = function(shareId) {
 		url: "/shares/"+shareId,
 		success: function(data, textStatus, jqXHR) {
 			current_share = data;
+			if(0 == position) {
+				for(var i = 0; i < shares.length; i++) {
+					if(shareId == shares[i]["share_id"]) {
+						position = i;
+						break;
+					}
+				}
+			}
+
 			setReadState(0);
 
 			$("#shareUnreadCount").html(--shares_unread);
