@@ -168,7 +168,7 @@ var updateTitleContent = function() {
 
 	current_share = undefined;
 
-	$("#feedUnreadCount").html(shares.length);
+	$("#shareUnreadCount").html(shares.length);
 	document.title = "Amplifize | Great conversation goes best with great content ("+shares.length+")";
 
 
