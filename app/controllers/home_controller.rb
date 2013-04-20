@@ -26,6 +26,10 @@ class HomeController < ApplicationController
     @user_session = UserSession.new
   end
   
+  def privacy
+    @user_session = UserSession.new
+  end
+  
   def why_amplifize
     @user_session = UserSession.new
     render :file => 'home/about/why'
