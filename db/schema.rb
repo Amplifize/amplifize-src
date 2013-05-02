@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403061157) do
+ActiveRecord::Schema.define(:version => 20130502062333) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20130403061157) do
     t.string   "display_name"
     t.string   "single_access_token",                 :null => false
     t.string   "perishable_token",    :default => "", :null => false
+    t.datetime "last_request_at"
   end
 
   add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
