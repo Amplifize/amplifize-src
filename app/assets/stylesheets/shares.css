@@ -5,8 +5,9 @@
 
 #conversationStarter,
 #popup_conversationStarter {
-	font-size: 20px;
-	margin-top: 15px;
+	font-size: 22px;
+	margin: 15px 5px 0 0;
+	line-height: 30px;
 }
 
 #commentThread,
@@ -24,22 +25,27 @@
 	margin: 2px;
 }
 
-.commentAuthor {
-	float: left;
-	margin-right: 10px;
-	
-	font-style: italic;
-	
-	color: #454545;
+#commentThread td {
+	font-size: 14px;	
 }
 
-tr.commentInstance:nth-child(even) {
-  background-color: rgba(0,0,0, 0.1);
+.commentAuthor {
+	margin-right: 10px;
+	font-style: italic;
+	color: #454545;
+	
+	font-size: 12px;
+
+	background-color: rgba(0,0,0, 0.1);
+
+	padding: 5px 0 5px 5px;
 }
 
 tr.commentInstance td {
 	padding-left: 10px;
 	padding-top: 10px;
+
+	max-width: 940px;
 }
 
 #toggleContentSelect,

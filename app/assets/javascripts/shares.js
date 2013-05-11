@@ -208,6 +208,7 @@ var openPost = function(shareId) {
 
 			var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
 			$("#popup_sharedBy").html(displayName);
+			$("#popup_sharedDate").html(dateFormat(current_share.created_at, "mmmm dS"));
 			$("#popup_conversationStarter").html(current_share.summary);	
 
 
@@ -235,7 +236,7 @@ var openPost = function(shareId) {
 					followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
 				}
 				var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>')
+				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied on '+dateFormat(comment.created_at, "mmmm dS")+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>')
 			}
 
 			disableOverlay();
@@ -282,6 +283,7 @@ var updateShareContent = function(shareId) {
 
 				var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
 				$("#sharedBy").html(displayName);
+				$("#sharedDate").html(dateFormat(current_share.created_at, "mmmm dS"));
 				$("#conversationStarter").html(current_share.summary);	
 
 				if (typeof(current_post.feed) != "undefined") {

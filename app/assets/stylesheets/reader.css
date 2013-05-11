@@ -232,9 +232,7 @@
 }
 
 #contentPublishDate,
-#popup_contentPublishDate
-#sharedBy,
-#popup_sharedBy {
+#popup_contentPublishDate {
 	color: #b8b8b8;
 	margin-bottom: 15px;
 	font-size: 12px;
