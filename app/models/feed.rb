@@ -152,10 +152,10 @@ class Feed < ActiveRecord::Base
       new_feed.status = Feed::FEED_STATUS_NEW
       new_feed.users = []
       new_feed.tags = []
-    new_feed.users.push(user)
-    new_feed.save
+      new_feed.users.push(user)
+      new_feed.save
     elsif user.feeds.include?(new_feed) then
-    return
+      return
     else
       new_feed.users.push(user)
       new_feed.save

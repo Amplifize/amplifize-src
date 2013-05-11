@@ -11,8 +11,5 @@ class FeedStatus < ActiveRecord::Base
         :message => message
       )
     end
-    
-    
-    
   end
 end

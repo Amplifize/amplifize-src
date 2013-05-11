@@ -227,7 +227,7 @@ var openPost = function(postId) {
 			$("#feedUnreadCount").html(--posts_unread);
 			document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
 
-			$("#popup_feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
+			$("#popup_feedTitle").html('<a href="'+current_post.feed.site_url+'" target="_blank">'+current_post.feed.title+'</a>');
 			$("#popup_contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 			if(current_post.author) {
 				$("#popup_contentAuthor").html("by "+current_post.author+" ");
@@ -277,7 +277,7 @@ var updatePostContent = function(postId) {
 					document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
 				}
 
-				$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
+				$("#feedTitle").html('<a href="'+current_post.feed.site_url+'" target="_blank">'+current_post.feed.title+'</a>');
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
 				if(current_post.author) {
 					$("#contentAuthor").html("by "+current_post.author+" ");

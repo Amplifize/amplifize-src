@@ -212,7 +212,7 @@ var openPost = function(shareId) {
 
 
 			if(current_share.post.feed) {
-				$("#popup_feedTitle").html('<a href="'+current_share.post.feed.url+'" target="_blank">'+current_share.post.feed.title+'</a>');
+				$("#popup_feedTitle").html('<a href="'+current_share.post.feed.site_url+'" target="_blank">'+current_share.post.feed.title+'</a>');
 			}
 
 			$("#popup_contentTitle").html('<p><a href="'+current_share.post.url+'" target="_blank">'+current_share.post.title+'</a></p>');
@@ -285,7 +285,7 @@ var updateShareContent = function(shareId) {
 				$("#conversationStarter").html(current_share.summary);	
 
 				if (typeof(current_post.feed) != "undefined") {
-					$("#feedTitle").html('<a href="'+current_post.feed.url+'" target="_blank">'+current_post.feed.title+'</a>');
+					$("#feedTitle").html('<a href="'+current_post.feed.site_url+'" target="_blank">'+current_post.feed.title+'</a>');
 				}
 
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
@@ -377,6 +377,9 @@ $(document).ready(function() {
 		return false;
 	});
 
+	jQuery(document).bind('keydown', 'c', function(evt) {
+		return false;
+	});
 	
 	jQuery(document).bind('keyup', 'j', function(evt) {
 		 upPost();
@@ -390,6 +393,11 @@ $(document).ready(function() {
 
 	jQuery(document).bind('keyup', 'v', function(evt) {
 		openNewWindow();
+		return false;
+	});
+
+	jQuery(document).bind('keyup', 'c', function(evt) {
+		$("#addComment-modal-content").modal("show");
 		return false;
 	});
 });

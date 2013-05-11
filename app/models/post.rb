@@ -51,7 +51,9 @@ class Post < ActiveRecord::Base
 
     if not rss_feed.nil? and not rss_feed.is_a? Fixnum then
       add_entries(rss_feed.entries, feed.id)
-      feed.title = rss_feed.title
+      feed.title = rss_feed.title.nil? ? '' : rss_feed.title
+      feed.site_url = rss_feed.link.nil? ? '' : rss_feed.link 
+      feed.description = rss_feed.description.nil? ? '' : rss_feed.description
     end
 
 
