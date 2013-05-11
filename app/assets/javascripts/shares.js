@@ -349,8 +349,8 @@ $(document).ready(function() {
 
 		var comment = data;
 		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied '+prettyDate(Date.now())+':</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>');
-		$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied '+prettyDate(Date.now())+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>');
+		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied '+prettyDate(dateFormat(new Date(), "isoDateTime",false))+':</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>');
+		$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied '+prettyDate(dateFormat(new Date(), "isoDateTime", false))+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>');
 
 		disableOverlay();
 
