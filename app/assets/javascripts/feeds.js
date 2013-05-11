@@ -200,7 +200,7 @@ var updateTitleContent = function() {
 		$("#titleList").append(
 			'<li id="post_'+posts[i]["id"]+'"> ' +
 			'<a href="#" onclick="openPost('+posts[i]["post_id"]+');return false;">'+posts[i]["post_title"]+'</a>'+
-			'<span>From '+posts[i]["feed_title"]+' published on '+dateFormat(posts[i]["published_at"], "dddd, mmmm dS, yyyy, h:MM:ss TT")+'</span></li>'
+			'<span>From '+posts[i]["feed_title"]+' published on '+dateFormat(posts[i]["published_at"], "dddd, mmmm dS, yyyy, h:MM:ss TT", false)+'</span></li>'
 		);
 	}
 	
@@ -235,7 +235,7 @@ var openPost = function(postId) {
 				$("#popup_contentAuthor").html("");
 			}
 
-			$("#popup_contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+			$("#popup_contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT", false));
 			$("#popup_contentBody").html(current_post.content);
 			$("#sharePostId").val(current_post.id);
 
@@ -284,7 +284,7 @@ var updatePostContent = function(postId) {
 				} else {
 					$("#contentAuthor").html("");
 				}
-				$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+				$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT", false));
 				$("#contentBody").html(current_post.content);
 				$("#sharePostId").val(current_post.id);
 

@@ -208,7 +208,7 @@ var openPost = function(shareId) {
 
 			var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
 			$("#popup_sharedBy").html(displayName);
-			$("#popup_sharedDate").html(dateFormat(current_share.created_at, "mmmm dS"));
+			$("#popup_sharedDate").html(dateFormat(current_share.created_at, "mmmm dS", false));
 			$("#popup_conversationStarter").html(current_share.summary);	
 
 
@@ -223,7 +223,7 @@ var openPost = function(shareId) {
 				$("#popup_contentAuthor").html("");
 			}
 
-			$("#popup_contentPublishDate").html("Written on "+dateFormat(current_share.post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+			$("#popup_contentPublishDate").html("Written on "+dateFormat(current_share.post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT", false));
 			$("#popup_contentBody").html(current_share.post.content);
 			$("#comment_share_id").val(current_share.id);
 
@@ -236,7 +236,7 @@ var openPost = function(shareId) {
 					followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
 				}
 				var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied on '+dateFormat(comment.created_at, "mmmm dS")+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>')
+				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied '+prettyDate(dateFormat(comment.created_at, "isoDateTime", false))+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>')
 			}
 
 			disableOverlay();
@@ -283,7 +283,7 @@ var updateShareContent = function(shareId) {
 
 				var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
 				$("#sharedBy").html(displayName);
-				$("#sharedDate").html(dateFormat(current_share.created_at, "mmmm dS"));
+				$("#sharedDate").html(dateFormat(current_share.created_at, "mmmm dS", false));
 				$("#conversationStarter").html(current_share.summary);	
 
 				if (typeof(current_post.feed) != "undefined") {
@@ -291,7 +291,7 @@ var updateShareContent = function(shareId) {
 				}
 
 				$("#contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');
-				$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+				$("#contentPublishDate").html("Written on "+dateFormat(current_post.published_at, "dddd, mmmm dS, yyyy, h:MM:ss TT", false));
 				
 				if(current_post.author) {
 					$("#contentAuthor").html(" by "+current_post.author+" ");
@@ -309,7 +309,7 @@ var updateShareContent = function(shareId) {
 						followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
 					}
 					var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-					$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
+					$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied '+prettyDate(dateFormat(comment.created_at, "isoDateTime", false))+': </p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
 				}
 
 				disableOverlay();
@@ -349,8 +349,8 @@ $(document).ready(function() {
 
 		var comment = data;
 		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied:</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>');
-		$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied:</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>');
+		$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied '+prettyDate(Date.now())+':</p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>');
+		$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied '+prettyDate(Date.now())+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>');
 
 		disableOverlay();
 
