@@ -399,7 +399,9 @@ $(document).ready(function() {
 	});
 
 	jQuery(document).bind('keyup', 'c', function(evt) {
-		$("#addComment-modal-content").modal("show");
-		return false;
+		if(!evt.shiftKey) {
+			$("#addComment-modal-content").modal("show");
+			return false;
+		}
 	});
 });
