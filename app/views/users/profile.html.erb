@@ -1,29 +1,31 @@
 <% content_for :stylesheets do %>
-	<%= stylesheet_link_tag "profile.css" %>
+<%= stylesheet_link_tag "profile.css" %>
 <% end %>
 
 <% content_for :javascripts do %>
-	<%= javascript_include_tag "updateProfile.js" %>
+<%= javascript_include_tag "updateProfile.js" %>
 <% end %>
 
 <%
-if Rails.env.production?
-bm_js_host = 'amplifize.com';
-bm_js_func = 'amplifize_share';
-bm_msg = 'Share on Amplifize';
-else
-bm_js_host = "#{request.host}:#{request.port}";
-bm_js_func = 'amplifize_share_dev';
-bm_msg = 'Share on Amplifize [DEV]';
-end
+ if Rails.env.production?
+    bm_js_host = 'amplifize.com';
+    bm_msg = 'Share on Amplifize';
+  else
+    bm_js_host = "#{request.host}:#{request.port}";
+    bm_msg = 'Share on Amplifize [DEV]';
+  end
 %>
 <div style="margin-bottom: 30px;">
 	<h3>Share from anywhere bookmarklet</h3>
 	<ol>
-		<li>Drag the link below onto your bookmarks bar</li>
-		<li>Share content from all over the web</li>
+		<li>
+			Drag the link below onto your bookmarks bar
+		</li>
+		<li>
+			Share content from all over the web
+		</li>
 	</ol>
-	<a class="bookmarklet" href="javascript:function <%=bm_js_func%>(){var d=document,z=d.createElement(&#039;scr&#039;+&#039;ipt&#039;),b=d.body,l=d.location;try{if(!b)throw(0);z.setAttribute(&#039;src&#039;,&#039;http://<%=bm_js_host%>/ext/share/prompt/v1/<%=@user.single_access_token%>?url=&#039;+encodeURIComponent(l.href)+&#039;&amp;ts=&#039;+(new Date().getTime()));b.appendChild(z);}catch(e){}}<%=bm_js_func%>();void(0)"><%=bm_msg%></a>
+	<a class="bookmarklet" href="javascript:(function(){if(window.amplifizeBookmarklet!==undefined){amplifizeBookmarklet();}else{document.body.appendChild(document.createElement('script')).src = 'http://<%= bm_js_host%>/ext/share/prompt/v1/<%= @user.single_access_token%>?url=&#039;+encodeURIComponent(location.href)+&#039;&amp;ts=&#039;+(new Date().getTime());}void(0);})();"><%= bm_msg%></a>
 </div>
 
 <%= render 'users/profile_form' %>
