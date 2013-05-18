@@ -399,7 +399,7 @@ $(document).ready(function() {
 	});
 
 	jQuery(document).bind('keyup', 'c', function(evt) {
-		if(!evt.shiftKey) {
+		if(!evt.ctrlKey) {
 			$("#addComment-modal-content").modal("show");
 			return false;
 		}
