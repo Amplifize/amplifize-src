@@ -104,23 +104,21 @@
 	}
 
 	function shareContent() {
-		var fetch = 1;
-		/*
-		var docContent = window.jQuery(document.body).clone().remove('script').remove('noscript').remove('iframe');
+		var fetch = 0;
+		var docContent = window.jQuery(document.body).clone().contents().remove('script').remove('noscript').remove('iframe');
 		removeHiddenNodes(docContent);
-		docContent = docContent.html();
+		docContent = encodeURIComponent(docContent.html());
 		if(150000 < docContent.length) {
 			fetch = 1;
 			docContent = '';
 		}
-		*/
 
 		var data = {
 			fetch : fetch,
 			url: encodeURIComponent(window.location),
 			comment: encodeURIComponent(window.jQuery("#amplifizeShareComment").val()),
 			title: encodeURIComponent(document.title),
-			content: encodeURIComponent('') //encodeURIComponent(docContent)
+			content: docContent
 		};
 
 		window.jQuery.ajax({
