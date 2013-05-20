@@ -15,7 +15,6 @@ class BookmarkletController < ApplicationController
   # If fetch is 1, then will retrieve text content from the
   # given URL on a delayed task
   def share
-    
     fetch = params[:fetch]
     url = params[:url]
     comment = params[:comment]
