@@ -35,10 +35,6 @@
 		})();
 	}
 
-	function ampgettitle() {
-		return document.title;
-	}
-
 	function removeNode(node) {
 		if (node != null) {
 			while (node.firstChild) {
@@ -79,11 +75,11 @@
 		return b.innerHTML;
 	}
 
-	function ampsendshare(comment, successFn, errorFn) {
+	function shareContent(comment, successFn, errorFn) {
 
 		var url = '<%=callback_protocol%><%=callback_host%>/ext/share/v1/<%=@current_user.single_access_token%>';
 		var method = 'POST';
-		var t = ampgettitle();
+		var t = document.title;
 		var c = ampgetfilteredbody();
 
 		if (c.length > 150000) {
@@ -169,12 +165,11 @@
 		var btn_container = document.createElement('div');
 		btn_container.setAttribute('style', 'text-align:center;padding:5px;');
 
-		var submit_btn = document.createElement('button');
-		submit_btn.setAttribute("style", "margin-right:10px;height: 30px;");
+var submit_btn = document.createElement('button');
+		submit_btn.setAttribute("style", "margin-right:10px;height: 30px;color: #fff; padding: 5px; width: 100px; font-size: 15px; background-color: #3AAADB; border-radius: 12px;-moz-border-radius: 12px;-webkit-border-radius: 12px; border: 1px solid #3AAADB;");
 
 		var cancel_btn = document.createElement('button');
-		cancel_btn.setAttribute("style", "height:30px;");
-
+		cancel_btn.setAttribute("style", "height: 30px;color: #fff; padding: 5px; width: 100px; font-size: 15px; background-color: #7b7165; border-radius: 12px;-moz-border-radius: 12px;-webkit-border-radius: 12px; border: 1px solid #7b7165;");
 		btn_container.appendChild(submit_btn);
 		btn_container.appendChild(cancel_btn);
 
@@ -201,7 +196,7 @@
 		submit_btn.onclick = function() {
 			header_container.innerHTML = 'Sharing...';
 
-			ampsendshare(ta.value, successFn, errorFn);
+			shareContent(ta.value, successFn, errorFn);
 
 			label_container.style.display = 'none';
 			ta.style.display = 'none';
