@@ -1,0 +1,19 @@
+.who {
+	
+}
+
+.about {
+	font-size: 15px;
+}
+
+.why {
+	font-style: italic;
+	font-size: 13px;
+}
+
+.teamMember {
+	float:left;
+	
+	width: 400px;
+	margin-right: 20px;
+}

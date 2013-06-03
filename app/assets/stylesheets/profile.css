@@ -13,6 +13,9 @@
 .bookmarklet,
 .bookmarklet:visited,
 .bookmarklet:hover {
+	display: block;
+	margin-top: 20px;
+	
 	background-color: rgba(0,0,0, 0.6);
 	border-radius: 10px;
 

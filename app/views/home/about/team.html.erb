@@ -1,3 +1,28 @@
-<h3 style="margin-bottom: 20px;">Say hello to the Amplifize team</h3>
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "team.css" %>
+<% end %>
 
-<p>Coming soon :-)</p>
+<h2 style="margin-bottom: 20px;">Meet the team</h2>
+
+<%= image_tag "team/team.jpg", :alt => "amplifize team", :style => "margin-left: 330px;"%>
+
+<div class="teamMember">
+	<h3 class="who">Melih Onvural</h3>
+	<div class="about">
+		<p>Melih is a builder.</p>
+		<p>He built websites in high school; he built soccer teams in college; and now he builds products.</p>
+		<p>Melih’s first product was the OpenTok platform that has powered face-to-face video for over 75,000 partners.</p>
+		<p>And now, as a founder of Big Fish, Big Pond, Melih wants to build products that help people organize their content, and their time, more efficiently.</p>
+	</div>
+	<p class="why">Why Amplifize? &mdash; "Because I love reading, and I love discussion, and building the platform that made both possible means I get the best of both"</p>
+</div>
+
+<div class="teamMember">
+	<h3 class="who">James Kellermann</h3>
+	<div class="about">
+		<p>James, our resident East Coaster, is an everyman of sorts.</p> 
+		<p>From rescuing kittens in tall trees to spearheading the revolution to save the healthcare industry, James dabbles in just about everything. In his spare time, James has a bit of the running bug, ...what the hell are you running from again?... and is an avid college basketball fan. At Amplifize, you’ll often find him keeping the wheels on the cart. From QA’ing new releases, to marketing, to blogging about the happenings in the Amplifize world, James is here to lend a hand to your Amplifize experience. Drop him a line at <a href="mailto:james@amplifize.com">james@amplifize.com</a>.</p> 
+		<p>(Oh, and ladies, James enjoys long walks on the beach and candle lit dinners.... your hero awaits.)</p>
+	</div>
+	<p class="why">Why Amplifize? &mdash; "Do you ever have those conversations where the dialog on seemingly every topic is so rich and vibrant that you just can’t get enough? Yeah. That’s Amplifize. It pulls you in.”</p>
+</div>

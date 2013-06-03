@@ -6,26 +6,6 @@
 <%= javascript_include_tag "updateProfile.js" %>
 <% end %>
 
-<%
- if Rails.env.production?
-    bm_js_host = 'amplifize.com';
-    bm_msg = 'Share on Amplifize';
-  else
-    bm_js_host = "#{request.host}:#{request.port}";
-    bm_msg = 'Share on Amplifize [DEV]';
-  end
-%>
-<div style="margin-bottom: 30px;">
-	<h3>Share from anywhere bookmarklet</h3>
-	<ol>
-		<li>
-			Drag the link below onto your bookmarks bar
-		</li>
-		<li>
-			Share content from all over the web
-		</li>
-	</ol>
-	<a class="bookmarklet" href="javascript:(function(){if(window.amplifizeBookmarklet!==undefined){amplifizeBookmarklet();}else{document.body.appendChild(document.createElement('script')).src = 'http://<%= bm_js_host%>/ext/share/prompt/v1/<%= @user.single_access_token%>?url=&#039;+encodeURIComponent(location.href)+&#039;&amp;ts=&#039;+(new Date().getTime());}void(0);})();"><%= bm_msg%></a>
-</div>
+<%= render 'bookmarklet/install' %>
 
 <%= render 'users/profile_form' %>

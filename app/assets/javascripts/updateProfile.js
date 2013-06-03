@@ -32,5 +32,3 @@ function clearMessages()
 	$('.updateProfileFieldError').html("");
 	$('#updateProfileStatusMessage').html("");
 }
-
-

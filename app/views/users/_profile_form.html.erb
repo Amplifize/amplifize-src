@@ -1,4 +1,4 @@
-<%= form_for(@user, :remote => true, :html => { :id => "updateProfileForm" }, :url => { :action => "update" }) do |f| %>
+<%= form_for(@user, :remote => true, :html => { :id => "updateProfileForm" }) do |f| %>
   <div class="field">
     <%= f.label :email %><%= f.email_field :email %> <span id="email_error" class="updateProfileFieldError"></span>
   </div>
