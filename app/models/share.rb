@@ -18,7 +18,9 @@ class Share < ActiveRecord::Base
     ShareUser.create(
       :share_id     => share.id,
       :user_id      => user_id,
-      :read_state   => 0
+      :read_state   => 0,
+      :last_viewed_at => Time.now.utc,
+      :last_updated_at => Time.now.utc
     )
 
     followers = Follow.find_all_by_follows(user_id)
@@ -29,7 +31,9 @@ class Share < ActiveRecord::Base
         ShareUser.create(
           :share_id      => share.id,
           :user_id      => follower.user_id,
-          :read_state   => 1
+          :read_state   => 1,
+          :last_viewed_at => Time.now.utc,
+          :last_updated_at => Time.now.utc
         )
       end
     end
@@ -49,5 +53,4 @@ class Share < ActiveRecord::Base
     
     add(summary, post.id, user_id)
   end
-
 end

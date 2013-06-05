@@ -32,15 +32,4 @@ class SharesController < ApplicationController
       )}
     end
   end
-
-  def byFollows
-    shares = current_user.shares.where("shares.user_id = ?", params[:followsId]).unread.oldest_to_newest
-    if shares.nil? then
-      shares = []
-    end
-    
-    respond_to do |format|
-      format.js {render :json => shares.map(&:id).to_json}
-    end
-  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130511054840) do
+ActiveRecord::Schema.define(:version => 20130603064141) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(:version => 20130511054840) do
     t.integer  "read_state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_update_at"
+    t.datetime "last_viewed_at"
   end
 
   create_table "shares", :force => true do |t|

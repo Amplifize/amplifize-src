@@ -7,6 +7,7 @@ class ShareUsersController < ApplicationController
     
     share_user = ShareUser.find_by_share_id_and_user_id(share_id, current_user.id)
     share_user.read_state = new_state
+    share_user.last_viewed_at = Time.now.utc
     share_user.save
     
     respond_to do |format|

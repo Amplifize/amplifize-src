@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   autocomplete :tag, :name, :full => true
 
   before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:hompage, :content, :conversations, :people, :update, :search, :profile]
+  before_filter :require_user, :only => [:homepage, :content, :conversations, :people, :update, :search, :profile]
 
   def new
     @user = User.new
