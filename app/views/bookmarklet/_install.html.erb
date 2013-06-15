@@ -13,14 +13,15 @@
 	<p>Sometimes you're out on the web, and you run into an article that you really want to share with your amplifize community. Install this bookmarklet so you can start the conversation right away. How?</p>
 	<ol>
 		<li>
-			Drag the link below into your browser's bookmarks bar
-		</li>
-		<li>
-			Start sharing content from all over the web
+			Drag the "Share on amplifize" button below into your browser's bookmarks bar
 		</li>
 		<li>
 			That's it!
 		</li>
+		<li>
+			Navigate to another site, and start sharing content from all over the web
+		</li>
+
 	</ol>
 	<a class="bookmarklet" href="javascript:(function(){if(window.amplifizeBookmarklet!==undefined){amplifizeBookmarklet();}else{document.body.appendChild(document.createElement('script')).src = 'http://<%= bm_js_host%>/ext/share/prompt/v1/<%= @user.single_access_token%>?url=&#039;+encodeURIComponent(location.href)+&#039;&amp;ts=&#039;+(new Date().getTime());}void(0);})();"><%= bm_msg%></a>
 </div>
