@@ -1,20 +1,44 @@
-<h2>Frequently Asked Questions</h2>
-<ul>
-	<li class="question">What is Amplifize?</li>
-	<li class="answer">Amplifize is simple. It’s about you, the content you love, and the friends you want to share it with.  We give good content a voice.</li>
-	
-	<li class="question">Well that’s nice, but what is Amplifize, really?</li>
-	<li class="answer">Amplifize is currently structured around sharing content from RSS feeds. Feeds that you subscribe to can be shared and commented on by you and your friends, without getting lost in the noise of the web.</li>
-	
-	<li class="question">So what if I want to share other content? Videos, articles, or something other then RSS feeds?</li>
-	<li class="answer">We hear you, and we’re working on it.</li>
-	
-	<li class="question">Ok, so now that I know what Amplifize is, what do I do?</li>
-	<li class="answer">First, <%= link_to "sign up", :login %>. You do need to be a verified user to use the service. (Hey, we are trying to weed out the unwanted stuff, so we know you’ll understand.) Next, add some feeds. As of now, we are only allowing sharing of RSS feeds. Once you sign up for your favorite feeds, start sharing.</li>
-	
-	<li class="question">How do I add a feed on Amplifize?</li>
-	<li class="answer">Adding a feed is easy, but first you have to find a feed to add. If you don't have one to start off with, then consider adding the Amplifize Blog to your account. Once you’ve logged in, click on "Add Feed" in the left hand navigation. A dialog box will be pop up in the middle of the screen, where you can paste your favorite feed link (or http://www.amplifize.com/blog/feed/ if you don't have anything to add) into the box. <em>Note, be sure that you use an RSS feed link, as a standard website link wont work.</em> For more helpful hints, check out this <a href="http://www.amplifize.com/blog/2012/06/taggingyourfeed/" target="_blank">blog post</a> on adding a feed.</li>
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "faq.css" %>
+<% end %>
 
-	<li class="question">What are tags? Why should I use them?</li>
-	<li class="answer">You can now "tag" your feeds. Tagging allows you to keep track of your favorite feeds by using key words to lump a bunch of your feeds together. Then, on the main feeds page, you can select a tag, and only see posts from those feeds. Eventually, your followers will be able to subscribe to just the tags they want to follow.</li>	
-</ul>
+<h2>amplifize frequently asked questions</h2>
+<h3>The essential 5 things to know</h3>
+<p>amplifize is fun to use, but we understand that a quick crash course might be in order for those who are new. We hope these "essential" 5 steps help you get through the basics. If you need more help, then drop us a line in our <a href="mailto:tickets@amplifize.uservoice.com">support queue</a>, and we’ll be happy to help out.</p>
+<ol>
+	<li>
+		<p class="question">What is amplifize?</p>
+		<p class="answer">amplifize is a platform centered around the conversations you have with your friends and family about the content you find on the Internet. We believe that good content deserves to be discovered, shared, and discussed. amplifize gives you a vehicle to do just that, without getting lost in a sea of comments and trolls. </p>
+	</li>
+	<li>
+		<p class="question">What do you mean by content?</p>
+		<p class="answer">Content is the news articles, recipes, videos, blog posts or any other find on the Internet.</p>
+	</li>
+	<li>
+		<p class="question">How do I add content to my amplifize account?</p>
+		<p class="answer">
+			<p>Adding content to your feed reader is simple. First, create an account on amplifize, by clicking "Register" on the home page.</p>
+			<%= image_tag "homepage/faq/register.png" %>
+			<p>Once you've registered, add your favorite feeds by clicking the 'add feed' link on the home page:</p>
+			<%= image_tag "homepage/faq/addFeed.png" %>
+			<p>Fill out the URL of the website you want to subscribe to, and use the tags field to organize the content. As an example, if you put in the CNN website, you might put <em>news</em> as the tag. You'll use tags later to help find content.</p>
+		</p>
+	</li>
+	<li>
+		<p class="question">How do I add friends to have conversations with?</p>
+		<p class="answer">
+			<p>Adding great content is only half the fun of amplifize. What’s better is <em>sharing</em> this content with your friends and family. To do so, click the "People" link in the top navigation.</p>
+			<%= image_tag "homepage/faq/inviteFriends.png" %>
+			<p>You'll land on the page pictured in the image above. If you are looking for someone already on amplifize, then type in their email address into the form on the left. If you are inviting some new friends, you can invite them straight from amplifize, by using the invite tool on the right.</p>
+		</p>
+	</li>
+	<li>
+		<p class="question">How do I start a conversation?</p>
+		<p class="answer">
+			<p>Starting a conversation is quick and easy.</p> 
+			<p>Once you’ve found something you want to share, you’ll want to click on the "share" button. It’s the "open letter" button in the top right:</p>
+			<%= image_tag "homepage/faq/share.png" %>
+			<p>Add a comment about the content to get the conversation started, sit back, and let your amplifize community join in the fun.</p>
+		</p>
+	</li>
+</ol>
