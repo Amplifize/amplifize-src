@@ -201,10 +201,13 @@ var openPost = function(shareId) {
 				}
 			}
 
-			setReadState(0);
+			if(1 == shares[position]["read_state"]) {
+				shares[position]["read_state"] = 0;
+				setReadState(0);
 
-			$("#shareUnreadCount").html(--shares_unread);
-			document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
+				$("#shareUnreadCount").html(--shares_unread);
+				document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
+			}
 
 			var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
 			$("#popup_sharedBy").html(displayName);
