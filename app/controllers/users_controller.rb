@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   end
 
   def create
+    if(params[:captcha] != "4") 
+      redirect_to :new_user
+      return
+    end
+
     @user = User.new(params[:user])
     @invite_id = params[:invite_id]
 
@@ -21,7 +26,7 @@ class UsersController < ApplicationController
         UserSession.create(@user)
         format.html { redirect_to(:homepage, :notice => 'Welcome to amplifize') }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(:new_user, :notice => 'Error signing up.') }
       end
     end  
   end

@@ -24,7 +24,11 @@
   </div>
   <div class="field">
       <%= f.label :password_confirmation %><%= f.password_field :password_confirmation %>
-    </div>
+  </div>
+  <div class="field">
+  	<%=f.label "What is 2 + 2?"%>
+	<input id="captcha" type="text" size="30" name="captcha" />
+  </div>
   <div class="actions">
     <%= f.submit :value => 'Register new user' %>
   </div>

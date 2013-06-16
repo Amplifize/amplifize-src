@@ -1,3 +1,11 @@
-<h2>Register to get started with Amplifize</h2>
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "register.css" %>
+<% end %>
+
+<h2>Register to get started with amplifize</h2>
+
+<% if flash[:notice] %>
+    <div id="notice"><%= flash[:notice] %> Did you already sign up and <%= link_to "forget your password?", :new_password_reset  %></div>
+<% end %>
 
 <%= render "form" %>
