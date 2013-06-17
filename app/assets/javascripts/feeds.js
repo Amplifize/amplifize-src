@@ -216,19 +216,20 @@ var openPost = function(postId) {
 
 			current_post = data;
 			
-			if(0 == position) {
-				for(var i = 0; i < posts.length; i++) {
-					if(postId == posts[i]["post_id"]) {
-						position = i;
-						break;
-					}
+			for(var i = 0; i < posts.length; i++) {
+				if(postId == posts[i]["post_id"]) {
+					position = i;
+					break;
 				}
 			}
 
-			setReadState(0);
+			if(1 == posts[position]["read_state"]) {
+				posts[position]["read_state"] = 0;
+				setReadState(0);
 
-			$("#feedUnreadCount").html(--posts_unread);
-			document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
+				$("#feedUnreadCount").html(--posts_unread);
+				document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
+			}
 
 			$("#popup_feedTitle").html('<a href="'+current_post.feed.site_url+'" target="_blank">'+current_post.feed.title+'</a>');
 			$("#popup_contentTitle").html('<p><a href="'+current_post.url+'" target="_blank">'+current_post.title+'</a></p>');

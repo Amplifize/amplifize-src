@@ -194,13 +194,11 @@ var openPost = function(shareId) {
 			//empty out comment field on new post
 			$('#comment_comment_text').val('');
 			
-			current_share = data;
-			if(0 == position) {
-				for(var i = 0; i < shares.length; i++) {
-					if(shareId == shares[i]["share_id"]) {
-						position = i;
-						break;
-					}
+			current_share = data;			
+			for(var i = 0; i < shares.length; i++) {
+				if(shareId == shares[i]["share_id"]) {
+					position = i;
+					break;
 				}
 			}
 
