@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Amplifize | Great conversation goes best with great content</title>
+	<%= stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Roboto:400,700,100", "http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700", "jquery.labels", "onboarding" %>
+	<%= yield :stylesheets %>
+	<%= javascript_include_tag "jquery.min", "jquery_ujs", "jquery.labels", "onboarding.js" %>
+	<%= yield :javascripts %>
+	<script type="text/javascript">
+		$.ajaxSettings.dataType = "json";
+  	</script>
+  	<%= csrf_meta_tag %>
+</head>
+<body>
+	<header class="navbar-fixed-top">
+		<div class="navbar">
+	    	<ul class="nav">
+	    		<li class="active logo"><h1><a href="/">amplifize</a></h1></li>
+	    	</ul>
+	        <ul class="nav pull-right">
+				<li><%= link_to "Front page", :homepage %></li>
+				<li><%= link_to "Log out", :logout %></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div> 
+	</header>
+	<div id="subNav">
+		<div id="subNavContainer">
+			<div id="importStep" class="onboardingStepDiv firstStep">
+				<a href="/onboarding/import">
+					<div class="stepNumber">1</div>
+					<div class="stepText">Find feeds</div>
+				</a>
+			</div>
+			<div id="findFriendsStep" class="onboardingStepDiv">
+				<a href="/onboarding/friends">
+					<div class="stepNumber">2</div>
+					<div class="stepText">Find friends</div>
+				</a>				
+			</div>
+			<div id="setupProfileStep" class="onboardingStepDiv">
+				<a href="/onboarding/profile">
+					<div class="stepNumber">3</div>
+					<div class="stepText">Setup profile</div>
+				</a>
+			</div>
+			<div id="theRestStep" class="onboardingStepDiv lastStep">
+				<a href="/onboarding/the-rest">
+					<div class="stepNumber">4</div>
+					<div class="stepText">All the rest</div>
+				</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="content">
+		<%= yield %>
+		<a id="skipSetupLink" style="display:block; float:right;" href="/my/homepage" onclick="skipOnboarding();">Skip setup</a>
+	  	<div class="clear"></div>
+	</div>
+	<%= render 'general/footer' %>
+	<div id="overlay">
+	    <div>
+	          <p>Loading</p>
+	          <%= image_tag "reader/loader.gif" %>
+	     </div>
+	</div>
+	<div class="clear"></div>
+</body>
+</html>

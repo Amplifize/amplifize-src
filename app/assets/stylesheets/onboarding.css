@@ -1,0 +1,89 @@
+h2 {
+	border-bottom: 1px solid #333;
+	margin-bottom: 20px;
+}
+
+#subNav {
+  background: #072229 url(/assets/homepage/banner-background.png) no-repeat fixed 0px 50px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  
+  color: #fff;
+}
+
+#subNavContainer {
+  width: 940px;
+  margin: 0 auto;
+}
+
+.onboardingStepDiv {
+	float: left;
+	margin-right: 30px;
+	width: 200px;
+	height: 100px;
+	text-align: center;
+}
+
+.onboardingStepDiv a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+.firstStep {
+	margin-left: 20px;
+}
+
+.stepNumber,
+.currentStep {
+	border-radius: 50px;
+	height: 50px;
+	width: 50px;
+	
+	line-height: 48px;
+	
+	margin: 10px auto;
+	
+	font-size: 18px;
+	font-family: "Roboto", sans-serif;
+	font-weight: 100;
+}
+
+.stepNumber {
+	background-color: #fff;
+	color: #0480BE;
+}
+
+.stepNumber:hover,
+.activeStep {
+	background-color:#0480BE;
+	color: #fff;
+}
+
+.currentStep {
+	background-color:#0480BE; 
+	color: #fff;	
+}
+
+.activeStep .stepText {
+	color: #fff;
+}
+
+#overlay {
+     visibility: hidden;
+     position: fixed;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 5000;
+     background-image: url("/assets/reader/overlay.png");
+}
+
+#overlay div {
+     width:300px;
+     margin: 100px auto;
+     padding:15px;
+     text-align:center;
+     color: #fff;
+}

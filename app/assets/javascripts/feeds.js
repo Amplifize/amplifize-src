@@ -211,6 +211,9 @@ var openPost = function(postId) {
 	$.ajax({
 		url: "/posts/"+postId,
 		success: function(data, textStatus, jqXHR) {
+			//Empty out the comment box when new content is loaded
+			$('#summary').val('');
+
 			current_post = data;
 			
 			if(0 == position) {
@@ -261,9 +264,12 @@ var updatePostContent = function(postId) {
 		$("#contentStateOptions").css("visibility", "visible");
 		$("#contentOptions").css("visibility", "visible");
 
+		//empty share comment on new post
+		$('#summary').val('');
+
 		$.ajax({
 			url: "/posts/"+postId["post_id"],
-			success: function(data, textStatus, jqXHR) {
+			success: function(data, textStatus, jqXHR) {				
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				$("#contentMetadata").css("visibility", "visible").css("display", "block");
 				
@@ -355,7 +361,6 @@ $(document).ready(function() {
 	});
 
 	$('#addShare-modal-content').bind('show', function () {
-	  $('#summary').val('');
 	  setTimeout(function(){$("#summary").focus();}, 250);
 	});
 

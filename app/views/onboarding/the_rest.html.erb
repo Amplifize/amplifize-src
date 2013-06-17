@@ -1,0 +1,52 @@
+<% content_for :stylesheets do %>
+<style>
+	.bookmarklet,
+	.bookmarklet:visited,
+	.bookmarklet:hover {
+		display: block;
+		
+		margin-top: 20px;
+		
+		background-color: rgba(0,0,0, 0.6);
+		border-radius: 10px;
+	
+		padding: 10px;
+	
+		width: 200px;
+	
+		text-align:center;
+	
+		color: #fff;
+		text-decoration:none;
+	}
+</style>
+<% end %>
+
+<% content_for :javascripts do %>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#theRestStep").addClass("activeStep");
+			$("#skipSetupLink").css("visibility", "hidden");
+		});
+
+		function nextStepPass() {
+			mixpanel.track("Skipped profile setup");
+		}
+
+		function nextStepSuccess() {
+			mixpanel.track("Setup profile");
+		}
+
+		function nextStep() {
+			//TODO: Log that they hopped into the application
+		}
+	</script>
+<% end %>
+
+<h2>Everything else you should get setup</h2>
+
+<%= render 'bookmarklet/install' %>
+
+<hr/>
+
+<a href="/my/homepage" style="float:right;text-align:center; color: #eee; padding: 5px; margin-top: 7px; width: 150px; font-size: 14px; background-color: #3AAADB; border-radius: 12px;-moz-border-radius: 12px;-webkit-border-radius: 12px; border: 1px solid #3AAADB;">Start using amplifize</a>

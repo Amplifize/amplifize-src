@@ -1,0 +1,49 @@
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "onboarding/onboardingFindFriends.css" %>
+<% end %>
+
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "bootstrap-modal", "jquery.labels", "jquery-ui-1.10.0.custom.min", "autocomplete-rails", "people" %>
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			$("#findFriendsStep").addClass("activeStep");
+		});
+		
+		function nextStep() {
+			//TODO: Log that user moved on to "setup profile" step
+		}
+	
+	
+	</script>	
+<% end %>
+<h2>Build your amplifize community <a style="float:right; font-size: 15px; font-weight: normal; display:block;" href="/onboarding/profile" onclick="nextStep();">Next step</a></h2>
+<div>
+	<div id="findFormDiv" class="peopleForm">
+		<div id="findFriends-form">
+			<h3>Find people to follow</h3>
+			<p>Find the people you know on amplifize by entering their email in the form below.</p>
+			<%= render "users/search_form" %>
+		</div>
+		<div id="findFriends-response" class="hide">
+			<p id="userSearchResults">Results<p>
+			<div id="emptyUserSearchResult"></div>
+			<div id="userSearchResult"></div>
+		</div>
+	</div>
+	<div id="orDiv" class="peopleForm">
+		<span class="orCircle">or</span>
+	</div>
+	<div id="emailDiv" class="peopleForm">
+		<div id="inviteFriends-form">
+			<h3>Invite friends to join amplifize</h3>
+			<p>Invite others to start sharing on amplifize by entering their email below.</p>
+			<%= render "users/invite_form" %>
+		</div>
+		<div id="inviteFriends-response" class="hide">
+			<p>Done! Your friends have been invited.</p>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+

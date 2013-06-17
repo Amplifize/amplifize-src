@@ -191,6 +191,9 @@ var openPost = function(shareId) {
 	$.ajax({
 		url: "/shares/"+shareId,
 		success: function(data, textStatus, jqXHR) {
+			//empty out comment field on new post
+			$('#comment_comment_text').val('');
+			
 			current_share = data;
 			if(0 == position) {
 				for(var i = 0; i < shares.length; i++) {
@@ -265,6 +268,9 @@ var updateShareContent = function(shareId) {
 		$("#contentOptions").css("visibility", "visible");
 		$("#shareInfo").css("visibility", "visible").css("display", "block");
 		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
+		
+		//empty out comment field when I move to new content
+		$('#comment_comment_text').val('');
 
 		enableOverlay();
 		$.ajax({
@@ -334,7 +340,6 @@ $(document).ready(function() {
 	updateSharesArray();
 
 	$('#addComment-modal-content').bind('show', function () {
-	  $('#comment_comment_text').val('');
 	  setTimeout(function(){$("#comment_comment_text").focus();}, 250);
 	});
 
@@ -348,7 +353,7 @@ $(document).ready(function() {
 
 	$('form#new_comment').bind("ajax:success", function(status, data, xhr) {
 		$("#addComment-modal-content").modal("hide");
-		$("#comment_text").val('');
+		$("#comment_comment_text").val('');
 
 		var comment = data;
 		var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;

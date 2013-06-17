@@ -1,0 +1,60 @@
+<% content_for :stylesheets do %>
+
+<% end %>
+
+<% content_for :javascripts do %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#setupProfileStep").addClass("activeStep");
+
+		$('form#updateDisplayname').bind("submit", function() {
+			enableOverlay();
+		});
+
+		$('form#updateDisplayname').bind("ajax:success", function(status, data, xhr) {
+			disableOverlay();
+			$("#nextStepLink").css("visibility", "hidden");
+			$("#updateDisplayname").css("visibility", "hidden").css("display", "none");
+
+			$("#displayname").html($("#displayNameField").val());
+			$("#success").removeClass("hide");
+		});
+
+		$('form#updateDisplayname').bind("ajax:failure", function(xhr, status, error) {
+			//TODO: Do something here
+		});
+	});
+
+	function skipOnboarding() {
+		mixpanel.track("Skipped onboarding - Setup profile")
+	}
+
+	function nextStepPass() {
+		mixpanel.track("Skipped profile setup");
+	}
+
+	function nextStepSuccess() {
+		mixpanel.track("Setup profile");
+	}
+</script>
+
+
+<% end %>
+
+<h2>Setup your amplifize profile <a id="nextStepLink" style="font-size: 15px; font-weight: normal;float:right;" href="/onboarding/the-rest" onclick="nextStepPass();">Next step</a></h2>
+
+<form id="updateDisplayname" method="PUT" data-remote="true" action="/users/<%= @user.id %>">
+	<p>Pick a display name for your friends to see when you share content and comment on conversations</p>
+	<div class="formField">
+    	<label class="input" style="float:left;">
+    		<span>Display name</span>
+    		<input type="text" name="user[display_name]" id="displayNameField" />
+    	</label>
+    	<input type="submit" style="float: left; color: #fff; padding: 5px; margin-top: 7px; margin-left: 20px; width: 150px; font-size: 12px; background-color: #3AAADB; border-radius: 12px;-moz-border-radius: 12px;-webkit-border-radius: 12px; border: 1px solid #3AAADB;" value="Set display name" />
+    	<div class="clear"></div>
+  	</div>
+</form>
+
+<div id="success" class="hide">
+	<p style="font-size: 14px;">You've set your display name to be &mdash; <span id="displayname"></span>. <a id="nextStepLink" style="font-weight: normal; display:inline-block;" href="/onboarding/the-rest" onclick="nextStepSuccess();">Finish the rest of onboarding</a></p> 
+</div>
