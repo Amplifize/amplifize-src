@@ -29,16 +29,8 @@
 			$("#skipSetupLink").css("visibility", "hidden");
 		});
 
-		function nextStepPass() {
-			mixpanel.track("Skipped profile setup");
-		}
-
 		function nextStepSuccess() {
-			mixpanel.track("Setup profile");
-		}
-
-		function nextStep() {
-			//TODO: Log that they hopped into the application
+			mixpanel.track("Setup the rest");
 		}
 	</script>
 <% end %>
@@ -49,4 +41,4 @@
 
 <hr/>
 
-<a href="/my/homepage" style="float:right;text-align:center; color: #eee; padding: 5px; margin-top: 7px; width: 150px; font-size: 14px; background-color: #3AAADB; border-radius: 12px;-moz-border-radius: 12px;-webkit-border-radius: 12px; border: 1px solid #3AAADB;">Start using amplifize</a>
+<a href="/my/homepage" onclick="nextStepSuccess();" style="float:right;text-align:center; color: #eee; padding: 5px; margin-top: 7px; width: 150px; font-size: 14px; background-color: #3AAADB; border-radius: 12px;-moz-border-radius: 12px;-webkit-border-radius: 12px; border: 1px solid #3AAADB;">Start using amplifize</a>

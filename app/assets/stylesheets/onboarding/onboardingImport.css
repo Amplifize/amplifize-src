@@ -1,0 +1,17 @@
+#findFeedsSearchBox {
+	height: 300px;
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 10px;
+	border-bottom: 1px solid #202020;
+}
+
+select {
+	min-height: 275px;
+}
+
+.findFeedsField {
+	float: left;
+	width: 300px;
+}
+

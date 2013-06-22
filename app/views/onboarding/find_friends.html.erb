@@ -10,14 +10,17 @@
 			$("#findFriendsStep").addClass("activeStep");
 		});
 		
-		function nextStep() {
-			//TODO: Log that user moved on to "setup profile" step
+		function skipOnboarding() {
+			mixpanel.track("Skipped onboarding - Find friends")
 		}
-	
-	
+
+		function nextStep() {
+			mixpanel.track("Find friends finished");
+		}
 	</script>	
 <% end %>
 <h2>Build your amplifize community <a style="float:right; font-size: 15px; font-weight: normal; display:block;" href="/onboarding/profile" onclick="nextStep();">Next step</a></h2>
+<p style="margin-bottom: 20px;">Use the forms below to find, or invite, friends to amplifize. When you're finished, click the <em>Next step</em> link on the right side above.</p>
 <div>
 	<div id="findFormDiv" class="peopleForm">
 		<div id="findFriends-form">

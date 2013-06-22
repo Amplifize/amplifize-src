@@ -1,0 +1,103 @@
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "onboarding/onboardingImport.css", "jquery.labels", "jquery-ui-1.10.0.custom" %>
+<% end %>
+
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "bootstrap-modal", "jquery.labels", "jquery-ui-1.10.0.custom.min", "autocomplete-rails" %>
+	<script type="text/javascript">
+		var current_feed = undefined;
+	
+		$(document).ready(function() {
+			$("#importStep").addClass("activeStep");
+		});
+
+		function skipOnboarding() {
+			mixpanel.track("Skipped onboarding - Import feed")
+		}
+
+		function nextStepSuccess() {
+			mixpanel.track("Import feed finished");
+		}
+
+		function tagSelected(tagName) {
+			$.ajax({
+				url: "/tags/"+tagName+"/feeds",
+				success: function(data, textStatus, jqXHR) {
+					$("#feeds option").remove();
+					for(var i=0; i < data.length; i++) {
+						var feed = data[i];
+						var html = '<option onclick="feedSelected('+feed["id"]+')" value="'+feed["id"]+'">'+feed["title"]+'</option>';
+						$("#feeds").append(html);
+						
+					}
+				},
+				error: function(xhr, text, error) {
+				
+				},
+				dataType: "json"
+			});
+		}
+
+		function feedSelected(feedId) {
+			$.ajax({
+				url: "/feeds/"+feedId,
+				success: function(data, textStatus, jqXHR) {
+					current_feed = data;
+					$("#feedTitle").html(data["title"]);
+					$("#feedSummary").html(data["description"]);
+					$("#feedDescription").removeClass("hide");
+				},
+				error: function(xhr, text, error) {
+				
+				},
+				dataType: "json"
+			})	
+		}
+	</script>	
+<% end %>
+
+<h2>Find feeds to follow <a style="font-size: 15px; font-weight: normal; display:block; float:right;" href="/onboarding/friends" onclick="nextStep();">Next step</a></h2>
+<div id="findFeedsSearchBox">
+	<div class="findFeedsField">
+		<label>Feed tags</label>
+		<select id="feedTag" multiple="multiple">
+			<% @tags.each do |tag| %>
+			<option onclick="tagSelected('<%= tag.name %>')" value="<%= tag.name %>"><%= tag.name %></option>
+			<% end %>
+		</select>
+	</div>
+	<div class="findFeedsField">
+		<label>Feeds</label>
+		<select id="feeds" multiple="multiple">
+			<option value="placeholder">Select a tag to find new feeds</option>
+		</select>
+	</div>
+	<div id="feedDescription" class="findFeedsField hide">
+		<h3 id="feedTitle"></h3>
+		<p id="feedSummary"></p>
+		<a id="subscribeLink" href="#" onclick="subscribeToFeed();return false;">Subscribe</a>
+	</div>
+	<div class="clear"></div>
+</div>
+<p>Or import your feeds from <%= link_to(import_google_path) do %>Google Reader<% end %> or an <a href="#importFile-modal" data-toggle="modal" onclick="return false;">OPML file</a></p>
+
+<div id="importFile-modal" class="modal hide fade">
+    <div class="modal-header">
+    	<h3>Import from an OPML file</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+		<p>Export your feeds from other readers as an OPML file, and upload it here.</p>
+		<%= form_for :import, :url => :import_opml, :html => {:multipart => true, :id => "importForm"} do |f| %>
+			<div class="formField">
+    			<label class="input">
+    				<span>OPML file</span>
+    				<%= f.file_field :opml_file %>
+    			</label>
+			</div>
+			<div class="formField">
+				<%= f.submit "Import" %>
+			</div>
+		<% end %>
+    </div>
+</div>

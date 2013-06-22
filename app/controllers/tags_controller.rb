@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_filter :require_user
+
   def create
     tags = params[:tag][:name].squish().split(",")
     return_tags = Hash.new
@@ -20,6 +22,14 @@ class TagsController < ApplicationController
     
     respond_to do |format|
       format.js { render :json => '{"success": true}' }
+    end
+  end
+  
+  def get_feeds
+    feeds = Feed.joins(:tags).where("tags.name = ?", params[:tag_name]).uniq
+    
+    respond_to do |format|
+      format.json { render :json => feeds }
     end
   end
 end

@@ -22,6 +22,12 @@ class FeedsController < ApplicationController
     end
   end
 
+  def show
+    respond_to do |format|
+      format.js { render :json => Feed.find_by_id(params[:id])}
+    end
+  end
+
   def manage
     @feeds = current_user.feeds.alphabetical
     @tags = current_user.tags

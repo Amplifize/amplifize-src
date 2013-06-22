@@ -4,7 +4,7 @@ class OnboardingController < ApplicationController
   before_filter :require_user
 
   def import
-    
+    @tags = Tag.all.uniq{|tag| tag.name}
   end
 
   def find_friends
