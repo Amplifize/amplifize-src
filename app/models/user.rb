@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
 
   def deliver_password_reset_instructions!  
     reset_perishable_token!  
-    Mailer.delay.forgot_password_email(self)  
+    Mailer.delay(:queue => 'mail').forgot_password_email(self)  
   end  
 
 end

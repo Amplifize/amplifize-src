@@ -16,7 +16,7 @@ class Invite < ActiveRecord::Base
         invite.message = message
         invite.save
 
-        Mailer.delay.invite_friend_email(invite)
+        Mailer.delay(:queue => 'mail').invite_friend_email(invite)
       else
       # User already exists.  Automatically follow
         Follow.follow_user(user, invited_user, true)

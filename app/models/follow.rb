@@ -9,7 +9,7 @@ class Follow < ActiveRecord::Base
     if not follow.persisted? then
       success = follow.save
       if email
-        Mailer.delay.new_follower_email(user_to_follow, user)
+        Mailer.delay(:queue => 'mail').new_follower_email(user_to_follow, user)
       end
     end
     success
