@@ -1,15 +1,7 @@
 class FeedUpdater
   def self.queue_feed_update(feed)
-    #begin
-      # Using the "delay" syntax queues to delayed_job
-      FeedUpdater.delay.run_update(feed.id)
-      #@@sender.rpush("feed_upates", feed.id)
-    #rescue
-    #  Post.get_new_posts(feed)
-    #  #Post.synchronize_posts_with_users(current_user.id, feed.id)
-    #end
-  end
-  
+      FeedUpdater.delay(:queue => "feed_update").run_update(feed.id)
+  end  
   
   def self.run_update(feed_id)
     thread_num = 0
