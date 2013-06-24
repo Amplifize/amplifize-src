@@ -21,12 +21,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         Invite.handle_new_user(@invite_id, @user)
-        Mailer.delay.new_user_email(@user)
+        Mailer.delay(:queue => 'mail').new_user_email(@user)
 
         UserSession.create(@user)
-        format.html { redirect_to(:homepage, :notice => 'Welcome to amplifize') }
+        format.html { redirect_to(:onboarding_step_1) }
       else
-        format.html { redirect_to(:new_user, :notice => 'Error signing up.') }
+        format.html { redirect_to(:new_user) }
       end
     end  
   end

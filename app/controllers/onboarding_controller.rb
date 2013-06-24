@@ -5,6 +5,7 @@ class OnboardingController < ApplicationController
 
   def import
     @tags = Tag.all.uniq{|tag| tag.name}
+    @feed = Feed.new
   end
 
   def find_friends

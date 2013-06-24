@@ -9,6 +9,15 @@
 	
 		$(document).ready(function() {
 			$("#importStep").addClass("activeStep");
+			
+			$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
+				$("#subscribeLink").addClass("hide");
+				$("#feedSubscribed").removeClass("hide");
+			});
+		
+			$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
+				//TODO: Log error here
+			});
 		});
 
 		function skipOnboarding() {
@@ -23,6 +32,7 @@
 			$.ajax({
 				url: "/tags/"+tagName+"/feeds",
 				success: function(data, textStatus, jqXHR) {
+					$("#feed_tags").val(tagName);
 					$("#feeds option").remove();
 					for(var i=0; i < data.length; i++) {
 						var feed = data[i];
@@ -43,6 +53,11 @@
 				url: "/feeds/"+feedId,
 				success: function(data, textStatus, jqXHR) {
 					current_feed = data;
+					$("#feed_url").val(current_feed["url"]);
+					
+					$("#subscribeLink").removeClass("hide");
+					$("#feedSubscribed").addClass("hide");
+					
 					$("#feedTitle").html(data["title"]);
 					$("#feedSummary").html(data["description"]);
 					$("#feedDescription").removeClass("hide");
@@ -52,6 +67,10 @@
 				},
 				dataType: "json"
 			})	
+		}
+		
+		function subscribeToFeed() {
+			$("#new_feed").submit();
 		}
 	</script>	
 <% end %>
@@ -76,6 +95,11 @@
 		<h3 id="feedTitle"></h3>
 		<p id="feedSummary"></p>
 		<a id="subscribeLink" href="#" onclick="subscribeToFeed();return false;">Subscribe</a>
+		<p id="feedSubscribed" class="hide">Subscription successful</p>
+		<p id="nextStepInstructions">Finished selecting feeds? Click next step above.</p>
+		<div class="hide">
+			<%= render 'feeds/form' %>
+		</div>
 	</div>
 	<div class="clear"></div>
 </div>
