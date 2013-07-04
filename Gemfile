@@ -20,7 +20,8 @@ gem 'jbuilder'
 
 # To use debugger
 group :development, :test do
-  gem 'debugger' 
+  gem 'debugger'
+  gem "query_reviewer", :github => "nesquena/query_reviewer"
 end
 
 gem 'authlogic'

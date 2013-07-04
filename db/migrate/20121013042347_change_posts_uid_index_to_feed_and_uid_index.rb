@@ -6,6 +6,5 @@ class ChangePostsUidIndexToFeedAndUidIndex < ActiveRecord::Migration
 
   def self.down
     remove_index :posts, :column => [:feed_id,:uid]
-    #add_index :posts, :uid, :unique => true
   end
 end

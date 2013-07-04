@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/nesquena/query_reviewer.git
+  revision: 7d743797a8c084042f51a3f588bd1687006bd4e8
+  specs:
+    query_reviewer (0.1.8)
+
 PATH
   remote: vendor/feedzirra
   specs:
@@ -176,6 +182,7 @@ DEPENDENCIES
   newrelic_rpm
   nifty-generators
   opml!
+  query_reviewer!
   rails (= 3.2.11)
   rails3-jquery-autocomplete
   ruby-readability

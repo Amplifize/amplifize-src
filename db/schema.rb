@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603064141) do
+ActiveRecord::Schema.define(:version => 20130705071140) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -110,7 +110,11 @@ ActiveRecord::Schema.define(:version => 20130603064141) do
   end
 
   add_index "post_users", ["post_id", "user_id"], :name => "index_post_users_on_post_id_and_user_id", :unique => true
+  add_index "post_users", ["post_id", "user_id"], :name => "posts_users_index"
+  add_index "post_users", ["post_id"], :name => "posts_index"
+  add_index "post_users", ["read_state"], :name => "readstate_index"
   add_index "post_users", ["user_id"], :name => "post_users_user_id_fk"
+  add_index "post_users", ["user_id"], :name => "users_index"
 
   create_table "posts", :force => true do |t|
     t.string   "uid"
@@ -126,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130603064141) do
 
   add_index "posts", ["feed_id", "uid"], :name => "index_posts_on_feed_id_and_uid", :unique => true
   add_index "posts", ["feed_id"], :name => "posts_feed_id_fk"
+  add_index "posts", ["published_at"], :name => "publishedat_index"
 
   create_table "share_users", :force => true do |t|
     t.integer  "share_id"
@@ -133,9 +138,11 @@ ActiveRecord::Schema.define(:version => 20130603064141) do
     t.integer  "read_state"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "last_update_at"
+    t.datetime "last_updated_at"
     t.datetime "last_viewed_at"
   end
+
+  add_index "share_users", ["share_id", "user_id"], :name => "shares_users_index"
 
   create_table "shares", :force => true do |t|
     t.text     "summary"
