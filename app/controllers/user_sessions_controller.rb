@@ -1,37 +1,4 @@
-class UserSessionsController < ApplicationController
-  
-  def oauth2_request
-    require_dependency 'oauth2_handler'
-    service = params[:service]
-    
-    begin
-      oauth = OAuth2_Handler.new(session)
-      url = oauth.get_auth_url(service.to_sym)
-      redirect_to(url)
-    rescue => e
-      @error = e
-      @error_message = e.message
-      respond_to do |format|
-        format.html { render :template => 'general/error' }
-      end
-    end
-  end
-  
-  
-  def oauth2_response
-    require_dependency 'oauth2_handler'
-
-    begin
-      oauth = OAuth2_Handler.new(session)
-      oauth.authorize_token(params)
-      
-      redirect_to(url_for import_google_path)
-    rescue => e
-      @error = e
-      @error_message = e.message
-    end
-  end
-  
+class UserSessionsController < ApplicationController  
   # GET /user_sessions/new
   # GET /user_sessions/new.xml
   def new

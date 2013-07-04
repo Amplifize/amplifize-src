@@ -48,36 +48,4 @@ class ImportController < ApplicationController
       format.html { render :template => 'import/finish' }
     end
   end
-
-  def google
-    require_dependency 'oauth2_handler'
-    require_dependency 'importer'
-
-    begin
-      oauth = OAuth2_Handler.new(session)
-
-      @authorized = oauth.is_authorized?(:google)
-      if @authorized
-        subscriptions = Importer::Google.load_feeds(current_user,oauth)
-        @subscribed = subscriptions[:subscribed]
-        @unsubscribed = subscriptions[:unsubscribed]
-
-        do_import(@unsubscribed)
-
-        respond_to do |format|
-          format.html { render :template => 'import/finish' }
-        end
-
-      else
-        redirect_to(url_for oauth2_request_path(:google))
-      end
-    rescue => e
-      @error = e
-      @error_message = e.message
-      respond_to do |format|
-        format.html { render :template => 'general/error' }
-      end
-    end
-  end
-
 end

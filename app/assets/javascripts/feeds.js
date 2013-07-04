@@ -323,8 +323,10 @@ var clearContent = function() {
 
 	$("#contentBody").html(
 		"<h3>Looks like you've got no more posts to read</h3>" +
-		"<p>It might be time to add a <a href=\"#addFeed-modal-content\" data-toggle=\"modal\">new feed</a> or <a href=\"/feeds/import\">import your feeds</a> from Google Reader</p>"
+		"<p>It might be time to <a href=\"/onboarding/feeds\">find feeds</a> other amplifizers are subscribed to.</p>"
 	);
+	
+	$("#postPopup-modal-content").modal("hide");
 };
 
 $(document).ready(function() {

@@ -4,11 +4,6 @@
 
 <h2 id="importTitle">Import Feeds</h2>
 <div class="importOption">
-	<h3>From Google Reader</h3>
-	<p>Import your subscriptions from Google Reader.</p>
-	<p><%= link_to(import_google_path) do %>Get started now<% end %>!</p>
-</div>
-<div class="importOption">
 	<h3>From other RSS readers</h3>
 	<p>Export subscriptions from other readers as an OPML file.</p>
 	<%= form_for :import, :url => :import_opml, :html => {:multipart => true, :id => "importForm"} do |f| %>

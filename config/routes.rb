@@ -4,10 +4,6 @@ Amplifize::Application.routes.draw do
   match '/logout' => 'user_sessions#destroy', :as => :logout
   match '/register' => 'users#new', :as => :signup
 
-  #part of the Google Reader import process
-  match '/oauth2/callback' => 'user_sessions#oauth2_response', :as => :oauth2_response
-  match '/oauth2/request/:service' => 'user_sessions#oauth2_request', :as => :oauth2_request
-
   #Logged in state pages
   match '/my/homepage' => 'users#homepage', :as => :homepage
   match '/my/content' => 'users#content', :as => :content
@@ -27,7 +23,6 @@ Amplifize::Application.routes.draw do
   #Import 3rd-party content stack
   match '/feeds/import' => 'import#import', :as => :import
   match '/feeds/import/import' => 'import#do_import', :as => :import_import
-  match '/feeds/import/google' => 'import#google', :as => :import_google
   match '/feeds/import/opml' => 'import#opml', :as => :import_opml
 
   #Feed based actions
