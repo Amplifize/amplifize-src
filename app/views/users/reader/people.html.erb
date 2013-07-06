@@ -10,7 +10,7 @@
 	<div id="findFormDiv" class="peopleForm">
 		<div id="findFriends-form">
 			<h3>Find people to follow</h3>
-			<p>Find the people you know on amplifize by entering their email in the form below.</p>
+			<p>Find the people you know on amplifize by entering their email or username in the form below.</p>
 			<%= render "users/search_form" %>
 		</div>
 		<div id="findFriends-response" class="hide">
@@ -54,6 +54,9 @@
 	<% @followed_by.each do |follower| %>
 	<div>
 		<%= follower.display_name.nil? ? follower.email : follower.display_name %>
+		<% if not @subscribed_to.include? follower %>
+			<span id="inline_follow_<%= follower.id %>"><a href="#" onclick="inlineFollowUser(<%= follower.id %>);return false;">Follow back</a></span>
+		<% end %>
 	</div>
 	<% end %>
 </div>

@@ -36,6 +36,19 @@ var followUser = function(userId) {
 	});
 };
 
+var inlineFollowUser = function(userId) {
+	$.ajax({
+		url: '/follows/'+userId+'/add/',
+		success: function(data, textStatus, jqXHR) {
+			$("#inline_follow_"+userId).html("<p>Successfully followed</p>");			
+		},
+		error: function(xhr, text, error) {
+			//TODO: Log errors
+			$("#inline_follow_"+userId).append("<p>There was an error. Please try again.");			
+		}
+	});
+};
+
 $(document).ready(function() {
 	$('form#inviteFriendsForm').on("ajax:success", function(status, data, xhr) {
 		$("#inviteFriends-form").hide();

@@ -21,5 +21,4 @@ class Follow < ActiveRecord::Base
     Follow.follow_user(user1,user2,email)
     Follow.follow_user(user2,user1,email)
   end
-  
 end
