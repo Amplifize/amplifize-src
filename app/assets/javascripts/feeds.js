@@ -197,8 +197,10 @@ var updateTitleContent = function() {
 	$("#contentBody").html("");
 	$("#contentBody").append('<ul id="titleList"></ul>');
 	for(var i = 0; i < posts.length; i++) {
+		var readStateClass = posts[i]["read_state"] == 0 ? "read" : "unread";
+		
 		$("#titleList").append(
-			'<li id="post_'+posts[i]["id"]+'"> ' +
+			'<li id="post_'+posts[i]["post_id"]+'" class="'+readStateClass+'"> ' +
 			'<a href="#" onclick="openPost('+posts[i]["post_id"]+');return false;">'+posts[i]["post_title"]+'</a>'+
 			'<span>From '+posts[i]["feed_title"]+' published on '+dateFormat(posts[i]["published_at"], "dddd, mmmm dS, yyyy, h:MM:ss TT", false)+'</span></li>'
 		);
@@ -226,6 +228,8 @@ var openPost = function(postId) {
 			if(1 == posts[position]["read_state"]) {
 				posts[position]["read_state"] = 0;
 				setReadState(0);
+
+				$("li#post_"+postId).removeClass("unread").addClass("read");
 
 				$("#feedUnreadCount").html(--posts_unread);
 				document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"

@@ -115,6 +115,7 @@
   list-style: none;
   padding: 5px 10px;
   margin-left: -27px;
+  margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
 }
@@ -130,6 +131,18 @@
   font-size: 18px;
   margin-bottom: 5px;
 }
+
+#titleList .read,
+#titleList .read a {
+	font-size: 12px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#titleList .read li {
+	padding: 0;
+}
+
 /* END OF CONTENT SECTION */
 
 

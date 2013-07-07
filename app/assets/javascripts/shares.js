@@ -176,9 +176,10 @@ var updateTitleContent = function() {
 	$("#contentBody").append('<ul id="titleList"></ul>');
 	for(var i = 0; i < shares.length; i++) {
 		var sharerName = shares[i]["display_name"] ? shares[i]["display_name"] : shares[i]["email"];
+		var readStateClass = shares[i]["read_state"] == 0 ? "read" : "unread";
 		
 		$("#titleList").append(
-			'<li id="share_'+shares[i]["id"]+'"> ' +
+			'<li id="share_'+shares[i]["share_id"]+'" class="'+readStateClass+'"> ' +
 			'<a href="#" onclick="openPost('+shares[i]["share_id"]+');return false;">'+shares[i]["post_title"]+'</a>'+
 			'<span>Shared by '+sharerName+'</span></li>'
 		);
@@ -205,6 +206,8 @@ var openPost = function(shareId) {
 			if(1 == shares[position]["read_state"]) {
 				shares[position]["read_state"] = 0;
 				setReadState(0);
+
+				$("li#share_"+shareId).removeClass("unread").addClass("read");
 
 				$("#shareUnreadCount").html(--shares_unread);
 				document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
