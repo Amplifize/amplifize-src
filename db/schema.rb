@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705071140) do
+ActiveRecord::Schema.define(:version => 20130707045457) do
 
   create_table "comments", :force => true do |t|
     t.integer  "share_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20130705071140) do
     t.datetime "updated_at"
   end
 
-  add_index "follows", ["user_id"], :name => "follows_user_id_fk"
+  add_index "follows", ["user_id", "follows"], :name => "follows_index"
 
   create_table "invites", :force => true do |t|
     t.string   "uid"
@@ -142,7 +142,9 @@ ActiveRecord::Schema.define(:version => 20130705071140) do
     t.datetime "last_viewed_at"
   end
 
+  add_index "share_users", ["read_state"], :name => "readstate_index"
   add_index "share_users", ["share_id", "user_id"], :name => "shares_users_index"
+  add_index "share_users", ["user_id"], :name => "userid_index"
 
   create_table "shares", :force => true do |t|
     t.text     "summary"
@@ -159,6 +161,8 @@ ActiveRecord::Schema.define(:version => 20130705071140) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tags", ["name"], :name => "name_index"
 
   create_table "users", :force => true do |t|
     t.string   "email"
