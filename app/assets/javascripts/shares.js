@@ -78,6 +78,11 @@ var updateSharesArray = function() {
 var setReadState = function(readState) {
 	if(1 == readState) {
 		shares[position]["read_state"] = 1;
+		
+		if("titleView" == contentLayout) {
+			$("li#share_"+current_share.id).removeClass("read").addClass("unread");
+		}
+		
 		++shares_unread;
 		$("#shareUnreadCount").html(shares_unread);
 		document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"

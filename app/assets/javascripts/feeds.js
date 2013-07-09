@@ -93,6 +93,11 @@ var markAllAsRead = function() {
 var setReadState = function(readState) {
 	if(1 == readState) {
 		posts[position]["read_state"] = 1;
+		
+		if("titleView" == contentLayout) {
+			$("li#post_"+current_post.id).removeClass("read").addClass("unread");
+		}
+		
 		++posts_unread;
 		$("#feedUnreadCount").html(posts_unread);
 		document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
