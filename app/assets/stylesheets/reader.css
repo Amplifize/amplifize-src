@@ -315,7 +315,7 @@
 }
 
 .popup_navTab:hover .share_icon {
-	background-position: -113px -40px;
+	background-position: -113px -42px;
 }
 
 .read-later_icon {
@@ -324,8 +324,14 @@
 	margin-right: -10px;
 }
 
+.clear-all_icon {
+	background-position:-40px top;
+	margin-top: -5px;
+	margin-right: -10px;
+}
+
 .popup_navTab:hover .read-later_icon {
-	background-position:-290px -40px;
+	background-position:-290px -42px;
 	margin-right: -10px;
 }
 
@@ -334,8 +340,14 @@
 }
 
 .popup_navTab:hover .comment_icon {
-	background-position: 0px -40px;
+	background-position: 0px -42px;
 }
+
+.popup_navTab:hover .clear-all_icon {
+	background-position: -40px -42px;
+	margin-right: -10px;
+}
+
 
 
 #popup_navigation,

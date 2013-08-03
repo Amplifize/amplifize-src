@@ -32,6 +32,8 @@ class ShareUsersController < ApplicationController
       shares = shares.unread
     end
 
+    shares = shares.where("share_users.read_state != ?", ShareUser::MUTED_STATE)
+
     if params[:content_order] == "oldestFirst" then
       shares = shares.oldest_to_newest
     else

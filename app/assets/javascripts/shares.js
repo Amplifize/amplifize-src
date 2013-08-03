@@ -41,6 +41,21 @@ var toggleContentSort = function() {
 	updateSharesArray();
 };
 
+var muteConversation = function() {
+	enableOverlay();
+	setReadState(2);
+	
+	shares.splice(position, 1);
+	if("titleView" == contentLayout) {
+		$("#share_"+current_share.id).remove();
+	}
+	upPost();
+	
+	
+	$('#confirm-delete-modal').modal('hide');
+	disableOverlay();	
+};
+
 var updateSharesArray = function() {
 	resetAppState();
 	enableOverlay();

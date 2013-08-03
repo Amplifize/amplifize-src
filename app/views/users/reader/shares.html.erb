@@ -47,12 +47,10 @@
           		<div class="contentOptionBackground2" style="background-position:-408px;"></div>
           		<span class="contentOptionText">Read later</span>
           	</a>
-			<!--
         	<a href="#" class="navTab confirm-delete">
         		<div class="contentOptionBackground" style="background-position:-39px bottom;"></div>
-        		<span class="contentOptionText">Clear all</span>
+        		<span class="contentOptionText">Mute</span>
         	</a>
-        	-->
         	<div class="clear"></div>
         </div>
       	<div class="clear"></div>
@@ -60,7 +58,6 @@
 	<div class="clear"></div>
 <% end %>
 <div id="contentNavigation">
-	<!--<div><span id="beginningPoint">1</span>-<span id="endPoint">50</span> of <span id="totalPosts">200</span></div>-->
 	<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
 	<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
 	<div class="clear"></div>
@@ -99,7 +96,7 @@
 <div id="postPopup-modal-content" class="modal hide">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
-		<div id="popup_contentOptions" style="margin-left: 449px;">
+		<div id="popup_contentOptions" style="margin-left: 350px;">
 			<a href="#addComment-modal-content" data-toggle="modal" class="popup_navTab">
           		<div class="popup_contentOptionBackground comment_icon"></div>
           		<span class="popup_contentOptionText">Add comment</span>
@@ -110,6 +107,11 @@
 				<span class="popup_contentOptionText">Read later</span>
 				<div class="clear"></div>
 			</a>
+        	<a style="margin-left: -10px;" href="#" class="popup_navTab confirm-delete">
+        		<div class="popup_contentOptionBackground clear-all_icon"></div>
+        		<span class="popup_contentOptionText">Mute</span>
+        	</a>
+
 			<div class="clear"></div>
 		</div>
 		<div id="popup_navigation" style="margin-right:25px;">
@@ -138,4 +140,19 @@
 		</div>
 	</div>
 </div>
+
+<div id="confirm-delete-modal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+        <p>You are about to mute this conversation. You will no longer see this conversation even if others comment on it.</p>
+        <p>Are you sure you want to mute this conversation?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" onclick="muteConversation();" class="btn danger">Yes</a>
+        <a href="javascript:$('#confirm-delete-modal').modal('hide')" class="btn secondary">No</a>
+    </div>
+</div>
+
 

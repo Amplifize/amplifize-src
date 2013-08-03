@@ -87,8 +87,7 @@ var markAllAsRead = function() {
 			$('#confirm-delete-modal').modal('hide');
 		}
 	});
-
-}
+};
 
 var setReadState = function(readState) {
 	if(1 == readState) {

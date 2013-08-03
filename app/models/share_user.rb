@@ -1,7 +1,8 @@
 class ShareUser < ActiveRecord::Base
-  # read_state status codes are as follows:
-  # => 0 == read
-  # => 1 == unread
+
+  READ_STATE = 0
+  UNREAD_STATE = 1
+  MUTED_STATE = 2
 
   attr_accessible :share_id, :user_id, :read_state, :last_viewed_at, :last_updated_at
 
