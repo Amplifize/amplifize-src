@@ -2,7 +2,6 @@ Amplifize::Application.routes.draw do
 
   match '/login' => 'user_sessions#create', :as => :login
   match '/logout' => 'user_sessions#destroy', :as => :logout
-  match '/register' => 'users#new', :as => :signup
 
   #Logged in state pages
   match '/my/homepage' => 'users#homepage', :as => :homepage
