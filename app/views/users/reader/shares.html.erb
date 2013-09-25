@@ -32,6 +32,7 @@
 			<select id="toggleContentSort" onchange="toggleContentSort();">
 				<option value="unreadOnly">New content only</option>
 				<option value="allContent">All content</option>
+				<option value="favoriteContent">Favorited content</option>
 			</select>
 			<div class="clear"></div>
 		</div>
@@ -45,13 +46,16 @@
           	</a>
           	<a href="#" onclick="setReadState(1);" class="navTab">
           		<div class="contentOptionBackground2" style="background-position:-408px;"></div>
-          		<span class="contentOptionText">Read later</span>
+          		<span class="contentOptionText" style="padding-left:3px;">Read later</span>
+          	</a>
+          	<a href="#" onclick="setReadState(3);return false;" class="navTab">
+          		<div class="contentOptionBackgroundStar"></div>
+          		<span class="contentOptionText">Favorite</span>
           	</a>
         	<a href="#" class="navTab confirm-delete">
         		<div class="contentOptionBackground" style="background-position:-39px bottom;"></div>
         		<span class="contentOptionText">Mute</span>
         	</a>
-        	<div class="clear"></div>
         </div>
       	<div class="clear"></div>
 	</div>
@@ -96,7 +100,7 @@
 <div id="postPopup-modal-content" class="modal hide">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
-		<div id="popup_contentOptions" style="margin-left: 350px;">
+		<div id="popup_contentOptions" style="margin-left: 229px;">
 			<a href="#addComment-modal-content" data-toggle="modal" class="popup_navTab">
           		<div class="popup_contentOptionBackground comment_icon"></div>
           		<span class="popup_contentOptionText">Add comment</span>
@@ -107,11 +111,15 @@
 				<span class="popup_contentOptionText">Read later</span>
 				<div class="clear"></div>
 			</a>
+			<a style="margin-left: -10px;" href="#" onclick="setReadState(3);return false;" class="popup_navTab">
+				<div class="popup_contentOptionBackgroundStar"></div>
+				<span class="popup_contentOptionText">Favorite</span>
+				<div class="clear"></div>
+			</a>
         	<a style="margin-left: -10px;" href="#" class="popup_navTab confirm-delete">
         		<div class="popup_contentOptionBackground clear-all_icon"></div>
         		<span class="popup_contentOptionText">Mute</span>
         	</a>
-
 			<div class="clear"></div>
 		</div>
 		<div id="popup_navigation" style="margin-right:25px;">

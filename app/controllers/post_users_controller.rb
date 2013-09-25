@@ -29,9 +29,13 @@ class PostUsersController < ApplicationController
 
     if params[:content_sort] == "unreadOnly" then
       posts = posts.unread
+    elsif params[:content_sort] == "favoriteContent" then
+      posts = posts.favorite
     end
 
-    posts = posts.rolling_window
+    if params[:content_sort] != "favoriteContent" then
+      posts = posts.rolling_window
+    end
 
     if params[:content_order] == "oldestFirst" then
       posts = posts.oldest_to_newest

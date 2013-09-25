@@ -3,6 +3,7 @@ class ShareUser < ActiveRecord::Base
   READ_STATE = 0
   UNREAD_STATE = 1
   MUTED_STATE = 2
+  FAVORITE_STATE = 3
 
   attr_accessible :share_id, :user_id, :read_state, :last_viewed_at, :last_updated_at
 
@@ -14,6 +15,10 @@ class ShareUser < ActiveRecord::Base
   
   scope :unread, lambda {
     where("share_users.read_state = 1")
+  }
+
+  scope :favorite, lambda {
+    where("share_users.read_state = 3")
   }
 
   scope :rolling_window, lambda {

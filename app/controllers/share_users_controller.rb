@@ -2,14 +2,11 @@ class ShareUsersController < ApplicationController
   before_filter :require_user, :only => [:set_read_state, :retrieve]
   
   def set_read_state
-    share_id = params[:share_id]
-    new_state = params[:state]
-    
-    share_user = ShareUser.find_by_share_id_and_user_id(share_id, current_user.id)
-    share_user.read_state = new_state
+    share_user = ShareUser.find_by_share_id_and_user_id(params[:share_id], current_user.id)
+    share_user.read_state = params[:state]
     share_user.last_viewed_at = Time.now.utc
     share_user.save
-    
+
     respond_to do |format|
       format.js {"{'success': true}"}
     end
@@ -23,13 +20,10 @@ class ShareUsersController < ApplicationController
       shares = current_user.share_users.select("share_users.share_id, share_users.read_state").joins(:share)
     end
 
-    #TODO: Fix this
-    #if params[:follower_id]
-    #  shares = @shares.joins(:share).where("shares.user_id = ?", params[:follower_id])
-    #end
-
     if params[:content_sort] == "unreadOnly" then
       shares = shares.unread
+    elsif params[:content_sort] == "favoriteContent" then
+      shares = shares.favorite
     end
 
     shares = shares.where("share_users.read_state != ?", ShareUser::MUTED_STATE)
@@ -40,7 +34,7 @@ class ShareUsersController < ApplicationController
       shares = shares.newest_to_oldest
     end
 
-    shares = shares.limit(1000);
+    shares = shares.limit(100);
 
     respond_to do |format|
       format.js { render :json => shares }

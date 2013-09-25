@@ -16,7 +16,7 @@
 }
 
 #contentViewOptions {
-	width: 710px;
+	width: 680px;
 }
 
 #contentStateOptions {
@@ -252,10 +252,9 @@
 }
 
 .navTab {
-	width: 70px;
+	width: 65px;
 	height: 57px;
 	margin-top: 10px;
-	margin-right: 5px;
 
 	text-align: center;
 
@@ -310,6 +309,17 @@
 	margin-top: -7px;
 }
 
+.popup_contentOptionBackgroundStar {
+	float: left;
+	
+	background-image: url("/assets/shared/star-grey.png");
+	background-repeat: no-repeat;
+	width: 45px;
+	height: 27px;
+	margin-top: -7px;
+}
+
+
 .share_icon {
 	background-position:-113px top;
 }
@@ -358,7 +368,7 @@
 .contentOptionBackground {
 	background-image: url("/assets/shared/amplifize_icons_hover.png");
 	background-repeat: no-repeat;
-	width: 45px;
+	width: 40px;
 	height: 32px;
 	margin-left: 10px;
 	margin-top: 3px; 
@@ -371,6 +381,15 @@
 	height: 32px;
 	margin-left: 8px;
 	margin-top: 3px; 
+}
+
+.contentOptionBackgroundStar {
+	background-image: url("/assets/shared/star-white.png");
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 32px;
+	margin-left: 17px;
+	margin-top: 3px;
 }
 
 #overlay {

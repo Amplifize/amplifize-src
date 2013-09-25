@@ -26,7 +26,7 @@ var clearFilter = function() {
 	$("#filterContent-modal-content").modal("hide");
 	
 	return false;
-}
+};
 
 var loadFilterOverlay = function () {
 	$("#filter-overlay").css("visibility", "visible");
@@ -37,33 +37,21 @@ var closeFilterOverlay = function () {
 };
 
 var toggleContentOrder = function() {
-	if("newestFirst" == contentOrder) {
-		contentOrder = "oldestFirst";
-	} else {
-		contentOrder = "newestFirst";
-	}
+	contentOrder = $("#toggleContentSelect").val();
 
 	$.cookie("contentOrder", contentOrder);
 	updatePostsArray();
 };
 
 var toggleContentLayout = function() {
-	if("postView" == contentLayout) {
-		contentLayout = "titleView";
-	} else {
-		contentLayout = "postView";
-	}
+	contentLayout = $("#toggleContentLayout").val();
 	
 	$.cookie("contentLayout", contentLayout);
 	updatePostsArray();
 };
 
 var toggleContentSort = function() {
-	if("unreadOnly" == contentSort) {
-		contentSort = "allContent";
-	} else {
-		contentSort = "unreadOnly";
-	}
+	contentSort = $("#toggleContentSort").val();
 	
 	$.cookie("contentSort", contentSort);
 	updatePostsArray();

@@ -1,7 +1,9 @@
 class PostUser < ActiveRecord::Base
-  # read_state status codes are as follows:
-  # => 0 == read
-  # => 1 == unread
+  
+  READ_STATE = 0
+  UNREAD_STATE = 1
+  FAVORITE_STATE = 3
+
 
   attr_accessible :post_id, :user_id, :read_state
 
@@ -13,6 +15,10 @@ class PostUser < ActiveRecord::Base
 
   scope :unread, lambda {
     where("post_users.read_state = 1")
+  }
+  
+  scope :favorite, lambda {
+    where("post_users.read_state = 3")
   }
 
   scope :rolling_window, lambda {

@@ -11,7 +11,7 @@ var linksInNewWindow = function(evt) {
 		evt.preventDefault();
 		window.open($(this).attr("href"));
 	}	
-}
+};
 
 $(document).ready(function() {
 	$("#contentBody").on("click", "a", linksInNewWindow);

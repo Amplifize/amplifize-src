@@ -9,33 +9,21 @@ var resetAppState = function () {
 };
 
 var toggleContentOrder = function() {
-	if("newestFirst" == contentOrder) {
-		contentOrder = "oldestFirst";
-	} else {
-		contentOrder = "newestFirst";
-	}
+	contentOrder = $("#toggleContentSelect").val();
 
 	$.cookie("contentOrder", contentOrder);
 	updateSharesArray();
 };
 
 var toggleContentLayout = function() {
-	if("postView" == contentLayout) {
-		contentLayout = "titleView";
-	} else {
-		contentLayout = "postView";
-	}
-	
+	contentLayout = $("#toggleContentLayout").val();
+
 	$.cookie("contentLayout", contentLayout);
 	updateSharesArray();
 };
 
 var toggleContentSort = function() {
-	if("unreadOnly" == contentSort) {
-		contentSort = "allContent";
-	} else {
-		contentSort = "unreadOnly";
-	}
+	contentSort = $("#toggleContentSort").val();
 	
 	$.cookie("contentSort", contentSort);
 	updateSharesArray();
