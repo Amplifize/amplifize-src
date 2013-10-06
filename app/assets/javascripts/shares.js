@@ -47,7 +47,7 @@ var muteConversation = function() {
 var updateSharesArray = function() {
 	resetAppState();
 	enableOverlay();
-	
+
 	$.ajax({
 		url: "/share_users/",
 		data: {
@@ -76,19 +76,19 @@ var updateSharesArray = function() {
 		},
 		dataType: "json"
 	});
-}
+};
 
 var setReadState = function(readState) {
 	if(1 == readState) {
 		shares[position]["read_state"] = 1;
-		
+
 		if("titleView" == contentLayout) {
 			$("li#share_"+current_share.id).removeClass("read").addClass("unread");
 		}
 		
 		++shares_unread;
 		$("#shareUnreadCount").html(shares_unread);
-		document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
+		document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")";
 	}
 
 	$.ajax({
@@ -102,7 +102,7 @@ var setReadState = function(readState) {
 	});
 	
 	return false;
-}
+};
 
 var downPost = function() {
 	if(position > 0) {
@@ -179,7 +179,6 @@ var updateTitleContent = function() {
 	$("#shareUnreadCount").html(shares.length);
 	document.title = "Amplifize | Great conversation goes best with great content ("+shares.length+")";
 
-
 	$("#contentBody").html("");
 	$("#contentBody").append('<ul id="titleList"></ul>');
 	for(var i = 0; i < shares.length; i++) {
@@ -218,7 +217,7 @@ var openPost = function(shareId) {
 				$("li#share_"+shareId).removeClass("unread").addClass("read");
 
 				$("#shareUnreadCount").html(--shares_unread);
-				document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
+				document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")";
 			}
 
 			var displayName = null == current_share.user.display_name ? current_share.user.email : current_share.user.display_name;
@@ -244,6 +243,7 @@ var openPost = function(shareId) {
 
 			$("#popup_commentThread").find("tr:gt(0)").remove();
 			
+			var scrollNode = null;
 			for(var i = 0; i < data.comments.length; i++) {
 				var comment = data.comments[i];
 				var followsText = '';
@@ -251,14 +251,19 @@ var openPost = function(shareId) {
 					followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
 				}
 				var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied '+prettyDate(dateFormat(comment.created_at, "isoDateTime", false))+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>')
+				$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied '+prettyDate(dateFormat(comment.created_at, "isoDateTime", false))+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>');
+				if(null === scrollNode && comment.created_at > shares[position]["last_updated_at"]) {
+					scrollNode = $("#popup_commentThread tr:last");
+				}
 			}
 
 			disableOverlay();
 			$("#postPopup-modal-content").modal('show');
-			$("#postPopup-modal-content").animate({scrollTop: 0}, "slow");
-
-			mixpanel.track("Read another conversation");
+			if(scrollNode) {
+				$("#postPopup-modal-content").animate({scrollTop: (scrollNode.offset().top - 50)}, "fast");
+			} else {
+				$("#postPopup-modal-content").animate({scrollTop: 0}, "fast");
+			}
 		},
 		error: function(xhr, text, error) {
 			//log error here
@@ -266,7 +271,7 @@ var openPost = function(shareId) {
 		},
 		dataType: "json"
 	});
-}
+};
 
 var updateShareContent = function(shareId) {
 	if(shareId["share_id"]) {
@@ -285,7 +290,6 @@ var updateShareContent = function(shareId) {
 		$.ajax({
 			url: "/shares/"+shareId["share_id"],
 			success: function(data, textStatus, jqXHR) {
-				$("html, body").animate({ scrollTop: 0 }, "fast");
 				var current_post = data.post;
 				current_share = data;
 
@@ -294,7 +298,7 @@ var updateShareContent = function(shareId) {
 					setReadState(0);
 					
 					$("#shareUnreadCount").html(--shares_unread);
-					document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")"
+					document.title = "Amplifize | Great conversation goes best with great content ("+shares_unread+")";
 				}
 
 				$("#comment_share_id").val(current_share.id);
@@ -319,7 +323,8 @@ var updateShareContent = function(shareId) {
 				
 				$("#contentBody").html(current_post.content);
 				$("#commentThread").find("tr:gt(0)").remove();
-				
+
+				var scrollNode = null;
 				for(var i = 0; i < data.comments.length; i++) {
 					var comment = data.comments[i];
 					var followsText = '';
@@ -327,17 +332,26 @@ var updateShareContent = function(shareId) {
 						followsText = ' (<span class="followUser_'+comment.user.id+'"><a href="" onclick="followUser('+comment.user.id+');return false;">Follow</a></span>)';
 					}
 					var username = null == comment.user.display_name ? comment.user.email : comment.user.display_name;
-					$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied '+prettyDate(dateFormat(comment.created_at, "isoDateTime", false))+': </p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>')
+					$('#commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+followsText+' replied '+prettyDate(dateFormat(comment.created_at, "isoDateTime", false))+': </p></span><p class="commentText">'+comment.comment_text+'</p></td></tr>');
+
+					if(null === scrollNode && comment.created_at > shares[position]["last_updated_at"]) {
+						scrollNode = $("#commentThread tr:last");
+					}
 				}
 
 				disableOverlay();
-				mixpanel.track("Read another conversation");
+
+				if(scrollNode) {
+					$("html, body").animate({scrollTop: (scrollNode.offset().top - 50)}, "fast");
+				} else {
+					$("html, body").animate({ scrollTop: 0 }, "fast");
+				}
 			},
 			error: function(xhr, text, error) {
 				disableOverlay();
 				//TODO: Log error
 			}
-		})
+		});
 	} else {
 		$("#shareUnreadCount").html(0);
 		clearContent();
@@ -370,8 +384,6 @@ $(document).ready(function() {
 		$('#popup_commentThread tr:last').after('<tr class="commentInstance"><td><p class="commentAuthor">'+username+' replied '+prettyDate(dateFormat(new Date(), "isoDateTime", false))+':</p></span><p class="commentText">'+comment.comment_text.split("\n").join("<br />")+'</p></td></tr>');
 
 		disableOverlay();
-
-		mixpanel.track("Comment in a conversation");
 	});
 
 	$('form#new_comment').bind("ajax:failure", function(data, status, xhr) {
