@@ -16,7 +16,7 @@ class SharesController < ApplicationController
   def search
     @search = params[:search]
     share_ids = Share.search_for_ids(params[:search])
-    @shares = current_user.share_users.select("share_users.*, posts.title AS post_title, users.display_name AS display_name, users.email AS email").joins(:share => [:post, :user]).where(:id=>share_ids)
+    @shares = current_user.share_users.select("share_users.*, posts.title AS post_title, users.display_name AS display_name, users.email AS email").joins(:share => [:post, :user]).where(:share_id => share_ids)
 
     @posts_unread_count = current_user.feeds_unread_count
     @shares_unread_count = current_user.shares_unread_count
