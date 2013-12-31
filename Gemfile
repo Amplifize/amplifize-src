@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
-gem 'mysql2'
+gem 'mysql2', '0.3.14'
 gem 'jquery-rails'
+gem 'thinking-sphinx'
 
 # Gems used only for assets and not required
 # in production environments by default.

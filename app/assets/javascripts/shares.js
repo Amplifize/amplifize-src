@@ -4,7 +4,7 @@ var position = 0;
 var shares_unread = 0;
 
 var resetAppState = function () {
-	current_post = undefined;
+	current_share = undefined;
 	position = 0;
 };
 

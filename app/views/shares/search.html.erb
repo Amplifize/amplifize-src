@@ -1,0 +1,92 @@
+<% content_for :stylesheets do %>
+	<%= stylesheet_link_tag "shares", "jquery.selectbox" %>
+<% end %>
+
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "search", "jquery.selectbox-0.2.min", "pretty-date" %>
+	<script type="text/javascript">
+		var all_follows = <%= @all_follows %>;
+	</script>
+<% end %>
+
+<% content_for :subnav do %>
+	<div style="color:white; padding:5px 0 5px 0;">
+		<h3 style="display:inline-block;">Results for:</h3><em style="font-size:18px;padding-left:5px;">"<%= @search %>"</em>
+	</div>
+<% end %>
+
+<script>
+	document.title = "Amplifize | Great conversation goes best with great content (<%= @shares.length %>)";
+</script>
+
+<div id="source_content">
+	<div id="contentBody">
+	<ul id="titleList">
+		<% @shares.each do |share| %>
+			<li id="share_<%= share.share_id %>" class="unread">
+				<a href="#" onclick="openPost(<%= share.share_id %>);return false;"><%= share.post_title %></a>
+				<span>Shared by <%= share.display_name.nil? ? share.email : share.display_name %></span>
+			</li>
+		<% end %>
+	</ul>
+	</div>
+</div>
+
+<div id="postPopup-modal-content" class="modal hide">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<div id="popup_contentOptions" style="margin-left: 229px;">
+			<a href="#addComment-modal-content" data-toggle="modal" class="popup_navTab">
+          		<div class="popup_contentOptionBackground comment_icon"></div>
+          		<span class="popup_contentOptionText">Add comment</span>
+          		<div class="clear"></div>
+			</a>
+			<a style="margin-left: -10px;" href="#" onclick="setReadState(1);return false;" class="popup_navTab">
+				<div class="popup_contentOptionBackground read-later_icon"></div>
+				<span class="popup_contentOptionText">Read later</span>
+				<div class="clear"></div>
+			</a>
+			<a style="margin-left: -10px;" href="#" onclick="setReadState(3);return false;" class="popup_navTab">
+				<div class="popup_contentOptionBackgroundStar"></div>
+				<span class="popup_contentOptionText">Favorite</span>
+				<div class="clear"></div>
+			</a>
+        	<a style="margin-left: -10px;" href="#" class="popup_navTab confirm-delete">
+        		<div class="popup_contentOptionBackground clear-all_icon"></div>
+        		<span class="popup_contentOptionText">Mute</span>
+        	</a>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="modal-body" style="max-height: none; min-height:90%; width: 910px; padding-bottom: 10px; padding-top: 0px;">
+		<h3 id="popup_contentTitle"></h3>
+		<div id="popup_source_content">
+			<div id="popup_shareInfo">
+				<table id="popup_commentThread">
+					<tr>
+						<td>Shared on <span id="popup_sharedDate"></span> by <span id="popup_sharedBy"></span> who says: <blockquote id="popup_conversationStarter"></blockquote></td>
+					</tr>
+				</table>
+			</div>
+			<div id="popup_contentSourceSite">Currently reading <span id="popup_feedTitle"></span> from <span id="popup_currentTag">all tags</span>.</div>
+			<div id="popup_contentMetadata">
+				<p id="popup_contentInfoLine"><span id="popup_contentPublishDate"></span><span id="popup_contentArthur"></span></p>
+			</div>
+			<div id="popup_contentBody">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="addComment-modal-content" class="modal hide" style="z-index:2000;">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Continue the conversation</h3>
+	</div>
+	<div class="modal-body modal-body-style">
+		<%= render 'comments/form' %>
+	</div>
+</div>
+
+

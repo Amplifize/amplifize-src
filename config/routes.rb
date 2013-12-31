@@ -7,6 +7,7 @@ Amplifize::Application.routes.draw do
   match '/my/homepage' => 'users#homepage', :as => :homepage
   match '/my/content' => 'users#content', :as => :content
   match '/my/conversations' => 'users#conversations', :as => :conversations
+  match '/my/conversations/search' => 'shares#search', :as => :share_search
   match '/my/people' => 'users#people', :as => :people
 
   match '/my/profile' => 'users#profile', :as => :profile, :via => :get
