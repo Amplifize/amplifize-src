@@ -14,9 +14,16 @@ var deleteTag = function(tagId) {
 		},
 		dataType: "json"
 	});
-}
+};
 
 $(document).ready(function() {
+	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
+		$('#feed_url').val('');
+		$('#feed_tags').val('');
+
+		$('#addFeed-modal-content').modal('hide');
+	});
+
 	$('.addTagsLink').on("click", function() {
 		 $("#tag_feed_id").val($(this).data('id'));
 		 

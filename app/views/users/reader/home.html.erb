@@ -2,6 +2,11 @@
 	<%= stylesheet_link_tag "reader_homepage.css" %>
 <% end %>
 
+<% content_for :javascripts do %>
+	<%= javascript_include_tag "home" %>
+<% end %>
+
+
 
 <div id="contentPreview">
 	<h3>Content:</h3>

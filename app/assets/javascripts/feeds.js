@@ -351,14 +351,6 @@ $(document).ready(function() {
 		$("#postPopup-modal-content .modal-body").animate({scrollTop: 0});
 	});
 
-	$('form#new_feed').bind("ajax:success", function(data, status, xhr) {
-		$('#feed_url').val('');
-		$('#feed_tags').val('');
-
-		$('#addFeed-modal-content').modal('hide');
-	});
-
-
 	$('#addShare-modal-content').bind('show', function () {
 	  setTimeout(function(){$("#summary").focus();}, 250);
 	});
