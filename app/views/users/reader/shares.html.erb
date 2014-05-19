@@ -62,40 +62,24 @@
 </div>
 
 <div id="contentNavigation">
-	<div>
+	<div id="commentContentOption" class="navTab" style="padding-top:5px;">
+      	<a href="#" onclick="loadFlyOut();return false;">Add to the conversation</a>
+	</div>
+	<div class="navTab" style="padding-top:5px;">
+      	<a href="#" onclick="setReadState(1);return false;" class="navTab">Read conversation later</a>
+	</div>
+	<div class="navTab" style="padding-top:5px;">
+      	<a href="#" onclick="setReadState(3);return false;" class="navTab">Favorite conversation</a>
+	</div>
+	<div class="navTab" style="padding-top:5px;">
+    	<a href="#" class="confirm-delete">Mute the conversation</a>
+	</div>
+	<div class="navTab">
 		<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
 		<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
 	</div>
-	<div id="contentStateOptions">
-        <div id="contentOptions">
-        	<a class="navTab" href="#addComment-modal-content" data-toggle="modal">
-          		<div class="contentOptionBackground" style="background-position:-7px bottom;"></div>
-          		<span class="contentOptionText">Comment</span>
-          	</a>
-          	<a href="#" onclick="setReadState(1);" class="navTab">
-          		<div class="contentOptionBackground2" style="background-position:-408px;"></div>
-          		<span class="contentOptionText" style="padding-left:3px;">Read later</span>
-          	</a>
-          	<a href="#" onclick="setReadState(3);return false;" class="navTab">
-          		<div class="contentOptionBackgroundStar"></div>
-          		<span class="contentOptionText">Favorite</span>
-          	</a>
-        	<a href="#" class="navTab confirm-delete">
-        		<div class="contentOptionBackground" style="background-position:-39px bottom;"></div>
-        		<span class="contentOptionText">Mute</span>
-        	</a>
-        </div>
-      	<div class="clear"></div>
-	</div>
 	<div class="clear"></div>
-</div>
-
-<div id="addComment-modal-content" class="modal hide" style="z-index:2000;">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Continue the conversation</h3>
-	</div>
-	<div class="modal-body modal-body-style">
+	<div id="commentPostFlyout">
 		<%= render 'comments/form' %>
 	</div>
 </div>

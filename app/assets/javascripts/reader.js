@@ -25,4 +25,6 @@ $(document).ready(function() {
     	e.preventDefault();
     	$('#confirm-delete-modal').modal('show');
 	});
+	
+	$("#footer").css("margin-bottom", "45px");
 });

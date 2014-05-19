@@ -14,10 +14,11 @@
   <%= f.hidden_field :share_id, :value => '' %>
 
   <div class="field">
-    <%= f.text_area :comment_text, :style => "width: 470px; height: 100px;", :class => :htmlEditor %>
+    <%= f.text_area :comment_text, :style => "width: 95%; height: 75px;", :class => :htmlEditor %>
   	<br/>
   </div>
   <div class="actions">
     <%= f.submit :value => 'Add comment' %>
+    <input type="button" value="Cancel" onclick="hideFlyOut();" />
   </div>
 <% end %>

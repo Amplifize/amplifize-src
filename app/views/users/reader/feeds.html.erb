@@ -61,45 +61,30 @@
 </div>
 
 <div id="contentNavigation">
-	<div>
+	<div id="shareContentOption" class="navTab" style="padding-top:5px;">
+      	<a href="#" onclick="loadFlyOut();return false;">Share content</a>
+	</div>
+	<div class="navTab" style="padding-top:5px;">
+      	<a href="#" onclick="setReadState(1);return false;" class="navTab">Read content later</a>
+	</div>
+	<div class="navTab" style="padding-top:5px;">
+      	<a href="#" onclick="setReadState(3);return false;" class="navTab">Favorite content</a>
+	</div>
+	<div class="navTab" style="padding-top:5px;">
+    	<a href="#" class="navTab confirm-delete">Clear all content from this tag</a>
+	</div>
+	<div class="navTab">
 		<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
 		<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
 	</div>
-	<div id="contentStateOptions">
-        <div id="contentOptions">
-          	<a href="#addShare-modal-content" data-toggle="modal" class="navTab">
-          		<div class="contentOptionBackground" style="background-position:-113px bottom;margin-left:8px;"></div>
-          		<span class="contentOptionText">Share</span>
-          	</a>
-          	<a href="#" onclick="setReadState(1);return false;" class="navTab">
-          		<div class="contentOptionBackground2" style="background-position:-408px;"></div>
-          		<span class="contentOptionText" style="padding-left:3px;">Read later</span>
-          	</a>
-          	<a href="#" onclick="setReadState(3);return false;" class="navTab">
-          		<div class="contentOptionBackgroundStar"></div>
-          		<span class="contentOptionText">Favorite</span>
-          	</a>
-	    	<a href="#" class="navTab confirm-delete">
-	    		<div class="contentOptionBackground" style="background-position:-39px bottom;"></div>
-	    		<span class="contentOptionText">Clear all</span>
-	    	</a>
-        </div>
-      	<div class="clear"></div>
-	</div>
 	<div class="clear"></div>
-</div>
-
-<div id="addShare-modal-content" class="modal hide" style="z-index:2000;">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Share content</h3>
-	</div>
-	<div id="modal-body" class="modal-body-style">
+	<div id="sharePostFlyout">
 		<form method="POST" action="/shares/add" data-remote="true" id="addShareForm">
 			<input type="hidden" value="" id="sharePostId" name="postId" />
-			<label for="summary">Comment (required)</label>
-			<textarea name="summary" id="summary" style="width: 470px; height: 100px;" class="htmlEditor"></textarea><br/>
+			<label for="summary">Tell us why you're sharing:</label>
+			<textarea name="summary" id="summary" style="width: 95%; height: 75px;" class="htmlEditor"></textarea><br/>
 			<input type="submit" value="Share" />
+			<input type="button" value="Cancel" onclick="hideFlyOut();" />
 		</form>
 	</div>
 </div>

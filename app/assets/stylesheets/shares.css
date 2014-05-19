@@ -47,9 +47,3 @@ tr.commentInstance td {
 
 	max-width: 940px;
 }
-
-#toggleContentSelect,
-#toggleContentLayout,
-#toggleContentSort {
-	width: 150px;
-}

@@ -1,4 +1,3 @@
-#addShares-modal-content,
 #addFeed-modal-content,
 #addTags-modal-content,
 #deleteTags-modal-content {
@@ -10,8 +9,6 @@
 	padding: 3px;
 }
 
-#toggleContentSelect,
-#toggleContentLayout,
-#toggleContentSort {
-	width: 150px;
+#sharePostFlyout {
+	color:white;
 }

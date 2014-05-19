@@ -34,7 +34,11 @@
 #previousContent, #nextContent {
   float: left;
   margin-right: 20px;
-  margin-top: 8px;
+  color: black;
+}
+
+#previousContent {
+	margin-left: 25%;
 }
 
 .navLabel {
@@ -72,17 +76,32 @@
 
 #contentNavigation {
 	position:fixed;
-	top:25%;
-	right:0;
+	bottom:0;
+	left:0;
+	
+	width: 100%;
+	/*height: 25px;*/
 	
 	background-color: #072229;
 	
 	padding: 10px 0px 10px 20px;
-	
-	height: 320px;
-	
-	border-radius: 5px 0 0 5px;
 }
+
+#contentNavigation div.navTab {
+	text-align: center;
+	
+	display: block;
+
+	float: left;
+	width: 20%;
+	margin: 0;
+}
+
+div.navTab a,
+div.navTab a:visited {
+	color: #fff;
+}
+
 
 /* END OF SUB-NAVIGATION SECTION */
 
@@ -263,30 +282,8 @@
 	font-size: 12px;
 }
 
-.navTab {
-	width: 65px;
-	height: 57px;
-	margin-top: 10px;
-
-	text-align: center;
-
-	color: #fff;
-	
-	display: block;
-}
-
 .contentOptionText {
 	visibility: hidden;
-}
-
-.navTab:hover {
-	text-decoration: none;
-	background-color: #4ac36c;
-	border-radius: 5px;
-}
-
-.navTab:hover .contentOptionText {
-	visibility: visible;
 }
 
 .popup_navTab {
@@ -501,3 +498,10 @@
 	color: #737373;
 	line-height: 20px;
 }
+
+#sharePostFlyout,
+#commentPostFlyout {
+	visibility: hidden;
+	display:none;
+}
+
