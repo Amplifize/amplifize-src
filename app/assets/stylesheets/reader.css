@@ -10,19 +10,7 @@
 
 #contentViewOptions {
 	padding: 0 0 20px 6px;
-}
-
-#contentStateOptions {
-  float: left;
-  padding: 20px 0 20px 6px;
-}
-
-#contentViewOptions {
 	width: 680px;
-}
-
-#contentStateOptions {
-	margin-left: 
 }
 
 .subNavItem {
@@ -80,7 +68,6 @@
 	left:0;
 	
 	width: 100%;
-	/*height: 25px;*/
 	
 	background-color: #072229;
 	
@@ -101,8 +88,6 @@ div.navTab a,
 div.navTab a:visited {
 	color: #fff;
 }
-
-
 /* END OF SUB-NAVIGATION SECTION */
 
 /* CONTENT SECTION */
