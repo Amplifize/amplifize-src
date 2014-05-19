@@ -8,11 +8,13 @@
   margin: 0 auto;
 }
 
-#contentViewOptions,
+#contentViewOptions {
+	padding: 0 0 20px 6px;
+}
+
 #contentStateOptions {
   float: left;
-  padding-top: 10px;
-  padding-bottom: 30px;
+  padding: 20px 0 20px 6px;
 }
 
 #contentViewOptions {
@@ -69,7 +71,17 @@
 /* BEGINNING OF SUB-NAVIGATION SECTION */
 
 #contentNavigation {
-	float: right;
+	position:fixed;
+	top:25%;
+	right:0;
+	
+	background-color: #072229;
+	
+	padding: 10px 0px 10px 20px;
+	
+	height: 320px;
+	
+	border-radius: 5px 0 0 5px;
 }
 
 /* END OF SUB-NAVIGATION SECTION */
@@ -260,7 +272,6 @@
 
 	color: #fff;
 	
-	float: left;
 	display: block;
 }
 

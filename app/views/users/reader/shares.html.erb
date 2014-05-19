@@ -38,6 +38,34 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<div class="clear"></div>
+<% end %>
+<div id="source_content">
+	<div id="shareInfo">
+		<table id="commentThread">
+			<tr>
+				<td>Shared <span id="sharedDate"></span> by <span id="sharedBy"></span> who says: <blockquote id="conversationStarter"></blockquote></td>
+			</tr>
+		</table>
+	</div>
+
+  	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span>.</div>
+	<div id="contentMetadata">
+		<div id="contentTitleBanner">
+			<div id="contentTitle"></div>
+			<div class="clear"></div>
+		</div>
+		<p id="contentInfoLine"><span id="contentPublishDate"></span><span id="contentArthur"></span></p>
+	</div>
+	<div id="contentBody">
+	</div>
+</div>
+
+<div id="contentNavigation">
+	<div>
+		<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
+		<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
+	</div>
 	<div id="contentStateOptions">
         <div id="contentOptions">
         	<a class="navTab" href="#addComment-modal-content" data-toggle="modal">
@@ -60,31 +88,6 @@
       	<div class="clear"></div>
 	</div>
 	<div class="clear"></div>
-<% end %>
-<div id="contentNavigation">
-	<a href="#" onclick="downPost();" id="previousContent" class="btn" title="Previous content">&lt;</a>
-	<a href="#" onclick="upPost();" id="nextContent" class="btn" title="Next content">&gt;</a>
-	<div class="clear"></div>
-</div>
-<div id="source_content">
-	<div id="shareInfo">
-		<table id="commentThread">
-			<tr>
-				<td>Shared <span id="sharedDate"></span> by <span id="sharedBy"></span> who says: <blockquote id="conversationStarter"></blockquote></td>
-			</tr>
-		</table>
-	</div>
-
-  	<div id="contentSourceSite">Currently reading <span id="feedTitle"></span>.</div>
-	<div id="contentMetadata">
-		<div id="contentTitleBanner">
-			<div id="contentTitle"></div>
-			<div class="clear"></div>
-		</div>
-		<p id="contentInfoLine"><span id="contentPublishDate"></span><span id="contentArthur"></span></p>
-	</div>
-	<div id="contentBody">
-	</div>
 </div>
 
 <div id="addComment-modal-content" class="modal hide" style="z-index:2000;">
