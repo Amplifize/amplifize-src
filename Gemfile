@@ -38,8 +38,8 @@ gem "daemons"
 gem 'whenever'
 gem 'ruby-readability'
 
-gem 'execjs'
-gem 'therubyracer'
+#gem 'execjs'
+#gem 'therubyracer', '0.10.2', :platforms => :ruby
 
 gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
