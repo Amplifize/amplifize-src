@@ -381,6 +381,10 @@ $(document).ready(function() {
 	resetAppState();
 	updateSharesArray();
 
+	$('#addComment-modal-content').bind('show', function () {
+	  setTimeout(function(){$("#comment_comment_text").focus();}, 250);
+	});
+
 	$("#postPopup-modal-content").bind('show', function() {
 		$("#postPopup-modal-content .modal-body").animate({scrollTop: 0});
 	});
@@ -391,6 +395,7 @@ $(document).ready(function() {
 
 	$('form#new_comment').bind("ajax:success", function(status, data, xhr) {
 		hideFlyOut();
+		$("#addComment-modal-content").modal("hide");
 		$("#comment_comment_text").val('');
 
 		var comment = data;

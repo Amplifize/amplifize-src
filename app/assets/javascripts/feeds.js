@@ -295,7 +295,7 @@ var updatePostContent = function(postId) {
 					setReadState(0);
 					
 					$("#feedUnreadCount").html(--posts_unread);
-					document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")"
+					document.title = "Amplifize | Great conversation goes best with great content ("+posts_unread+")";
 				}
 
 				$("#feedTitle").html('<a href="'+current_post.feed.site_url+'" target="_blank">'+current_post.feed.title+'</a>');
@@ -317,7 +317,7 @@ var updatePostContent = function(postId) {
 				disableOverlay();
 			},
 			dataType: "json"
-		})
+		});
 	} else {
 		clearContent();
 	}
@@ -358,12 +358,18 @@ $(document).ready(function() {
 		$('#addFeed-modal-content').modal('hide');
 	});
 
+
+	$('#addShare-modal-content').bind('show', function () {
+	  setTimeout(function(){$("#summary").focus();}, 250);
+	});
+
 	$('form#new_feed').bind("ajax:failure", function(data, status, xhr) {
 		alert(status);
 	});
 
 	$('form#addShareForm').bind("ajax:success", function(data, status, xhr) {
 		$("#summary").val('');
+		$('#addShare-modal-content').modal('hide');
 		hideFlyOut();
 	});
 
