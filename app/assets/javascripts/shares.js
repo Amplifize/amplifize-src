@@ -21,7 +21,6 @@ var hideFlyOut = function () {
 	return false;
 };
 
-
 var resetAppState = function () {
 	current_share = undefined;
 	position = 0;
@@ -187,9 +186,8 @@ var clearContent = function() {
 };
 
 var updateTitleContent = function() {
+	$(".postViewOnly").css("visibility", "hidden");
 	$("#contentMetadata").css("visibility", "hidden").css("display", "none");
-	$("#contentStateOptions").css("visibility", "hidden");
-	$("#contentOptions").css("visibility", "hidden");
 	$("#shareInfo").css("visibility", "hidden").css("display", "none");
 	$("#contentSourceSite").css("visibility", "hidden").css("display", "none");
 
@@ -296,9 +294,8 @@ var updateShareContent = function(shareId) {
 	if(shareId["share_id"]) {
 		$("#contentBody").html('');
 		
+		$(".postViewOnly").css("visibility", "visible");
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
-		$("#contentStateOptions").css("visibility", "visible");
-		$("#contentOptions").css("visibility", "visible");
 		$("#shareInfo").css("visibility", "visible").css("display", "block");
 		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 		

@@ -195,9 +195,8 @@ var updatePostsArray = function() {
 };
 
 var updateTitleContent = function() {
+	$(".postViewOnly").css("visibility", "hidden");
 	$("#contentMetadata").css("visibility", "hidden").css("display", "none");
-	$("#contentStateOptions").css("visibility", "hidden");
-	$("#contentOptions").css("visibility", "hidden");
 
 	current_post = undefined;
 	
@@ -275,9 +274,8 @@ var updatePostContent = function(postId) {
 	if (postId["post_id"]) {
 		$("#contentBody").html('');
 		
+		$(".postViewOnly").css("visibility", "visible");
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
-		$("#contentStateOptions").css("visibility", "visible");
-		$("#contentOptions").css("visibility", "visible");
 
 		//empty share comment on new post
 		$('#summary').val('');
