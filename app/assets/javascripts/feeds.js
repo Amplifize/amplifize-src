@@ -196,6 +196,7 @@ var updatePostsArray = function() {
 
 var updateTitleContent = function() {
 	$(".postViewOnly").css("visibility", "hidden");
+	$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 	$("#contentMetadata").css("visibility", "hidden").css("display", "none");
 
 	current_post = undefined;
@@ -275,6 +276,7 @@ var updatePostContent = function(postId) {
 		$("#contentBody").html('');
 		
 		$(".postViewOnly").css("visibility", "visible");
+		$("#contentSourceSite").css("visibility", "visible").css("display", "block");
 		$("#contentMetadata").css("visibility", "visible").css("display", "block");
 
 		//empty share comment on new post
